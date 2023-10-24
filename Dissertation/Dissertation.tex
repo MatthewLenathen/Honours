@@ -1,0 +1,177 @@
+%You can delete all the comments after you have finished your document
+%this sets up the defaults for the documents, 12pt font and A4 size. The article type sets this up as such as opposed to letter or memo.
+
+%for the finer points LaTeX see https://en.wikibooks.org/wiki/LaTeX or http://tex.stackexchange.com/
+
+\documentclass[12pt,a4paper]{article}
+\usepackage{titlesec} %these are how we import packages, one helps set up footers and title layout
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\newcommand{\sectionbreak}{\clearpage}
+\usepackage{apacite}
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+\usepackage{graphicx} % support the \includegraphics command and options
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+\usepackage[toc,page]{appendix}
+% These packages are all incorporated in the memoir class to one degree or another...
+
+%header and footer settings
+\pagestyle{fancyplain}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+\setlength{\headheight}{15pt}
+\fancyhead[L]{Matthew Lenathen - 40506678}
+\fancyhead[R]{ SOC10101 Honours Project}
+\fancyfoot[L]{}
+\fancyfoot[C]{\thepage}
+
+%this starts the document
+\begin{document}
+
+%you can import other documents into your main one, these layout the Title and Declarations on its own page.
+%you might need to change these to \ if your on Microsoft Windows.
+\input{./Dissertation-Title.tex}
+\input{./Dissertation-Dec.tex}
+\pagebreak
+\input{./Dissertation-DP.tex}
+\pagebreak
+
+%LaTeX let you define the abstract separately so it wont get sucked into the main document.
+\begin{abstract}
+Abstract here
+% fill the abstract in here
+\end{abstract}
+\pagebreak
+
+\tableofcontents % is generated for you
+\newpage
+
+\listoftables
+%generated in same way as figures
+\newpage
+
+\listoffigures
+%you may have captions such as equations, listings etc they should all appear as required
+%these are done for you as long as you use \begin{figure}[placement settings] .. bla bla ... \end{figure}
+\newpage
+
+\section*{Acknowledgements}
+Insert acknowledgements here
+\subsection*{}
+	I would like to thank my cat, dog and family.
+\newpage
+
+\section{Introduction}
+\section{Literature Review}
+\subsection{Introduction to Cloth Simulation}
+Cloth is a major aspect of realistic simulations. Present in many different industries such as: film, games development and virtual reality, cloth simulation is a challenge that combines maths, physics and programming. \\
+
+Cloth simulation is a subsection of Physics-based animation. PBA uses physics and code to create a plausible looking display of realistic effects, e.g. fluid simulations, soft-body dynamics etc. Cloth is defined as a flexible plane of some material or fabric that can move in unique ways, such as bending or stretching. This makes it a tricky and unique problem to simulate accurately. \\
+
+The end goal of a cloth simulation can vary depending on the intended use. In computer graphics, physical accuracy is not the highest priority, the end product is mostly focused on how it looks. This is in contrast to cloth simulations for real-world engineering problems, their focus being primarily on physical accuracy, in order to help them predict real-world scenarios. Real time usage of cloth is also very important in the games industry, and will be discussed later. \\
+
+As it is featured in such a wide range of fields, the literature relating to cloth is plentiful. In this section, many papers, books and articles will be discussed and compared in order to give context to the focus of this project, Extended position based dynamics (XPBD).
+
+\subsection{Brief history of cloth}
+Cloth simulation is a very active field in research, and has been for a handful of decades. The first graphic models used to mimicking cloth was developed in 1986 by Jerry Weil. Before this, cloth objects were created by mapping textures onto rigid surfaces. His method represents cloth as a 2d grid of 3d coordinates, and focused on simulating cloth held at constraint points, like a draped fabric. \cite{weil_synthesis_1986}. This method didn't allow for cloth movement but it piqued the interest of the graphics community regarding cloth simulation. \\
+
+An important development was made in 1987 by Terzopoulos et al. Their method was a general solution for representing elastic deformable objects like rubber or paper. This method is physically-based, meaning the object is active and can respond to external forces such as gravity or wind. Their paper presented various equations on how objects such as cloth or paper should deform when presented with forces, it also describes how they integrated these equations through time, which is a key topic in simulation. This research laid the groundwork for many more physically based models, and more cloth oriented methods. \cite{terzopoulos1987elastically} \\
+
+As time went on, more ways to simulate cloth were developed, such as particle based systems by Breen et al. in 1992. In particle-based systems, the simulating focused on a series of connected particles, and how they react with each other. The way these particles interacted formed the basis for the cloth dynamics. \cite{breen1992physically} In their paper they decided to move away from continuum based methods and switch towards a particle based model. In 1995, Provot developed a similar particle system but used point masses connected with springs to represent a cloth mesh. \cite{provot1995deformation} \\
+
+In 1998, Baraff and Witkin developed a method that used implicit integration combined with the cloth being represented as a mesh of triangles. This new proposed system allowed for bigger time steps to be taken and faster simulation times. This system is still used today as the foundation for new methods. \cite{Baraff1998largesteps} \\
+
+Later, in 2007, Müller et al. developed and published a paper on a state of the art method for dynamic simulations called Position Based Dynamics. This technique, along with a newer extended version, is the main focus of this project and will be discussed in a later chapter. \cite{muller2007position}
+
+\subsection{Underlying Physics}
+In order to discuss the advancements and methods within the current literature, it is important to delve into the underlying physics that allow cloth simulations to function. This section will go over important principles that are crucial to creating such simulations.
+\subsubsection{Particles}
+Often, cloth is represented by particles. These particles have position p, and velocity v, and can be arranged in a grid structure to model a piece of cloth. \\
+In order to represent the actual geometry of these particles, they can be arranged into triangles that make up a bigger mesh. When these triangles are small enough, that is when the simulated cloth can look realistic.
+\subsubsection{Forces}
+Forces are necessary for these simulations, or else the cloth simply wouldn't move. The number of forces ultimately depend on the goal of the simulation, but typical outside forces can include: gravity, wind and collisions. \\ 
+While these are important, the forces that cause the cloth to move in a realistic manner are the forces between particles, e.g. bending, shearing and stretching forces.
+
+\subsubsection{Integration}
+
+\subsection{Offline Cloth Simulation}
+hey
+
+\subsection{Real Time Cloth Simulation}
+hey
+
+\subsection{Alternative Methods for Cloth Simulation}
+hey
+\subsection{Real Time Cloth Simulation Methods}
+\subsubsection{Particle-Based Systems}
+\subsubsection{Mass-Spring Systems}
+\subsubsection{Continuum}
+\subsection{Position Based Dynamics}
+\subsubsection{Extended Position Based Dynamics}
+\subsection{Future Trends}
+\subsection{Conclusion}
+blah
+\newpage
+
+
+
+\section{Rest of Diss}
+
+\subsubsection{Overview Of Project Content and Milestones}
+
+This is a sub sub section with a list of bullet points.
+\begin{itemize}\itemsep0pt
+	\item A working X, that will be used for this investigation.
+	\item Investigation of current tools and their potential use during an investigation of X .
+	\item Programming of X with related frameworks Y and Z.
+	\item That is all.
+\end{itemize}
+
+
+\section{Chapter 2}
+The following bibliographic information on Writing a literature review is contained in the \emph{bibliography.bib} file 
+The template automatically starts new chapters on a new page.  The associated guidelines tell you what the available styles do and also how to structure a report.
+There is a section break on this page that you should be careful NOT to delete otherwise the references and appendices will be numbered continuously with the rest of the document.
+
+% another example section
+\section{Additional Information / Knowledge Required}
+Experience with Linux and managing Virtual machines, networking.
+So on and so forth...
+
+
+\bibliographystyle{apacite}
+\bibliography{bibliography}
+
+%you can crate this on a extra tex document just like the title or any other part of the document.
+\newpage
+\begin{appendices}
+\section{Project Overview}
+%insert IPO
+
+\begin{subappendices}
+\subsection{Example sub appendices}
+...
+\end{subappendices}
+
+\section{Second Formal Review Output}
+Insert a copy of the project review form you were given at the end of the review by the second marker
+
+\section{Diary Sheets (or other project management evidence)}
+Insert diary sheets here together with any project management plan you have
+
+\section{Appendix 4 and following}
+insert content here and for each of the other appendices, the title may be just on a page by itself, the pages of the appendices are not numbered, unless an included document such as a user manual or design document is itself pager numbered.
+\end{appendices}
+
+\end{document}

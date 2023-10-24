@@ -1,0 +1,174 @@
+\begin{thebibliography}{}
+
+\bibitem [\protect \citeauthoryear {%
+Baraff%
+\ \BBA {} Witkin%
+}{%
+Baraff%
+\ \BBA {} Witkin%
+}{%
+{\protect \APACyear {1998}}%
+}]{%
+Baraff1998largesteps}
+\APACinsertmetastar {%
+Baraff1998largesteps}%
+\begin{APACrefauthors}%
+Baraff, D.%
+\BCBT {}\ \BBA {} Witkin, A.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1998}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Large Steps in Cloth Simulation} {Large steps in cloth
+  simulation}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Proceedings of the 25th Annual Conference on Computer
+  Graphics and Interactive Techniques} {Proceedings of the 25th annual
+  conference on computer graphics and interactive techniques}\ (\BPG~43–54).
+\newblock
+\APACaddressPublisher{New York, NY, USA}{Association for Computing Machinery}.
+\newblock
+\begin{APACrefURL} \url{https://doi.org/10.1145/280814.280821} \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1145/280814.280821} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Breen%
+, House%
+\BCBL {}\ \BBA {} Getto%
+}{%
+Breen%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {1992}}%
+}]{%
+breen1992physically}
+\APACinsertmetastar {%
+breen1992physically}%
+\begin{APACrefauthors}%
+Breen, D\BPBI E.%
+, House, D\BPBI H.%
+\BCBL {}\ \BBA {} Getto, P\BPBI H.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1992}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {A physically-based particle model of woven cloth} {A
+  physically-based particle model of woven cloth}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{The Visual Computer}{8}{}{264--277}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+M{\"u}ller%
+, Heidelberger%
+, Hennix%
+\BCBL {}\ \BBA {} Ratcliff%
+}{%
+M{\"u}ller%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2007}}%
+}]{%
+muller2007position}
+\APACinsertmetastar {%
+muller2007position}%
+\begin{APACrefauthors}%
+M{\"u}ller, M.%
+, Heidelberger, B.%
+, Hennix, M.%
+\BCBL {}\ \BBA {} Ratcliff, J.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2007}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Position based dynamics} {Position based
+  dynamics}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Journal of Visual Communication and Image
+  Representation}{18}{2}{109--118}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Provot%
+}{%
+Provot%
+}{%
+{\protect \APACyear {1995}}%
+}]{%
+provot1995deformation}
+\APACinsertmetastar {%
+provot1995deformation}%
+\begin{APACrefauthors}%
+Provot, X.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1995}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Deformation constraints in a mass-spring model to
+  describe rigid cloth behaviour} {Deformation constraints in a mass-spring
+  model to describe rigid cloth behaviour}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Graphics interface} {Graphics interface}\ (\BPGS\
+  147--147).
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Terzopoulos%
+, Platt%
+, Barr%
+\BCBL {}\ \BBA {} Fleischer%
+}{%
+Terzopoulos%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {1987}}%
+}]{%
+terzopoulos1987elastically}
+\APACinsertmetastar {%
+terzopoulos1987elastically}%
+\begin{APACrefauthors}%
+Terzopoulos, D.%
+, Platt, J.%
+, Barr, A.%
+\BCBL {}\ \BBA {} Fleischer, K.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1987}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Elastically deformable models} {Elastically deformable
+  models}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Proceedings of the 14th annual conference on Computer
+  graphics and interactive techniques} {Proceedings of the 14th annual
+  conference on computer graphics and interactive techniques}\ (\BPGS\
+  205--214).
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Weil%
+}{%
+Weil%
+}{%
+{\protect \APACyear {1986}}%
+}]{%
+weil_synthesis_1986}
+\APACinsertmetastar {%
+weil_synthesis_1986}%
+\begin{APACrefauthors}%
+Weil, J.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1986}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {The Synthesis of Cloth Objects} {The synthesis of cloth
+  objects}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{}{20}{4}{}.
+\PrintBackRefs{\CurrentBib}
+
+\end{thebibliography}
