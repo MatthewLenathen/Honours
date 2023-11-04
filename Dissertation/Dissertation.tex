@@ -95,30 +95,7 @@ In 1998, Baraff and Witkin developed a method that used implicit integration com
 
 Later, in 2007, Müller et al. developed and published a paper on a state of the art method for dynamic simulations called Position Based Dynamics. This technique, along with a newer extended version, is the main focus of this project and will be discussed in a later chapter. \cite{muller2007position} and \cite{macklin2016xpbd}
 
-\subsection{Offline Cloth Simulation}
-Cloth simulation can generally by split into two categories: Offline and Real Time. Offline simulations are calculated, tweaked and edited before being rendered to the screen. Commonly used in film and animation, visual fidelity is of utmost importance. Offline calculations can also help in a real time scenario by precomputing effects. \\
-
-\subsubsection{Fine Cloth Interactions}
-As offline simulations are not limited by the time between each frame, they can afford to focus on realism. They can do this by scaling the number of triangles up and allowing for finer interactions like folding and wrinkling, these interactions being crucial to a convincing cloth simulation. A great example of such work is presented in a paper by Selle et al., they detail their method of creating a high resolution simulation with up to two million triangles, that can accurately capture the intricate details of cloth. \cite{4522545}\\
-
-At the time of publication, cloth simulations were adding physically-based interactions like wrinkles through a separate modelling system. This can be seen in the work by Cutler et al., in which they created a system that allowed the artist to add in wrinkles on top of an existing character's clothing \cite{10.1145/1073368.1073384}. They achieved this by splitting it into stages: wrinkle creation and wrinkle evaluation. In the wrinkle creation phase, the artists use a tool to create winkle patterns, which get turned into a set of forces on the surface. Next, in the wrinkle evaluation phase, the system generates these deformations based on character poses, and the artists can either choose to keep these generated wrinkles, or alter the pattern until satisfactory results are achieved.\\
-In their results, they were able to use their system to create clothing wrinkles on hundreds of characters for a feature-length animated film. They noted that in production, close to zero hand-tweaking was needed for the wrinkles, proving its reliability.\\
-When discussing their work, they did note that the visual results from a dynamic clothing simulation is much preferred to what they achieved with their kinematic wrinkle system. This is where the work of Selle et al., aims to improve upon. \\
-
-
-
-----------------
-\subsubsection{Precomputing Effects}
-In computer graphics, it is often said that precomputing everything is simply not viable due to how many interactions can occur, but in a paper by Kim et al., they discuss precomputing secondary cloth effects. \cite{kim2013near}. In this case, secondary cloth effects refer to things such as folds and wrinkles, these are expensive simulate in real-time. In this paper, they propose a method to use many thousand CPU-hours to calculate these advanced effects in advance, based on a character motion graph. They achieve this by representing a character with two motion graphs, the primary graph simply being the movement of the character, and the secondary being the cloth dynamics. \\
-
-To evaluate their method, they acquired 12 unique motion clips for the primary graph, and used ARCSim cloth simulator for the cloth motion. They found that in their massive precomputation, they were able to generate good looking cloth animations for any random paths through the primary graph. Initially their secondary graph was just one to one mapping of character poses to cloth, but this proved insufficient for realistic motion, so the secondary graph was made much more complex. 
-Overall, the inclusion of precomputing cloth motion, helped simulate incredibly detailed secondary features of cloth, such as wrinkles and folds. This research also links into game development in their discussion section, they propose that viewing a database of precomputed cloth motion could be a great benefit when creating games, as certain scenes could be viewed and edited, also bad looking cloth could be fixed by hand to help realism within the game.
-
-
-\subsection{Real Time Cloth Simulation}
-Real time cloth simulations are created by computing the cloth dynamics at runtime, allowing interaction with the user through input and changes from the environment. As the time between frames on real time applications is small, the dynamics need to be calculated and applied efficiently, usually on the GPU. The most common use case for real time cloth simulations are in video games, and as these games also have lots of other calculations going on in the background, means optimisation is even more important. This section will discuss the literature on methods to create these simulations and how they compare with each other. \\
- 
-\subsubsection{Underlying Physics}
+\subsection{Underlying Physics}
 In order to discuss the advancements and methods within the current literature, it is important to delve into the underlying physics that allow cloth simulations to function. This section will go over important principles that are crucial to creating such simulations.
 \\
 
@@ -129,6 +106,31 @@ For simulations such as mass-spring systems, forces are the primary mechanism fo
 \\
 
 As the main focus of this project is position-based dynamics, constraints must be discussed too. Constraints are pivotal to position-based dynamics because instead of relying on forces, PBD directly adjusts positions to satisfy constraints. Constraints can vary depending on the situation but usually there are some staples such as distance, bending and collision constraints. Each of these will ensure that the particles within the simulation act as realistic as possible. 
+
+
+\subsection{Offline Cloth Simulation}
+Cloth simulation can generally by split into two categories: Offline and Real Time. Offline simulations are calculated, tweaked and edited before being rendered to the screen. Commonly used in film and animation, visual fidelity is of utmost importance. Offline calculations can also help in a real time scenario by precomputing effects. \\
+
+\subsubsection{Fine Cloth Interactions}
+As offline simulations are not limited by the time between each frame, they can afford to focus on realism. They can do this by scaling the number of triangles up and allowing for finer interactions like folding and wrinkling, these interactions being crucial to a convincing cloth simulation. A great example of such work is presented in a paper by Selle et al., they detail their method of creating a high resolution simulation with up to two million triangles, that can accurately capture the intricate details of cloth. \cite{4522545}\\
+
+At the time of publication, cloth simulations were adding physically-based interactions like wrinkles through a separate modelling system. This can be seen in the work by Cutler et al., in which they created a system that allowed the artist to add in wrinkles on top of an existing character's clothing \cite{10.1145/1073368.1073384}. They achieved this by splitting it into stages: wrinkle creation and wrinkle evaluation. In the wrinkle creation phase, the artists use a tool to create winkle patterns, which get turned into a set of forces on the surface. Next, in the wrinkle evaluation phase, the system generates these deformations based on character poses, and the artists can either choose to keep these generated wrinkles, or alter the pattern until satisfactory results are achieved.\\
+In their results, they were able to use their system to create clothing wrinkles on hundreds of characters for a feature-length animated film. They noted that in production, close to zero hand-tweaking was needed for the wrinkles, proving its reliability.\\
+When discussing their work, they did note that the visual results from a dynamic clothing simulation is much preferred to what they achieved with their kinematic wrinkle system. This is where the work of Selle et al., aims to improve upon. \\
+
+In their paper, they aimed to create a system where fine details such as folds and wrinkles were created in a physically-based fashion, from the various forces acting on the cloth. Their setup included a mass-spring system with edge and bending spring, and a modified time integration scheme. One notable contribution from their work is how they handle collisions. They note that in order to achieve high resolution folds and wrinkles, the self collisions and interactions must be extremely robust, as they are what cause cloth to create these effects in the first place. In their paper, they created a hybrid repulsion/collision technique that works based on the last known collision. They also utilise parallelism to further improve computing times.//
+In their initial evaluation, the researchers put their system to the test with a twisted cloth model comprising 500,000 triangles.  This example took an average of 30 minutes to calculate each frame. They found that their system was able to simulate an extremely detailed cloth with accurate folds and wrinkles, alongside realistic collision and repulsion. These advanced and realistic effects lend themselves to the offline nature of the simulation, as calculating all of these effects are extremely computationally expensive.
+
+\subsubsection{Precomputing Effects}
+In computer graphics, it is often said that precomputing everything is simply not viable due to how many interactions can occur, but in a paper by Kim et al., they discuss precomputing secondary cloth effects. \cite{kim2013near}. In this case, secondary cloth effects refer to things such as folds and wrinkles, these are expensive simulate in real-time. In this paper, they propose a method to use many thousand CPU-hours to calculate these advanced effects in advance, based on a character motion graph. They achieve this by representing a character with two motion graphs, the primary graph simply being the movement of the character, and the secondary being the cloth dynamics. \\
+
+To evaluate their method, they acquired 12 unique motion clips for the primary graph, and used ARCSim cloth simulator for the cloth motion. They found that in their massive precomputation, they were able to generate good looking cloth animations for any random paths through the primary graph. Initially their secondary graph was just one to one mapping of character poses to cloth, but this proved insufficient for realistic motion, so the secondary graph was made much more complex. 
+Overall, the inclusion of precomputing cloth motion, helped simulate incredibly detailed secondary features of cloth, such as wrinkles and folds. This research also links into game development in their discussion section, they propose that viewing a database of precomputed cloth motion could be a great benefit when creating games, as certain scenes could be viewed and edited, also bad looking cloth could be fixed by hand to help realism within the game.
+
+
+\subsection{Real Time Cloth Simulation}
+Real time cloth simulations are created by computing the cloth dynamics at runtime, allowing interaction with the user through input and changes from the environment. As the time between frames on real time applications is small, the dynamics need to be calculated and applied efficiently, usually on the GPU. The most common use case for real time cloth simulations are in video games, and as these games also have lots of other calculations going on in the background, means optimisation is even more important. This section will discuss the literature on methods to create these simulations and how they compare with each other. \\
+ 
 
 
 \subsubsection{Particle-Based Systems}

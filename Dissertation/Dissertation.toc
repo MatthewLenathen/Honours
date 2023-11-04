@@ -2,27 +2,27 @@
 \contentsline {section}{\numberline {2}Literature Review}{9}{}%
 \contentsline {subsection}{\numberline {2.1}Introduction to Cloth Simulation}{9}{}%
 \contentsline {subsection}{\numberline {2.2}Brief History of Cloth Simulation}{9}{}%
-\contentsline {subsection}{\numberline {2.3}Offline Cloth Simulation}{10}{}%
-\contentsline {subsubsection}{\numberline {2.3.1}Fine Cloth Interactions}{11}{}%
-\contentsline {subsubsection}{\numberline {2.3.2}Precomputing Effects}{11}{}%
-\contentsline {subsection}{\numberline {2.4}Real Time Cloth Simulation}{12}{}%
-\contentsline {subsubsection}{\numberline {2.4.1}Underlying Physics}{12}{}%
-\contentsline {subsubsection}{\numberline {2.4.2}Particle-Based Systems}{13}{}%
-\contentsline {subsubsection}{\numberline {2.4.3}Mass-Spring Systems}{13}{}%
-\contentsline {subsubsection}{\numberline {2.4.4}Continuum}{13}{}%
-\contentsline {subsubsection}{\numberline {2.4.5}Alternative Methods for Cloth Simulation}{13}{}%
-\contentsline {subsubsection}{\numberline {2.4.6}Position Based Dynamics}{13}{}%
-\contentsline {subsubsection}{\numberline {2.4.7}Extended Position Based Dynamics}{13}{}%
-\contentsline {subsection}{\numberline {2.5}Future Trends}{13}{}%
-\contentsline {subsection}{\numberline {2.6}Conclusion}{13}{}%
-\contentsline {section}{\numberline {3}Rest of Diss}{14}{}%
-\contentsline {subsubsection}{\numberline {3.0.1}Overview Of Project Content and Milestones}{14}{}%
-\contentsline {section}{\numberline {4}Chapter 2}{15}{}%
-\contentsline {section}{\numberline {5}Additional Information / Knowledge Required}{16}{}%
-\contentsline {section}{References}{17}{}%
-\contentsline {section}{Appendices}{18}{}%
-\contentsline {section}{\numberline {A}Project Overview}{18}{}%
-\contentsline {subsection}{\numberline {A.A}Example sub appendices}{18}{}%
-\contentsline {section}{\numberline {B}Second Formal Review Output}{19}{}%
-\contentsline {section}{\numberline {C}Diary Sheets (or other project management evidence)}{20}{}%
-\contentsline {section}{\numberline {D}Appendix 4 and following}{21}{}%
+\contentsline {subsection}{\numberline {2.3}Underlying Physics}{10}{}%
+\contentsline {subsection}{\numberline {2.4}Offline Cloth Simulation}{11}{}%
+\contentsline {subsubsection}{\numberline {2.4.1}Fine Cloth Interactions}{11}{}%
+\contentsline {subsubsection}{\numberline {2.4.2}Precomputing Effects}{12}{}%
+\contentsline {subsection}{\numberline {2.5}Real Time Cloth Simulation}{13}{}%
+\contentsline {subsubsection}{\numberline {2.5.1}Particle-Based Systems}{14}{}%
+\contentsline {subsubsection}{\numberline {2.5.2}Mass-Spring Systems}{14}{}%
+\contentsline {subsubsection}{\numberline {2.5.3}Continuum}{14}{}%
+\contentsline {subsubsection}{\numberline {2.5.4}Alternative Methods for Cloth Simulation}{14}{}%
+\contentsline {subsubsection}{\numberline {2.5.5}Position Based Dynamics}{14}{}%
+\contentsline {subsubsection}{\numberline {2.5.6}Extended Position Based Dynamics}{14}{}%
+\contentsline {subsection}{\numberline {2.6}Future Trends}{14}{}%
+\contentsline {subsection}{\numberline {2.7}Conclusion}{14}{}%
+\contentsline {section}{\numberline {3}Rest of Diss}{15}{}%
+\contentsline {subsubsection}{\numberline {3.0.1}Overview Of Project Content and Milestones}{15}{}%
+\contentsline {section}{\numberline {4}Chapter 2}{16}{}%
+\contentsline {section}{\numberline {5}Additional Information / Knowledge Required}{17}{}%
+\contentsline {section}{References}{18}{}%
+\contentsline {section}{Appendices}{19}{}%
+\contentsline {section}{\numberline {A}Project Overview}{19}{}%
+\contentsline {subsection}{\numberline {A.A}Example sub appendices}{19}{}%
+\contentsline {section}{\numberline {B}Second Formal Review Output}{20}{}%
+\contentsline {section}{\numberline {C}Diary Sheets (or other project management evidence)}{21}{}%
+\contentsline {section}{\numberline {D}Appendix 4 and following}{22}{}%
