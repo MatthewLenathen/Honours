@@ -62,6 +62,102 @@ Breen, D\BPBI E.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Cutler%
+\ \protect \BOthers {.}}{%
+Cutler%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2005}}%
+}]{%
+10.1145/1073368.1073384}
+\APACinsertmetastar {%
+10.1145/1073368.1073384}%
+\begin{APACrefauthors}%
+Cutler, L\BPBI D.%
+, Gershbein, R.%
+, Wang, X\BPBI C.%
+, Curtis, C.%
+, Maigret, E.%
+, Prasso, L.%
+\BCBL {}\ \BBA {} Farson, P.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2005}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {An Art-Directed Wrinkle System for CG Character
+  Clothing} {An art-directed wrinkle system for cg character clothing}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Proceedings of the 2005 ACM SIGGRAPH/Eurographics
+  Symposium on Computer Animation} {Proceedings of the 2005 acm
+  siggraph/eurographics symposium on computer animation}\ (\BPG~117–125).
+\newblock
+\APACaddressPublisher{New York, NY, USA}{Association for Computing Machinery}.
+\newblock
+\begin{APACrefURL} \url{https://doi.org/10.1145/1073368.1073384}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1145/1073368.1073384} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Kim%
+\ \protect \BOthers {.}}{%
+Kim%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2013}}%
+}]{%
+kim2013near}
+\APACinsertmetastar {%
+kim2013near}%
+\begin{APACrefauthors}%
+Kim, D.%
+, Koh, W.%
+, Narain, R.%
+, Fatahalian, K.%
+, Treuille, A.%
+\BCBL {}\ \BBA {} O'Brien, J\BPBI F.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2013}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Near-exhaustive precomputation of secondary cloth
+  effects} {Near-exhaustive precomputation of secondary cloth effects}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{ACM Transactions on Graphics (TOG)}{32}{4}{1--8}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Macklin%
+, M{\"u}ller%
+\BCBL {}\ \BBA {} Chentanez%
+}{%
+Macklin%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2016}}%
+}]{%
+macklin2016xpbd}
+\APACinsertmetastar {%
+macklin2016xpbd}%
+\begin{APACrefauthors}%
+Macklin, M.%
+, M{\"u}ller, M.%
+\BCBL {}\ \BBA {} Chentanez, N.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2016}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {XPBD: position-based simulation of compliant constrained
+  dynamics} {Xpbd: position-based simulation of compliant constrained
+  dynamics}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Proceedings of the 9th International Conference on
+  Motion in Games} {Proceedings of the 9th international conference on motion
+  in games}\ (\BPGS\ 49--54).
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 M{\"u}ller%
 , Heidelberger%
 , Hennix%
@@ -114,6 +210,40 @@ Provot, X.%
 \newblock
 \BIn{} \APACrefbtitle {Graphics interface} {Graphics interface}\ (\BPGS\
   147--147).
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Selle%
+, Su%
+, Irving%
+\BCBL {}\ \BBA {} Fedkiw%
+}{%
+Selle%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2009}}%
+}]{%
+4522545}
+\APACinsertmetastar {%
+4522545}%
+\begin{APACrefauthors}%
+Selle, A.%
+, Su, J.%
+, Irving, G.%
+\BCBL {}\ \BBA {} Fedkiw, R.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2009}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Robust High-Resolution Cloth Using Parallelism,
+  History-Based Collisions, and Accurate Friction} {Robust high-resolution
+  cloth using parallelism, history-based collisions, and accurate
+  friction}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{IEEE Transactions on Visualization and Computer
+  Graphics}{15}{2}{339-350}.
+\newblock
+\begin{APACrefDOI} \doi{10.1109/TVCG.2008.79} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  24 OCT 2023 16:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  4 NOV 2023 19:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -294,48 +294,90 @@ n-Dec.tex) [1
 ]
 [7
 
-]
-Underfull \hbox (badness 10000) in paragraph at lines 78--79
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 80--81
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 82--83
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 87--88
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 89--90
-
- []
-
-[8
+] [8
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 91--92
+Underfull \hbox (badness 10000) in paragraph at lines 79--80
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 93--94
+Underfull \hbox (badness 10000) in paragraph at lines 81--82
 
  []
 
-[9] [10] [11] [12
 
-{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [13
+Underfull \hbox (badness 10000) in paragraph at lines 83--84
 
-] (./Dissertation.bbl [14
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 88--89
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--91
+
+ []
+
+[9
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 92--93
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 94--95
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 99--100
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 102--103
+
+ []
+
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 104--107
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--113
+
+ []
+
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 119--120
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 122--124
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 125--127
+
+ []
+
+[12]
+Underfull \hbox (badness 10000) in paragraph at lines 128--130
+
+ []
+
+[13] [14
+
+{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [15
+
+] (./Dissertation.bbl [16
 
 ]
 Underfull \hbox (badness 1859) in paragraph at lines 16--36
@@ -367,13 +409,13 @@ Underfull \hbox (badness 3199) in paragraph at lines 16--36
 0821   \OT1/cmr/m/n/12 doi:
  []
 
-) [15
+) [17
 
-] [16] [17
+] [18] [19
 
-] [18
+] [20
 
-] [19
+] [21
 
 ] (./Dissertation.aux)
  ***********
@@ -382,13 +424,13 @@ L3 programming layer <2023-10-10>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 4869 strings out of 474503
- 82530 string characters out of 5756704
- 1931043 words of memory out of 5000000
- 26778 multiletter control sequences out of 15000+600000
+ 4881 strings out of 474503
+ 82734 string characters out of 5756704
+ 1930043 words of memory out of 5000000
+ 26790 multiletter control sequences out of 15000+600000
  564737 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 69i,11n,79p,705b,267s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 69i,11n,79p,843b,267s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/tex
 live/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2023
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dis
@@ -396,10 +438,10 @@ t/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2023/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-supe
 r/sfrm1200.pfb>
-Output written on Dissertation.pdf (20 pages, 110226 bytes).
+Output written on Dissertation.pdf (22 pages, 119277 bytes).
 PDF statistics:
- 105 PDF objects out of 1000 (max. 8388607)
- 68 compressed objects within 1 object stream
+ 111 PDF objects out of 1000 (max. 8388607)
+ 72 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
