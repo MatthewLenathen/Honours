@@ -100,6 +100,33 @@ Cutler, L\BPBI D.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Kang%
+\ \BBA {} Cho%
+}{%
+Kang%
+\ \BBA {} Cho%
+}{%
+{\protect \APACyear {2012}}%
+}]{%
+kang2012photorealistic}
+\APACinsertmetastar {%
+kang2012photorealistic}%
+\begin{APACrefauthors}%
+Kang, Y\BHBI M.%
+\BCBT {}\ \BBA {} Cho, C\BHBI S.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2012}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Photorealistic cloth in real-time applications}
+  {Photorealistic cloth in real-time applications}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Computer Animation and Virtual
+  Worlds}{23}{3-4}{253--265}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Kim%
 \ \protect \BOthers {.}}{%
 Kim%

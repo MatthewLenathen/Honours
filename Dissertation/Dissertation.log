@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  4 NOV 2023 23:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  7 NOV 2023 22:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -369,15 +369,35 @@ Underfull \hbox (badness 10000) in paragraph at lines 125--126
  []
 
 [12]
-Underfull \hbox (badness 10000) in paragraph at lines 132--133
+Underfull \hbox (badness 10000) in paragraph at lines 127--129
 
  []
 
-[13] [14] [15
 
-{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [16
+Underfull \hbox (badness 10000) in paragraph at lines 134--135
 
-] (./Dissertation.bbl [17
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 136--137
+
+ []
+
+[13]
+Underfull \hbox (badness 10000) in paragraph at lines 138--139
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--141
+
+ []
+
+[14] [15] [16
+
+{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [17
+
+] (./Dissertation.bbl [18
 
 ]
 Underfull \hbox (badness 1859) in paragraph at lines 16--36
@@ -409,13 +429,13 @@ Underfull \hbox (badness 3199) in paragraph at lines 16--36
 0821   \OT1/cmr/m/n/12 doi:
  []
 
-) [18
+) [19
 
-] [19] [20
-
-] [21
+] [20] [21
 
 ] [22
+
+] [23
 
 ] (./Dissertation.aux)
  ***********
@@ -424,10 +444,10 @@ L3 programming layer <2023-10-10>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 4881 strings out of 474503
- 82734 string characters out of 5756704
+ 4884 strings out of 474503
+ 82809 string characters out of 5756704
  1931043 words of memory out of 5000000
- 26790 multiletter control sequences out of 15000+600000
+ 26793 multiletter control sequences out of 15000+600000
  564737 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  69i,11n,79p,843b,267s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -438,10 +458,10 @@ t/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2023/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-supe
 r/sfrm1200.pfb>
-Output written on Dissertation.pdf (23 pages, 120460 bytes).
+Output written on Dissertation.pdf (24 pages, 123909 bytes).
 PDF statistics:
- 114 PDF objects out of 1000 (max. 8388607)
- 74 compressed objects within 1 object stream
+ 117 PDF objects out of 1000 (max. 8388607)
+ 76 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
