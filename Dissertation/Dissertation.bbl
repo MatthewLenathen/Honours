@@ -100,6 +100,29 @@ Cutler, L\BPBI D.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Jakobsen%
+}{%
+Jakobsen%
+}{%
+{\protect \APACyear {2001}}%
+}]{%
+fisixArticle}
+\APACinsertmetastar {%
+fisixArticle}%
+\begin{APACrefauthors}%
+Jakobsen, T.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2001}{01}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Advanced character physics} {Advanced character
+  physics}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{In Game Developers Conference Proceedings}{}{}{}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Kang%
 \ \BBA {} Cho%
 }{%

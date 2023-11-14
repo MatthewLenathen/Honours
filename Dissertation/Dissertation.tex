@@ -24,6 +24,9 @@
 \usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
 \usepackage[toc,page]{appendix}
 % These packages are all incorporated in the memoir class to one degree or another...
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\algdef{SE}[LOOP]{Loop}{EndLoop}[1]{\algorithmicloop\ #1}{\algorithmicend\ \algorithmicloop}%
 
 %header and footer settings
 \pagestyle{fancyplain}
@@ -85,6 +88,7 @@ The end goal of a cloth simulation can vary depending on the intended use. In co
 As it is featured in such a wide range of fields, the literature relating to cloth is plentiful. In this section, many papers, books and articles will be discussed and compared in order to give context to the focus of this project, Extended position based dynamics (XPBD).
 
 \subsection{Brief History of Cloth Simulation}
+\label{History}
 Cloth simulation is a very active field in research, and has been for a handful of decades. The first graphic models used to mimicking cloth was developed in 1986 by Jerry Weil. Before this, cloth objects were created by mapping textures onto rigid surfaces. His method represents cloth as a 2d grid of 3d coordinates, and focused on simulating cloth held at constraint points, like a draped fabric. \cite{weil_synthesis_1986}. This method didn't allow for cloth movement but it piqued the interest of the graphics community regarding cloth simulation. \\
 
 An important development was made in 1987 by Terzopoulos et al. Their method was a general solution for representing elastic deformable objects like rubber or paper. This method is physically-based, meaning the object is active and can respond to external forces such as gravity or wind. Their paper presented various equations on how objects such as cloth or paper should deform when presented with forces, it also describes how they integrated these equations through time, which is a key topic in simulation. This research laid the groundwork for many more physically based models, and more cloth oriented methods. \cite{terzopoulos1987elastically} \\
@@ -96,6 +100,7 @@ In 1998, Baraff and Witkin developed a method that used implicit integration com
 Later, in 2007, Müller et al. developed and published a paper on a state of the art method for dynamic simulations called Position Based Dynamics. This technique, along with a newer extended version, is the main focus of this project and will be discussed in a later chapter. \cite{muller2007position} and \cite{macklin2016xpbd}
 
 \subsection{Underlying Physics}
+\label{Physics}
 In order to discuss the advancements and methods within the current literature, it is important to delve into the underlying physics that allow cloth simulations to function. This section will go over important principles that are crucial to creating such simulations.
 \\
 
@@ -108,7 +113,7 @@ For simulations such as mass-spring systems, forces are the primary mechanism fo
 As the main focus of this project is position-based dynamics, constraints must be discussed too. Constraints are pivotal to position-based dynamics because instead of relying on forces, PBD directly adjusts positions to satisfy constraints. Constraints can vary depending on the situation but usually there are some staples such as distance, bending and collision constraints. Each of these will ensure that the particles within the simulation act as realistic as possible. 
 
 
-\subsection{Offline Cloth Simulation}
+\subsection{Offline Cloth Simulation} 
 Cloth simulation can generally by split into two categories: Offline and Real Time. Offline simulations are calculated, tweaked and edited before being rendered to the screen. Commonly used in film and animation, visual fidelity is of utmost importance. Offline calculations can also help in a real time scenario by precomputing effects. \\
 
 \subsubsection{Fine Cloth Interactions}
@@ -133,7 +138,8 @@ In summary, it can be seen that offline simulations, compared to real-time, prio
 \subsection{Real Time Cloth Simulation}
 Real time cloth simulations are created by computing the cloth dynamics at runtime, allowing interaction with the user through input and changes from the environment. As the time between frames on real time applications is small, the dynamics need to be calculated and applied efficiently, usually on the GPU. The most common use case for real time cloth simulations are in video games, and as these games also have lots of other calculations going on in the background, means optimisation is even more important. This section will discuss the literature on methods to create these simulations and how they compare with each other. \\
 \subsubsection{Mass-Spring Systems}
-As mentioned in the physics section, mass-spring systems are a popular approach to cloth simulations. They represent a cloth as a grid of particles that can exert forces on each other. The way they exert forces are through springs. As mentioned in the history of cloth simulation section, the first example of this system was introduced by Provot \cite{provot1995deformation}.\\
+\label{Mass-Spring}
+As mentioned in section \ref{Physics}, mass-spring systems are a popular approach to cloth simulations. They represent a cloth as a grid of particles that can exert forces on each other. The way they exert forces are through springs. The first example of this system, as noted in section \ref{History}, was introduced by Provot \cite{provot1995deformation}.\\
 
 In his paper, he posited that the current state of cloth animation at the time had a lack of realism, especially in the realm of elasticity. His proposed mesh had three different types of springs to achieve different effects. Structural springs being the most basic, it connects adjacent particles in a grid formation. Shear springs connect particles diagonally, and bend springs connect particles by skipping a particle in between, e.g. connecting particle [i,j] to particle [i+2,j+2]. \\
 
@@ -143,18 +149,66 @@ It is noted that Hooke's law is commonly used with mass-spring systems to calcul
 With their new integration method and parallelism implemented, they were able to simulate cloth containing 16,384 particles and 161,544 springs at  over 68 frames per second. This shows that mass spring systems can be a good tool for simple simulations, although in their results they also show that once the springs get to a large size, in this case 1,200,000 springs, the frame rate drops to 15. It can be seen in current day simulations that the additional complexity from all the springs, stiffness tuning and overall accuracy lead to mass-spring systems not being the optimal method for real time cloth simulations.
 
 \subsubsection{Particle-Based Systems}
-
+todo - section about other ways to simulate cloth with particles, not just with springs. PBD fits into this category but since it is the focus of the project, it has its own section later.
 \subsubsection{Continuum}
+todo - section will talk about the continuum approach, doesn't deal with particles or springs but on the actual triangles themselves. Finite element methods falls under this section
 \subsubsection{Alternative Methods for Cloth Simulation}
+todo - this section will talk about other more niche ways for cloth simulation such as simulCap and neural networks
 \subsubsection{Position Based Dynamics}
-\subsubsection{Extended Position Based Dynamics}
+A great number of techniques discussed above have been force based, and these forces are used to calculate accelerations. Finally these accelerations are integrated to find the velocities and positions of particles. The Position based dynamics (PBD) technique takes a unique approach to physically based animations by omitting the velocity layer and directly working on the positions of particles. \cite{muller2007position} The main advantage is the controllability, the integration instability discussed in section \ref{Mass-Spring} is completely avoided due to the lack of explicit integration. As this is a real time technique, it is greatly suited to games development, as it is very helpful to have direct control over positions of objects within the game.\\
 
+It was noted that even though PBD was the first fully position based approach, there had been other attempts to utilize positions in this way, such as \cite{fisixArticle}. In his approach, Jacobsen manipulated the positions directly using a Verlet integrator. Müller et al. mentions that Jacobsen didn't go into depth in terms of constraints, which is crucial in cloth simulation. PBD aims to improve upon it by giving a general approach to constraints.\\
+
+To fully discuss the technique, the algorithm must be analysed. In the algorithm, an object is represented by N vertices and M constraints. The vertices are the particles which have mass m, position x and veloctiy v. The constraints contain a few more properties: cardinality, a function, set of indices, stiffness and a type of either equality or inequality. It is noted that the equality property is satisfied if the function of that constraint is equal to 0, and likewise if it has type inequality, it is satisfied if the function is more than equal to zero. The stiffness affects the strength of the constraints and it ranges from 0 to 1.
+
+\begin{algorithm}
+\caption{Position Based Dynamics Algorithm}
+\begin{algorithmic}[1]
+\ForAll{vertices $i$}
+	\State initialize $x_i = x_i^0$, $v_i = v_i^0$, $w_i = 1/m_i$
+\EndFor
+\Loop
+	\ForAll{vertices $i$}\State $v_i \leftarrow v_i + \Delta t w_i f_{ext}(x_i)$
+	\EndFor
+	\State dampVelocities$(v_1, \dots, v_N)$
+	\ForAll{vertices $i$}
+		\State $p_i \leftarrow x_i + \Delta t v_i$
+	\EndFor
+	\ForAll{vertices $i$}
+		\State generateCollisionConstraints$(x_i \rightarrow p_i)$
+	\EndFor
+	\Loop{solverIterations \textbf{times}}
+	\State projectConstraints$(C_1, \ldots, C_{M+M_{coll}}, p_1, \ldots, p_N)$
+	\EndLoop
+	\ForAll{vertices $i$}
+		\State $v_i \leftarrow (p_i - x_i) / \Delta t$
+		\State $x_i \leftarrow p_i$
+	\EndFor
+	\State velocityUpdate$(v_1, \dots, v_N)$
+\EndLoop
+\end{algorithmic}
+\end{algorithm}
+\newpage
+Now it can be broken down to see what each part does. Lines 1 to 3 is just initialising each particle with initial position, velocity and inverse mass. Line 6 is where external forces get added to the system, Müller et al. notes that if gravity is the only external force then the line becomes $v_i \leftarrow v_i + \Delta tg$ where g is the gravitational acceleration. Next, on line 10, the new positions are estimated with a explicit Euler integration step, they are then adjusted in the line 15 loop as many times as needed until all constraints are satisfied. Once completed, the line 18 loop then moves the positions to the calculated position and updates the velocity. \\
+
+This algorithm can be classed as unconditionally stable as the integration method in lines 19 and 20 do not use future positions/velocities, but instead calculate physically possible configurations and move the vertices to them.\\
+
+In the paper, Müller et al also discuss their implementation of a cloth simulator for use in games. Their simulator accepts a triangle mesh and creates two constraints, stretching and bending constraints. Much like the springs in mass-spring systems, these constraints force the positions of the particles to satisfy them in order to continue the simulation, this relates to the loop in line 15 of the algorithm.
+
+... todo: finish this section by comparing the results and analysing them.
+
+\paragraph{Extended Position Based Dynamics}
+todo: talk about the extended position based dynamics paper
+
+\paragraph{Other PBD methods}
+todo: can talk about other implementations that utilize PBD, such as projective dynamics by Bouaziz et al. bridging finite element methods and PBD
 
 
 
 \subsection{Future Trends}
+todo: this section will discuss any future trends that cloth simulation could have
 \subsection{Conclusion}
-
+todo: conclusion of lit review
 \newpage
 
 
