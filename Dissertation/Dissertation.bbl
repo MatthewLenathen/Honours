@@ -35,6 +35,64 @@ Baraff, D.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Bertiche%
+, Madadi%
+\BCBL {}\ \BBA {} Escalera%
+}{%
+Bertiche%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2021}}%
+}]{%
+bertiche2021pbns}
+\APACinsertmetastar {%
+bertiche2021pbns}%
+\begin{APACrefauthors}%
+Bertiche, H.%
+, Madadi, M.%
+\BCBL {}\ \BBA {} Escalera, S.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2021}{}{}.
+\newblock
+\APACrefbtitle {PBNS: Physically Based Neural Simulator for Unsupervised
+  Garment Pose Space Deformation.} {Pbns: Physically based neural simulator for
+  unsupervised garment pose space deformation.}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Bertiche%
+, Madadi%
+\BCBL {}\ \BBA {} Escalera%
+}{%
+Bertiche%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2022}}%
+}]{%
+neuralCloth}
+\APACinsertmetastar {%
+neuralCloth}%
+\begin{APACrefauthors}%
+Bertiche, H.%
+, Madadi, M.%
+\BCBL {}\ \BBA {} Escalera, S.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2022}{nov}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Neural Cloth Simulation} {Neural cloth
+  simulation}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{ACM Trans. Graph.}{41}{6}{}.
+\newblock
+\begin{APACrefURL} \url{https://doi.org/10.1145/3550454.3555491}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1145/3550454.3555491} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Breen%
 , House%
 \BCBL {}\ \BBA {} Getto%
@@ -59,6 +117,40 @@ Breen, D\BPBI E.%
   physically-based particle model of woven cloth}.{\BBCQ}
 \newblock
 \APACjournalVolNumPages{The Visual Computer}{8}{}{264--277}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Carignan%
+, Yang%
+, Thalmann%
+\BCBL {}\ \BBA {} Thalmann%
+}{%
+Carignan%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {1992}}%
+}]{%
+carignanclothy}
+\APACinsertmetastar {%
+carignanclothy}%
+\begin{APACrefauthors}%
+Carignan, M.%
+, Yang, Y.%
+, Thalmann, N\BPBI M.%
+\BCBL {}\ \BBA {} Thalmann, D.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1992}{jul}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Dressing Animated Synthetic Actors with Complex
+  Deformable Clothes} {Dressing animated synthetic actors with complex
+  deformable clothes}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{SIGGRAPH Comput. Graph.}{26}{2}{99–104}.
+\newblock
+\begin{APACrefURL} \url{https://doi.org/10.1145/142920.134017} \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1145/142920.134017} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -329,6 +421,39 @@ Terzopoulos, D.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Wang%
+, O'Brien%
+\BCBL {}\ \BBA {} Ramamoorthi%
+}{%
+Wang%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2011}}%
+}]{%
+wangdatadriven}
+\APACinsertmetastar {%
+wangdatadriven}%
+\begin{APACrefauthors}%
+Wang, H.%
+, O'Brien, J\BPBI F.%
+\BCBL {}\ \BBA {} Ramamoorthi, R.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2011}{jul}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Data-Driven Elastic Models for Cloth: Modeling and
+  Measurement} {Data-driven elastic models for cloth: Modeling and
+  measurement}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{ACM Trans. Graph.}{30}{4}{}.
+\newblock
+\begin{APACrefURL} \url{https://doi.org/10.1145/2010324.1964966}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1145/2010324.1964966} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Weil%
 }{%
 Weil%
@@ -349,6 +474,67 @@ Weil, J.%
   objects}.{\BBCQ}
 \newblock
 \APACjournalVolNumPages{}{20}{4}{}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Yu%
+\ \protect \BOthers {.}}{%
+Yu%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2018}}%
+}]{%
+yu2018doublefusion}
+\APACinsertmetastar {%
+yu2018doublefusion}%
+\begin{APACrefauthors}%
+Yu, T.%
+, Zheng, Z.%
+, Guo, K.%
+, Zhao, J.%
+, Dai, Q.%
+, Li, H.%
+\BDBL {}Liu, Y.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2018}{}{}.
+\newblock
+\APACrefbtitle {DoubleFusion: Real-time Capture of Human Performances with
+  Inner Body Shapes from a Single Depth Sensor.} {Doublefusion: Real-time
+  capture of human performances with inner body shapes from a single depth
+  sensor.}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Yu%
+\ \protect \BOthers {.}}{%
+Yu%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2019}}%
+}]{%
+Yu_2019_CVPR}
+\APACinsertmetastar {%
+Yu_2019_CVPR}%
+\begin{APACrefauthors}%
+Yu, T.%
+, Zheng, Z.%
+, Zhong, Y.%
+, Zhao, J.%
+, Dai, Q.%
+, Pons-Moll, G.%
+\BCBL {}\ \BBA {} Liu, Y.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2019}{June}{}.
+\newblock
+{\BBOQ}\APACrefatitle {SimulCap : Single-View Human Performance Capture With
+  Cloth Simulation} {Simulcap : Single-view human performance capture with
+  cloth simulation}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Proceedings of the IEEE/CVF Conference on Computer
+  Vision and Pattern Recognition (CVPR).} {Proceedings of the ieee/cvf
+  conference on computer vision and pattern recognition (cvpr).}
 \PrintBackRefs{\CurrentBib}
 
 \end{thebibliography}
