@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  6 DEC 2023 01:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  6 DEC 2023 01:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -428,64 +428,64 @@ Underfull \hbox (badness 10000) in paragraph at lines 169--170
  []
 
 [16]
-Underfull \hbox (badness 10000) in paragraph at lines 175--176
+Underfull \hbox (badness 10000) in paragraph at lines 178--179
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 177--179
+Underfull \hbox (badness 10000) in paragraph at lines 180--182
 
  []
 
 [17]
-Underfull \hbox (badness 10000) in paragraph at lines 180--181
+Underfull \hbox (badness 10000) in paragraph at lines 183--184
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 182--183
+Underfull \hbox (badness 10000) in paragraph at lines 185--186
 
  []
 
 
-Overfull \hbox (2.50703pt too wide) in paragraph at lines 184--185
+Overfull \hbox (2.50703pt too wide) in paragraph at lines 187--188
 []\OT1/cmr/m/n/12 In terms of per-for-mance, they sim-u-lated meshes be-tween 1
 0000 and 100000
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 190--191
+Underfull \hbox (badness 10000) in paragraph at lines 191--192
 
  []
 
 [18]
-Underfull \hbox (badness 10000) in paragraph at lines 192--193
+Underfull \hbox (badness 10000) in paragraph at lines 193--194
 
  []
 
 [19] [20]
-Underfull \hbox (badness 10000) in paragraph at lines 224--227
+Underfull \hbox (badness 10000) in paragraph at lines 225--228
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 228--233
+Underfull \hbox (badness 10000) in paragraph at lines 229--234
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 237--240
+Underfull \hbox (badness 10000) in paragraph at lines 238--241
 
  []
 
 [21]
-Overfull \hbox (91.37845pt too wide) in paragraph at lines 246--248
+Overfull \hbox (91.37845pt too wide) in paragraph at lines 247--249
 []\OT1/cmr/m/n/12 bridging fi-nite el-e-ment meth-ods and PBD https://dl.acm.or
 g/doi/10.1145/2601097.2601116 
  []
 
 
-Overfull \hbox (56.1718pt too wide) in paragraph at lines 249--252
+Overfull \hbox (56.1718pt too wide) in paragraph at lines 250--253
 []\OT1/cmr/m/n/12 2017 sur-vey on PBD, lots more info http://mmacklin.com/2017-
 EG-CourseNotes.pdf
  []
@@ -526,32 +526,21 @@ Underfull \hbox (badness 3199) in paragraph at lines 16--36
 0821   \OT1/cmr/m/n/12 doi:
  []
 
-! Misplaced alignment tab character &.
-<argument> Computers &
-                       Graphics
-l.95 ...ages{Computers & Graphics}{37}{8}{945-954}
-                                                  .
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
 
-
-Underfull \hbox (badness 3354) in paragraph at lines 83--104
-[]\OT1/cmr/m/n/12 Bender, J., We-ber, D., & Diziol, R.  (2013).  Fast and sta-
+Underfull \hbox (badness 2302) in paragraph at lines 83--104
+[]\OT1/cmr/m/n/12 Bender, J., We-ber, D., & Diziol, R.  (2013).  Fast and sta-b
+le
  []
 
 
-Underfull \hbox (badness 5533) in paragraph at lines 83--104
-\OT1/cmr/m/n/12 ble cloth sim-u-la-tion based on multi-resolution shape match-
+Underfull \hbox (badness 10000) in paragraph at lines 83--104
+\OT1/cmr/m/n/12 cloth sim-u-la-tion based on multi-resolution shape match-ing.
  []
 
 
-Underfull \hbox (badness 1895) in paragraph at lines 83--104
-\OT1/cmr/m/n/12 ing.  \OT1/cmr/m/it/12 Com-put-ers  Graph-ics\OT1/cmr/m/n/12 , 
-\OT1/cmr/m/it/12 37\OT1/cmr/m/n/12 (8), 945-954.  Re-trieved from
+Underfull \hbox (badness 6204) in paragraph at lines 83--104
+\OT1/cmr/m/it/12 Com-put-ers and Graph-ics\OT1/cmr/m/n/12 , \OT1/cmr/m/it/12 37
+\OT1/cmr/m/n/12 (8), 945-954.  Re-trieved from
  []
 
 
@@ -634,7 +623,7 @@ L3 programming layer <2023-10-10>
 Here is how much of TeX's memory you used:
  5038 strings out of 474503
  83674 string characters out of 5756704
- 1931043 words of memory out of 5000000
+ 1932043 words of memory out of 5000000
  26961 multiletter control sequences out of 15000+600000
  564737 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -650,7 +639,7 @@ fb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/te
 xlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/202
 3/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-d
 ist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on Dissertation.pdf (33 pages, 198157 bytes).
+Output written on Dissertation.pdf (33 pages, 198473 bytes).
 PDF statistics:
  172 PDF objects out of 1000 (max. 8388607)
  111 compressed objects within 2 object streams

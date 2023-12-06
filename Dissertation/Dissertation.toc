@@ -13,7 +13,7 @@
 \contentsline {subsubsection}{\numberline {2.5.4}Cloth Simulation with Camera Capture}{16}{}%
 \contentsline {subsubsection}{\numberline {2.5.5}Cloth Simulation with Neural Networks}{17}{}%
 \contentsline {subsubsection}{\numberline {2.5.6}Shape Matching}{17}{}%
-\contentsline {subsubsection}{\numberline {2.5.7}Position Based Dynamics}{18}{}%
+\contentsline {subsubsection}{\numberline {2.5.7}Position Based Dynamics}{19}{}%
 \contentsline {paragraph}{Extended Position Based Dynamics}{21}{}%
 \contentsline {paragraph}{Other PBD methods}{22}{}%
 \contentsline {subsection}{\numberline {2.6}Future Trends}{22}{}%
