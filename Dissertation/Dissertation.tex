@@ -28,6 +28,7 @@
 \usepackage{algpseudocode}
 \algdef{SE}[LOOP]{Loop}{EndLoop}[1]{\algorithmicloop\ #1}{\algorithmicend\ \algorithmicloop}%
 
+
 %header and footer settings
 \pagestyle{fancyplain}
 \fancyhf{}
@@ -159,11 +160,31 @@ As mentioned in section \ref{History}, Baraff and Witkin proposed one of the fir
 In their results, they tested multiple setups including clothing. They found that changing the bend stiffness factor, didn't affect in running times a great deal, which explicit simulators wouldn't be able to do. They were also able to estimate their performance in terms of number of particles, and found that it was slightly better than \(O(n^{1.5})\) which was what they expected.\\
 
 This paper laid the groundworks for many continuum implementations, one of which being a paper on data-driven elastic models for cloth simulation \cite{wangdatadriven}. Their goal was to more closely represent how different materials are simulated, ideally close to their real world counterpart. It does this by representing cloth with a piecewise linear elastic model. They explain that real world cloth items such as clothes often have anisotropic properties from the woven nature of cloth, and that this is often ignored by most cloth simulations for simplicity. A part of their research was a way to measure real life samples of cloth, construct a database of parameters are use them directly in their cloth simulation which was a very interesting way to get realistic results.
+\\
 
-\subsubsection{Alternative Methods for Cloth Simulation}
+Finite element analysis is a way to break down the cloth into discrete elements such as triangles, and the physical behaviour is calculated based on the material properties and forces acting on it. In 2020, Kim discussed how most cloth simulation are either made from finite element methods, position based dynamics or mass-spring systems, and that the Baraff-Witkin model doesn't really fit into these categories. In his paper he formulated a version of the Baraff-Witkin model but entirely in terms of finite elements \cite{FEMcantunderstand}. \\ 
+
+
+\subsubsection{Cloth Simulation with Camera Capture}
 As cloth simulation is such a wide field of research, there are many alternative methods and interesting papers to look at, one such idea is SimulCap by \cite{Yu_2019_CVPR}. SimulCap is a method of capturing human movement while also capturing dynamic details such as folds and wrinkles. It uses a RGBD (RGB depth) camera. Their problem with other recent implementations were the lack of realism, in part due to the human and cloth being considered as one piece of geometry, and also the results not being editable, which is a huge aspect of a lot of use cases, i.e. virtual dressing applications. So, for SimulCap, the authors decided to combine a layered representation of the human body, while also having a separate cloth simulation that matches the human movement. For their cloth simulation, they chose to use a mass-spring model for simplicity and also an explicit integration scheme with a small time step for stability. In their results, they compared their implementation with DoubleFusion, another previous system by \cite{yu2018doublefusion}, which is a state-of-the-art system for real time human capture. The authors found that SimulCap achieves a much more realistic cloth representation, mainly due to the separation of geometry as described earlier. The limitations of this system lie in the variation of clothing, e.g. thick jumpers remain challenging to simulate, also due to the simple nature of the cloth simulation, the realism could be improved upon by choosing a more advanced technique. \\
 
-Another exciting alternative method to cloth can be found in the research of \cite{neuralCloth}, a cloth simulation framework that uses an unsupervised deep learning methodology. This has been attempted in the past but the other approaches do not handle cloth dynamics. The authors note that while supervised learning systems have been used before, it requires huge volumes of data, and it has to be repeated for every garment/body, so they chose an unsupervised approach. For their cloth representation, they chose to use a particle based system that also considers external forces like wind and collision, this cloth is then skinned to a 3D model. After training their model, they compared their results to other unsupervised approaches such as \cite{bertiche2021pbns}. They evaluated their framework with multiple different body motions such as jumping and spinning. They found that their approach was the only one capable of achieving dynamic cloth effects. In terms of limitations, unsupervised learning compared to supervised takes much longer and is more computationally expensive, and neural cloth has yet to implement cloth self-collision which is a crucial component of most simulators.
+\subsubsection{Cloth Simulation with Neural Networks}
+Another interest alternative method to cloth can be found in the research of \cite{neuralCloth}, a cloth simulation framework that uses an unsupervised deep learning methodology. This has been attempted in the past but the other approaches do not handle cloth dynamics. The authors note that while supervised learning systems have been used before, it requires huge volumes of data, and it has to be repeated for every garment/body, so they chose an unsupervised approach. For their cloth representation, they chose to use a particle based system that also considers external forces like wind and collision, this cloth is then skinned to a 3D model. After training their model, they compared their results to other unsupervised approaches such as \cite{bertiche2021pbns}. They evaluated their framework with multiple different body motions such as jumping and spinning. They found that their approach was the only one capable of achieving dynamic cloth effects. In terms of limitations, unsupervised learning compared to supervised takes much longer and is more computationally expensive, and neural cloth has yet to implement cloth self-collision which is a crucial component of most simulators.
+
+\subsubsection{Shape Matching}
+Shape matching is a technique that allows an object to deform but tries to maintain the form of the original shape. In 2005, Müller et al., utilised shape matching to come up with a new method to simulate deformable objects \cite{ogshapematching}. It does this by replacing energies by geometric constraints, and forces by the distance of current positions to goal positions. These goal positions are determined by shape matching, given a rest state. They mention that because the points are always drawn to goal positions, the overshooting issue with explicit methods is completely removed.\\
+
+In their algorithm, their idea is given a set of particles with an initial configuration, every time step the particles are moved towards their goal position, and these goal positions are determined by the original configuration of the shape. In terms of performance, it depends on the number of points used, and they note it is hard to compare it to another model such as mass-spring systems, as the technique depends on the number of clusters chosen, which cannot be reflected in the other models.\\
+Overall, this shape matching approach to simulation provides an unconditionally stable simulation that is inexpensive to compute, although the model is not physically accurate.\\
+
+This research inspired a paper on cloth simulation using shape matching in 2013 \cite{BENDER2013945}. As mentioned before, using shape matching for simulations proved unconditionally stable, so a model specifically designed for cloth simulation was created. They note that normal shape matching approaches that use regions, cannot differentiate between shearing, bending and stretching, which are crucial to represent cloth accurately. To combat that, they introduce a novel approach to use a multi-resolution model instead of region based. This multi-resolution model will allow for the simulation of fabrics that have different stretching/shearing stiffness. It is also noted that this method is fast due to it scaling linearly with the size of the cloth. \\
+
+A shape matching approach that used regions was attempted before \cite{regionshapecloth}. But in this model, it introduces forces that influence the bending stiffness and depend on the size of the model, and this is undesirable in cloth simulation. Another problem is that due to small regions within a large model, high stretching and shearing stiffness cannot be obtained. This lead to the development of the multi-resolution approach.\\
+
+In terms of performance, they simulated meshes between 10000 and 100000 triangles to test their scalability, and confirmed their linear relationship between computation time and number of triangles. They also implemented a GPU version of the method which resulted in a much faster compute time. They found in similar setups, the multi-resolution method was around 9 times faster than a standard mass-spring system, and around 15 times faster than a corotational finite element method, a method created by Etzmuss et al. \cite{etzmuss2003fast}.
+
+Overall, the multi-resolution approach provided a very noticeable speed-up compared to other approaches, at the cost of physical accuracy.
+
 
 \subsubsection{Position Based Dynamics}
 A great number of techniques discussed above have been force based, and these forces are used to calculate accelerations. Finally these accelerations are integrated to find the velocities and positions of particles. The Position based dynamics (PBD) technique takes a unique approach to physically based animations by omitting the velocity layer and directly working on the positions of particles. \cite{muller2007position} The main advantage is the controllability, the integration instability discussed in section \ref{Mass-Spring} is completely avoided due to the lack of explicit integration. As this is a real time technique, it is greatly suited to games development, as it is very helpful to have direct control over positions of objects within the game.\\
@@ -200,20 +221,34 @@ To fully discuss the technique, the algorithm must be analysed. In the algorithm
 \end{algorithmic}
 \end{algorithm}
 \newpage
-Now it can be broken down to see what each part does. Lines 1 to 3 is just initialising each particle with initial position, velocity and inverse mass. Line 6 is where external forces get added to the system, Müller et al. notes that if gravity is the only external force then the line becomes $v_i \leftarrow v_i + \Delta tg$ where g is the gravitational acceleration. Next, on line 10, the new positions are estimated with a explicit Euler integration step, they are then adjusted in the line 15 loop as many times as needed until all constraints are satisfied. Once completed, the line 18 loop then moves the positions to the calculated position and updates the velocity. \\
-
+Now it can be broken down to see what each part does. Lines 1 to 3 is just initialising each particle with initial position, velocity and inverse mass. Line 6 is where external forces get added to the system, Müller et al. notes that if gravity is the only external force then the line becomes $v_i \leftarrow v_i + \Delta tg$ where g is the gravitational acceleration. Next, on line 10, the new positions are estimated with a explicit Euler integration step, they are then adjusted in the line 15 loop as many times as needed until all constraints are satisfied. Once completed, the line 18 loop then moves the positions to the calculated position and updates the velocity. 
+\\
 This algorithm can be classed as unconditionally stable as the integration method in lines 19 and 20 do not use future positions/velocities, but instead calculate physically possible configurations and move the vertices to them.\\
 
 In the paper, the authors also discuss their implementation of a cloth simulator for use in games. Their simulator accepts a triangle mesh and creates two constraints, stretching and bending constraints. Much like the springs in mass-spring systems, these constraints force the positions of the particles to satisfy them in order to continue the simulation, this relates to the loop in line 15 of the algorithm.
+\\
+To test their cloth simulation, they integrated the method into a game environment and conducted various experiments. They note that a positive to this method is that their bending and stretching terms are independent which can lead to more results when testing values. \\ 
+In one of their tests they used one way coupling to link cloth to a stationary object, and two way coupled the bottom of the cloth to a rigid body, it resulted in realistic twisting and swaying, but more importantly ran at more than 380fps which showcases the efficiency of this method. \\
+They were also able to test tearing of the cloth. Their tearing process is as follows: when an edge stretches past a threshold value then it is split, with the triangles above being assigned to the original vertex and the lower triangles assigned to the duplicate. They claim this is also extremely stable.\\
 
-... todo: finish this section by comparing the results and analysing them.
+Overall, this paper was a very interesting approach to cloth simulation at the time, and influenced a great deal of work into real time cloth, eventually being used in Nvidia's physX software which in turn is used very frequently in game development.
 
 \paragraph{Extended Position Based Dynamics}
-todo: talk about the extended position based dynamics paper
+In 2016, Müller collaborated with Miles Macklin and Nuttapong Chentanez to extend position based dynamics and improve upon the original method \cite{macklin2016xpbd}. Their problems with the original stemmed with iteration count and time step affecting the stiffness of the simulated object, specifically: constraints become stiff as iteration count increases/time step decreases. This effect is discussed in the 2014 survey on position-based methods \cite{bender2014survey}. \\
+Their solution to this problem involved creating a new constraint formulation that corresponds to elastic potential energy. It also introduces a total Lagrange multiplier, which is a technique used to find the local maxima and minima of a function that is subject to constraints, e.g. in cloth this could be a distance constraint. This Lagrange multiplier allows the constraints to be solved irrespective of time step.\\
+To test this on cloth, they set up the same cloth configuration for PBD and XPBD and compared them. They found that PBD became progressively stiffer as the iteration count increased but XPBD remained consistent. They also found a small downside of XPBD in terms of performance per-iteration, but this was less than 2\% of total simulation time. \\
+
+
 
 \paragraph{Other PBD methods}
-todo: can talk about other implementations that utilize PBD, such as projective dynamics by Bouaziz et al. bridging finite element methods and PBD
+todo: can talk about other implementations that utilize PBD, such as projective dynamics by Bouaziz et al.
+ 
+bridging finite element methods and PBD
+https://dl.acm.org/doi/10.1145/2601097.2601116
 
+2017 survey on PBD, lots more info
+http://mmacklin.com/2017-EG-CourseNotes.pdf
+maybe some future trends in here.
 
 
 \subsection{Future Trends}

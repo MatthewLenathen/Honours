@@ -35,6 +35,74 @@ Baraff, D.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Bender%
+, M{\"u}ller%
+, Otaduy%
+, Teschner%
+\BCBL {}\ \BBA {} Macklin%
+}{%
+Bender%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2014}}%
+}]{%
+bender2014survey}
+\APACinsertmetastar {%
+bender2014survey}%
+\begin{APACrefauthors}%
+Bender, J.%
+, M{\"u}ller, M.%
+, Otaduy, M\BPBI A.%
+, Teschner, M.%
+\BCBL {}\ \BBA {} Macklin, M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2014}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {A survey on position-based simulation methods in
+  computer graphics} {A survey on position-based simulation methods in computer
+  graphics}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Computer graphics forum} {Computer graphics forum}\
+  (\BVOL~33, \BPGS\ 228--251).
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Bender%
+, Weber%
+\BCBL {}\ \BBA {} Diziol%
+}{%
+Bender%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2013}}%
+}]{%
+BENDER2013945}
+\APACinsertmetastar {%
+BENDER2013945}%
+\begin{APACrefauthors}%
+Bender, J.%
+, Weber, D.%
+\BCBL {}\ \BBA {} Diziol, R.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2013}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Fast and stable cloth simulation based on
+  multi-resolution shape matching} {Fast and stable cloth simulation based on
+  multi-resolution shape matching}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Computers & Graphics}{37}{8}{945-954}.
+\newblock
+\begin{APACrefURL}
+  \url{https://www.sciencedirect.com/science/article/pii/S0097849313001283}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{https://doi.org/10.1016/j.cag.2013.08.003}
+  \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Bertiche%
 , Madadi%
 \BCBL {}\ \BBA {} Escalera%
@@ -192,6 +260,35 @@ Cutler, L\BPBI D.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Etzmu{\ss}%
+, Keckeisen%
+\BCBL {}\ \BBA {} Stra{\ss}er%
+}{%
+Etzmu{\ss}%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2003}}%
+}]{%
+etzmuss2003fast}
+\APACinsertmetastar {%
+etzmuss2003fast}%
+\begin{APACrefauthors}%
+Etzmu{\ss}, O.%
+, Keckeisen, M.%
+\BCBL {}\ \BBA {} Stra{\ss}er, W.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2003}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {A fast finite element solution for cloth modelling} {A
+  fast finite element solution for cloth modelling}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {11th Pacific Conference onComputer Graphics and
+  Applications, 2003. Proceedings.} {11th pacific conference oncomputer
+  graphics and applications, 2003. proceedings.}\ (\BPGS\ 244--251).
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Jakobsen%
 }{%
 Jakobsen%
@@ -242,9 +339,9 @@ Kang, Y\BHBI M.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
-Kim%
+D.~Kim%
 \ \protect \BOthers {.}}{%
-Kim%
+D.~Kim%
 \ \protect \BOthers {.}}{%
 {\protect \APACyear {2013}}%
 }]{%
@@ -267,6 +364,35 @@ Kim, D.%
   effects} {Near-exhaustive precomputation of secondary cloth effects}.{\BBCQ}
 \newblock
 \APACjournalVolNumPages{ACM Transactions on Graphics (TOG)}{32}{4}{1--8}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+T.~Kim%
+}{%
+T.~Kim%
+}{%
+{\protect \APACyear {2020}}%
+}]{%
+FEMcantunderstand}
+\APACinsertmetastar {%
+FEMcantunderstand}%
+\begin{APACrefauthors}%
+Kim, T.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2020}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {A Finite Element Formulation of Baraff-Witkin Cloth} {A
+  finite element formulation of baraff-witkin cloth}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Computer Graphics Forum}{39}{8}{171-179}.
+\newblock
+\begin{APACrefURL}
+  \url{https://onlinelibrary.wiley.com/doi/abs/10.1111/cgf.14111}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{https://doi.org/10.1111/cgf.14111} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
@@ -330,6 +456,40 @@ M{\"u}ller, M.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+M\"{u}ller%
+, Heidelberger%
+, Teschner%
+\BCBL {}\ \BBA {} Gross%
+}{%
+M\"{u}ller%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2005}}%
+}]{%
+ogshapematching}
+\APACinsertmetastar {%
+ogshapematching}%
+\begin{APACrefauthors}%
+M\"{u}ller, M.%
+, Heidelberger, B.%
+, Teschner, M.%
+\BCBL {}\ \BBA {} Gross, M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2005}{jul}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Meshless Deformations Based on Shape Matching} {Meshless
+  deformations based on shape matching}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{ACM Trans. Graph.}{24}{3}{471–478}.
+\newblock
+\begin{APACrefURL} \url{https://doi.org/10.1145/1073204.1073216}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1145/1073204.1073216} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Provot%
 }{%
 Provot%
@@ -386,6 +546,38 @@ Selle, A.%
   Graphics}{15}{2}{339-350}.
 \newblock
 \begin{APACrefDOI} \doi{10.1109/TVCG.2008.79} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Stumpp%
+, Spillmann%
+, Becker%
+\BCBL {}\ \BBA {} Teschner%
+}{%
+Stumpp%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2008}}%
+}]{%
+regionshapecloth}
+\APACinsertmetastar {%
+regionshapecloth}%
+\begin{APACrefauthors}%
+Stumpp, T.%
+, Spillmann, J.%
+, Becker, M.%
+\BCBL {}\ \BBA {} Teschner, M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2008}{01}{}.
+\newblock
+{\BBOQ}\APACrefatitle {A Geometric Deformation Model for Stable Cloth
+  Simulation} {A geometric deformation model for stable cloth
+  simulation}.{\BBCQ}
+\newblock
+\BIn{} (\BPG~39-46).
+\newblock
+\begin{APACrefDOI} \doi{10.2312/PE/vriphys/vriphys08/039-046} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%

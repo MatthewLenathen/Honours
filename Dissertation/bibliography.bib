@@ -227,3 +227,77 @@
 	archivePrefix={arXiv},
 	primaryClass={cs.CV}
 }
+@article{FEMcantunderstand,
+	author = {Kim, Theodore},
+	title = {A Finite Element Formulation of Baraff-Witkin Cloth},
+	journal = {Computer Graphics Forum},
+	volume = {39},
+	number = {8},
+	pages = {171-179},
+	doi = {https://doi.org/10.1111/cgf.14111},
+	url = {https://onlinelibrary.wiley.com/doi/abs/10.1111/cgf.14111},
+	eprint = {https://onlinelibrary.wiley.com/doi/pdf/10.1111/cgf.14111},
+	abstract = {Abstract The Baraff-Witkin [BW98] model has been a popular formulation for cloth for 20 years. However, its relationship to the finite element method (FEM) has always been unclear, because the model resists being written as an isotropic, hyperelastic strain energy. In this paper, we show that this is because the Baraff-Witkin model is actually a coupled anisotropic strain energy. We show that its stretching term approximates the isotropic As-Rigid-As-Possible (ARAP) energy, and its shearing term is a cross-fiber coupling energy common in biomechanics. While it has been known empirically for some time that the model can produce indefinite force Jacobians, the conditions under which they occur has never been clear. Our formulation enables a complete eigenanalysis that precisely characterizes exactly when indefiniteness occurs, and leads to fast, analytic, semi-positive-definite projection methods. Finally, our analysis suggests a generalized Baraff-Witkin energy with non-orthogonal warp and weft directions.},
+	year = {2020}
+}
+@inproceedings{bender2014survey,
+	title={A survey on position-based simulation methods in computer graphics},
+	author={Bender, Jan and M{\"u}ller, Matthias and Otaduy, Miguel A and Teschner, Matthias and Macklin, Miles},
+	booktitle={Computer graphics forum},
+	volume={33},
+	number={6},
+	pages={228--251},
+	year={2014},
+	organization={Wiley Online Library}
+}
+@inproceedings{etzmuss2003fast,
+	title={A fast finite element solution for cloth modelling},
+	author={Etzmu{\ss}, Olaf and Keckeisen, Michael and Stra{\ss}er, Wolfgang},
+	booktitle={11th Pacific Conference onComputer Graphics and Applications, 2003. Proceedings.},
+	pages={244--251},
+	year={2003},
+	organization={IEEE}
+}
+
+@article{ogshapematching,
+	author = {M\"{u}ller, Matthias and Heidelberger, Bruno and Teschner, Matthias and Gross, Markus},
+	title = {Meshless Deformations Based on Shape Matching},
+	year = {2005},
+	issue_date = {July 2005},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	volume = {24},
+	number = {3},
+	issn = {0730-0301},
+	url = {https://doi.org/10.1145/1073204.1073216},
+	doi = {10.1145/1073204.1073216},
+	abstract = {We present a new approach for simulating deformable objects. The underlying model is geometrically motivated. It handles pointbased objects and does not need connectivity information. The approach does not require any pre-processing, is simple to compute, and provides unconditionally stable dynamic simulations.The main idea of our deformable model is to replace energies by geometric constraints and forces by distances of current positions to goal positions. These goal positions are determined via a generalized shape matching of an undeformed rest state with the current deformed state of the point cloud. Since points are always drawn towards well-defined locations, the overshooting problem of explicit integration schemes is eliminated. The versatility of the approach in terms of object representations that can be handled, the efficiency in terms of memory and computational complexity, and the unconditional stability of the dynamic simulation make the approach particularly interesting for games.},
+	journal = {ACM Trans. Graph.},
+	month = {jul},
+	pages = {471–478},
+	numpages = {8},
+	keywords = {deformable modeling, real-time simulation, geometric deformation, shape matching}
+}
+@article{BENDER2013945,
+	title = {Fast and stable cloth simulation based on multi-resolution shape matching},
+	journal = {Computers and Graphics},
+	volume = {37},
+	number = {8},
+	pages = {945-954},
+	year = {2013},
+	issn = {0097-8493},
+	doi = {https://doi.org/10.1016/j.cag.2013.08.003},
+	url = {https://www.sciencedirect.com/science/article/pii/S0097849313001283},
+	author = {Jan Bender and Daniel Weber and Raphael Diziol},
+	keywords = {Cloth simulation, Shape matching, Multi-resolution model, GPU-based simulation},
+	abstract = {We present an efficient and unconditionally stable method which allows the deformation of very complex stiff cloth models in real-time. This method is based on a shape matching approach which uses edges and triangles as 1D and 2D regions to simulate stretching and shearing resistance. Previous shape matching approaches require large overlapping regions to simulate stiff materials. This unfortunately also affects the bending behavior of the model. Instead of using large regions, we introduce a novel multi-resolution shape matching approach to increase only the stretching and shearing stiffness. Shape matching is performed for each level of the multi-resolution model and the results are propagated from one level to the next one. To preserve the fine wrinkles of the cloth on coarse levels of the hierarchy we present a modified version of the original shape matching method. The introduced method for cloth simulation can perform simulations in linear time and has no numerical damping. Furthermore, we show that multi-resolution shape matching can be performed efficiently on the GPU.}
+}
+@inproceedings{regionshapecloth,
+	author = {Stumpp, Thomas and Spillmann, Jonas and Becker, Markus and Teschner, Matthias},
+	year = {2008},
+	month = {01},
+	pages = {39-46},
+	title = {A Geometric Deformation Model for Stable Cloth Simulation},
+	journal = {VRIPHYS 2008 - 5th Workshop on Virtual Reality Interactions and Physical Simulations},
+	doi = {10.2312/PE/vriphys/vriphys08/039-046}
+}

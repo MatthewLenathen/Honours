@@ -14,45 +14,45 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: bibliography.bib
 apacite.bst [2013/07/21 v6.03 APA bibliography style]
 Warning--No journal in weil_synthesis_1986
-You've used 18 entries,
+You've used 24 entries,
             6951 wiz_defined-function locations,
-            1399 strings with 14539 characters,
-and the built_in function-call counts, 37341 in all, are:
-= -- 4617
-> -- 383
-< -- 1641
-+ -- 1710
-- -- 36
-* -- 2341
-:= -- 6355
-add.period$ -- 83
-call.type$ -- 18
-change.case$ -- 322
+            1446 strings with 15986 characters,
+and the built_in function-call counts, 50378 in all, are:
+= -- 6240
+> -- 521
+< -- 2211
++ -- 2287
+- -- 48
+* -- 3154
+:= -- 8516
+add.period$ -- 113
+call.type$ -- 24
+change.case$ -- 430
 chr.to.int$ -- 0
-cite$ -- 37
-duplicate$ -- 1109
-empty$ -- 1505
-format.name$ -- 642
-if$ -- 7207
+cite$ -- 49
+duplicate$ -- 1500
+empty$ -- 2024
+format.name$ -- 860
+if$ -- 9745
 int.to.chr$ -- 0
-int.to.str$ -- 54
+int.to.str$ -- 72
 missing$ -- 0
-newline$ -- 494
-num.names$ -- 144
-pop$ -- 801
+newline$ -- 668
+num.names$ -- 192
+pop$ -- 1070
 preamble$ -- 1
-purify$ -- 82
+purify$ -- 110
 quote$ -- 0
-skip$ -- 2411
+skip$ -- 3270
 stack$ -- 0
-substring$ -- 1914
-swap$ -- 653
-text.length$ -- 79
+substring$ -- 2571
+swap$ -- 895
+text.length$ -- 115
 text.prefix$ -- 0
 top$ -- 1
-type$ -- 1824
+type$ -- 2496
 warning$ -- 1
-while$ -- 234
+while$ -- 323
 width$ -- 0
-write$ -- 642
+write$ -- 871
 (There was 1 warning)
