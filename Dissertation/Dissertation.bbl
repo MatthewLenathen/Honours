@@ -490,6 +490,73 @@ M\"{u}ller, M.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Narain%
+, Overby%
+\BCBL {}\ \BBA {} Brown%
+}{%
+Narain%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2016}}%
+}]{%
+ADMM}
+\APACinsertmetastar {%
+ADMM}%
+\begin{APACrefauthors}%
+Narain, R.%
+, Overby, M.%
+\BCBL {}\ \BBA {} Brown, G\BPBI E.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2016}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {ADMM  projective dynamics: fast simulation of general
+  constitutive models} {Admm  projective dynamics: fast simulation of
+  general constitutive models}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Proceedings of the ACM SIGGRAPH/Eurographics Symposium
+  on Computer Animation} {Proceedings of the acm siggraph/eurographics
+  symposium on computer animation}\ (\BPG~21–28).
+\newblock
+\APACaddressPublisher{Goslar, DEU}{Eurographics Association}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Oh%
+, Lee%
+\BCBL {}\ \BBA {} Lee%
+}{%
+Oh%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2018}}%
+}]{%
+OhNeural}
+\APACinsertmetastar {%
+OhNeural}%
+\begin{APACrefauthors}%
+Oh, Y\BPBI J.%
+, Lee, T\BPBI M.%
+\BCBL {}\ \BBA {} Lee, I\BHBI K.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2018}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Hierarchical Cloth Simulation using Deep Neural
+  Networks} {Hierarchical cloth simulation using deep neural networks}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Proceedings of Computer Graphics International 2018}
+  {Proceedings of computer graphics international 2018}\ (\BPG~139–146).
+\newblock
+\APACaddressPublisher{New York, NY, USA}{Association for Computing Machinery}.
+\newblock
+\begin{APACrefURL} \url{https://doi.org/10.1145/3208159.3208162}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1145/3208159.3208162} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Provot%
 }{%
 Provot%
@@ -613,11 +680,11 @@ Terzopoulos, D.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
-Wang%
+H.~Wang%
 , O'Brien%
 \BCBL {}\ \BBA {} Ramamoorthi%
 }{%
-Wang%
+H.~Wang%
 \ \protect \BOthers {.}}{%
 {\protect \APACyear {2011}}%
 }]{%
@@ -643,6 +710,39 @@ Wang, H.%
   \end{APACrefURL}
 \newblock
 \begin{APACrefDOI} \doi{10.1145/2010324.1964966} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+K.~Wang%
+, Zhang%
+, Cong%
+\BCBL {}\ \BBA {} Yang%
+}{%
+K.~Wang%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2023}}%
+}]{%
+Wang_2023_CVPR}
+\APACinsertmetastar {%
+Wang_2023_CVPR}%
+\begin{APACrefauthors}%
+Wang, K.%
+, Zhang, G.%
+, Cong, S.%
+\BCBL {}\ \BBA {} Yang, J.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2023}{June}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Clothed Human Performance Capture With a Double-Layer
+  Neural Radiance Fields} {Clothed human performance capture with a
+  double-layer neural radiance fields}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Proceedings of the IEEE/CVF Conference on Computer
+  Vision and Pattern Recognition (CVPR)} {Proceedings of the ieee/cvf
+  conference on computer vision and pattern recognition (cvpr)}\
+  (\BPG~21098-21107).
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%

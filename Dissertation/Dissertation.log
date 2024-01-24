@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  6 DEC 2023 01:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  24 JAN 2024 00:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -397,104 +397,121 @@ Underfull \hbox (badness 10000) in paragraph at lines 147--148
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 153--154
+
+ []
+
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 156--157
+Underfull \hbox (badness 10000) in paragraph at lines 155--156
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 158--159
+Underfull \hbox (badness 10000) in paragraph at lines 157--158
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 160--161
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 162--164
+Underfull \hbox (badness 10000) in paragraph at lines 159--161
 
  []
 
 [15]
-Underfull \hbox (badness 10000) in paragraph at lines 165--166
+Underfull \hbox (badness 10000) in paragraph at lines 162--163
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 169--170
+Underfull \hbox (badness 10000) in paragraph at lines 166--167
 
  []
 
 [16]
-Underfull \hbox (badness 10000) in paragraph at lines 178--179
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 180--182
+Underfull \hbox (badness 10000) in paragraph at lines 177--179
 
  []
 
 [17]
-Underfull \hbox (badness 10000) in paragraph at lines 183--184
+<figures/DNN.png, id=67, 943.3644pt x 273.1806pt>
+File: figures/DNN.png Graphic file (type png)
+<use figures/DNN.png>
+Package pdftex.def Info: figures/DNN.png  used on input line 185.
+(pdftex.def)             Requested size: 390.0pt x 112.93848pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 193--194
+
+ []
+
+[18 <./figures/DNN.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 195--197
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 185--186
+Underfull \hbox (badness 10000) in paragraph at lines 198--199
 
  []
 
 
-Overfull \hbox (2.50703pt too wide) in paragraph at lines 187--188
+Underfull \hbox (badness 10000) in paragraph at lines 200--201
+
+ []
+
+[19]
+Overfull \hbox (2.50703pt too wide) in paragraph at lines 202--203
 []\OT1/cmr/m/n/12 In terms of per-for-mance, they sim-u-lated meshes be-tween 1
 0000 and 100000
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 191--192
-
+Overfull \hbox (5.38339pt too wide) in paragraph at lines 204--205
+[]\OT1/cmr/m/n/12 Can write about this too https://dl.acm.org/doi/10.1145/31343
+02.3134332 
  []
 
-[18]
-Underfull \hbox (badness 10000) in paragraph at lines 193--194
 
- []
-
-[19] [20]
-Underfull \hbox (badness 10000) in paragraph at lines 225--228
+Underfull \hbox (badness 10000) in paragraph at lines 208--209
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 229--234
+Underfull \hbox (badness 10000) in paragraph at lines 210--211
+
+ []
+
+[20] [21]
+Underfull \hbox (badness 10000) in paragraph at lines 242--245
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 238--241
+Underfull \hbox (badness 10000) in paragraph at lines 246--251
 
  []
 
-[21]
-Overfull \hbox (91.37845pt too wide) in paragraph at lines 247--249
+
+Underfull \hbox (badness 10000) in paragraph at lines 255--258
+
+ []
+
+[22]
+Overfull \hbox (91.37845pt too wide) in paragraph at lines 265--267
 []\OT1/cmr/m/n/12 bridging fi-nite el-e-ment meth-ods and PBD https://dl.acm.or
 g/doi/10.1145/2601097.2601116 
  []
 
 
-Overfull \hbox (56.1718pt too wide) in paragraph at lines 250--253
+Overfull \hbox (56.1718pt too wide) in paragraph at lines 268--271
 []\OT1/cmr/m/n/12 2017 sur-vey on PBD, lots more info http://mmacklin.com/2017-
 EG-CourseNotes.pdf
  []
 
-[22] [23
+[23] [24
 
-{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [24
+{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [25
 
-] (./Dissertation.bbl [25
+] (./Dissertation.bbl [26
 
 ]
 Underfull \hbox (badness 1859) in paragraph at lines 16--36
@@ -573,7 +590,7 @@ Underfull \hbox (badness 3199) in paragraph at lines 204--223
 4017   \OT1/cmr/m/n/12 doi:
  []
 
-[26
+[27
 
 ]
 Underfull \hbox (badness 3724) in paragraph at lines 380--397
@@ -608,11 +625,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 472--491
  \OT1/cmr/m/n/12 doi:
  []
 
-[27]) [28] [29] [30
 
-] [31
+Underfull \hbox (badness 5847) in paragraph at lines 537--558
+[]\OT1/cmr/m/n/12 Oh, Y. J., Lee, T. M., & Lee, I.-K.  (2018).  Hi-er-ar-chi-
+ []
+
+
+Underfull \hbox (badness 1755) in paragraph at lines 537--558
+\OT1/cmr/m/n/12 cal cloth sim-u-la-tion us-ing deep neu-ral net-works.  In \OT1
+/cmr/m/it/12 Pro-ceed-
+ []
+
+
+Underfull \hbox (badness 2326) in paragraph at lines 537--558
+\OT1/cmr/m/n/12 York, NY, USA: As-so-ci-a-tion for Com-put-ing Ma-chin-ery.  Re
+-
+ []
+
+[28]) [29] [30] [31
 
 ] [32
+
+] [33
 
 ] (./Dissertation.aux)
  ***********
@@ -621,10 +655,10 @@ L3 programming layer <2023-10-10>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 5038 strings out of 474503
- 83674 string characters out of 5756704
- 1932043 words of memory out of 5000000
- 26961 multiletter control sequences out of 15000+600000
+ 5062 strings out of 474503
+ 84074 string characters out of 5756704
+ 1931043 words of memory out of 5000000
+ 26985 multiletter control sequences out of 15000+600000
  564737 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  69i,11n,79p,1557b,387s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -639,10 +673,10 @@ fb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/te
 xlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/202
 3/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-d
 ist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on Dissertation.pdf (33 pages, 198473 bytes).
+Output written on Dissertation.pdf (34 pages, 359397 bytes).
 PDF statistics:
- 172 PDF objects out of 1000 (max. 8388607)
- 111 compressed objects within 2 object streams
+ 178 PDF objects out of 1000 (max. 8388607)
+ 114 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

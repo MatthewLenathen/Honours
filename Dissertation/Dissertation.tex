@@ -13,7 +13,7 @@
 % !TEX encoding = UTF-8 Unicode
 \usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
 \usepackage{graphicx} % support the \includegraphics command and options
-
+\graphicspath{{figures/}}
 % \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
 
 %%% PACKAGES
@@ -149,9 +149,6 @@ This research successfully modelled a more realistic cloth using mass-springs an
 It is noted that Hooke's law is commonly used with mass-spring systems to calculate forces, but Kang and Cho decided to use a harmonic oscillation model, allowing for integration.\\
 With their new integration method and parallelism implemented, they were able to simulate cloth containing 16,384 particles and 161,544 springs at  over 68 frames per second. This shows that mass spring systems can be a good tool for simple simulations, although in their results they also show that once the springs get to a large size, in this case 1,200,000 springs, the frame rate drops to 15. It can be seen in current day simulations that the additional complexity from all the springs, stiffness tuning and overall accuracy lead to mass-spring systems not being the optimal method for real time cloth simulations.
 
-\subsubsection{Particle-Based Systems}
-todo - section about other ways to simulate cloth with particles, not just with springs. PBD fits into this category but since it is the focus of the project, it has its own section later.
-
 \subsubsection{The Continuum Model}
 While representing cloth with particles and springs can be straightforward and relatively pleasing to look at, there is a downside to this method, the real world representation of cloth. It is very hard to come up with a spring model that accurately represents various cloth materials such as nylon. This is where the continuum system for cloth fits in. The continuum method treats cloth as a continuous material made up of triangles rather than particles with space in-between, and instead of looking at spring forces, continuum looks at how each triangle is stretched and compressed. \\
 
@@ -168,12 +165,30 @@ Finite element analysis is a way to break down the cloth into discrete elements 
 \subsubsection{Cloth Simulation with Camera Capture}
 As cloth simulation is such a wide field of research, there are many alternative methods and interesting papers to look at, one such idea is SimulCap by \cite{Yu_2019_CVPR}. SimulCap is a method of capturing human movement while also capturing dynamic details such as folds and wrinkles. It uses a RGBD (RGB depth) camera. Their problem with other recent implementations were the lack of realism, in part due to the human and cloth being considered as one piece of geometry, and also the results not being editable, which is a huge aspect of a lot of use cases, i.e. virtual dressing applications. So, for SimulCap, the authors decided to combine a layered representation of the human body, while also having a separate cloth simulation that matches the human movement. For their cloth simulation, they chose to use a mass-spring model for simplicity and also an explicit integration scheme with a small time step for stability. In their results, they compared their implementation with DoubleFusion, another previous system by \cite{yu2018doublefusion}, which is a state-of-the-art system for real time human capture. The authors found that SimulCap achieves a much more realistic cloth representation, mainly due to the separation of geometry as described earlier. The limitations of this system lie in the variation of clothing, e.g. thick jumpers remain challenging to simulate, also due to the simple nature of the cloth simulation, the realism could be improved upon by choosing a more advanced technique. \\
 
--- more stuff to be added here ---
+In a more recent paper by Wang et al., in 2023, they address the problem of extracting cloth movement combined with clothing motion, by proposing a novel method of capturing the human motion and clothing separately using double layer neural radiance fields (NeRF) \cite{Wang_2023_CVPR}. NeRF is a method of reconstructing a 3D scene using sparse 2D images. This is makes it a perfect method for cloth simulation using camera capture.During the optimisation phase, they introduce a physics-aware cloth simulation network to properly handle the cloth dynamics to ensure realism.
+
+They comment on the previous implementation, SimulCap, by saying it failed to track the motion of the clothing to achieve editable clothing on humans, which is a prerequisite to most VR/AR apps. Their solution, using NeRFs, model both the body and the clothing in template space, which can then be transformed into observation space using deformation fields. Then, using the two NeRFs from before, the rendered images can be synthesized.
+
+This approach addresses the problems with previous camera capture implementations. Its physics network is taught from simulation data, to constrain the clothing and ensure physically plausible clothing deformations.
+In their comparison to state of the art methods, which include DeepCap and NerfCap, they found that their implementation vastly outperformed the other methods without a cloth template, and achieved a much higher accuracy during geometry tracking.
+
 
 \subsubsection{Cloth Simulation with Neural Networks}
 Another interest alternative method to cloth can be found in the research of \cite{neuralCloth}, a cloth simulation framework that uses an unsupervised deep learning methodology. This has been attempted in the past but the other approaches do not handle cloth dynamics. The authors note that while supervised learning systems have been used before, it requires huge volumes of data, and it has to be repeated for every garment/body, so they chose an unsupervised approach. For their cloth representation, they chose to use a particle based system that also considers external forces like wind and collision, this cloth is then skinned to a 3D model. After training their model, they compared their results to other unsupervised approaches such as \cite{bertiche2021pbns}. They evaluated their framework with multiple different body motions such as jumping and spinning. They found that their approach was the only one capable of achieving dynamic cloth effects. In terms of limitations, unsupervised learning compared to supervised takes much longer and is more computationally expensive, and neural cloth has yet to implement cloth self-collision which is a crucial component of most simulators.
+\\
 
---- Can fit more stuff in here ---
+Another example of cloth simulations using neural networks can be found in the works of Oh et al., where they propose a hierarchical cloth simulation method that combines traditional physical based methods with deep neural networks (DNN) \cite{OhNeural}. They note that proper physically based cloth animation is expensive, so being able to utilise DNNs to replace the complex computation with data inferred from the network will reduce the cost significantly.
+
+Their proposed method would split the simulation into two parts. Firstly, a low resolution or coarse model of the cloth is calculated using a normal physically based method. Then, the DNN is used to calculate the finer levels of the cloth, reducing the computation cost. They note that due to only calculating the coarsest level of cloth using a physically-based method, the overall cloth simulation won't be as accurate as a fully physically-based model but it successfully prevents errors stemming from the DNN, and guarantees a reliable simulation. This can be seen in Figure \ref{fig:DNN}.
+\begin{figure}[h]
+	\caption{An overview of how this implementation works}
+	\includegraphics[width=\textwidth]{DNN.png}
+	\label{fig:DNN}
+\end{figure}
+
+In their results, they constructed the simulation with three levels, one physically based used projective dynamics, and two DNN models. Projective dynamics will be covered in section \ref{otherMethods}. They compared time performance of their method against a normal implicit integration simulation, and against a projective dynamics implementation with an optimised algorithm applied to it called ADMM (alternating direction method of multipliers) \cite{ADMM}. They found that their hierarchical model that uses DNN improved performance, especially on configurations with many particles, e.g. flags and curtains. They do admit that the accuracy is not on the same level as completely physically based implementations but the results generated were of a high standard and were fast to generate. One final thing to note is that if the cloth is overstretched by external forces, the DNN can sometimes give unusual wrinkles near the bottom of the cloth. They aim to improve this in future work by updating the DNN model to also hold information such as velocity and momentum.
+
+
 \subsubsection{Shape Matching}
 Shape matching is a technique that allows an object to deform but tries to maintain the form of the original shape. In 2005, Müller et al., utilised shape matching to come up with a new method to simulate deformable objects \cite{ogshapematching}. It does this by replacing energies by geometric constraints, and forces by the distance of current positions to goal positions. These goal positions are determined by shape matching, given a rest state. They mention that because the points are always drawn to goal positions, the overshooting issue with explicit methods is completely removed.\\
 
@@ -185,6 +200,8 @@ This research inspired a paper on cloth simulation using shape matching in 2013 
 A shape matching approach that used regions was attempted before \cite{regionshapecloth}. But in this model, it introduces forces that influence the bending stiffness and depend on the size of the model, and this is undesirable in cloth simulation. Another problem is that due to small regions within a large model, high stretching and shearing stiffness cannot be obtained. This lead to the development of the multi-resolution approach.\\
 
 In terms of performance, they simulated meshes between 10000 and 100000 triangles to test their scalability, and confirmed their linear relationship between computation time and number of triangles. They also implemented a GPU version of the method which resulted in a much faster compute time. They found in similar setups, the multi-resolution method was around 9 times faster than a standard mass-spring system, and around 15 times faster than a corotational finite element method, a method created by Etzmuss et al. \cite{etzmuss2003fast}. Overall, the multi-resolution approach provided a very noticeable speed-up compared to other approaches, at the cost of physical accuracy.
+
+Can write about this too https://dl.acm.org/doi/10.1145/3134302.3134332
 
 
 \subsubsection{Position Based Dynamics}
@@ -241,6 +258,7 @@ To test this on cloth, they set up the same cloth configuration for PBD and XPBD
 
 In the limitations, the authors note that the method is only an approximation of an implicit Euler integrator, but this still creates very realistic real time results. Even so, if the application requires great accuracy, it would be advisable to choose a more traditional simulation method.
 
+\label{otherMethods}
 \paragraph{Other PBD methods}
 todo: can talk about other implementations that utilize PBD, such as projective dynamics by Bouaziz et al.
  
