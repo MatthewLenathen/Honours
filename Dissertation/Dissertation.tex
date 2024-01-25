@@ -195,14 +195,22 @@ Shape matching is a technique that allows an object to deform but tries to maint
 In their algorithm, their idea is given a set of particles with an initial configuration, every time step the particles are moved towards their goal position, and these goal positions are determined by the original configuration of the shape. In terms of performance, it depends on the number of points used, and they note it is hard to compare it to another model such as mass-spring systems, as the technique depends on the number of clusters chosen, which cannot be reflected in the other models.\\
 Overall, this shape matching approach to simulation provides an unconditionally stable simulation that is inexpensive to compute, although the model is not physically accurate.\\
 
-This research inspired a paper on cloth simulation using shape matching in 2013 \cite{BENDER2013945}. As mentioned before, using shape matching for simulations proved unconditionally stable, so a model specifically designed for cloth simulation was created. They note that normal shape matching approaches that use regions, cannot differentiate between shearing, bending and stretching, which are crucial to represent cloth accurately. To combat that, they introduce a novel approach to use a multi-resolution model instead of region based. This multi-resolution model will allow for the simulation of fabrics that have different stretching/shearing stiffness. It is also noted that this method is fast due to it scaling linearly with the size of the cloth. \\
+This research inspired a paper on cloth simulation using shape matching in 2013 \cite{BENDER2013945}. As mentioned before, using shape matching for simulations proved unconditionally stable, so a model specifically designed for cloth simulation was created. They note that normal shape matching approaches that use regions, cannot differentiate between shearing, bending and stretching, which are crucial to represent cloth accurately. To combat that, they introduce a novel approach to use a multi-resolution model instead of region based. This can be seen in Figure \ref{fig:shape}, where a is a nested model that shares vertices between levels, and b is a non-nested model that do not share vertices. The results in this paper use a nested configuration. This multi-resolution model will allow for the simulation of fabrics that have different stretching/shearing stiffness. It is also noted that this method is fast due to it scaling linearly with the size of the cloth. \\
 
+\begin{figure}[h]
+	\caption{Two levels in a multi-resolution configuration, where a is a nested model and b is a non-nested model.}
+	\includegraphics{shapeMatching.jpg}
+	\label{fig:shape}
+\end{figure} 
 A shape matching approach that used regions was attempted before \cite{regionshapecloth}. But in this model, it introduces forces that influence the bending stiffness and depend on the size of the model, and this is undesirable in cloth simulation. Another problem is that due to small regions within a large model, high stretching and shearing stiffness cannot be obtained. This lead to the development of the multi-resolution approach.\\
 
 In terms of performance, they simulated meshes between 10000 and 100000 triangles to test their scalability, and confirmed their linear relationship between computation time and number of triangles. They also implemented a GPU version of the method which resulted in a much faster compute time. They found in similar setups, the multi-resolution method was around 9 times faster than a standard mass-spring system, and around 15 times faster than a corotational finite element method, a method created by Etzmuss et al. \cite{etzmuss2003fast}. Overall, the multi-resolution approach provided a very noticeable speed-up compared to other approaches, at the cost of physical accuracy.
+\\
 
-Can write about this too https://dl.acm.org/doi/10.1145/3134302.3134332
+Another implementation of shape matching was proposed by Vassilev, using shape matching to improve upon a traditional mass-spring model \cite{shapeMatchingMassSpring}. Once shape matching is applied, the springs no longer follow Hooke's law but the stability of the simulation is much improved at larger time steps. At the base, this model is based on the work of Provot, discussed in section \ref{Mass-Spring} \cite{provot1995deformation}. The modification made is replacing Hooke's law with shape matching. Vassilev was inspired by the work of Müller et al, in their original shape matching paper, but instead of shape matching on regions of vertices, Vassilev used it on springs. Each mass connected by one spring will have its own goal position to try to achieve. \\
+After implementing it in OpenGL with compute shaders, the implementation was tested on a human figure wearing jeans, to monitor the stability of the shape matching springs. He found that for low time steps, the number of iterations that the shape matching method took to stitch the jeans was roughly the same or slightly higher than the original mass spring model. Since the original model is not stable for time steps above 40ms, the shape matching implementation proved better for larger time steps.
 
+Overall, he found that the shape matching spring implementation was considerably more stable and was less dependant on time steps than the original mass spring system. He proposed this method could be used in real time simulation for things such as trying on clothes on models.
 
 \subsubsection{Position Based Dynamics}
 A great number of techniques discussed above have been force based, and these forces are used to calculate accelerations. Finally these accelerations are integrated to find the velocities and positions of particles. The Position based dynamics (PBD) technique takes a unique approach to physically based animations by omitting the velocity layer and directly working on the positions of particles. \cite{muller2007position} The main advantage is the controllability, the integration instability discussed in section \ref{Mass-Spring} is completely avoided due to the lack of explicit integration. As this is a real time technique, it is greatly suited to games development, as it is very helpful to have direct control over positions of objects within the game.\\
@@ -251,7 +259,7 @@ They were also able to test tearing of the cloth. Their tearing process is as fo
 
 Overall, this paper was a very interesting approach to cloth simulation at the time, and influenced a great deal of work into real time cloth, eventually being used in Nvidia's physX software which in turn is used very frequently in game development.
 
-\paragraph{Extended Position Based Dynamics}
+\paragraph{Extended Position Based Dynamics} \mbox{} \\
 In 2016, Müller collaborated with Miles Macklin and Nuttapong Chentanez to extend position based dynamics and improve upon the original method \cite{macklin2016xpbd}. Their problems with the original stemmed with iteration count and time step affecting the stiffness of the simulated object, specifically: constraints become stiff as iteration count increases/time step decreases. This effect is discussed in the 2014 survey on position-based methods \cite{bender2014survey}. \\
 Their solution to this problem involved creating a new constraint formulation that corresponds to elastic potential energy. It also introduces a total Lagrange multiplier, which is a technique used to find the local maxima and minima of a function that is subject to constraints, e.g. in cloth this could be a distance constraint. This Lagrange multiplier allows the constraints to be solved irrespective of time step.\\
 To test this on cloth, they set up the same cloth configuration for PBD and XPBD and compared them. They found that PBD became progressively stiffer as the iteration count increased but XPBD remained consistent. They also found a small downside of XPBD in terms of performance per-iteration, but this was less than 2\% of total simulation time. \\
@@ -259,16 +267,28 @@ To test this on cloth, they set up the same cloth configuration for PBD and XPBD
 In the limitations, the authors note that the method is only an approximation of an implicit Euler integrator, but this still creates very realistic real time results. Even so, if the application requires great accuracy, it would be advisable to choose a more traditional simulation method.
 
 \label{otherMethods}
-\paragraph{Other PBD methods}
-todo: can talk about other implementations that utilize PBD, such as projective dynamics by Bouaziz et al.
- 
-bridging finite element methods and PBD
-https://dl.acm.org/doi/10.1145/2601097.2601116
+\paragraph{Other PBD methods} \mbox{} \\
+Another interesting approach to position based dynamics is found in the works of Bouaziz et al. \cite{projectivedynamics}. They worked on bridging the gap between position based dynamics, a fast physically inaccurate method, and finite element methods. This lead to robust and efficient implementation that was accurate and supported many different types of constraints. Since continuum methods have the unfortunate side effect of being considerable more expensive than other methods, it would be beneficial to have the accuracy of finite element methods with the efficiency of position based dynamics, this is what projective dynamics aims for. The way they achieve this is by instead of using typical constraints found in position based dynamics, they use constraints derived from continuous deformation energies. With this method they can also perform a local and global optimisation step, meaning that for each element, they project it onto the constraint goal, and at the end the global step combines all of these and finds a compromise. 
 
-2017 survey on PBD, lots more info
-http://mmacklin.com/2017-EG-CourseNotes.pdf
-maybe some future trends in here.
+This is similar to shape matching, which the authors note. \cite{ogshapematching}. Except in shape matching, the constraint projections are used to create the elastic forces instead of potentials.
 
+When comparing this implementation to PBD, the authors note that the stiffness due to time step problem in the original PBD is solved due to including a momentum term. So that the cloth can behave in a similar way no matter the chosen time step.
+
+When analysing the results, they test a cloth setup as a flag on a pole. They used edge constraints and external wind force to simulate movement. They were able to simulate the flag tearing in high wind by removing edge constraints when the strain on the cloth exceeds a certain limit.
+\begin{figure}[h]
+	\centering
+	\caption{The simulation remaining stable in high wind speeds}
+	\includegraphics[scale=0.5]{PDFlag.png}
+	\label{fig:pd}
+\end{figure}
+
+In 2012, Kim et al., tackled a problem that all cloth has to deal with: inextensibility \cite{longrange}. At the time, existing methods had to solve non-linear systems which are computationally expensive. The authors proposed a new method, long range attachments (LRA). It is designed with the fact that in computer games, cloth is typically attached to the kinematic body of whatever is wearing the cloth. It uses this to create a constraint and enforce global inextensibility. This method can be applied to existing physics methods such as position based dynamics.\\
+
+This works by creating a constraint on a fixed point, e.g. the part of cape attached to a characters shoulders. It then computes the distance from this particle to other attached particles. If a particle goes beyond a certain radius it is projected back towards the surface of a sphere with the centre of that sphere being the attachment point.
+\\
+The time taken to handle these LRA constraints scales linearly with the number of attachment points. This can be used to optimise the simulation by pruning certain attachment points. For example, in their cape test, they only choose the closest attachment point to each particle and it shows good results. It gets tricky when working on other shapes and for each configuration, it is recommended to find certain groups of pinned points, e.g. a waistline for a skirt.
+\\
+In their results,
 
 \subsection{Future Trends}
 todo: this section will discuss any future trends that cloth simulation could have

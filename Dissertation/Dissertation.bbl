@@ -161,6 +161,43 @@ Bertiche, H.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Bouaziz%
+, Martin%
+, Liu%
+, Kavan%
+\BCBL {}\ \BBA {} Pauly%
+}{%
+Bouaziz%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2014}}%
+}]{%
+projectivedynamics}
+\APACinsertmetastar {%
+projectivedynamics}%
+\begin{APACrefauthors}%
+Bouaziz, S.%
+, Martin, S.%
+, Liu, T.%
+, Kavan, L.%
+\BCBL {}\ \BBA {} Pauly, M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2014}{jul}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Projective dynamics: fusing constraint projections for
+  fast simulation} {Projective dynamics: fusing constraint projections for fast
+  simulation}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{ACM Trans. Graph.}{33}{4}{}.
+\newblock
+\begin{APACrefURL} \url{https://doi.org/10.1145/2601097.2601116}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1145/2601097.2601116} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Breen%
 , House%
 \BCBL {}\ \BBA {} Getto%
@@ -396,6 +433,40 @@ Kim, T.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+T\BHBI Y.~Kim%
+, Chentanez%
+\BCBL {}\ \BBA {} Müller-Fischer%
+}{%
+T\BHBI Y.~Kim%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2012}}%
+}]{%
+longrange}
+\APACinsertmetastar {%
+longrange}%
+\begin{APACrefauthors}%
+Kim, T\BHBI Y.%
+, Chentanez, N.%
+\BCBL {}\ \BBA {} Müller-Fischer, M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2012}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {{Long Range Attachments - A Method to Simulate
+  Inextensible Clothing in Computer Games}} {{Long Range Attachments - A Method
+  to Simulate Inextensible Clothing in Computer Games}}.{\BBCQ}
+\newblock
+\BIn{} J.~Lee\ \BBA {} P.~Kry\ (\BEDS), \APACrefbtitle {Eurographics/ ACM
+  SIGGRAPH Symposium on Computer Animation.} {Eurographics/ acm siggraph
+  symposium on computer animation.}
+\newblock
+\APACaddressPublisher{}{The Eurographics Association}.
+\newblock
+\begin{APACrefDOI} \doi{10.2312/SCA/SCA12/305-310} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Macklin%
 , M{\"u}ller%
 \BCBL {}\ \BBA {} Chentanez%
@@ -510,9 +581,9 @@ Narain, R.%
 \newblock
 \APACrefYearMonthDay{2016}{}{}.
 \newblock
-{\BBOQ}\APACrefatitle {ADMM  projective dynamics: fast simulation of general
-  constitutive models} {Admm  projective dynamics: fast simulation of
-  general constitutive models}.{\BBCQ}
+{\BBOQ}\APACrefatitle {ADMM projective dynamics: fast simulation of general
+  constitutive models} {Admm projective dynamics: fast simulation of general
+  constitutive models}.{\BBCQ}
 \newblock
 \BIn{} \APACrefbtitle {Proceedings of the ACM SIGGRAPH/Eurographics Symposium
   on Computer Animation} {Proceedings of the acm siggraph/eurographics
@@ -677,6 +748,38 @@ Terzopoulos, D.%
   graphics and interactive techniques} {Proceedings of the 14th annual
   conference on computer graphics and interactive techniques}\ (\BPGS\
   205--214).
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Vassilev%
+}{%
+Vassilev%
+}{%
+{\protect \APACyear {2017}}%
+}]{%
+shapeMatchingMassSpring}
+\APACinsertmetastar {%
+shapeMatchingMassSpring}%
+\begin{APACrefauthors}%
+Vassilev, T\BPBI I.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2017}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Mass-spring Cloth Simulation with Shape Matching}
+  {Mass-spring cloth simulation with shape matching}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Proceedings of the 18th International Conference on
+  Computer Systems and Technologies} {Proceedings of the 18th international
+  conference on computer systems and technologies}\ (\BPG~257–264).
+\newblock
+\APACaddressPublisher{New York, NY, USA}{Association for Computing Machinery}.
+\newblock
+\begin{APACrefURL} \url{https://doi.org/10.1145/3134302.3134332}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1145/3134302.3134332} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
