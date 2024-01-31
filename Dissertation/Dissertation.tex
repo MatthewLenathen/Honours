@@ -174,6 +174,7 @@ In their comparison to state of the art methods, which include DeepCap and NerfC
 
 
 \subsubsection{Cloth Simulation with Neural Networks}
+\label{neuralSection}
 Another interest alternative method to cloth can be found in the research of \cite{neuralCloth}, a cloth simulation framework that uses an unsupervised deep learning methodology. This has been attempted in the past but the other approaches do not handle cloth dynamics. The authors note that while supervised learning systems have been used before, it requires huge volumes of data, and it has to be repeated for every garment/body, so they chose an unsupervised approach. For their cloth representation, they chose to use a particle based system that also considers external forces like wind and collision, this cloth is then skinned to a 3D model. After training their model, they compared their results to other unsupervised approaches such as \cite{bertiche2021pbns}. They evaluated their framework with multiple different body motions such as jumping and spinning. They found that their approach was the only one capable of achieving dynamic cloth effects. In terms of limitations, unsupervised learning compared to supervised takes much longer and is more computationally expensive, and neural cloth has yet to implement cloth self-collision which is a crucial component of most simulators.
 \\
 
@@ -262,38 +263,76 @@ Overall, this paper was a very interesting approach to cloth simulation at the t
 \paragraph{Extended Position Based Dynamics} \mbox{} \\
 In 2016, Müller collaborated with Miles Macklin and Nuttapong Chentanez to extend position based dynamics and improve upon the original method \cite{macklin2016xpbd}. Their problems with the original stemmed with iteration count and time step affecting the stiffness of the simulated object, specifically: constraints become stiff as iteration count increases/time step decreases. This effect is discussed in the 2014 survey on position-based methods \cite{bender2014survey}. \\
 Their solution to this problem involved creating a new constraint formulation that corresponds to elastic potential energy. It also introduces a total Lagrange multiplier, which is a technique used to find the local maxima and minima of a function that is subject to constraints, e.g. in cloth this could be a distance constraint. This Lagrange multiplier allows the constraints to be solved irrespective of time step.\\
+
 To test this on cloth, they set up the same cloth configuration for PBD and XPBD and compared them. They found that PBD became progressively stiffer as the iteration count increased but XPBD remained consistent. They also found a small downside of XPBD in terms of performance per-iteration, but this was less than 2\% of total simulation time. \\
 
 In the limitations, the authors note that the method is only an approximation of an implicit Euler integrator, but this still creates very realistic real time results. Even so, if the application requires great accuracy, it would be advisable to choose a more traditional simulation method.
 
 \label{otherMethods}
 \paragraph{Other PBD methods} \mbox{} \\
+\label{t}
+In 2012, Kim et al., tackled a problem that all cloth has to deal with: inextensibility \cite{longrange}. At the time, existing methods had to solve non-linear systems which are computationally expensive. The authors proposed a new method, long range attachments (LRA). It is designed with the fact that in computer games, cloth is typically attached to the kinematic body of whatever is wearing the cloth. It uses this to create a constraint and enforce global inextensibility. This method can be applied to existing physics methods such as position based dynamics.\\
+
+This works by creating a constraint on a fixed point, e.g. the part of cape attached to a characters shoulders. It then computes the distance from this particle to other attached particles. If a particle goes beyond a certain radius it is projected back towards the surface of a sphere with the centre of that sphere being the attachment point.
+\\
+
+The time taken to handle these LRA constraints scales linearly with the number of attachment points. This can be used to optimise the simulation by pruning certain attachment points. For example, in their cape test, they only choose the closest attachment point to each particle and it shows good results. It gets tricky when working on other shapes and for each configuration, it is recommended to find certain groups of pinned points, e.g. a waistline for a skirt.
+\\
+
+In their results, they found that the implementation provided a efficient and simple way to solve the stretching problem of cloth in games. They note that this method is only applicable to cloth applied to characters such as dresses, skirts and capes and that any environmental cloth such as a tissue or paper would see no benefit.
+\\
+
 Another interesting approach to position based dynamics is found in the works of Bouaziz et al. \cite{projectivedynamics}. They worked on bridging the gap between position based dynamics, a fast physically inaccurate method, and finite element methods. This lead to robust and efficient implementation that was accurate and supported many different types of constraints. Since continuum methods have the unfortunate side effect of being considerable more expensive than other methods, it would be beneficial to have the accuracy of finite element methods with the efficiency of position based dynamics, this is what projective dynamics aims for. The way they achieve this is by instead of using typical constraints found in position based dynamics, they use constraints derived from continuous deformation energies. With this method they can also perform a local and global optimisation step, meaning that for each element, they project it onto the constraint goal, and at the end the global step combines all of these and finds a compromise. 
 
 This is similar to shape matching, which the authors note. \cite{ogshapematching}. Except in shape matching, the constraint projections are used to create the elastic forces instead of potentials.
 
 When comparing this implementation to PBD, the authors note that the stiffness due to time step problem in the original PBD is solved due to including a momentum term. So that the cloth can behave in a similar way no matter the chosen time step.
 
-When analysing the results, they test a cloth setup as a flag on a pole. They used edge constraints and external wind force to simulate movement. They were able to simulate the flag tearing in high wind by removing edge constraints when the strain on the cloth exceeds a certain limit.
-\begin{figure}[h]
+When analysing the results, they test a cloth setup as a flag on a pole, which can be seen in Figure \ref{fig:pd}. They used edge constraints and external wind force to simulate movement. They were able to simulate the flag tearing in high wind by removing edge constraints when the strain on the cloth exceeds a certain limit.
+\\
+
+\begin{figure}
 	\centering
 	\caption{The simulation remaining stable in high wind speeds}
 	\includegraphics[scale=0.5]{PDFlag.png}
 	\label{fig:pd}
 \end{figure}
 
-In 2012, Kim et al., tackled a problem that all cloth has to deal with: inextensibility \cite{longrange}. At the time, existing methods had to solve non-linear systems which are computationally expensive. The authors proposed a new method, long range attachments (LRA). It is designed with the fact that in computer games, cloth is typically attached to the kinematic body of whatever is wearing the cloth. It uses this to create a constraint and enforce global inextensibility. This method can be applied to existing physics methods such as position based dynamics.\\
+In 2022, Li et al., proposed a new differentiable cloth simulation based on projective dynamics, but with dry frictional contact to simulate cloth self collision \cite{diffCloth}. The key difference of this work is that the simulation is differentiable, meaning gradients can be computed through backpropagation. This means that it can utilise many optimisation methods that result in a great speedup compared to non differentiable simulations. It also aims to  further improve upon the physical accuracy of projective dynamics by adding dry frictional contact. The paper showcases the simulator in many different use cases to showcase the efficacy of it.
+\\
+One of these examples showcases the usefulness of dry frictional contact, a piece of cloth falling onto a sphere. This is a very standard test in cloth simulation. This example contains both self collision from the cloth and also external contact with the sphere. After colliding the motion was mostly from the frictional component.
+\\
 
-This works by creating a constraint on a fixed point, e.g. the part of cape attached to a characters shoulders. It then computes the distance from this particle to other attached particles. If a particle goes beyond a certain radius it is projected back towards the surface of a sphere with the centre of that sphere being the attachment point.
+Another example is a real-to-sim implementation of a flag. They used real motion of a flag blowing in the wind and tried to create a digital simulation copy. This was particularly tricky as it involved estimating what material was used and also modelling the wind condition at the time. They found it to be a good recreation of it but noted that due to the final loss function being non-zero, it was still imperfect. This is most likely due to the simplistic wind model they employed and could be improved with a more sophisticated model, such as one from a neural network.
 \\
-The time taken to handle these LRA constraints scales linearly with the number of attachment points. This can be used to optimise the simulation by pruning certain attachment points. For example, in their cape test, they only choose the closest attachment point to each particle and it shows good results. It gets tricky when working on other shapes and for each configuration, it is recommended to find certain groups of pinned points, e.g. a waistline for a skirt.
-\\
-In their results,
+
+When evaluating the implementation, they found that it successfully accommodated rich and detailed self contact, differentiability and dry frictional contact. Since it was differentiable, they were able to utilise backpropagation and observe a significant speedup when compared to other direct solvers. There are a few limitations with this model, one being that since it is based on projective dynamics, it limits the choice of material. Another significant drawback is that the solver doesn't guarantee convergence, even though it is rare for this to happen, it still results in a costly switch to a direct solver. They note that they hope to resolve this in the future.
 
 \subsection{Future Trends}
-todo: this section will discuss any future trends that cloth simulation could have
+Since clothing is so prevalent in daily life, the graphics and physics research communities are always striving to improve and innovate the simulation of cloth. The evolution of cloth simulation can and will take many paths. One such path can be seen recently in the works of Clegg et al., which is robot-assisted dressing \cite{robot}. In the future, robots will most likely be interacting physically with humans more, one of these areas could be robot-assisted dressing. As clothing is extremely dynamic, the robot will need accurate cloth simulations to properly assist dressing.
+\\
+
+Another possible future trend would be cloth simulations with AI. As previously discussed in section \ref{neuralSection}, there are already examples of cloth simulations using neural networks for constraints. As machine learning and AI techniques improve, we could see more models being trained on real world clothing data and being used in more simulations.
+\\
+
+Finally, one more possible future trend is the increasing realism of clothing simulations. As seen in section \ref{t}, projective dynamics utilised the high accuracy of continuum based methods to more accurately simulate clothing. Perhaps in the future, continuum models will improve to accurately simulate a massive range of materials and textures that all have different properties. This would impact most use cases of cloth simulation such as garment try ons, video games and more.
 \subsection{Conclusion}
-todo: conclusion of lit review
+The field of cloth simulation has faced major advancements in the past two decades through a variety of approaches both traditional and novel. Both offline and real-time simulations have seen great improvements through the evolution of methods and by building upon previous works. 
+\\
+
+Offline simulation has seen advancements in the form of accuracy and attention to detail. As these simulations are not bound by frame times, they can afford to spend much more time computing effects. This leads to simulations with incredible precision. These are typically seen in animation and film for high visual fidelity.
+\\
+
+Real time simulations have also seen big improvements to how they are made. As the use cases for clothing simulations are so large, there have been many different methods to creating simulations, such as camera capture. This is an important step forward as it enables the capture of real life clothing which not only helps to create realistic simulations, but can also be used as data to be fed into other computational models.
+\\
+
+Neural networks have also been a big focus for many researchers in the field due to the rapid improvement of AI techniques in recent years. These neural networks can have great predictive capabilities and room to learn off of previous data, which makes it suitable for large or detailed cloth models. Neural network cloth simulations will continue to be improved upon with models holding more data and variables, resulting in more physically accurate simulations.
+\\
+
+Despite all of these advancements, the field continues to face hurdles in developing these simulations, such as scalability, computational efficiency and physical accuracy. The future of cloth simulations will likely be solving these problems and discovering new techniques to more accurately model cloth as it appears in the real world.
+\\
+
+In conclusion, the literature on cloth simulation reflects a massive field, that is marked by novel and innovate approaches dedicated to improving the realism of cloth simulation. The combination of traditional methods rooted in classical physics, and the interesting techniques in computer science such as neural networks and camera capture highlights the progress of the field to date, but also opens the door to future breakthroughs that will further improve and scale cloth simulations.
 \newpage
 
 

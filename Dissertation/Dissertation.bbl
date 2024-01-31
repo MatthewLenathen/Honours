@@ -259,6 +259,37 @@ Carignan, M.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Clegg%
+\ \protect \BOthers {.}}{%
+Clegg%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2020}}%
+}]{%
+robot}
+\APACinsertmetastar {%
+robot}%
+\begin{APACrefauthors}%
+Clegg, A.%
+, Erickson, Z.%
+, Grady, P.%
+, Turk, G.%
+, Kemp, C.%
+\BCBL {}\ \BBA {} Liu, K.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2020}{02}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Learning to Collaborate From Simulation for
+  Robot-Assisted Dressing} {Learning to collaborate from simulation for
+  robot-assisted dressing}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{IEEE Robotics and Automation Letters}{PP}{}{1-1}.
+\newblock
+\begin{APACrefDOI} \doi{10.1109/LRA.2020.2972852} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Cutler%
 \ \protect \BOthers {.}}{%
 Cutler%
@@ -464,6 +495,42 @@ Kim, T\BHBI Y.%
 \APACaddressPublisher{}{The Eurographics Association}.
 \newblock
 \begin{APACrefDOI} \doi{10.2312/SCA/SCA12/305-310} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Li%
+, Du%
+, Wu%
+, Xu%
+\BCBL {}\ \BBA {} Matusik%
+}{%
+Li%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2022}}%
+}]{%
+diffCloth}
+\APACinsertmetastar {%
+diffCloth}%
+\begin{APACrefauthors}%
+Li, Y.%
+, Du, T.%
+, Wu, K.%
+, Xu, J.%
+\BCBL {}\ \BBA {} Matusik, W.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2022}{oct}{}.
+\newblock
+{\BBOQ}\APACrefatitle {DiffCloth: Differentiable Cloth Simulation with Dry
+  Frictional Contact} {Diffcloth: Differentiable cloth simulation with dry
+  frictional contact}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{ACM Trans. Graph.}{42}{1}{}.
+\newblock
+\begin{APACrefURL} \url{https://doi.org/10.1145/3527660} \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1145/3527660} \end{APACrefDOI}
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
