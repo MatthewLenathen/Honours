@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
+
 
 // Represents a particle in the cloth
 public class Particle
@@ -57,6 +59,18 @@ public class MeshCreator
     }
 }
 
+public class cppFunctions
+{
+    [DllImport("clothsim_dll", EntryPoint = "cpp_init")]
+    public static extern void cpp_init([In] Vector3[] vertices, int gridSize, float spacing);
+
+    [DllImport("clothsim_dll", EntryPoint = "cpp_update")]
+    public static extern void cpp_update(Vector3[] vertices, int gridSize, float spacing);
+    
+    [DllImport("clothsim_dll", EntryPoint = "cpp_test")]
+    public static extern int cpp_test(int a);
+}
+
 [System.Diagnostics.DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
 public class HangingCloth : MonoBehaviour
 {
@@ -83,6 +97,11 @@ public class HangingCloth : MonoBehaviour
         mesh = meshFilter.mesh;
         vertices = mesh.vertices;
 
+        // test dll
+        Debug.Log(cppFunctions.cpp_test(5));
+
+
+#if CSHARP_SIM
         // Create all particles and initialise them
         foreach (Vector3 vertex in vertices)
         {
@@ -99,7 +118,9 @@ public class HangingCloth : MonoBehaviour
         {
             particles[i].isStatic = true;
         }
-
+#else
+		//cpp_init(vertices, ...);
+#endif
     }
 
     void ApplyConstraints()
@@ -157,8 +178,9 @@ public class HangingCloth : MonoBehaviour
         }
     }
 
-    void Update()
+    void Update() // change to fixedupdat
     {
+#if CSHARP_SIM
         windStrength = Mathf.Sin(Time.time) * 5.0f;
         // Simple Euler integration as a test
         for (int i = 0; i < particles.Count; i++)
@@ -167,12 +189,15 @@ public class HangingCloth : MonoBehaviour
             {
                 particles[i].velocity += gravity * Time.deltaTime;
                 particles[i].velocity += windForce * windStrength * Time.deltaTime;
-                particles[i].position += particles[i].velocity * Time.deltaTime; ;
+                particles[i].position += particles[i].velocity * Time.deltaTime; 
             }
             vertices[i] = particles[i].position;
         }
 
         ApplyConstraints();
+#else
+		//cpp_update( vertices, ...)
+#endif
 
         mesh.vertices = vertices;
         mesh.RecalculateNormals();
