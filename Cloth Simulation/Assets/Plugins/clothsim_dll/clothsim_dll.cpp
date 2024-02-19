@@ -6,18 +6,13 @@
 ClothSim g_ClothSim;
 
 extern "C" {
-	/*CLOTHSIM_API void cpp_init(glm::vec3* positions, int numPositions, float fixedTimeStep)
+	CLOTHSIM_API void cpp_init(glm::vec3* positions, int num_positions, float delta_time, int grid_size, int algorithm_type, int scenario)
 	{
-		g_ClothSim.Init();
+		g_ClothSim.Init(positions, num_positions, delta_time, grid_size, algorithm_type,scenario);
 	}
-	CLOTHSIM_API void cpp_update(glm::vec3* positions, int numPositions, glm::vec3 windForce)
+	
+	CLOTHSIM_API void cpp_update(glm::vec3* positions, glm::vec3 wind_force)
 	{
-		g_ClothSim.Update();
-	}*/
-
-	// Used to test it works in unity
-	CLOTHSIM_API int cpp_test(int a)
-	{
-		return g_ClothSim.Test(a);
+		g_ClothSim.Update(positions,wind_force);
 	}
 }
