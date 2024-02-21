@@ -61,13 +61,10 @@ public class MeshCreator
 public class cppFunctions
 {
     [DllImport("clothsim_dll", EntryPoint = "cpp_init")]
-    public static extern void cpp_init([In] Vector3[] vertices, int numParticles, float fixedDeltaTime, int gridSize, int algorithmType, int scenario, float spacing);
+    public static extern void cpp_init([In] Vector3[] vertices, int numParticles, float fixedDeltaTime, int gridSize, int algorithmType, int scenario, float spacing, int solverIterations);
 
     [DllImport("clothsim_dll", EntryPoint = "cpp_update")]
     public static extern void cpp_update([Out] Vector3[] vertices,[In] Vector3 WindForce);
-    
-    [DllImport("clothsim_dll", EntryPoint = "cpp_test")]
-    public static extern int cpp_test(int a);
 }
 
 [System.Diagnostics.DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
@@ -86,6 +83,7 @@ public class HangingCloth : MonoBehaviour
     private float spacing = 0.5f;
     private int algorithmType = 0; // 0 for mass spring, 1 for position based
     private int scenario = 0; // 0 for hanging cloth, 1 for ..
+    private int solverIterations = 5;
 
     private Vector3 gravity = new Vector3(0.0f, -9.8f, 0.0f);
     private int springConstant = 10000;
@@ -121,7 +119,7 @@ public class HangingCloth : MonoBehaviour
 
         }
         else{
-		    cppFunctions.cpp_init(vertices, numParticles, Time.fixedDeltaTime,gridSize,algorithmType, scenario, spacing);
+		    cppFunctions.cpp_init(vertices, numParticles, Time.fixedDeltaTime,gridSize,algorithmType, scenario, spacing, solverIterations);
         }
 
        

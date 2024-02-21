@@ -57,7 +57,7 @@ void ApplySpringForce(Particle& p1, Particle& p2, float rest_length, float sprin
 }
 
 // Called at start of sim
-void ClothSim::Init(glm::vec3* positions, int num_positions, float delta_time, int grid_size, int algorithm_type, int scenario, float spacing)
+void ClothSim::Init(glm::vec3* positions, int num_positions, float delta_time, int grid_size, int algorithm_type, int scenario, float spacing, int solver_iterations)
 {
 	// Since the g_ClothSim object stays alive, must clear the particles when initialising again
 	_particles.clear();
@@ -69,11 +69,12 @@ void ClothSim::Init(glm::vec3* positions, int num_positions, float delta_time, i
 	_delta_time = delta_time;
 	_algorithm_type = algorithm_type;
 	_scenario = scenario;
+	_solver_iterations = solver_iterations;
 
 	// Create particles and add them to particles vector
 	for (int i = 0; i < num_positions; i++)
 	{
-		_particles.push_back(Particle(positions[i], 1.0f, false));
+		_particles.push_back(Particle(positions[i], 1.0f, false)); // mass of 1, inverse mass is still 1
 	}
 
 	// Now branch off depending on algorithm/scenario
@@ -150,23 +151,59 @@ void ClothSim::Init(glm::vec3* positions, int num_positions, float delta_time, i
 void ClothSim::Update(glm::vec3* positions, glm::vec3 wind_force)
 {
 	_total_time += _delta_time;
-
-	for (int i = 0; i < _num_particles; i++)
+	switch (_algorithm_type)
 	{
-		if (!_particles[i].is_static)
+	case 0: // Mass spring
+		for (int i = 0; i < _num_particles; i++)
 		{
-			_particles[i].velocity += GRAVITY * _delta_time;
-			_particles[i].velocity += wind_force * std::sin(_total_time) * (float)dis(gen) * _delta_time;
-			_particles[i].position += _particles[i].velocity * _delta_time;
+			if (!_particles[i].is_static)
+			{
+				_particles[i].velocity += GRAVITY * _delta_time;
+				_particles[i].velocity += wind_force * std::sin(_total_time) * (float)dis(gen) * _delta_time;
+				_particles[i].position += _particles[i].velocity * _delta_time;
+			}
+
+			positions[i] = _particles[i].position;
 		}
 
-		positions[i] = _particles[i].position;
-	}
+		// Go through all structural constraints to apply force, constraint holds indices of particles that have a constraint
+		for (auto constraint : _structural_constraints)
+		{
+			ApplySpringForce(_particles[constraint.x], _particles[constraint.y], _spacing, SPRING_CONSTANT, _delta_time);
+		}
+		break;
 
-	// Go through all structural constraints to apply force, constraint holds indices of particles that have a constraint
-	for (auto constraint : _structural_constraints)
-	{
-		ApplySpringForce(_particles[constraint.x], _particles[constraint.y], _spacing, SPRING_CONSTANT, _delta_time);
+	case 1: // pbd, going off the papers algorithm to start
+		// first, hook up external forces to the system, e.g. gravity and wind
+		for (int i = 0; i < _num_particles; i++)
+		{
+			if(!_particles[i].is_static)
+				_particles[i].velocity += _delta_time * _particles[i].inverse_mass * (GRAVITY + wind_force);
+		}
+
+		// Next, damp velocities
+		for (int i = 0; i < _num_particles; i++)
+		{
+			if (!_particles[i].is_static)
+				_particles[i].velocity *= 0.99;
+		}
+
+		// Calculate predicted position next
+		for (int i = 0; i < _num_particles; i++)
+		{
+			if (!_particles[i].is_static)
+				_particles[i].predicted_position = _particles[i].position + (_delta_time * _particles[i].velocity);
+		}
+
+		// Collision constraints to be generated here, doing it later as i want to get main pbd working first
+		// forall vertices i do generateCollisionConstraints(xi -> pi)
+
+		// Now, for a set number of solver iterations, work on the constraints to slightly move particles to fit them
+		for (int i = 0; i < _solver_iterations; i++)
+		{
+
+		}
+		
 	}
 }
 

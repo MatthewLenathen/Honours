@@ -12,12 +12,13 @@ class Particle
 {
 public:
 	glm::vec3 position;
+	glm::vec3 predicted_position;
 	glm::vec3 velocity = glm::vec3(0.0f);
-	float mass;
+	float inverse_mass;
 	bool is_static;
 
 	// Create particle with values, starting velocity always 0
-	Particle(const glm::vec3& position, float mass, bool is_static) : position(position), mass(mass), is_static(is_static){}
+	Particle(const glm::vec3& position, float inverse_mass, bool is_static) : position(position), predicted_position(position), inverse_mass(inverse_mass), is_static(is_static){}
 };
 
 // Class representing the simulation
@@ -33,9 +34,10 @@ class ClothSim
 	float _delta_time;
 	float _total_time = 0.0f;
 	float _spacing;
+	int _solver_iterations;
 	
 public:
-	void Init(glm::vec3* positions, int num_positions, float delta_time, int grid_size, int algorithm_type, int scenario, float spacing);
+	void Init(glm::vec3* positions, int num_positions, float delta_time, int grid_size, int algorithm_type, int scenario, float spacing, int solver_iterations);
 
 	// Testing particle positions upon initialisation, making sure Vector3 converts to glm vec3 nicely
 	void LogParticlePositions(const std::vector<Particle>& particles);
