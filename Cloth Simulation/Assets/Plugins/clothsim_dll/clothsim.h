@@ -32,9 +32,10 @@ class ClothSim
 	vector<glm::uvec2> _bend_constraints;
 	float _delta_time;
 	float _total_time = 0.0f;
+	float _spacing;
 	
 public:
-	void Init(glm::vec3* positions, int num_positions, float delta_time, int grid_size, int algorithm_type, int scenario);
+	void Init(glm::vec3* positions, int num_positions, float delta_time, int grid_size, int algorithm_type, int scenario, float spacing);
 
 	// Testing particle positions upon initialisation, making sure Vector3 converts to glm vec3 nicely
 	void LogParticlePositions(const std::vector<Particle>& particles);

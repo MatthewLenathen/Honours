@@ -24,7 +24,7 @@ public class Particle
 // Class to create a cloth mesh based on a grid size
 public class MeshCreator
 {
-    public static Mesh generateMesh(int gridSize, float spacing)
+    public static Mesh generateVerticalMesh(int gridSize, float spacing)
     {
         Mesh mesh = new Mesh();
 
@@ -61,7 +61,7 @@ public class MeshCreator
 public class cppFunctions
 {
     [DllImport("clothsim_dll", EntryPoint = "cpp_init")]
-    public static extern void cpp_init([In] Vector3[] vertices, int numParticles, float fixedDeltaTime, int gridSize, int algorithmType, int scenario);
+    public static extern void cpp_init([In] Vector3[] vertices, int numParticles, float fixedDeltaTime, int gridSize, int algorithmType, int scenario, float spacing);
 
     [DllImport("clothsim_dll", EntryPoint = "cpp_update")]
     public static extern void cpp_update([Out] Vector3[] vertices,[In] Vector3 WindForce);
@@ -73,7 +73,7 @@ public class cppFunctions
 [System.Diagnostics.DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
 public class HangingCloth : MonoBehaviour
 {
-    bool CSHARP_SIM = true;
+    bool CSHARP_SIM = false;
 
     // Start is called before the first frame update
     List<Particle> particles = new List<Particle>();
@@ -82,13 +82,13 @@ public class HangingCloth : MonoBehaviour
     private Vector3[] vertices;
 
     private int gridSize = 20;
-    private int numParticles = 21 * 21;
+    private int numParticles = 20 * 20;
     private float spacing = 0.5f;
     private int algorithmType = 0; // 0 for mass spring, 1 for position based
     private int scenario = 0; // 0 for hanging cloth, 1 for ..
 
     private Vector3 gravity = new Vector3(0.0f, -9.8f, 0.0f);
-    private int springConstant = 1000;
+    private int springConstant = 10000;
 
     Vector3 windForce = new Vector3(0.0f, 0.0f, 1.0f); 
     float windStrength = 3.0f; 
@@ -96,7 +96,7 @@ public class HangingCloth : MonoBehaviour
     void Start()
     {
         MeshFilter meshFilter = GetComponent<MeshFilter>();
-        meshFilter.mesh = MeshCreator.generateMesh(gridSize, spacing);
+        meshFilter.mesh = MeshCreator.generateVerticalMesh(gridSize, spacing);
 
         mesh = meshFilter.mesh;
         vertices = mesh.vertices;
@@ -121,7 +121,7 @@ public class HangingCloth : MonoBehaviour
 
         }
         else{
-		    cppFunctions.cpp_init(vertices, numParticles, Time.fixedDeltaTime,gridSize,algorithmType, scenario);
+		    cppFunctions.cpp_init(vertices, numParticles, Time.fixedDeltaTime,gridSize,algorithmType, scenario, spacing);
         }
 
        

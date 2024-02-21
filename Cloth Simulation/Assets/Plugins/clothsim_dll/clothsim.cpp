@@ -1,4 +1,11 @@
 #include "clothsim.h"
+#include <random>
+
+std::random_device rd;
+std::mt19937 gen(rd());
+std::uniform_real_distribution<> dis(-10.0, 10.0);
+
+const int SPRING_CONSTANT = 1000;
 // Log 
 void logConstraints(vector<glm::uvec2> constraints, string filename)
 {
@@ -16,14 +23,48 @@ void logConstraints(vector<glm::uvec2> constraints, string filename)
 	}
 }
 
+
+void ApplySpringForce(Particle& p1, Particle& p2, float rest_length, float spring_constant, float delta_time)
+{
+	glm::vec3 delta = p2.position - p1.position;
+	float distance = glm::length(delta);
+	glm::vec3 force_direction = glm::normalize(delta);
+
+	// Spring force magnitude
+	float force_magnitude = spring_constant * (distance - rest_length);
+	glm::vec3 force = force_magnitude * force_direction;
+
+	// Damping coefficient, prevents oscillation
+	float dampingCoefficient = 0.25f;
+
+	// Working on first particle
+	if (!p1.is_static)
+	{
+		glm::vec3 velocityChange = force * delta_time;
+		p1.velocity += velocityChange;
+		// Applying damping
+		p1.velocity *= 1 - dampingCoefficient * delta_time;
+	}
+	// Working on second particle
+	if (!p2.is_static)
+	{
+		// negative force here because it's applied in the opposite direction
+		glm::vec3 velocityChange = -force * delta_time;
+		p2.velocity += velocityChange;
+		// Same damping
+		p2.velocity *= 1 - dampingCoefficient * delta_time;
+	}
+}
+
 // Called at start of sim
-void ClothSim::Init(glm::vec3* positions, int num_positions, float delta_time, int grid_size, int algorithm_type, int scenario)
+void ClothSim::Init(glm::vec3* positions, int num_positions, float delta_time, int grid_size, int algorithm_type, int scenario, float spacing)
 {
 	// Since the g_ClothSim object stays alive, must clear the particles when initialising again
 	_particles.clear();
 	_structural_constraints.clear();
 
 	// Initialise necessary variables used in update
+	_spacing = spacing;
 	_num_particles = num_positions;
 	_delta_time = delta_time;
 	_algorithm_type = algorithm_type;
@@ -112,14 +153,20 @@ void ClothSim::Update(glm::vec3* positions, glm::vec3 wind_force)
 
 	for (int i = 0; i < _num_particles; i++)
 	{
-		if (!_particles[i].is_static && _particles[i].position.y > -30.0f)
+		if (!_particles[i].is_static)
 		{
 			_particles[i].velocity += GRAVITY * _delta_time;
-			_particles[i].velocity += wind_force * std::sin(_total_time) * 5.0f * _delta_time;
+			_particles[i].velocity += wind_force * std::sin(_total_time) * (float)dis(gen) * _delta_time;
 			_particles[i].position += _particles[i].velocity * _delta_time;
 		}
 
 		positions[i] = _particles[i].position;
+	}
+
+	// Go through all structural constraints to apply force, constraint holds indices of particles that have a constraint
+	for (auto constraint : _structural_constraints)
+	{
+		ApplySpringForce(_particles[constraint.x], _particles[constraint.y], _spacing, SPRING_CONSTANT, _delta_time);
 	}
 }
 
