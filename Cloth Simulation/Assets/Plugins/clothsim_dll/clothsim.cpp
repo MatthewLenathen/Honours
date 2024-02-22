@@ -117,15 +117,13 @@ void ClothSim::Init(glm::vec3* positions, int num_positions, float delta_time, i
 				}
 			}
 			//logConstraints(_structural_constraints, "constraints_log.txt");
-
-
-
+			break;
 		}
 		case 1: // tbd
 			//...
 			break;
 		default:
-			exit(EXIT_FAILURE);
+			break;
 		}
 		break;
 	}
@@ -133,14 +131,47 @@ void ClothSim::Init(glm::vec3* positions, int num_positions, float delta_time, i
 		switch (scenario)
 		{
 		case 0: // Hanging cloth
-			//...
+		{
+			// Create static particles
+			int startIndexOfTopRow = grid_size * (grid_size - 1);
+
+			// Iterate over the top row vertices and set them to be static
+			for (int i = startIndexOfTopRow; i < _num_particles; i++)
+			{
+				_particles[i].is_static = true;
+				_particles[i].inverse_mass = 0;
+			}
+
+			// Generate structural constraints
+			for (int y = 0; y < grid_size; y++)
+			{
+				for (int x = 0; x < grid_size; x++)
+				{
+					unsigned int index = y * grid_size + x;
+
+					// Horizontal spring
+					if (x < grid_size - 1)
+					{
+						_structural_constraints.push_back(glm::uvec2(index, index + 1));
+					}
+
+					// Vertical spring
+					if (y < grid_size - 1)
+					{
+						_structural_constraints.push_back(glm::uvec2(index, index + grid_size));
+					}
+
+				}
+			}
+			//logConstraints(_structural_constraints, "constraints_log.txt");
 			break;
+		}
 		default:
-			exit(EXIT_FAILURE);
+			break;
 		}
 
 	default:
-		exit(EXIT_FAILURE);
+		break;
 	}
 
 
@@ -161,9 +192,8 @@ void ClothSim::Update(glm::vec3* positions, glm::vec3 wind_force)
 				_particles[i].velocity += GRAVITY * _delta_time;
 				_particles[i].velocity += wind_force * std::sin(_total_time) * (float)dis(gen) * _delta_time;
 				_particles[i].position += _particles[i].velocity * _delta_time;
+				positions[i] = _particles[i].position; // important, update actual positions that gets passed back to unity
 			}
-
-			positions[i] = _particles[i].position;
 		}
 
 		// Go through all structural constraints to apply force, constraint holds indices of particles that have a constraint
@@ -174,11 +204,12 @@ void ClothSim::Update(glm::vec3* positions, glm::vec3 wind_force)
 		break;
 
 	case 1: // pbd, going off the papers algorithm to start
+	{
 		// first, hook up external forces to the system, e.g. gravity and wind
 		for (int i = 0; i < _num_particles; i++)
 		{
-			if(!_particles[i].is_static)
-				_particles[i].velocity += _delta_time * _particles[i].inverse_mass * (GRAVITY + wind_force);
+			if (!_particles[i].is_static)
+				_particles[i].velocity += _delta_time * _particles[i].inverse_mass * (GRAVITY + (wind_force * std::sin(_total_time)));
 		}
 
 		// Next, damp velocities
@@ -201,9 +232,44 @@ void ClothSim::Update(glm::vec3* positions, glm::vec3 wind_force)
 		// Now, for a set number of solver iterations, work on the constraints to slightly move particles to fit them
 		for (int i = 0; i < _solver_iterations; i++)
 		{
+			for (auto constraint : _structural_constraints)
+			{
+				Particle& p1 = _particles[constraint.x];
+				Particle& p2 = _particles[constraint.y];
 
+				float distance_between_particles = glm::length(p1.predicted_position - p2.predicted_position);
+
+				if (distance_between_particles == 0)
+					continue;
+
+				if (p1.is_static && p2.is_static)
+					continue; // Skip this constraint if both particles are static
+
+				glm::vec3 direction = glm::normalize(p1.predicted_position - p2.predicted_position);
+
+				// Modelling from example given in section 3.3, distance constraint, assuming d to be _spacing
+				glm::vec3 p1_correction = (p1.inverse_mass / (p1.inverse_mass + p2.inverse_mass)) * (distance_between_particles - _spacing) * direction;
+				glm::vec3 p2_correction = (p2.inverse_mass / (p1.inverse_mass + p2.inverse_mass)) * (distance_between_particles - _spacing) * direction;
+
+				p1.predicted_position -= p1_correction;
+				p2.predicted_position += p2_correction;
+			}
 		}
-		
+
+		// Finally, after solving, set new velocity and position 
+		for (int i = 0; i < _num_particles; i++)
+		{
+			if (!_particles[i].is_static) {
+				_particles[i].velocity = (_particles[i].predicted_position - _particles[i].position) / _delta_time;
+				_particles[i].position = _particles[i].predicted_position;
+				positions[i] = _particles[i].position; // important, update actual positions that gets passed back to unity
+			}
+		}
+		break;
+	}
+	default:
+		break;
+
 	}
 }
 
