@@ -3,7 +3,7 @@
 
 std::random_device rd;
 std::mt19937 gen(rd());
-std::uniform_real_distribution<> dis(-10.0, 10.0);
+std::uniform_real_distribution<> dis(-100.0, 100.0);
 
 const int SPRING_CONSTANT = 1000;
 // Log 
@@ -70,7 +70,8 @@ void ClothSim::Init(glm::vec3* positions, int num_positions, float delta_time, i
 	_algorithm_type = algorithm_type;
 	_scenario = scenario;
 	_solver_iterations = solver_iterations;
-
+	_total_time = 0.0f;
+	
 	// Create particles and add them to particles vector
 	for (int i = 0; i < num_positions; i++)
 	{
@@ -135,12 +136,20 @@ void ClothSim::Init(glm::vec3* positions, int num_positions, float delta_time, i
 			// Create static particles
 			int startIndexOfTopRow = grid_size * (grid_size - 1);
 
+			_particles[startIndexOfTopRow].is_static = true;
+			_particles[startIndexOfTopRow].inverse_mass = 0;
+
+			_particles[_num_particles - 1].is_static = true;
+			_particles[_num_particles - 1].inverse_mass = 0;
+
+			/*
 			// Iterate over the top row vertices and set them to be static
 			for (int i = startIndexOfTopRow; i < _num_particles; i++)
 			{
 				_particles[i].is_static = true;
 				_particles[i].inverse_mass = 0;
 			}
+			*/
 
 			// Generate structural constraints
 			for (int y = 0; y < grid_size; y++)

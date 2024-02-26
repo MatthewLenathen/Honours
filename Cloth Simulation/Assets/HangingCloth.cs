@@ -83,7 +83,7 @@ public class HangingCloth : MonoBehaviour
     private float spacing = 0.5f;
     private int algorithmType = 1; // 0 for mass spring, 1 for position based
     private int scenario = 0; // 0 for hanging cloth, 1 for ..
-    private int solverIterations = 20;
+    private int solverIterations = 30;
 
     private Vector3 gravity = new Vector3(0.0f, -9.8f, 0.0f);
     private int springConstant = 10000;
