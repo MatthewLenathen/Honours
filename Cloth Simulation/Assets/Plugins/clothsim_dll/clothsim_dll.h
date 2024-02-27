@@ -4,6 +4,6 @@
 #define CLOTHSIM_API __declspec(dllexport)
 
 extern "C" {
-	CLOTHSIM_API void cpp_init(glm::vec3* positions, int num_positions, float delta_time, int grid_size, int algorithm_type, int scenario, float spacing, int solver_iterations);
+	CLOTHSIM_API void cpp_init(glm::vec3* positions,int* triangles, int num_positions,int num_triangles, float delta_time, int algorithm_type, int scenario, float spacing, int solver_iterations,int* static_particles, int num_static_particles);
 	CLOTHSIM_API void cpp_update(glm::vec3* positions, glm::vec3 wind_force);
 }

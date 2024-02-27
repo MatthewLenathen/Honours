@@ -23,6 +23,23 @@ void logConstraints(vector<glm::uvec2> constraints, string filename)
 	}
 }
 
+void LogTriangleIndices(int* triangles, int triangleCount)
+{
+	std::ofstream logFile("triangles_log.txt");
+	if (logFile.is_open()) {
+		for (int i = 0; i < triangleCount; ++i) {
+			logFile << "Triangle Indices: "
+				<< triangles[i * 3] << ", "
+				<< triangles[i * 3 + 1] << ", "
+				<< triangles[i * 3 + 2] << std::endl;
+		}
+		logFile.close();
+	}
+	else {
+		std::cerr << "Failed to open log file." << std::endl;
+	}
+}
+
 
 void ApplySpringForce(Particle& p1, Particle& p2, float rest_length, float spring_constant, float delta_time)
 {
@@ -57,25 +74,44 @@ void ApplySpringForce(Particle& p1, Particle& p2, float rest_length, float sprin
 }
 
 // Called at start of sim
-void ClothSim::Init(glm::vec3* positions, int num_positions, float delta_time, int grid_size, int algorithm_type, int scenario, float spacing, int solver_iterations)
+void ClothSim::Init(glm::vec3* positions,int* triangles, int num_positions,int num_triangles, float delta_time, int algorithm_type, int scenario, float spacing, int solver_iterations, int* static_particles, int num_static_particles)
 {
 	// Since the g_ClothSim object stays alive, must clear the particles when initialising again
 	_particles.clear();
 	_structural_constraints.clear();
+	_static_particles.clear();
+	_triangles.clear();
 
 	// Initialise necessary variables used in update
 	_spacing = spacing;
 	_num_particles = num_positions;
+	_num_triangles = num_triangles;
 	_delta_time = delta_time;
 	_algorithm_type = algorithm_type;
 	_scenario = scenario;
 	_solver_iterations = solver_iterations;
 	_total_time = 0.0f;
+	_num_static_particles = num_static_particles;
 	
 	// Create particles and add them to particles vector
 	for (int i = 0; i < num_positions; i++)
 	{
 		_particles.push_back(Particle(positions[i], 1.0f, false)); // mass of 1, inverse mass is still 1
+	}
+
+	//LogTriangleIndices(triangles, num_triangles);
+	
+	// Create triangles from triangles pointer, *3 because triangles data comes in 3's, represents indices that make up a triangle, e.g. {0,20,1} 
+	for (int i = 0; i < num_triangles*3; i++)
+	{
+		_triangles.push_back(triangles[i]);
+	}
+
+	// Static particles, set specific particle by using index from static_particles array
+	for (int i = 0; i < num_static_particles; i++)
+	{
+		_particles[static_particles[i]].is_static = true;
+		_particles[static_particles[i]].inverse_mass = 0;
 	}
 
 	// Now branch off depending on algorithm/scenario
@@ -87,16 +123,8 @@ void ClothSim::Init(glm::vec3* positions, int num_positions, float delta_time, i
 		{
 		case 0: // Hanging cloth
 		{
-			// Create static particles
-			int startIndexOfTopRow = grid_size * (grid_size - 1);
-
-			// Iterate over the top row vertices and set them to be static
-			for (int i = startIndexOfTopRow; i < _num_particles; i++)
-			{
-				_particles[i].is_static = true;
-			}
-
 			// Generate structural constraints
+			/*
 			for (int y = 0; y < grid_size; y++)
 			{
 				for (int x = 0; x < grid_size; x++)
@@ -117,11 +145,11 @@ void ClothSim::Init(glm::vec3* positions, int num_positions, float delta_time, i
 
 				}
 			}
-			//logConstraints(_structural_constraints, "constraints_log.txt");
+			*/
 			break;
 		}
 		case 1: // tbd
-			//...
+			
 			break;
 		default:
 			break;
@@ -133,45 +161,43 @@ void ClothSim::Init(glm::vec3* positions, int num_positions, float delta_time, i
 		{
 		case 0: // Hanging cloth
 		{
-			// Create static particles
-			int startIndexOfTopRow = grid_size * (grid_size - 1);
+			// Using sets for uniqueness, and pairs to utilise minmax
+			// e.g. a constraint between 1 and 20 will be turned into a pair (1,20) and added to temp_constraints
+			// so that when we get to the same diagonal edge of the adjacent triangle, (20,1), then minmax will turn it into (1,20) and it will not be added to the set because it already is in there
+			// This will make sure the shared diagonal edge constraint isn't added created twice
+			std::set<std::pair<int, int>> temp_constraints;
 
-			_particles[startIndexOfTopRow].is_static = true;
-			_particles[startIndexOfTopRow].inverse_mass = 0;
-
-			_particles[_num_particles - 1].is_static = true;
-			_particles[_num_particles - 1].inverse_mass = 0;
-
-			/*
-			// Iterate over the top row vertices and set them to be static
-			for (int i = startIndexOfTopRow; i < _num_particles; i++)
+			// Loop through num triangles, we get triangles by multiplying i by 3 each time
+			for (int i = 0; i < num_triangles; i++)
 			{
-				_particles[i].is_static = true;
-				_particles[i].inverse_mass = 0;
-			}
-			*/
+				int i1 = triangles[i*3];
+				int i2 = triangles[i*3 + 1];
+				int i3 = triangles[i*3 + 2];
 
-			// Generate structural constraints
-			for (int y = 0; y < grid_size; y++)
-			{
-				for (int x = 0; x < grid_size; x++)
-				{
-					unsigned int index = y * grid_size + x;
+				// constraint between all edges of the triangles to represent structural constraints
 
-					// Horizontal spring
-					if (x < grid_size - 1)
-					{
-						_structural_constraints.push_back(glm::uvec2(index, index + 1));
-					}
+				// NOTE: when moving to this triangle based method of creating constraints, not sure how to get the 4th particle involved to create the opposite diagonal constraint
+				// could maybe double loop through all triangles and compare to each other to see if they have a shared vertex and make a constraint off that
+				// but that seems like it would be VERY slow
 
-					// Vertical spring
-					if (y < grid_size - 1)
-					{
-						_structural_constraints.push_back(glm::uvec2(index, index + grid_size));
-					}
-
+				// So i'm just sticking with structural
+				if (i % 2 == 0) { // On even triangles, create constraints i1->i2, i1->i3
+					temp_constraints.insert(std::minmax(i1, i2));
+					temp_constraints.insert(std::minmax(i1, i3));
 				}
+				else { // but for odd ones, create between i2->i3 instead, this avoids creating a diagonal constraint
+					temp_constraints.insert(std::minmax(i1, i3));
+					temp_constraints.insert(std::minmax(i2, i3));
+				}
+				// This also could be achieved by skipping odd triangles, cause the missing constraints would be added by the next even triangle.
 			}
+
+			// Now turn the pair into glm uvec2 for use in update
+			for (const auto& constraint : temp_constraints)
+			{
+				_structural_constraints.push_back(glm::uvec2(constraint.first, constraint.second));
+			}
+
 			//logConstraints(_structural_constraints, "constraints_log.txt");
 			break;
 		}

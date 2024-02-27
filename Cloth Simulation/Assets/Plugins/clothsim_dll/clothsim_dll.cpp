@@ -6,9 +6,9 @@
 ClothSim g_ClothSim;
 
 extern "C" {
-	CLOTHSIM_API void cpp_init(glm::vec3* positions, int num_positions, float delta_time, int grid_size, int algorithm_type, int scenario, float spacing, int solver_iterations)
+	CLOTHSIM_API void cpp_init(glm::vec3* positions,int* triangles, int num_positions, int num_triangles, float delta_time, int algorithm_type, int scenario, float spacing, int solver_iterations, int* static_particles, int num_static_particles)
 	{
-		g_ClothSim.Init(positions, num_positions, delta_time, grid_size, algorithm_type,scenario, spacing, solver_iterations);
+		g_ClothSim.Init(positions,triangles, num_positions,num_triangles, delta_time, algorithm_type,scenario, spacing, solver_iterations, static_particles, num_static_particles);
 	}
 	
 	CLOTHSIM_API void cpp_update(glm::vec3* positions, glm::vec3 wind_force)

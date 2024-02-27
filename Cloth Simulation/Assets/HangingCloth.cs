@@ -21,7 +21,6 @@ public class Particle
     }
 }
 
-// Class to create a cloth mesh based on a grid size
 public class MeshCreator
 {
     public static Mesh generateVerticalMesh(int gridSize, float spacing)
@@ -39,16 +38,18 @@ public class MeshCreator
         }
 
         // Create triangles
-        int[] triangles = new int[gridSize * gridSize * 6];
-        for (int ti = 0, vi = 0, y = 0; y < gridSize-1; y++, vi++)
+        // Changed this, because it was generating too many triangles, now it's generating the correct amount
+        int[] triangles = new int[(gridSize - 1) * (gridSize - 1) * 6];
+        for (int ti = 0, vi = 0, y = 0; y < gridSize - 1; y++)
         {
-            for (int x = 0; x < gridSize-1; x++, ti += 6, vi++)
+            for (int x = 0; x < gridSize - 1; x++, ti += 6, vi++)
             {
                 triangles[ti] = vi;
                 triangles[ti + 3] = triangles[ti + 2] = vi + 1;
                 triangles[ti + 4] = triangles[ti + 1] = vi + gridSize;
                 triangles[ti + 5] = vi + gridSize + 1;
             }
+            vi++; 
         }
 
         mesh.vertices = vertices;
@@ -61,7 +62,7 @@ public class MeshCreator
 public class cppFunctions
 {
     [DllImport("clothsim_dll", EntryPoint = "cpp_init")]
-    public static extern void cpp_init([In] Vector3[] vertices, int numParticles, float fixedDeltaTime, int gridSize, int algorithmType, int scenario, float spacing, int solverIterations);
+    public static extern void cpp_init([In] Vector3[] vertices,[In] int[] triangles, int numParticles, int numTriangles, float fixedDeltaTime, int algorithmType, int scenario, float spacing, int solverIterations, [In] int[] staticParticleIndices, int numStaticParticles);
 
     [DllImport("clothsim_dll", EntryPoint = "cpp_update")]
     public static extern void cpp_update([Out] Vector3[] vertices,[In] Vector3 WindForce);
@@ -75,29 +76,54 @@ public class HangingCloth : MonoBehaviour
     // Start is called before the first frame update
     List<Particle> particles = new List<Particle>();
 
-    private Mesh mesh;
-    private Vector3[] vertices;
+    Mesh mesh;
+    Vector3[] vertices;
 
-    private int gridSize = 20;
-    private int numParticles = 20 * 20;
-    private float spacing = 0.5f;
-    private int algorithmType = 1; // 0 for mass spring, 1 for position based
-    private int scenario = 0; // 0 for hanging cloth, 1 for ..
-    private int solverIterations = 30;
+    int gridSize = 20;
+    int numParticles; // Changed to vertices.Length instead of hardcoded value
+    int numTriangles; // Need for the C++ code
+    float spacing = 0.5f;
+    int algorithmType = 1; // 0 for mass spring, 1 for position based
+    int scenario = 0; // 0 for hanging cloth, 1 for ..
+    int solverIterations = 30; // Number of iterations for the pbd solver
 
-    private Vector3 gravity = new Vector3(0.0f, -9.8f, 0.0f);
-    private int springConstant = 10000;
+    int[] triangles;
+    int[] staticParticleIndices = new int[2]; // Change this number for more/less static particles
+    int numStaticParticles;
+
+    Vector3 gravity = new Vector3(0.0f, -9.8f, 0.0f);
+    int springConstant = 10000;
 
     Vector3 windForce = new Vector3(0.0f, 0.0f, 1.0f); 
     float windStrength = 3.0f; 
 
     void Start()
     {
+        // TODO: Add a dropdown to select the algorithm type
         MeshFilter meshFilter = GetComponent<MeshFilter>();
         meshFilter.mesh = MeshCreator.generateVerticalMesh(gridSize, spacing);
 
         mesh = meshFilter.mesh;
         vertices = mesh.vertices;
+        triangles = mesh.triangles;
+
+        numParticles = vertices.Length;
+        numTriangles = triangles.Length / 3;
+
+        Debug.Log("Number of particles: " + numParticles);
+        Debug.Log("Number of triangles: " + numTriangles);
+
+        // //debug log triangle array
+        // for (int i = 0; i < triangles.Length; i++)
+        // {
+        //     Debug.Log("Triangle " + i + ": " + triangles[i]);
+        // }
+
+        // Assign static particles to be able to pass them to the C++ code
+        staticParticleIndices[0] = 380;
+        staticParticleIndices[1] = 399;
+
+        numStaticParticles = staticParticleIndices.Length;
 
         if (CSHARP_SIM){
             // Create all particles and initialise them
@@ -119,7 +145,7 @@ public class HangingCloth : MonoBehaviour
 
         }
         else{
-		    cppFunctions.cpp_init(vertices, numParticles, Time.fixedDeltaTime,gridSize,algorithmType, scenario,spacing, solverIterations);
+		    cppFunctions.cpp_init(vertices, triangles, numParticles,numTriangles, Time.fixedDeltaTime,algorithmType, scenario,spacing, solverIterations, staticParticleIndices, numStaticParticles);
         }
 
        
