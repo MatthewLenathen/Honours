@@ -88,11 +88,11 @@ public class HangingCloth : MonoBehaviour
     int solverIterations = 30; // Number of iterations for the pbd solver
 
     int[] triangles;
-    int[] staticParticleIndices = new int[2]; // Change this number for more/less static particles
+    int[] staticParticleIndices; 
     int numStaticParticles;
 
     Vector3 gravity = new Vector3(0.0f, -9.8f, 0.0f);
-    int springConstant = 10000;
+    int springConstant = 2000;
 
     Vector3 windForce = new Vector3(0.0f, 0.0f, 1.0f); 
     float windStrength = 3.0f; 
@@ -120,8 +120,11 @@ public class HangingCloth : MonoBehaviour
         // }
 
         // Assign static particles to be able to pass them to the C++ code
+        staticParticleIndices = new int[2]; // Change this number for more/less static particles
         staticParticleIndices[0] = 380;
         staticParticleIndices[1] = 399;
+        //staticParticleIndices[0] = 90;
+        //staticParticleIndices[1] = 99;
 
         numStaticParticles = staticParticleIndices.Length;
 
@@ -133,14 +136,10 @@ public class HangingCloth : MonoBehaviour
                 particles.Add(p);
             }
 
-            // Fix the top row of particles
-            // Since the mesh is created from the bottom left corner, the top row of vertices are the last ones in the list
-            int startIndexOfTopRow = gridSize * (gridSize - 1);
-
-            // Iterate over the top row vertices and set them to be static
-            for (int i = startIndexOfTopRow; i < particles.Count; i++)
+            // Set static particles
+            for (int i = 0; i < numStaticParticles; i++)
             {
-                particles[i].isStatic = true;
+                particles[staticParticleIndices[i]].isStatic = true;
             }
 
         }
@@ -185,7 +184,7 @@ public class HangingCloth : MonoBehaviour
         Vector3 force = forceMagnitude * forceDirection;
 
         // Damping coefficient, prevents oscillation
-        float dampingCoefficient = 0.25f; 
+        float dampingCoefficient = 0.5f; 
 
         // Working on first particle
         if (!p1.isStatic)
@@ -210,8 +209,8 @@ public class HangingCloth : MonoBehaviour
     {
         if (CSHARP_SIM)
         {
-            //windStrength = Mathf.Sin(Time.time) * 3.0f;
-            windStrength = Random.Range(-10.0f, 10.0f);
+            windStrength = Mathf.Sin(Time.time) * 3.0f;
+            //windStrength = Random.Range(-10.0f, 10.0f);
             // Simple Euler integration as a test
             for (int i = 0; i < particles.Count; i++)
             {

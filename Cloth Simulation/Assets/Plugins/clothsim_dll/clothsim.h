@@ -33,6 +33,7 @@ class ClothSim
 	int _num_particles;
 	int _num_triangles;
 	vector<glm::uvec2> _structural_constraints;
+	vector<glm::uvec2> _shear_constraints;
 	vector<glm::uvec2> _bend_constraints;
 	float _delta_time;
 	float _total_time = 0.0f;
@@ -48,4 +49,6 @@ public:
 	void LogParticlePositions(const std::vector<Particle>& particles);
 
 	void Update(glm::vec3* positions, glm::vec3 wind_force);
+
+	void GenerateConstraints(const vector<int>& triangles, int num_triangles, std::vector<glm::uvec2>& structural_constraints, std::vector<glm::uvec2>& shear_constraints);
 };

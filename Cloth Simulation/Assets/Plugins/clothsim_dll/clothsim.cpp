@@ -123,29 +123,8 @@ void ClothSim::Init(glm::vec3* positions,int* triangles, int num_positions,int n
 		{
 		case 0: // Hanging cloth
 		{
-			// Generate structural constraints
-			/*
-			for (int y = 0; y < grid_size; y++)
-			{
-				for (int x = 0; x < grid_size; x++)
-				{
-					unsigned int index = y * grid_size + x;
-
-					// Horizontal spring
-					if (x < grid_size - 1)
-					{
-						_structural_constraints.push_back(glm::uvec2(index, index + 1));
-					}
-
-					// Vertical spring
-					if (y < grid_size - 1)
-					{
-						_structural_constraints.push_back(glm::uvec2(index, index + grid_size));
-					}
-
-				}
-			}
-			*/
+			GenerateConstraints(_triangles, _num_triangles, _structural_constraints, _shear_constraints);
+			
 			break;
 		}
 		case 1: // tbd
@@ -161,44 +140,9 @@ void ClothSim::Init(glm::vec3* positions,int* triangles, int num_positions,int n
 		{
 		case 0: // Hanging cloth
 		{
-			// Using sets for uniqueness, and pairs to utilise minmax
-			// e.g. a constraint between 1 and 20 will be turned into a pair (1,20) and added to temp_constraints
-			// so that when we get to the same diagonal edge of the adjacent triangle, (20,1), then minmax will turn it into (1,20) and it will not be added to the set because it already is in there
-			// This will make sure the shared diagonal edge constraint isn't added created twice
-			std::set<std::pair<int, int>> temp_constraints;
-
-			// Loop through num triangles, we get triangles by multiplying i by 3 each time
-			for (int i = 0; i < num_triangles; i++)
-			{
-				int i1 = triangles[i*3];
-				int i2 = triangles[i*3 + 1];
-				int i3 = triangles[i*3 + 2];
-
-				// constraint between all edges of the triangles to represent structural constraints
-
-				// NOTE: when moving to this triangle based method of creating constraints, not sure how to get the 4th particle involved to create the opposite diagonal constraint
-				// could maybe double loop through all triangles and compare to each other to see if they have a shared vertex and make a constraint off that
-				// but that seems like it would be VERY slow
-
-				// So i'm just sticking with structural
-				if (i % 2 == 0) { // On even triangles, create constraints i1->i2, i1->i3
-					temp_constraints.insert(std::minmax(i1, i2));
-					temp_constraints.insert(std::minmax(i1, i3));
-				}
-				else { // but for odd ones, create between i2->i3 instead, this avoids creating a diagonal constraint
-					temp_constraints.insert(std::minmax(i1, i3));
-					temp_constraints.insert(std::minmax(i2, i3));
-				}
-				// This also could be achieved by skipping odd triangles, cause the missing constraints would be added by the next even triangle.
-			}
-
-			// Now turn the pair into glm uvec2 for use in update
-			for (const auto& constraint : temp_constraints)
-			{
-				_structural_constraints.push_back(glm::uvec2(constraint.first, constraint.second));
-			}
-
-			//logConstraints(_structural_constraints, "constraints_log.txt");
+			GenerateConstraints(_triangles, _num_triangles, _structural_constraints, _shear_constraints);
+			logConstraints(_structural_constraints, "struct_constraints_log.txt");
+			logConstraints(_shear_constraints, "shear_constraints_log.txt");
 			break;
 		}
 		default:
@@ -306,6 +250,59 @@ void ClothSim::Update(glm::vec3* positions, glm::vec3 wind_force)
 		break;
 
 	}
+}
+
+// Generates constraints and stores them in the vectors passed in
+void ClothSim::GenerateConstraints(const vector<int>& triangles, int num_triangles, vector<glm::uvec2>& structural_constraints, vector<glm::uvec2>& shear_constraints)
+{
+	// Using sets for uniqueness, and pairs to utilise minmax
+	// e.g. a constraint between 1 and 20 will be turned into a pair (1,20) and added to temp_constraints
+	// so that when we get to the same diagonal edge of the adjacent triangle, (20,1), then minmax will turn it into (1,20) and it will not be added to the set because it already is in there
+	// This will make sure the shared diagonal edge constraint isn't added created twice
+	std::set<std::pair<int, int>> temp_structural_constraints;
+	std::set<std::pair<int, int>> temp_shear_constraints;
+
+	// Loop through num triangles, we get triangles by multiplying i by 3 each time
+	for (int i = 0; i < num_triangles; i += 2)
+	{
+		// First triangle
+		int i1 = triangles[i * 3];
+		int i2 = triangles[i * 3 + 1];
+		int i3 = triangles[i * 3 + 2];
+
+		// First triangle constraints
+		temp_structural_constraints.insert(std::minmax(i1, i2));
+		temp_structural_constraints.insert(std::minmax(i1, i3));
+
+		// Since second triangle is i+1, need to check if we can do that
+		if ((i + 1) < num_triangles)
+		{
+			// Second triangle
+			int i4 = triangles[(i + 1) * 3];
+			int i5 = triangles[(i + 1) * 3 + 1];
+			int i6 = triangles[(i + 1) * 3 + 2];
+
+			// Second triangle constraints
+			temp_structural_constraints.insert(std::minmax(i4, i6));
+			temp_structural_constraints.insert(std::minmax(i5, i6));
+
+			// Two shear constraints
+			temp_shear_constraints.insert(std::minmax(i2, i3));
+			temp_shear_constraints.insert(std::minmax(i1, i6));
+		}
+	}
+
+	// Now turn the pair into glm uvec2 for use in update
+	for (const auto& constraint : temp_structural_constraints)
+	{
+		structural_constraints.push_back(glm::uvec2(constraint.first, constraint.second));
+	}
+
+	for (const auto& constraint : temp_shear_constraints)
+	{
+		shear_constraints.push_back(glm::uvec2(constraint.first, constraint.second));
+	}
+
 }
 
 // Used to check particles, cant print through dll without external debug program
