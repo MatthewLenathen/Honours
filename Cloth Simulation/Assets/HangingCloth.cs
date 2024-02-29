@@ -65,7 +65,7 @@ public class cppFunctions
     public static extern void cpp_init([In] Vector3[] vertices,[In] int[] triangles, int numParticles, int numTriangles, float fixedDeltaTime, int algorithmType, int scenario, float spacing, int solverIterations, [In] int[] staticParticleIndices, int numStaticParticles);
 
     [DllImport("clothsim_dll", EntryPoint = "cpp_update")]
-    public static extern void cpp_update([Out] Vector3[] vertices,[In] float windStrength, [In] float stretchingStiffness, [In] float shearingStiffness);
+    public static extern void cpp_update([Out] Vector3[] vertices,[In] float windStrength, [In] float stretchingStiffness, [In] float shearingStiffness, [In] int selectedParticleIndex, [In] Vector3 mouseWorldPos, [In] int stopGrabbingIndex);
 }
 
 [System.Diagnostics.DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
@@ -100,6 +100,9 @@ public class HangingCloth : MonoBehaviour
 
     bool isDragging = false;
     int selectedParticleIndex = -1;
+    Vector3 mouseWorldPos;
+    int stopGrabbingIndex = -1;
+    float distanceToCloth = 0.0f;
 
     // Public stuff to change in the editor
     [Range(0f, 1f)]
@@ -133,6 +136,10 @@ public class HangingCloth : MonoBehaviour
         staticParticleIndices = new int[2]; // Change this number for more/less static particles
         staticParticleIndices[0] = 380;
         staticParticleIndices[1] = 399;
+
+        //staticParticleIndices[0] = 1560;
+        //staticParticleIndices[1] = 1599;
+
         //staticParticleIndices[0] = 90;
         //staticParticleIndices[1] = 99;
 
@@ -255,11 +262,7 @@ public class HangingCloth : MonoBehaviour
             ApplyConstraints();
         }
         else{
-            // If we are dragging a particle, pass its index and mouse position to the C++ code
-            if(isDragging&&selectedParticleIndex!=-1){
-                Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
-            }
-            cppFunctions.cpp_update(vertices, windStrength, stretchingStiffness, shearingStiffness);
+            cppFunctions.cpp_update(vertices, windStrength, stretchingStiffness, shearingStiffness, selectedParticleIndex, mouseWorldPos, stopGrabbingIndex);
         }
 
         mesh.vertices = vertices;
@@ -268,14 +271,6 @@ public class HangingCloth : MonoBehaviour
         //meshCollider.sharedMesh = mesh;
         boxCollider.center = mesh.bounds.center;
         boxCollider.size = mesh.bounds.size;
-
-        // Debug to check static particles
-        /*  foreach (var particle in particles) {
-            if (particle.isStatic) {
-                Debug.Log("Static particle at: " + particle.position);
-            }   
-        } 
-        */
     }
     
     void Update()
@@ -284,6 +279,7 @@ public class HangingCloth : MonoBehaviour
         // Dont do this if we are already dragging a particle
         if (Input.GetMouseButtonDown(0) && !isDragging)
         {
+            stopGrabbingIndex = -1;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             //Debug.DrawLine(ray.origin, ray.origin + ray.direction * 1000, Color.blue, 4.0f);
             RaycastHit hit;
@@ -293,16 +289,23 @@ public class HangingCloth : MonoBehaviour
             // If the ray hits the cloth, find the nearest particle
             if (Physics.Raycast(ray, out hit))
             {
-                Debug.Log("Hit position: " + hit.point);
+                //Debug.Log("Hit position: " + hit.point);
                 selectedParticleIndex = FindClosestParticleToMouse(hit.point);
                 isDragging = true;
-                Debug.Log("Selected particle: " + selectedParticleIndex);
+                //Debug.Log("Selected particle: " + selectedParticleIndex);
+                Vector3 worldPos = transform.TransformPoint(vertices[selectedParticleIndex]);
+                distanceToCloth = Vector3.Distance(Camera.main.transform.position, worldPos);
             }
+        }
+        if(isDragging){
+            Vector3 mouseScreenPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distanceToCloth);
+            mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
         }
         // Check for mouse button release
         if (Input.GetMouseButtonUp(0))
         {
             isDragging = false;
+            stopGrabbingIndex = selectedParticleIndex;
             selectedParticleIndex = -1;
         }
         

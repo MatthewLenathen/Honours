@@ -52,7 +52,7 @@ public:
 	// Testing particle positions upon initialisation, making sure Vector3 converts to glm vec3 nicely
 	void LogParticlePositions(const std::vector<Particle>& particles);
 
-	void Update(glm::vec3* positions, float wind_strength, float stretching_stiffness, float shearing_stiffness);
+	void Update(glm::vec3* positions, float wind_strength, float stretching_stiffness, float shearing_stiffness, int selected_particle_index, glm::vec3 mouse_world_pos, int stop_grabbing_index);
 
 	void GenerateConstraints(const vector<int>& triangles, int num_triangles,const vector<Particle>& particles, vector<std::pair<glm::uvec2, float>>& structural_constraints, vector<std::pair<glm::uvec2, float>>& shear_constraints);
 

@@ -160,9 +160,20 @@ void ClothSim::Init(glm::vec3* positions,int* triangles, int num_positions,int n
 }
 
 // Called every frame
-void ClothSim::Update(glm::vec3* positions, float wind_strength, float stretching_stiffness, float shearing_stiffness)
+void ClothSim::Update(glm::vec3* positions, float wind_strength, float stretching_stiffness, float shearing_stiffness, int selected_particle_index, glm::vec3 mouse_world_pos, int stop_grabbing_index)
 {
 	_total_time += _delta_time;
+
+	if (stop_grabbing_index != -1)
+	{
+		_particles[stop_grabbing_index].inverse_mass = 1.0f;
+		_particles[stop_grabbing_index].is_static = false;
+	}
+	if (selected_particle_index != -1)
+	{
+		_particles[selected_particle_index].inverse_mass = 0.0f;
+		_particles[selected_particle_index].is_static = true;
+	}
 	
 	switch (_algorithm_type)
 	{
@@ -190,8 +201,10 @@ void ClothSim::Update(glm::vec3* positions, float wind_strength, float stretchin
 		// first, hook up external forces to the system, e.g. gravity and wind
 		for (int i = 0; i < _num_particles; i++)
 		{
-			if (!_particles[i].is_static)
-				_particles[i].velocity += _delta_time * _particles[i].inverse_mass * (GRAVITY + (WIND_FORCE * wind_strength * std::sin(_total_time)));
+			if (!_particles[i].is_static) {
+				glm::vec3 external_forces = GRAVITY + (WIND_FORCE * wind_strength * std::sin(_total_time));
+				_particles[i].velocity += _delta_time * _particles[i].inverse_mass * external_forces;
+			}
 		}
 
 		// Next, damp velocities
@@ -204,8 +217,13 @@ void ClothSim::Update(glm::vec3* positions, float wind_strength, float stretchin
 		// Calculate predicted position next
 		for (int i = 0; i < _num_particles; i++)
 		{
-			if (!_particles[i].is_static)
-				_particles[i].predicted_position = _particles[i].position + (_delta_time * _particles[i].velocity);
+			if (!_particles[i].is_static || i == selected_particle_index)
+				if (i == selected_particle_index) {
+					_particles[i].predicted_position = mouse_world_pos;
+				}
+				else {
+					_particles[i].predicted_position = _particles[i].position + (_delta_time * _particles[i].velocity);
+				}
 		}
 
 		// Collision constraints to be generated here, doing it later as i want to get main pbd working first
@@ -228,7 +246,7 @@ void ClothSim::Update(glm::vec3* positions, float wind_strength, float stretchin
 		// Finally, after solving, set new velocity and position 
 		for (int i = 0; i < _num_particles; i++)
 		{
-			if (!_particles[i].is_static) {
+			if (!_particles[i].is_static || i==selected_particle_index ) {
 				_particles[i].velocity = (_particles[i].predicted_position - _particles[i].position) / _delta_time;
 				_particles[i].position = _particles[i].predicted_position;
 				positions[i] = _particles[i].position; // important, update actual positions that gets passed back to unity
