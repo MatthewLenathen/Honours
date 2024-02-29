@@ -11,8 +11,8 @@ extern "C" {
 		g_ClothSim.Init(positions,triangles, num_positions,num_triangles, delta_time, algorithm_type,scenario, spacing, solver_iterations, static_particles, num_static_particles);
 	}
 	
-	CLOTHSIM_API void cpp_update(glm::vec3* positions, glm::vec3 wind_force)
+	CLOTHSIM_API void cpp_update(glm::vec3* positions, float wind_strength, float stretching_stiffness, float shearing_stiffness)
 	{
-		g_ClothSim.Update(positions,wind_force);
+		g_ClothSim.Update(positions,wind_strength, stretching_stiffness,shearing_stiffness);
 	}
 }

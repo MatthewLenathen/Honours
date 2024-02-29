@@ -65,7 +65,7 @@ public class cppFunctions
     public static extern void cpp_init([In] Vector3[] vertices,[In] int[] triangles, int numParticles, int numTriangles, float fixedDeltaTime, int algorithmType, int scenario, float spacing, int solverIterations, [In] int[] staticParticleIndices, int numStaticParticles);
 
     [DllImport("clothsim_dll", EntryPoint = "cpp_update")]
-    public static extern void cpp_update([Out] Vector3[] vertices,[In] Vector3 WindForce);
+    public static extern void cpp_update([Out] Vector3[] vertices,[In] float windStrength, [In] float stretchingStiffness, [In] float shearingStiffness);
 }
 
 [System.Diagnostics.DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
@@ -78,6 +78,9 @@ public class HangingCloth : MonoBehaviour
 
     Mesh mesh;
     Vector3[] vertices;
+
+    MeshCollider meshCollider;
+    BoxCollider boxCollider;
 
     int gridSize = 20;
     int numParticles; // Changed to vertices.Length instead of hardcoded value
@@ -93,31 +96,38 @@ public class HangingCloth : MonoBehaviour
 
     Vector3 gravity = new Vector3(0.0f, -9.8f, 0.0f);
     int springConstant = 2000;
-
     Vector3 windForce = new Vector3(0.0f, 0.0f, 1.0f); 
-    float windStrength = 3.0f; 
+
+    bool isDragging = false;
+    int selectedParticleIndex = -1;
+
+    // Public stuff to change in the editor
+    [Range(0f, 1f)]
+    public float stretchingStiffness = 1.0f;
+    [Range(0f, 1f)]
+    public float shearingStiffness = 1.0f;
+    [Range(0f, 100f)]
+    public float windStrength = 1.0f;
 
     void Start()
     {
         // TODO: Add a dropdown to select the algorithm type
         MeshFilter meshFilter = GetComponent<MeshFilter>();
-        meshFilter.mesh = MeshCreator.generateVerticalMesh(gridSize, spacing);
+        meshFilter.sharedMesh = MeshCreator.generateVerticalMesh(gridSize, spacing);
 
         mesh = meshFilter.mesh;
         vertices = mesh.vertices;
         triangles = mesh.triangles;
 
+        //meshCollider = GetComponent<MeshCollider>();
+        //meshCollider.sharedMesh = mesh;
+        boxCollider = GetComponent<BoxCollider>();
+        boxCollider.center = mesh.bounds.center;
+        boxCollider.size = mesh.bounds.size;
+
+
         numParticles = vertices.Length;
         numTriangles = triangles.Length / 3;
-
-        Debug.Log("Number of particles: " + numParticles);
-        Debug.Log("Number of triangles: " + numTriangles);
-
-        // //debug log triangle array
-        // for (int i = 0; i < triangles.Length; i++)
-        // {
-        //     Debug.Log("Triangle " + i + ": " + triangles[i]);
-        // }
 
         // Assign static particles to be able to pass them to the C++ code
         staticParticleIndices = new int[2]; // Change this number for more/less static particles
@@ -205,6 +215,25 @@ public class HangingCloth : MonoBehaviour
         }
     }
 
+    // Will return the index to the nearest particle to the hit position by calculating distance to all particles
+    int FindClosestParticleToMouse(Vector3 hitPosition)
+    {
+        float minDistance = float.MaxValue;
+        int closestParticleIndex = -1; // Set -1 to start
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            // distance between hit position and particle
+            Vector3 worldPos = transform.TransformPoint(vertices[i]);
+            float distance = Vector3.Distance(worldPos, hitPosition);
+            if (distance < minDistance) // typical minimisation loop
+            {
+                minDistance = distance;
+                closestParticleIndex = i;
+            }
+        }
+        return closestParticleIndex;
+    }
+
     void FixedUpdate()
     {
         if (CSHARP_SIM)
@@ -226,12 +255,20 @@ public class HangingCloth : MonoBehaviour
             ApplyConstraints();
         }
         else{
-            cppFunctions.cpp_update(vertices, windForce);
+            // If we are dragging a particle, pass its index and mouse position to the C++ code
+            if(isDragging&&selectedParticleIndex!=-1){
+                Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
+            }
+            cppFunctions.cpp_update(vertices, windStrength, stretchingStiffness, shearingStiffness);
         }
 
         mesh.vertices = vertices;
         mesh.RecalculateNormals();
         mesh.RecalculateBounds();
+        //meshCollider.sharedMesh = mesh;
+        boxCollider.center = mesh.bounds.center;
+        boxCollider.size = mesh.bounds.size;
+
         // Debug to check static particles
         /*  foreach (var particle in particles) {
             if (particle.isStatic) {
@@ -240,6 +277,38 @@ public class HangingCloth : MonoBehaviour
         } 
         */
     }
+    
+    void Update()
+    {
+        // If mouse is clicked, cast a ray from the camera to the mouse position
+        // Dont do this if we are already dragging a particle
+        if (Input.GetMouseButtonDown(0) && !isDragging)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            //Debug.DrawLine(ray.origin, ray.origin + ray.direction * 1000, Color.blue, 4.0f);
+            RaycastHit hit;
+
+            // Debug.Log("Mouse position: " + Input.mousePosition);
+            // Debug.Log("ray origin: " + ray.origin);
+            // If the ray hits the cloth, find the nearest particle
+            if (Physics.Raycast(ray, out hit))
+            {
+                Debug.Log("Hit position: " + hit.point);
+                selectedParticleIndex = FindClosestParticleToMouse(hit.point);
+                isDragging = true;
+                Debug.Log("Selected particle: " + selectedParticleIndex);
+            }
+        }
+        // Check for mouse button release
+        if (Input.GetMouseButtonUp(0))
+        {
+            isDragging = false;
+            selectedParticleIndex = -1;
+        }
+        
+    }
+
+    
 
     private string GetDebuggerDisplay()
     {

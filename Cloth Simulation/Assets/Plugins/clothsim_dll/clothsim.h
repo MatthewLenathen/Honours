@@ -4,9 +4,12 @@
 #include <glm.hpp>
 #include <vector>
 #include <set>
+#include <random>
+#include <cmath>
 using namespace std;
 
 const glm::vec3 GRAVITY = glm::vec3(0.0f,-9.81f,0.0f);
+const glm::vec3 WIND_FORCE = glm::vec3(0.0f, 0.0f, 1.0f);
 
 // Class representing a particle
 class Particle
@@ -32,14 +35,15 @@ class ClothSim
 	vector<int> _static_particles;
 	int _num_particles;
 	int _num_triangles;
-	vector<glm::uvec2> _structural_constraints;
-	vector<glm::uvec2> _shear_constraints;
-	vector<glm::uvec2> _bend_constraints;
+	vector<std::pair<glm::uvec2,float>> _structural_constraints;
+	vector<std::pair<glm::uvec2, float>> _shear_constraints;
+	vector<std::pair<glm::uvec2, float>> _bend_constraints;
 	float _delta_time;
 	float _total_time = 0.0f;
 	float _spacing;
 	int _solver_iterations;
 	int _num_static_particles;
+
 
 	
 public:
@@ -48,7 +52,9 @@ public:
 	// Testing particle positions upon initialisation, making sure Vector3 converts to glm vec3 nicely
 	void LogParticlePositions(const std::vector<Particle>& particles);
 
-	void Update(glm::vec3* positions, glm::vec3 wind_force);
+	void Update(glm::vec3* positions, float wind_strength, float stretching_stiffness, float shearing_stiffness);
 
-	void GenerateConstraints(const vector<int>& triangles, int num_triangles, std::vector<glm::uvec2>& structural_constraints, std::vector<glm::uvec2>& shear_constraints);
+	void GenerateConstraints(const vector<int>& triangles, int num_triangles,const vector<Particle>& particles, vector<std::pair<glm::uvec2, float>>& structural_constraints, vector<std::pair<glm::uvec2, float>>& shear_constraints);
+
+	void ApplyConstraint(const std::pair<glm::uvec2, float>& constraint, float stiffness);
 };
