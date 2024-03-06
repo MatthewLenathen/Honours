@@ -39,15 +39,18 @@ class ClothSim
 	vector<std::pair<glm::uvec2, float>> _shear_constraints;
 	vector<std::pair<glm::uvec2, float>> _bend_constraints;
 	float _delta_time;
+	float _delta_time_substeps;
 	float _total_time = 0.0f;
-	float _spacing;
+	float _compliance;
 	int _solver_iterations;
+	int _substeps;
 	int _num_static_particles;
+	float _damping_factor_substeps;
 
 
 	
 public:
-	void Init(glm::vec3* positions,int* triangles, int num_positions, int num_triangles, float delta_time, int algorithm_type, int scenario, float spacing, int solver_iterations, int* static_particles, int num_static_particles);
+	void Init(glm::vec3* positions,int* triangles, int num_positions, int num_triangles, float delta_time, int algorithm_type, int scenario, int solver_iterations, int* static_particles, int num_static_particles, int substeps);
 
 	// Testing particle positions upon initialisation, making sure Vector3 converts to glm vec3 nicely
 	void LogParticlePositions(const std::vector<Particle>& particles);
@@ -57,4 +60,6 @@ public:
 	void GenerateConstraints(const vector<int>& triangles, int num_triangles,const vector<Particle>& particles, vector<std::pair<glm::uvec2, float>>& structural_constraints, vector<std::pair<glm::uvec2, float>>& shear_constraints);
 
 	void ApplyConstraint(const std::pair<glm::uvec2, float>& constraint, float stiffness);
+
+	void ApplyConstraintXPBD(const std::pair<glm::uvec2, float>& constraint, float compliance);
 };

@@ -249,8 +249,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8670543e71571da48ae69ffc9de7d469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stretchingStiffness: 1
-  shearingStiffness: 1
+  stretchingStiffness: 0
+  shearingStiffness: 0
   windStrength: 1
 --- !u!4 &860173042
 Transform:

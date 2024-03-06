@@ -62,7 +62,7 @@ public class MeshCreator
 public class cppFunctions
 {
     [DllImport("clothsim_dll", EntryPoint = "cpp_init")]
-    public static extern void cpp_init([In] Vector3[] vertices,[In] int[] triangles, int numParticles, int numTriangles, float fixedDeltaTime, int algorithmType, int scenario, float spacing, int solverIterations, [In] int[] staticParticleIndices, int numStaticParticles);
+    public static extern void cpp_init([In] Vector3[] vertices,[In] int[] triangles, int numParticles, int numTriangles, float fixedDeltaTime, int algorithmType, int scenario, int solverIterations, [In] int[] staticParticleIndices, int numStaticParticles, int subSteps);
 
     [DllImport("clothsim_dll", EntryPoint = "cpp_update")]
     public static extern void cpp_update([Out] Vector3[] vertices,[In] float windStrength, [In] float stretchingStiffness, [In] float shearingStiffness, [In] int selectedParticleIndex, [In] Vector3 mouseWorldPos, [In] int stopGrabbingIndex);
@@ -85,10 +85,11 @@ public class HangingCloth : MonoBehaviour
     int gridSize = 20;
     int numParticles; // Changed to vertices.Length instead of hardcoded value
     int numTriangles; // Need for the C++ code
-    float spacing = 0.5f;
-    int algorithmType = 1; // 0 for mass spring, 1 for position based
+    float spacing = 0.5f; // Only used for mesh generation, not in c++ anymore
+    int algorithmType = 2; // 0 for mass spring, 1 for position based, 2 for XPBD
     int scenario = 0; // 0 for hanging cloth, 1 for ..
     int solverIterations = 30; // Number of iterations for the pbd solver
+    int subSteps = 15; // Number of substeps for XPBD
 
     int[] triangles;
     int[] staticParticleIndices; 
@@ -134,6 +135,7 @@ public class HangingCloth : MonoBehaviour
 
         // Assign static particles to be able to pass them to the C++ code
         staticParticleIndices = new int[2]; // Change this number for more/less static particles
+
         staticParticleIndices[0] = 380;
         staticParticleIndices[1] = 399;
 
@@ -161,7 +163,7 @@ public class HangingCloth : MonoBehaviour
 
         }
         else{
-		    cppFunctions.cpp_init(vertices, triangles, numParticles,numTriangles, Time.fixedDeltaTime,algorithmType, scenario,spacing, solverIterations, staticParticleIndices, numStaticParticles);
+		    cppFunctions.cpp_init(vertices, triangles, numParticles,numTriangles, Time.fixedDeltaTime,algorithmType, scenario, solverIterations, staticParticleIndices, numStaticParticles, subSteps);
         }
 
        
@@ -295,6 +297,7 @@ public class HangingCloth : MonoBehaviour
                 //Debug.Log("Selected particle: " + selectedParticleIndex);
                 Vector3 worldPos = transform.TransformPoint(vertices[selectedParticleIndex]);
                 distanceToCloth = Vector3.Distance(Camera.main.transform.position, worldPos);
+                
             }
         }
         if(isDragging){

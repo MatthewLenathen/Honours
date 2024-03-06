@@ -73,7 +73,7 @@ void ApplySpringForce(Particle& p1, Particle& p2, float rest_length, float sprin
 }
 
 // Called at start of sim
-void ClothSim::Init(glm::vec3* positions,int* triangles, int num_positions,int num_triangles, float delta_time, int algorithm_type, int scenario, float spacing, int solver_iterations, int* static_particles, int num_static_particles)
+void ClothSim::Init(glm::vec3* positions, int* triangles, int num_positions, int num_triangles, float delta_time, int algorithm_type, int scenario, int solver_iterations, int* static_particles, int num_static_particles, int substeps)
 {
 	// Since the g_ClothSim object stays alive, must clear the particles when initialising again
 	_particles.clear();
@@ -82,10 +82,9 @@ void ClothSim::Init(glm::vec3* positions,int* triangles, int num_positions,int n
 	_structural_constraints.clear();
 	_shear_constraints.clear();
 	_bend_constraints.clear();
-	
+
 
 	// Initialise necessary variables used in update
-	_spacing = spacing;
 	_num_particles = num_positions;
 	_num_triangles = num_triangles;
 	_delta_time = delta_time;
@@ -94,7 +93,10 @@ void ClothSim::Init(glm::vec3* positions,int* triangles, int num_positions,int n
 	_solver_iterations = solver_iterations;
 	_total_time = 0.0f;
 	_num_static_particles = num_static_particles;
-	
+	_substeps = substeps;
+	_delta_time_substeps = _delta_time / _substeps;
+	_damping_factor_substeps = pow(0.99, 1.0 / _substeps);
+
 	// Create particles and add them to particles vector
 	for (int i = 0; i < num_positions; i++)
 	{
@@ -102,9 +104,9 @@ void ClothSim::Init(glm::vec3* positions,int* triangles, int num_positions,int n
 	}
 
 	//LogTriangleIndices(triangles, num_triangles);
-	
+
 	// Create triangles from triangles pointer, *3 because triangles data comes in 3's, represents indices that make up a triangle, e.g. {0,20,1} 
-	for (int i = 0; i < num_triangles*3; i++)
+	for (int i = 0; i < num_triangles * 3; i++)
 	{
 		_triangles.push_back(triangles[i]);
 	}
@@ -125,12 +127,12 @@ void ClothSim::Init(glm::vec3* positions,int* triangles, int num_positions,int n
 		{
 		case 0: // Hanging cloth
 		{
-			GenerateConstraints(_triangles, _num_triangles,_particles, _structural_constraints, _shear_constraints);
-			
+			GenerateConstraints(_triangles, _num_triangles, _particles, _structural_constraints, _shear_constraints);
+
 			break;
 		}
 		case 1: // tbd
-			
+
 			break;
 		default:
 			break;
@@ -142,7 +144,7 @@ void ClothSim::Init(glm::vec3* positions,int* triangles, int num_positions,int n
 		{
 		case 0: // Hanging cloth
 		{
-			GenerateConstraints(_triangles, _num_triangles,_particles, _structural_constraints, _shear_constraints);
+			GenerateConstraints(_triangles, _num_triangles, _particles, _structural_constraints, _shear_constraints);
 			logConstraints(_structural_constraints, "struct_constraints_log.txt");
 			logConstraints(_shear_constraints, "shear_constraints_log.txt");
 			break;
@@ -150,7 +152,19 @@ void ClothSim::Init(glm::vec3* positions,int* triangles, int num_positions,int n
 		default:
 			break;
 		}
-
+		break;
+	case 2: // XPBD
+		switch (scenario)
+		{
+		case 0:
+		{
+			GenerateConstraints(_triangles, _num_triangles, _particles, _structural_constraints, _shear_constraints);
+			break;
+		}
+		default:
+			break;
+		}
+		break;
 	default:
 		break;
 	}
@@ -174,7 +188,7 @@ void ClothSim::Update(glm::vec3* positions, float wind_strength, float stretchin
 		_particles[selected_particle_index].inverse_mass = 0.0f;
 		_particles[selected_particle_index].is_static = true;
 	}
-	
+
 	switch (_algorithm_type)
 	{
 	case 0: // Mass spring
@@ -183,7 +197,7 @@ void ClothSim::Update(glm::vec3* positions, float wind_strength, float stretchin
 			if (!_particles[i].is_static)
 			{
 				_particles[i].velocity += GRAVITY * _delta_time;
-				_particles[i].velocity += WIND_FORCE * std::sin(_total_time) * (float)dis(gen) * _delta_time;
+				_particles[i].velocity += WIND_FORCE * std::sin(_total_time) * wind_strength * _delta_time;
 				_particles[i].position += _particles[i].velocity * _delta_time;
 				positions[i] = _particles[i].position; // important, update actual positions that gets passed back to unity
 			}
@@ -234,19 +248,19 @@ void ClothSim::Update(glm::vec3* positions, float wind_strength, float stretchin
 		{
 			for (const auto& constraint : _structural_constraints)
 			{
-				ApplyConstraint(constraint,stretching_stiffness);
+				ApplyConstraint(constraint, stretching_stiffness);
 			}
 
 			for (const auto& constraint : _shear_constraints)
 			{
-				ApplyConstraint(constraint,shearing_stiffness);
+				ApplyConstraint(constraint, shearing_stiffness);
 			}
 		}
 
 		// Finally, after solving, set new velocity and position 
 		for (int i = 0; i < _num_particles; i++)
 		{
-			if (!_particles[i].is_static || i==selected_particle_index ) {
+			if (!_particles[i].is_static || i == selected_particle_index) {
 				_particles[i].velocity = (_particles[i].predicted_position - _particles[i].position) / _delta_time;
 				_particles[i].position = _particles[i].predicted_position;
 				positions[i] = _particles[i].position; // important, update actual positions that gets passed back to unity
@@ -254,11 +268,72 @@ void ClothSim::Update(glm::vec3* positions, float wind_strength, float stretchin
 		}
 		break;
 	}
+	case 2: //XPBD
+		for (int i = 0; i < _substeps; i++) // XPBD spending fixed time budget more effective with substeps
+		{
+			// first, hook up external forces to the system, e.g. gravity and wind
+			// We now use delta_substeps which is deltaTime / substeps
+			for (int i = 0; i < _num_particles; i++)
+			{
+				if (!_particles[i].is_static) {
+					glm::vec3 external_forces = GRAVITY + (WIND_FORCE * wind_strength * std::sin(_total_time));
+					_particles[i].velocity += _delta_time_substeps * _particles[i].inverse_mass * external_forces;
+				}
+			}
+
+			// Next, damp velocities, dont want ultra damping so need to involve the num substeps
+			for (int i = 0; i < _num_particles; i++)
+			{
+				if (!_particles[i].is_static)
+					_particles[i].velocity *= _damping_factor_substeps; // calced in init, 0.99^(1/substeps)
+			}
+
+			// Calculate predicted position next
+			for (int i = 0; i < _num_particles; i++)
+			{
+				if (!_particles[i].is_static || i == selected_particle_index)
+					if (i == selected_particle_index) {
+						//glm::vec3 drag_vel = (normalize(mouse_world_pos - _particles[i].position)) / _delta_time_substeps;
+						//_particles[i].predicted_position = _particles[i].position + (_delta_time_substeps * drag_vel);
+						_particles[i].predicted_position = mouse_world_pos;
+					}
+					else {
+						_particles[i].predicted_position = _particles[i].position + (_delta_time_substeps * _particles[i].velocity);
+					}
+			}
+
+			// Collision constraints to be generated here, doing it later as i want to get main pbd working first
+			// forall vertices i do generateCollisionConstraints(xi -> pi)
+
+			// Since we're doing substeps, only apply the constraints once within a substep
+			for (const auto& constraint : _structural_constraints)
+			{
+				ApplyConstraintXPBD(constraint, stretching_stiffness);
+			}
+
+			for (const auto& constraint : _shear_constraints)
+			{
+				ApplyConstraintXPBD(constraint, shearing_stiffness);
+			}
+
+			// Finally, after solving, set new velocity and position 
+			for (int i = 0; i < _num_particles; i++)
+			{
+				if (!_particles[i].is_static || i == selected_particle_index) {
+					_particles[i].velocity = (_particles[i].predicted_position - _particles[i].position) / _delta_time_substeps;
+					_particles[i].position = _particles[i].predicted_position;
+					positions[i] = _particles[i].position; // important, update actual positions that gets passed back to unity
+				}
+			}
+			
+		}
+		break;
+
 	default:
 		break;
 
 	}
-	
+
 }
 
 void ClothSim::ApplyConstraint(const std::pair<glm::uvec2, float>& constraint, float stiffness)
@@ -288,6 +363,33 @@ void ClothSim::ApplyConstraint(const std::pair<glm::uvec2, float>& constraint, f
 
 	p1.predicted_position -= p1_correction * k_dash;
 	p2.predicted_position += p2_correction * k_dash;
+}
+
+void ClothSim::ApplyConstraintXPBD(const std::pair<glm::uvec2, float>& constraint, float compliance)
+{
+	Particle& p1 = _particles[constraint.first.x];
+	Particle& p2 = _particles[constraint.first.y];
+
+	float rest_length = constraint.second;
+
+	float distance_between_particles = glm::length(p1.predicted_position - p2.predicted_position);
+
+	if (distance_between_particles == 0)
+		return;
+
+	if (p1.is_static && p2.is_static)
+		return; // Skip this constraint if both particles are static
+
+	glm::vec3 direction = glm::normalize(p1.predicted_position - p2.predicted_position);
+
+	float compliance_factor = compliance / (pow(_delta_time_substeps, 2.0f));
+
+	// Now using compliance in xpbd instead of a stiffness factor
+	glm::vec3 p1_correction = (p1.inverse_mass / (p1.inverse_mass + p2.inverse_mass + compliance_factor)) * (distance_between_particles - rest_length) * direction;
+	glm::vec3 p2_correction = (p2.inverse_mass / (p1.inverse_mass + p2.inverse_mass + compliance_factor)) * (distance_between_particles - rest_length) * direction;
+
+	p1.predicted_position -= p1_correction;
+	p2.predicted_position += p2_correction;
 }
 
 // Generates constraints and stores them in the vectors passed in
@@ -334,13 +436,13 @@ void ClothSim::GenerateConstraints(const vector<int>& triangles, int num_triangl
 	for (const auto& constraint : temp_structural_constraints)
 	{
 		float rest_length = glm::length(particles[constraint.first].position - particles[constraint.second].position);
-		structural_constraints.push_back(make_pair(glm::uvec2(constraint.first, constraint.second),rest_length));
+		structural_constraints.push_back(make_pair(glm::uvec2(constraint.first, constraint.second), rest_length));
 	}
 
 	for (const auto& constraint : temp_shear_constraints)
 	{
 		float rest_length = glm::length(particles[constraint.first].position - particles[constraint.second].position);
-		shear_constraints.push_back(make_pair(glm::uvec2(constraint.first, constraint.second),rest_length));
+		shear_constraints.push_back(make_pair(glm::uvec2(constraint.first, constraint.second), rest_length));
 	}
 
 }
