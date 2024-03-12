@@ -21,3 +21,12 @@ looks good
 XPBD -> Bend constraints if i can do it in an hour-ish -> fix mouseLocation bug with the drag feature -> get the collision stuff working
 - He recommended for me to use debug and breakpoints for the dll, not sure why i wasn't doing that in the first place tbh
 
+MEETIng 07/03/2024
+--------------------------
+showed xpbd demo, looks a bit better/stable than pbd on correct settings, 10 substeps
+explained that my shear constraints work fine as bending constraints and that actual angle bending constraints are harder to implement
+Babis recommended me to look into a recording script that records X amounts of fixed updates with same vertex setup and only changing parameters like stiffness/iterations.
+will make it easier to review and analyse, think this is quite high priority.
+- Babis also explained that instead of needing to do _vector.clear() on init, i can have my cloth object be g_ClothSim = {}; and it would overwrite it every time its ran. Would be a tiny bit slower but won't need to add a .clear() to new vectors 
+- He asked if i could sent an unlisted youtube recording of me showing the simulation as teams screenshare isn't good for animation.
+	- sent one and got some feedback

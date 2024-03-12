@@ -46,11 +46,13 @@ class ClothSim
 	int _substeps;
 	int _num_static_particles;
 	float _damping_factor_substeps;
+	glm::vec3 _sphere_centre;
+	float _sphere_radius;
 
 
 	
 public:
-	void Init(glm::vec3* positions,int* triangles, int num_positions, int num_triangles, float delta_time, int algorithm_type, int scenario, int solver_iterations, int* static_particles, int num_static_particles, int substeps);
+	void Init(glm::vec3* positions,int* triangles, int num_positions, int num_triangles, float delta_time, int algorithm_type, int scenario, int solver_iterations, int* static_particles, int num_static_particles, int substeps, glm::vec3 sphere_centre, float sphere_radius);
 
 	// Testing particle positions upon initialisation, making sure Vector3 converts to glm vec3 nicely
 	void LogParticlePositions(const std::vector<Particle>& particles);
@@ -62,4 +64,6 @@ public:
 	void ApplyConstraint(const std::pair<glm::uvec2, float>& constraint, float stiffness);
 
 	void ApplyConstraintXPBD(const std::pair<glm::uvec2, float>& constraint, float compliance);
+
+	void CollisionWithSphere();
 };

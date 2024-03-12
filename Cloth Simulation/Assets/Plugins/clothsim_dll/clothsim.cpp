@@ -73,7 +73,7 @@ void ApplySpringForce(Particle& p1, Particle& p2, float rest_length, float sprin
 }
 
 // Called at start of sim
-void ClothSim::Init(glm::vec3* positions, int* triangles, int num_positions, int num_triangles, float delta_time, int algorithm_type, int scenario, int solver_iterations, int* static_particles, int num_static_particles, int substeps)
+void ClothSim::Init(glm::vec3* positions, int* triangles, int num_positions, int num_triangles, float delta_time, int algorithm_type, int scenario, int solver_iterations, int* static_particles, int num_static_particles, int substeps, glm::vec3 sphere_centre, float sphere_radius)
 {
 	// Since the g_ClothSim object stays alive, must clear the particles when initialising again
 	_particles.clear();
@@ -95,7 +95,9 @@ void ClothSim::Init(glm::vec3* positions, int* triangles, int num_positions, int
 	_num_static_particles = num_static_particles;
 	_substeps = substeps;
 	_delta_time_substeps = _delta_time / _substeps;
-	_damping_factor_substeps = pow(0.99, 1.0 / _substeps);
+	_damping_factor_substeps = pow(0.99f, 1.0f / _substeps);
+	_sphere_centre = sphere_centre;
+	_sphere_radius = sphere_radius;
 
 	// Create particles and add them to particles vector
 	for (int i = 0; i < num_positions; i++)
@@ -304,6 +306,8 @@ void ClothSim::Update(glm::vec3* positions, float wind_strength, float stretchin
 
 			// Collision constraints to be generated here, doing it later as i want to get main pbd working first
 			// forall vertices i do generateCollisionConstraints(xi -> pi)
+			CollisionWithSphere();
+
 
 			// Since we're doing substeps, only apply the constraints once within a substep
 			for (const auto& constraint : _structural_constraints)
@@ -311,10 +315,12 @@ void ClothSim::Update(glm::vec3* positions, float wind_strength, float stretchin
 				ApplyConstraintXPBD(constraint, stretching_stiffness);
 			}
 
+			
 			for (const auto& constraint : _shear_constraints)
 			{
 				ApplyConstraintXPBD(constraint, shearing_stiffness);
 			}
+			
 
 			// Finally, after solving, set new velocity and position 
 			for (int i = 0; i < _num_particles; i++)
@@ -445,6 +451,37 @@ void ClothSim::GenerateConstraints(const vector<int>& triangles, int num_triangl
 		shear_constraints.push_back(make_pair(glm::uvec2(constraint.first, constraint.second), rest_length));
 	}
 
+}
+
+
+void ClothSim::CollisionWithSphere()
+{
+	std::ofstream debugFile("debug.txt"); // Open a file for writing
+
+	for (int i = 0; i < _num_particles; i++)
+	{
+		// Calc the vector from particle to sphere centre, if its shorter than sphere radius then a collision has occured
+		glm::vec3 particle_to_centre = _particles[i].predicted_position - _sphere_centre;
+		float length = glm::length(particle_to_centre);
+
+		debugFile << "Particle " << i << " predicted position: " << _particles[i].predicted_position.x<<","<<_particles[i].predicted_position.y<<","<<_particles[i].predicted_position.z << "\n";
+		debugFile << "Sphere centre: " << _sphere_centre.x<<","<<_sphere_centre.y<<","<<_sphere_centre.z << "\n";
+		debugFile << "Sphere radius: " << _sphere_radius << "\n";
+		debugFile << "Length: " << length << "\n";
+
+		if (length < _sphere_radius)
+		{
+			float depth = _sphere_radius - length;
+			depth += 0.001f;
+			glm::vec3 delta = glm::normalize(particle_to_centre) * depth;
+			_particles[i].predicted_position += delta;
+
+			debugFile << "Collision detected, depth: " << depth << ", delta: " << delta.x<<","<<delta.y<<","<<delta.z << "\n"<<"\n";
+		}
+	}
+
+	debugFile.close(); // Close the file
+	exit(0); // Exit the program
 }
 
 // Used to check particles, cant print through dll without external debug program

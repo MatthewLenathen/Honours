@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 // Represents a particle in the cloth
@@ -57,12 +58,48 @@ public class MeshCreator
         mesh.RecalculateNormals();
         return mesh;
     }
+
+    public static Mesh generateHorizontalMesh(int gridSize, float spacing)
+    {
+        Mesh mesh = new Mesh();
+
+        // Create vertices
+        Vector3[] vertices = new Vector3[gridSize * gridSize];
+        for (int i = 0, y = 0; y < gridSize; y++)
+        {
+            for (int x = 0; x < gridSize; x++, i++)
+            {
+                vertices[i] = new Vector3(x * spacing, 0, y * spacing);
+            }
+        }
+
+        // Create triangles
+        // Changed this, because it was generating too many triangles, now it's generating the correct amount
+        int[] triangles = new int[(gridSize - 1) * (gridSize - 1) * 6];
+        for (int ti = 0, vi = 0, y = 0; y < gridSize - 1; y++)
+        {
+            for (int x = 0; x < gridSize - 1; x++, ti += 6, vi++)
+            {
+                triangles[ti] = vi;
+                triangles[ti + 3] = triangles[ti + 2] = vi + 1;
+                triangles[ti + 4] = triangles[ti + 1] = vi + gridSize;
+                triangles[ti + 5] = vi + gridSize + 1;
+            }
+            vi++; 
+        }
+
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+        mesh.RecalculateNormals();
+        return mesh;
+    
+    }
 }
 
 public class cppFunctions
 {
     [DllImport("clothsim_dll", EntryPoint = "cpp_init")]
-    public static extern void cpp_init([In] Vector3[] vertices,[In] int[] triangles, int numParticles, int numTriangles, float fixedDeltaTime, int algorithmType, int scenario, int solverIterations, [In] int[] staticParticleIndices, int numStaticParticles, int subSteps);
+    public static extern void cpp_init([In] Vector3[] vertices,[In] int[] triangles, int numParticles, int numTriangles, float fixedDeltaTime, int algorithmType, int scenario, int solverIterations, [In] int[] staticParticleIndices, int numStaticParticles, int subSteps, Vector3 sphereCenter, float sphereRadius);
 
     [DllImport("clothsim_dll", EntryPoint = "cpp_update")]
     public static extern void cpp_update([Out] Vector3[] vertices,[In] float windStrength, [In] float stretchingStiffness, [In] float shearingStiffness, [In] int selectedParticleIndex, [In] Vector3 mouseWorldPos, [In] int stopGrabbingIndex);
@@ -79,7 +116,6 @@ public class HangingCloth : MonoBehaviour
     Mesh mesh;
     Vector3[] vertices;
 
-    MeshCollider meshCollider;
     BoxCollider boxCollider;
 
     int gridSize = 20;
@@ -87,16 +123,16 @@ public class HangingCloth : MonoBehaviour
     int numTriangles; // Need for the C++ code
     float spacing = 0.5f; // Only used for mesh generation, not in c++ anymore
     int algorithmType = 2; // 0 for mass spring, 1 for position based, 2 for XPBD
-    int scenario = 0; // 0 for hanging cloth, 1 for ..
+    int scenario = 1; // 0 for hanging cloth, 1 for ..
     int solverIterations = 30; // Number of iterations for the pbd solver
-    int subSteps = 15; // Number of substeps for XPBD
+    int subSteps = 20; // Number of substeps for XPBD
 
     int[] triangles;
     int[] staticParticleIndices; 
     int numStaticParticles;
 
     Vector3 gravity = new Vector3(0.0f, -9.8f, 0.0f);
-    int springConstant = 2000;
+    int springConstant = 1000;
     Vector3 windForce = new Vector3(0.0f, 0.0f, 1.0f); 
 
     bool isDragging = false;
@@ -105,47 +141,76 @@ public class HangingCloth : MonoBehaviour
     int stopGrabbingIndex = -1;
     float distanceToCloth = 0.0f;
 
+    Vector3 sphereCentre;
+    float sphereRadius;
+
     // Public stuff to change in the editor
     [Range(0f, 1f)]
     public float stretchingStiffness = 1.0f;
     [Range(0f, 1f)]
     public float shearingStiffness = 1.0f;
+    [Range(0f, 0.001f)]
+    public float stretchingCompliance = 0.001f;
+    [Range(0f, 0.001f)]
+    public float shearingCompliance = 0.001f;
     [Range(0f, 100f)]
     public float windStrength = 1.0f;
 
     void Start()
     {
-        // TODO: Add a dropdown to select the algorithm type
-        MeshFilter meshFilter = GetComponent<MeshFilter>();
-        meshFilter.sharedMesh = MeshCreator.generateVerticalMesh(gridSize, spacing);
+        if (scenario == 0) // Hanging cloth
+        {
+            MeshFilter meshFilter = GetComponent<MeshFilter>();
+            meshFilter.sharedMesh = MeshCreator.generateVerticalMesh(gridSize, spacing);
 
-        mesh = meshFilter.mesh;
-        vertices = mesh.vertices;
-        triangles = mesh.triangles;
+            mesh = meshFilter.mesh;
+            vertices = mesh.vertices;
+            triangles = mesh.triangles;
 
-        //meshCollider = GetComponent<MeshCollider>();
-        //meshCollider.sharedMesh = mesh;
-        boxCollider = GetComponent<BoxCollider>();
-        boxCollider.center = mesh.bounds.center;
-        boxCollider.size = mesh.bounds.size;
+            //meshCollider = GetComponent<MeshCollider>();
+            //meshCollider.sharedMesh = mesh;
+            boxCollider = GetComponent<BoxCollider>();
+            boxCollider.center = mesh.bounds.center;
+            boxCollider.size = mesh.bounds.size;
 
+            numParticles = vertices.Length;
+            numTriangles = triangles.Length / 3;
 
-        numParticles = vertices.Length;
-        numTriangles = triangles.Length / 3;
+            // Assign static particles to be able to pass them to the C++ code
+            staticParticleIndices = new int[2]; // Change this number for more/less static particles
 
-        // Assign static particles to be able to pass them to the C++ code
-        staticParticleIndices = new int[2]; // Change this number for more/less static particles
+            staticParticleIndices[0] = gridSize * (gridSize -1);
+            staticParticleIndices[1] = gridSize * gridSize -1;
 
-        staticParticleIndices[0] = 380;
-        staticParticleIndices[1] = 399;
+            numStaticParticles = staticParticleIndices.Length;
 
-        //staticParticleIndices[0] = 1560;
-        //staticParticleIndices[1] = 1599;
+            sphereCentre = new Vector3(999.0f, 999.0f, 999.0f);
+            sphereRadius = 0.0f;
+        } 
+        else if (scenario == 1){ // Falling horizontal cloth
+            MeshFilter meshFilter = GetComponent<MeshFilter>();
+            meshFilter.sharedMesh = MeshCreator.generateHorizontalMesh(gridSize, spacing);
 
-        //staticParticleIndices[0] = 90;
-        //staticParticleIndices[1] = 99;
+            mesh = meshFilter.mesh;
+            vertices = mesh.vertices;
+            triangles = mesh.triangles;
 
-        numStaticParticles = staticParticleIndices.Length;
+            boxCollider = GetComponent<BoxCollider>();
+            boxCollider.center = mesh.bounds.center;
+            boxCollider.size = mesh.bounds.size;
+
+            numParticles = vertices.Length;
+            numTriangles = triangles.Length / 3;
+
+            numStaticParticles = 0;
+
+            MeshFilter sphereMeshFilter = GameObject.Find("Sphere").GetComponent<MeshFilter>();
+
+            sphereCentre = GameObject.Find("Sphere").transform.position;
+            //Debug.Log(sphereCentre);
+            sphereRadius = 2.5f;
+        }
+
 
         if (CSHARP_SIM){
             // Create all particles and initialise them
@@ -163,7 +228,7 @@ public class HangingCloth : MonoBehaviour
 
         }
         else{
-		    cppFunctions.cpp_init(vertices, triangles, numParticles,numTriangles, Time.fixedDeltaTime,algorithmType, scenario, solverIterations, staticParticleIndices, numStaticParticles, subSteps);
+            cppFunctions.cpp_init(vertices, triangles, numParticles,numTriangles, Time.fixedDeltaTime,algorithmType, scenario, solverIterations, staticParticleIndices, numStaticParticles, subSteps,sphereCentre, sphereRadius);
         }
 
        
@@ -264,13 +329,19 @@ public class HangingCloth : MonoBehaviour
             ApplyConstraints();
         }
         else{
-            cppFunctions.cpp_update(vertices, windStrength, stretchingStiffness, shearingStiffness, selectedParticleIndex, mouseWorldPos, stopGrabbingIndex);
+            if(algorithmType ==2)
+            {
+                cppFunctions.cpp_update(vertices, windStrength, stretchingCompliance, shearingCompliance, selectedParticleIndex, mouseWorldPos, stopGrabbingIndex);
+            }
+            else{
+                cppFunctions.cpp_update(vertices, windStrength, stretchingStiffness, shearingStiffness, selectedParticleIndex, mouseWorldPos, stopGrabbingIndex);
+            }
         }
 
         mesh.vertices = vertices;
         mesh.RecalculateNormals();
+        mesh.RecalculateTangents();
         mesh.RecalculateBounds();
-        //meshCollider.sharedMesh = mesh;
         boxCollider.center = mesh.bounds.center;
         boxCollider.size = mesh.bounds.size;
     }
@@ -296,7 +367,8 @@ public class HangingCloth : MonoBehaviour
                 isDragging = true;
                 //Debug.Log("Selected particle: " + selectedParticleIndex);
                 Vector3 worldPos = transform.TransformPoint(vertices[selectedParticleIndex]);
-                distanceToCloth = Vector3.Distance(Camera.main.transform.position, worldPos);
+                //distanceToCloth = Vector3.Distance(Camera.main.transform.position, worldPos);
+                distanceToCloth = Camera.main.WorldToScreenPoint(hit.point).z;
                 
             }
         }
