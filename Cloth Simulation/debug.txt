@@ -1,0 +1,7 @@
+Frame number: 69
+Particle 276 predicted position: 8,-7.51138,6.79934
+Sphere centre: 8,-10,7
+Sphere radius: 2.5
+Length: 2.49669
+Collision detected, depth: 0.00430639, delta: 0,0.00429246,-0.000346107
+

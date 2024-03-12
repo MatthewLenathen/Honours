@@ -167,6 +167,8 @@ public class HangingCloth : MonoBehaviour
             vertices = mesh.vertices;
             triangles = mesh.triangles;
 
+            
+
             //meshCollider = GetComponent<MeshCollider>();
             //meshCollider.sharedMesh = mesh;
             boxCollider = GetComponent<BoxCollider>();
@@ -230,8 +232,6 @@ public class HangingCloth : MonoBehaviour
         else{
             cppFunctions.cpp_init(vertices, triangles, numParticles,numTriangles, Time.fixedDeltaTime,algorithmType, scenario, solverIterations, staticParticleIndices, numStaticParticles, subSteps,sphereCentre, sphereRadius);
         }
-
-       
     }
 
     void ApplyConstraints()
@@ -340,7 +340,10 @@ public class HangingCloth : MonoBehaviour
 
         mesh.vertices = vertices;
         mesh.RecalculateNormals();
-        mesh.RecalculateTangents();
+        //mesh.RecalculateTangents();
+        // testing other normal calc
+        //CalculateNormals(mesh);
+
         mesh.RecalculateBounds();
         boxCollider.center = mesh.bounds.center;
         boxCollider.size = mesh.bounds.size;
@@ -393,4 +396,30 @@ public class HangingCloth : MonoBehaviour
         return ToString();
     }
 
+    private void CalculateNormals(Mesh mesh)
+    {
+        Vector3[] normals = new Vector3[mesh.vertexCount];
+        for (int i = 0; i < mesh.triangles.Length; i += 3)
+        {
+            int index1 = mesh.triangles[i];
+            int index2 = mesh.triangles[i + 1];
+            int index3 = mesh.triangles[i + 2];
+
+            Vector3 side1 = mesh.vertices[index2] - mesh.vertices[index1];
+            Vector3 side2 = mesh.vertices[index3] - mesh.vertices[index1];
+            Vector3 normal = Vector3.Cross(side1, side2).normalized;
+
+            normals[index1] += normal;
+            normals[index2] += normal;
+            normals[index3] += normal;
+        }
+
+        for (int i = 0; i < normals.Length; i++)
+        {
+            normals[i].Normalize();
+        }
+
+        mesh.normals = normals;
+    }
 }
+

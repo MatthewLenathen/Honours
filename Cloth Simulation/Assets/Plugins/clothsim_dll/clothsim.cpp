@@ -163,6 +163,11 @@ void ClothSim::Init(glm::vec3* positions, int* triangles, int num_positions, int
 			GenerateConstraints(_triangles, _num_triangles, _particles, _structural_constraints, _shear_constraints);
 			break;
 		}
+		case 1:
+		{
+			GenerateConstraints(_triangles, _num_triangles, _particles, _structural_constraints, _shear_constraints);
+			break;
+		}
 		default:
 			break;
 		}
@@ -456,7 +461,6 @@ void ClothSim::GenerateConstraints(const vector<int>& triangles, int num_triangl
 
 void ClothSim::CollisionWithSphere()
 {
-	std::ofstream debugFile("debug.txt"); // Open a file for writing
 
 	for (int i = 0; i < _num_particles; i++)
 	{
@@ -464,24 +468,15 @@ void ClothSim::CollisionWithSphere()
 		glm::vec3 particle_to_centre = _particles[i].predicted_position - _sphere_centre;
 		float length = glm::length(particle_to_centre);
 
-		debugFile << "Particle " << i << " predicted position: " << _particles[i].predicted_position.x<<","<<_particles[i].predicted_position.y<<","<<_particles[i].predicted_position.z << "\n";
-		debugFile << "Sphere centre: " << _sphere_centre.x<<","<<_sphere_centre.y<<","<<_sphere_centre.z << "\n";
-		debugFile << "Sphere radius: " << _sphere_radius << "\n";
-		debugFile << "Length: " << length << "\n";
-
 		if (length < _sphere_radius)
 		{
 			float depth = _sphere_radius - length;
-			depth += 0.001f;
+			depth += 0.0001f;
 			glm::vec3 delta = glm::normalize(particle_to_centre) * depth;
 			_particles[i].predicted_position += delta;
 
-			debugFile << "Collision detected, depth: " << depth << ", delta: " << delta.x<<","<<delta.y<<","<<delta.z << "\n"<<"\n";
 		}
 	}
-
-	debugFile.close(); // Close the file
-	exit(0); // Exit the program
 }
 
 // Used to check particles, cant print through dll without external debug program
