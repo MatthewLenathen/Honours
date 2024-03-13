@@ -147,8 +147,8 @@ void ClothSim::Init(glm::vec3* positions, int* triangles, int num_positions, int
 		case 0: // Hanging cloth
 		{
 			GenerateConstraints(_triangles, _num_triangles, _particles, _structural_constraints, _shear_constraints);
-			logConstraints(_structural_constraints, "struct_constraints_log.txt");
-			logConstraints(_shear_constraints, "shear_constraints_log.txt");
+			//logConstraints(_structural_constraints, "struct_constraints_log.txt");
+			//logConstraints(_shear_constraints, "shear_constraints_log.txt");
 			break;
 		}
 		default:

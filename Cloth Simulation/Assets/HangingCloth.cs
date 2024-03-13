@@ -129,7 +129,7 @@ public class HangingCloth : MonoBehaviour
     int numTriangles; // Need for the C++ code
     float spacing = 0.5f; // Only used for mesh generation, not in c++ anymore
     int algorithmType = 2; // 0 for mass spring, 1 for position based, 2 for XPBD
-    int scenario = 1; // 0 for hanging cloth, 1 for ..
+    int scenario = 0; // 0 for hanging cloth, 1 for ..
     int solverIterations = 30; // Number of iterations for the pbd solver
     int subSteps = 10; // Number of substeps for XPBD
 
@@ -167,6 +167,8 @@ public class HangingCloth : MonoBehaviour
     private List<RecordParameters> pendingExperiments = new List<RecordParameters>();
     RecorderController m_RecorderController;
     RecorderControllerSettings controllerSettings;
+    int fixedUpdateCounter = 0;
+    int maxFixedUpdates = 500;
 
     class RecordParameters
     {
@@ -183,7 +185,6 @@ public class HangingCloth : MonoBehaviour
 
         public string filename; // e.g. $"xpbd_shearCompliance={xpbdShearCompliance}_bendCompliance={xpbdBendCompliance}_numSubsteps.mp4"
         //public CameraSettings cameraSettings; // prefab for camera transform, or however you want to set it up
-        public int maxFixedUpdates = 500;
     }
 
     // Generate a string for recording filenames
@@ -257,70 +258,88 @@ public class HangingCloth : MonoBehaviour
             sphereCentre = new Vector3(999.0f, 999.0f, 999.0f);
             sphereRadius = 0.0f;
             
-            // Now setting the variables depending on the experiment
-            scenario = recordParameters.scenario;
-            algorithmType = recordParameters.algorithm;
-            if(algorithmType==1)
-            {
-                stretchingStiffness = recordParameters.pbdStretchingStiffness;
-                shearingStiffness = recordParameters.pbdShearingStiffness;
-                solverIterations = recordParameters.pbdSolverIterations;
-            }
-            if(algorithmType==2)
-            {
-                stretchingCompliance = recordParameters.xpbdStretchingCompliance;
-                shearingCompliance = recordParameters.xpbdShearingCompliance;
-                subSteps = recordParameters.xpbdSubsteps;
-            }
-
-            cppFunctions.cpp_init(vertices, triangles, numParticles,numTriangles, Time.fixedDeltaTime,algorithmType, scenario, solverIterations, staticParticleIndices, numStaticParticles, subSteps,sphereCentre, sphereRadius);
-
-            // Recorder Init
-
-            var mediaOutputFolder = Path.Combine(Application.dataPath, "..", "Simulation_Recordings");
-
-            var videoRecorder = ScriptableObject.CreateInstance<MovieRecorderSettings>();
-            videoRecorder.name = "Recorder";
-            videoRecorder.Enabled = true;
-
-            videoRecorder.EncoderSettings = new CoreEncoderSettings
-            {
-                EncodingQuality = CoreEncoderSettings.VideoEncodingQuality.Medium,
-                Codec = CoreEncoderSettings.OutputCodec.MP4
-            };
-
-            videoRecorder.CaptureAudio = false;
-
-            videoRecorder.ImageInputSettings = new GameViewInputSettings
-            {
-                OutputWidth = 1920,
-                OutputHeight = 1080
-            };
-
-            videoRecorder.OutputFile = Path.Combine(mediaOutputFolder, recordParameters.filename) + DefaultWildcard.Take;
-            // Setup Recording
-            controllerSettings.AddRecorderSettings(videoRecorder);
-
-            controllerSettings.SetRecordModeToManual();
-            controllerSettings.FrameRate = 60.0f;
-
-            RecorderOptions.VerboseMode = false;
-            m_RecorderController.PrepareRecording();
-            m_RecorderController.StartRecording();
-            // After starting the recording, set isRecording to true
-            isRecording = true;
+           
 
         }
         else if(recordParameters.scenario==1)
         {
             //fall
         }
+
+        // Now setting the variables depending on the experiment
+        scenario = recordParameters.scenario;
+        algorithmType = recordParameters.algorithm;
+        if (algorithmType == 1)
+        {
+            stretchingStiffness = recordParameters.pbdStretchingStiffness;
+            shearingStiffness = recordParameters.pbdShearingStiffness;
+            solverIterations = recordParameters.pbdSolverIterations;
+        }
+        if (algorithmType == 2)
+        {
+            stretchingCompliance = recordParameters.xpbdStretchingCompliance;
+            shearingCompliance = recordParameters.xpbdShearingCompliance;
+            subSteps = recordParameters.xpbdSubsteps;
+        }
+
+        cppFunctions.cpp_init(vertices, triangles, numParticles, numTriangles, Time.fixedDeltaTime, algorithmType, scenario, solverIterations, staticParticleIndices, numStaticParticles, subSteps, sphereCentre, sphereRadius);
+
+        // Recorder Init
+
+        var mediaOutputFolder = Path.Combine(Application.dataPath, "..", "Simulation_Recordings");
+
+        var videoRecorder = ScriptableObject.CreateInstance<MovieRecorderSettings>();
+        videoRecorder.name = "Recorder";
+        videoRecorder.Enabled = true;
+
+        videoRecorder.EncoderSettings = new CoreEncoderSettings
+        {
+            EncodingQuality = CoreEncoderSettings.VideoEncodingQuality.Medium,
+            Codec = CoreEncoderSettings.OutputCodec.MP4
+        };
+
+        videoRecorder.CaptureAudio = false;
+
+        videoRecorder.ImageInputSettings = new GameViewInputSettings
+        {
+            OutputWidth = 1920,
+            OutputHeight = 1080
+        };
+
+        // Set output file path to filename that is generated for each recording
+        videoRecorder.OutputFile = Path.Combine(mediaOutputFolder, recordParameters.filename) + DefaultWildcard.Take;
+
+        // Setup Recording
+        controllerSettings.AddRecorderSettings(videoRecorder);
+
+        controllerSettings.SetRecordModeToManual();
+        controllerSettings.FrameRate = 60.0f;
+
+        RecorderOptions.VerboseMode = true;
+        m_RecorderController.PrepareRecording();
+        m_RecorderController.StartRecording();
+        // After starting the recording, set isRecording to true
+        isRecording = true;
     }
     
     // For the GUI buttons
-    void OnGUI()
+    public void OnButtonClick()
     {
-        
+        for (int i = 0; i < 3; i++)
+        {
+            var rp = new RecordParameters
+            {
+                algorithm = 2, // XPBD
+                scenario = 0, // HangingCloth
+                xpbdStretchingCompliance = 0.01f, 
+                xpbdShearingCompliance = 0.01f, 
+                xpbdSubsteps = 5 + (i*5), 
+                filename = $"{GenerateIdentifier()}"
+            };
+
+            // Add the recording settings to the pendingExperiments list
+            pendingExperiments.Add(rp);
+        }
     }
 
     void Start()
@@ -512,6 +531,11 @@ public class HangingCloth : MonoBehaviour
         mesh.RecalculateBounds();
         boxCollider.center = mesh.bounds.center;
         boxCollider.size = mesh.bounds.size;
+        // increment fixed update counter if we are recording
+        if(isRecording)
+        {
+            fixedUpdateCounter++;
+        }
     }
     
     void Update()
@@ -552,12 +576,20 @@ public class HangingCloth : MonoBehaviour
             selectedParticleIndex = -1;
         }
 
+        // Handle starting recordings
         if (!isRecording && pendingExperiments.Count > 0)
         {
             var iLastElement = pendingExperiments.Count - 1;
             var rp = pendingExperiments[iLastElement];
             pendingExperiments.RemoveAt(iLastElement);
             StartRecording(rp);
+        }
+        // Handle stopping them
+        if(isRecording && fixedUpdateCounter>=maxFixedUpdates)
+        {
+            m_RecorderController.StopRecording();
+            isRecording = false;
+            fixedUpdateCounter = 0;
         }
        
         
