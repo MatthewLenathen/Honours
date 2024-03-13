@@ -94,7 +94,10 @@ public class MeshCreator
         return mesh;
     
     }
+    
 }
+
+
 
 public class cppFunctions
 {
@@ -108,12 +111,16 @@ public class cppFunctions
 [System.Diagnostics.DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
 public class HangingCloth : MonoBehaviour
 {
+
+    Mesh originalMesh;
+    
     bool CSHARP_SIM = false;
 
     // Start is called before the first frame update
     List<Particle> particles = new List<Particle>();
 
     Mesh mesh;
+    MeshFilter meshFilter;
     Vector3[] vertices;
 
     BoxCollider boxCollider;
@@ -125,7 +132,7 @@ public class HangingCloth : MonoBehaviour
     int algorithmType = 2; // 0 for mass spring, 1 for position based, 2 for XPBD
     int scenario = 1; // 0 for hanging cloth, 1 for ..
     int solverIterations = 30; // Number of iterations for the pbd solver
-    int subSteps = 20; // Number of substeps for XPBD
+    int subSteps = 10; // Number of substeps for XPBD
 
     int[] triangles;
     int[] staticParticleIndices; 
@@ -160,7 +167,7 @@ public class HangingCloth : MonoBehaviour
     {
         if (scenario == 0) // Hanging cloth
         {
-            MeshFilter meshFilter = GetComponent<MeshFilter>();
+            meshFilter = GetComponent<MeshFilter>();
             meshFilter.sharedMesh = MeshCreator.generateVerticalMesh(gridSize, spacing);
 
             mesh = meshFilter.mesh;
@@ -190,8 +197,9 @@ public class HangingCloth : MonoBehaviour
             sphereRadius = 0.0f;
         } 
         else if (scenario == 1){ // Falling horizontal cloth
-            MeshFilter meshFilter = GetComponent<MeshFilter>();
-            meshFilter.sharedMesh = MeshCreator.generateHorizontalMesh(gridSize, spacing);
+            meshFilter = GetComponent<MeshFilter>();
+            originalMesh = MeshCreator.generateHorizontalMesh(gridSize, spacing);
+            meshFilter.sharedMesh = originalMesh;
 
             mesh = meshFilter.mesh;
             vertices = mesh.vertices;
@@ -386,6 +394,7 @@ public class HangingCloth : MonoBehaviour
             stopGrabbingIndex = selectedParticleIndex;
             selectedParticleIndex = -1;
         }
+       
         
     }
 
@@ -396,30 +405,7 @@ public class HangingCloth : MonoBehaviour
         return ToString();
     }
 
-    private void CalculateNormals(Mesh mesh)
-    {
-        Vector3[] normals = new Vector3[mesh.vertexCount];
-        for (int i = 0; i < mesh.triangles.Length; i += 3)
-        {
-            int index1 = mesh.triangles[i];
-            int index2 = mesh.triangles[i + 1];
-            int index3 = mesh.triangles[i + 2];
 
-            Vector3 side1 = mesh.vertices[index2] - mesh.vertices[index1];
-            Vector3 side2 = mesh.vertices[index3] - mesh.vertices[index1];
-            Vector3 normal = Vector3.Cross(side1, side2).normalized;
-
-            normals[index1] += normal;
-            normals[index2] += normal;
-            normals[index3] += normal;
-        }
-
-        for (int i = 0; i < normals.Length; i++)
-        {
-            normals[i].Normalize();
-        }
-
-        mesh.normals = normals;
-    }
+  
 }
 
