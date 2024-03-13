@@ -1,8 +1,12 @@
 using System.Collections;
+using System.IO;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using UnityEditor.Recorder;
+using UnityEditor.Recorder.Encoder;
+using UnityEditor.Recorder.Input;
 
 // Represents a particle in the cloth
 public class Particle
@@ -97,8 +101,6 @@ public class MeshCreator
     
 }
 
-
-
 public class cppFunctions
 {
     [DllImport("clothsim_dll", EntryPoint = "cpp_init")]
@@ -111,16 +113,13 @@ public class cppFunctions
 [System.Diagnostics.DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
 public class HangingCloth : MonoBehaviour
 {
-
-    Mesh originalMesh;
-    
     bool CSHARP_SIM = false;
 
     // Start is called before the first frame update
     List<Particle> particles = new List<Particle>();
 
-    Mesh mesh;
-    MeshFilter meshFilter;
+    public Mesh mesh;
+    public MeshFilter meshFilter;
     Vector3[] vertices;
 
     BoxCollider boxCollider;
@@ -135,12 +134,12 @@ public class HangingCloth : MonoBehaviour
     int subSteps = 10; // Number of substeps for XPBD
 
     int[] triangles;
-    int[] staticParticleIndices; 
+    int[] staticParticleIndices;
     int numStaticParticles;
 
     Vector3 gravity = new Vector3(0.0f, -9.8f, 0.0f);
     int springConstant = 1000;
-    Vector3 windForce = new Vector3(0.0f, 0.0f, 1.0f); 
+    Vector3 windForce = new Vector3(0.0f, 0.0f, 1.0f);
 
     bool isDragging = false;
     int selectedParticleIndex = -1;
@@ -163,8 +162,173 @@ public class HangingCloth : MonoBehaviour
     [Range(0f, 100f)]
     public float windStrength = 1.0f;
 
+    // Recorder Variables
+    bool isRecording = false;
+    private List<RecordParameters> pendingExperiments = new List<RecordParameters>();
+    RecorderController m_RecorderController;
+    RecorderControllerSettings controllerSettings;
+
+    class RecordParameters
+    {
+        public int algorithm; // 0 = M-S, 1 = PBD, 2 = XPBD
+        public int scenario; // 0 = hanging cloth, 1 = cloth fall on sphere
+
+        public float pbdStretchingStiffness;
+        public float pbdShearingStiffness;
+        public int pbdSolverIterations;
+
+        public float xpbdStretchingCompliance; 
+        public float xpbdShearingCompliance;
+        public int xpbdSubsteps;
+
+        public string filename; // e.g. $"xpbd_shearCompliance={xpbdShearCompliance}_bendCompliance={xpbdBendCompliance}_numSubsteps.mp4"
+        //public CameraSettings cameraSettings; // prefab for camera transform, or however you want to set it up
+        public int maxFixedUpdates = 500;
+    }
+
+    // Generate a string for recording filenames
+    public string GenerateIdentifier()
+    {
+        string identifier = "";
+
+        switch (algorithmType)
+        {
+            case 0:
+                identifier += "MS";
+                break;
+            case 1:
+                identifier += "PBD";
+                break;
+            case 2:
+                identifier += "XPBD";
+                break;
+        }
+
+        switch (scenario)
+        {
+            case 0:
+                identifier += "_HangingCloth";
+                break;
+            case 1:
+                identifier += "_ClothFallOnSphere";
+                break;
+        }
+
+        // can use string interpolation to add the variables in there
+        if (algorithmType == 1) // PBD
+        {
+            identifier += $"_StretchingStiffness_{stretchingStiffness}_ShearingStiffness_{shearingStiffness}_SolverIterations_{solverIterations}";
+        }
+        else if (algorithmType == 2) // XPBD
+        {
+            identifier += $"_StretchingCompliance_{stretchingCompliance}_ShearingCompliance_{shearingCompliance}_SubSteps_{subSteps}";
+        }
+
+        return identifier;
+    }
+
+    void StartRecording(RecordParameters recordParameters)
+    {
+        // First, get the type of cloth
+        if(recordParameters.scenario==0)
+        {
+            meshFilter = GetComponent<MeshFilter>();
+            meshFilter.sharedMesh = MeshCreator.generateVerticalMesh(gridSize, spacing);
+
+            mesh = meshFilter.mesh;
+            vertices = mesh.vertices;
+            triangles = mesh.triangles;
+
+            boxCollider = GetComponent<BoxCollider>();
+            boxCollider.center = mesh.bounds.center;
+            boxCollider.size = mesh.bounds.size;
+
+            numParticles = vertices.Length;
+            numTriangles = triangles.Length / 3;
+
+            // Assign static particles to be able to pass them to the C++ code
+            staticParticleIndices = new int[2]; // Change this number for more/less static particles
+
+            staticParticleIndices[0] = gridSize * (gridSize -1);
+            staticParticleIndices[1] = gridSize * gridSize -1;
+
+            numStaticParticles = staticParticleIndices.Length;
+
+            sphereCentre = new Vector3(999.0f, 999.0f, 999.0f);
+            sphereRadius = 0.0f;
+            
+            // Now setting the variables depending on the experiment
+            scenario = recordParameters.scenario;
+            algorithmType = recordParameters.algorithm;
+            if(algorithmType==1)
+            {
+                stretchingStiffness = recordParameters.pbdStretchingStiffness;
+                shearingStiffness = recordParameters.pbdShearingStiffness;
+                solverIterations = recordParameters.pbdSolverIterations;
+            }
+            if(algorithmType==2)
+            {
+                stretchingCompliance = recordParameters.xpbdStretchingCompliance;
+                shearingCompliance = recordParameters.xpbdShearingCompliance;
+                subSteps = recordParameters.xpbdSubsteps;
+            }
+
+            cppFunctions.cpp_init(vertices, triangles, numParticles,numTriangles, Time.fixedDeltaTime,algorithmType, scenario, solverIterations, staticParticleIndices, numStaticParticles, subSteps,sphereCentre, sphereRadius);
+
+            // Recorder Init
+
+            var mediaOutputFolder = Path.Combine(Application.dataPath, "..", "Simulation_Recordings");
+
+            var videoRecorder = ScriptableObject.CreateInstance<MovieRecorderSettings>();
+            videoRecorder.name = "Recorder";
+            videoRecorder.Enabled = true;
+
+            videoRecorder.EncoderSettings = new CoreEncoderSettings
+            {
+                EncodingQuality = CoreEncoderSettings.VideoEncodingQuality.Medium,
+                Codec = CoreEncoderSettings.OutputCodec.MP4
+            };
+
+            videoRecorder.CaptureAudio = false;
+
+            videoRecorder.ImageInputSettings = new GameViewInputSettings
+            {
+                OutputWidth = 1920,
+                OutputHeight = 1080
+            };
+
+            videoRecorder.OutputFile = Path.Combine(mediaOutputFolder, recordParameters.filename) + DefaultWildcard.Take;
+            // Setup Recording
+            controllerSettings.AddRecorderSettings(videoRecorder);
+
+            controllerSettings.SetRecordModeToManual();
+            controllerSettings.FrameRate = 60.0f;
+
+            RecorderOptions.VerboseMode = false;
+            m_RecorderController.PrepareRecording();
+            m_RecorderController.StartRecording();
+            // After starting the recording, set isRecording to true
+            isRecording = true;
+
+        }
+        else if(recordParameters.scenario==1)
+        {
+            //fall
+        }
+    }
+    
+    // For the GUI buttons
+    void OnGUI()
+    {
+        
+    }
+
     void Start()
     {
+        // Init Recorder settings
+        RecorderControllerSettings controllerSettings = ScriptableObject.CreateInstance<RecorderControllerSettings>();
+        m_RecorderController = new RecorderController(controllerSettings);
+
         if (scenario == 0) // Hanging cloth
         {
             meshFilter = GetComponent<MeshFilter>();
@@ -174,10 +338,6 @@ public class HangingCloth : MonoBehaviour
             vertices = mesh.vertices;
             triangles = mesh.triangles;
 
-            
-
-            //meshCollider = GetComponent<MeshCollider>();
-            //meshCollider.sharedMesh = mesh;
             boxCollider = GetComponent<BoxCollider>();
             boxCollider.center = mesh.bounds.center;
             boxCollider.size = mesh.bounds.size;
@@ -198,8 +358,7 @@ public class HangingCloth : MonoBehaviour
         } 
         else if (scenario == 1){ // Falling horizontal cloth
             meshFilter = GetComponent<MeshFilter>();
-            originalMesh = MeshCreator.generateHorizontalMesh(gridSize, spacing);
-            meshFilter.sharedMesh = originalMesh;
+            meshFilter.sharedMesh = MeshCreator.generateHorizontalMesh(gridSize, spacing);
 
             mesh = meshFilter.mesh;
             vertices = mesh.vertices;
@@ -214,10 +373,8 @@ public class HangingCloth : MonoBehaviour
 
             numStaticParticles = 0;
 
-            MeshFilter sphereMeshFilter = GameObject.Find("Sphere").GetComponent<MeshFilter>();
-
+            //MeshFilter sphereMeshFilter = GameObject.Find("Sphere").GetComponent<MeshFilter>();
             sphereCentre = GameObject.Find("Sphere").transform.position;
-            //Debug.Log(sphereCentre);
             sphereRadius = 2.5f;
         }
 
@@ -394,6 +551,14 @@ public class HangingCloth : MonoBehaviour
             stopGrabbingIndex = selectedParticleIndex;
             selectedParticleIndex = -1;
         }
+
+        if (!isRecording && pendingExperiments.Count > 0)
+        {
+            var iLastElement = pendingExperiments.Count - 1;
+            var rp = pendingExperiments[iLastElement];
+            pendingExperiments.RemoveAt(iLastElement);
+            StartRecording(rp);
+        }
        
         
     }
@@ -408,4 +573,6 @@ public class HangingCloth : MonoBehaviour
 
   
 }
+
+
 
