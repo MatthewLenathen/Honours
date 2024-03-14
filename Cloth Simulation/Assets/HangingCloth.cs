@@ -167,10 +167,11 @@ public class HangingCloth : MonoBehaviour
     private List<RecordParameters> pendingExperiments = new List<RecordParameters>();
     RecorderController m_RecorderController;
     RecorderControllerSettings controllerSettings;
+    MovieRecorderSettings videoRecorderSettings;
     int fixedUpdateCounter = 0;
-    int maxFixedUpdates = 500;
+    int maxFixedUpdates = 250;
 
-    class RecordParameters
+    public class RecordParameters
     {
         public int algorithm; // 0 = M-S, 1 = PBD, 2 = XPBD
         public int scenario; // 0 = hanging cloth, 1 = cloth fall on sphere
@@ -183,49 +184,53 @@ public class HangingCloth : MonoBehaviour
         public float xpbdShearingCompliance;
         public int xpbdSubsteps;
 
-        public string filename; // e.g. $"xpbd_shearCompliance={xpbdShearCompliance}_bendCompliance={xpbdBendCompliance}_numSubsteps.mp4"
+        public string filename; 
         //public CameraSettings cameraSettings; // prefab for camera transform, or however you want to set it up
     }
 
     // Generate a string for recording filenames
-    public string GenerateIdentifier()
+    public string GenerateFilename(RecordParameters rp)
     {
-        string identifier = "";
+        string filename = "";
 
-        switch (algorithmType)
+        switch (rp.algorithm)
         {
             case 0:
-                identifier += "MS";
+                filename += "MS";
                 break;
             case 1:
-                identifier += "PBD";
+                filename += "PBD";
                 break;
             case 2:
-                identifier += "XPBD";
+                filename += "XPBD";
                 break;
         }
 
-        switch (scenario)
+        switch (rp.scenario)
         {
             case 0:
-                identifier += "_HangingCloth";
+                filename += "_HangingCloth";
                 break;
             case 1:
-                identifier += "_ClothFallOnSphere";
+                filename += "_ClothFallOnSphere";
                 break;
         }
 
         // can use string interpolation to add the variables in there
-        if (algorithmType == 1) // PBD
+        if(rp.algorithm==0)
         {
-            identifier += $"_StretchingStiffness_{stretchingStiffness}_ShearingStiffness_{shearingStiffness}_SolverIterations_{solverIterations}";
+            filename += $"_SpringConstant_{springConstant}";
         }
-        else if (algorithmType == 2) // XPBD
+        else if (rp.algorithm == 1) // PBD
         {
-            identifier += $"_StretchingCompliance_{stretchingCompliance}_ShearingCompliance_{shearingCompliance}_SubSteps_{subSteps}";
+            filename += $"_StretchingStiffness_{rp.pbdStretchingStiffness}_ShearingStiffness_{rp.pbdShearingStiffness}_SolverIterations_{rp.pbdSolverIterations}";
+        }
+        else if (rp.algorithm == 2) // XPBD
+        {
+            filename += $"_StretchingCompliance_{rp.xpbdStretchingCompliance}_ShearingCompliance_{rp.xpbdShearingCompliance}_SubSteps_{rp.xpbdSubsteps}";
         }
 
-        return identifier;
+        return filename;
     }
 
     void StartRecording(RecordParameters recordParameters)
@@ -257,13 +262,28 @@ public class HangingCloth : MonoBehaviour
 
             sphereCentre = new Vector3(999.0f, 999.0f, 999.0f);
             sphereRadius = 0.0f;
-            
-           
-
         }
-        else if(recordParameters.scenario==1)
+        else if (recordParameters.scenario == 1)
         {
-            //fall
+            meshFilter = GetComponent<MeshFilter>();
+            meshFilter.sharedMesh = MeshCreator.generateHorizontalMesh(gridSize, spacing);
+
+            mesh = meshFilter.mesh;
+            vertices = mesh.vertices;
+            triangles = mesh.triangles;
+
+            boxCollider = GetComponent<BoxCollider>();
+            boxCollider.center = mesh.bounds.center;
+            boxCollider.size = mesh.bounds.size;
+
+            numParticles = vertices.Length;
+            numTriangles = triangles.Length / 3;
+
+            numStaticParticles = 0;
+
+            //MeshFilter sphereMeshFilter = GameObject.Find("Sphere").GetComponent<MeshFilter>();
+            sphereCentre = GameObject.Find("Sphere").transform.position;
+            sphereRadius = 2.5f;
         }
 
         // Now setting the variables depending on the experiment
@@ -285,37 +305,17 @@ public class HangingCloth : MonoBehaviour
         cppFunctions.cpp_init(vertices, triangles, numParticles, numTriangles, Time.fixedDeltaTime, algorithmType, scenario, solverIterations, staticParticleIndices, numStaticParticles, subSteps, sphereCentre, sphereRadius);
 
         // Recorder Init
-
         var mediaOutputFolder = Path.Combine(Application.dataPath, "..", "Simulation_Recordings");
 
-        var videoRecorder = ScriptableObject.CreateInstance<MovieRecorderSettings>();
-        videoRecorder.name = "Recorder";
-        videoRecorder.Enabled = true;
-
-        videoRecorder.EncoderSettings = new CoreEncoderSettings
-        {
-            EncodingQuality = CoreEncoderSettings.VideoEncodingQuality.Medium,
-            Codec = CoreEncoderSettings.OutputCodec.MP4
-        };
-
-        videoRecorder.CaptureAudio = false;
-
-        videoRecorder.ImageInputSettings = new GameViewInputSettings
-        {
-            OutputWidth = 1920,
-            OutputHeight = 1080
-        };
-
         // Set output file path to filename that is generated for each recording
-        videoRecorder.OutputFile = Path.Combine(mediaOutputFolder, recordParameters.filename) + DefaultWildcard.Take;
+        videoRecorderSettings.OutputFile = Path.Combine(mediaOutputFolder, recordParameters.filename);
 
         // Setup Recording
-        controllerSettings.AddRecorderSettings(videoRecorder);
-
+        controllerSettings.AddRecorderSettings(videoRecorderSettings);
         controllerSettings.SetRecordModeToManual();
         controllerSettings.FrameRate = 60.0f;
 
-        RecorderOptions.VerboseMode = true;
+        RecorderOptions.VerboseMode = false;
         m_RecorderController.PrepareRecording();
         m_RecorderController.StartRecording();
         // After starting the recording, set isRecording to true
@@ -325,28 +325,74 @@ public class HangingCloth : MonoBehaviour
     // For the GUI buttons
     public void OnButtonClick()
     {
+        /*
         for (int i = 0; i < 3; i++)
         {
             var rp = new RecordParameters
             {
-                algorithm = 2, // XPBD
+                algorithm = i, // XPBD
                 scenario = 0, // HangingCloth
-                xpbdStretchingCompliance = 0.01f, 
-                xpbdShearingCompliance = 0.01f, 
-                xpbdSubsteps = 5 + (i*5), 
-                filename = $"{GenerateIdentifier()}"
+                xpbdStretchingCompliance = 0.001f, 
+                xpbdShearingCompliance = 0.001f, 
+                xpbdSubsteps = 5,
+                pbdShearingStiffness = 0.5f,
+                pbdStretchingStiffness = 0.5f,
+                pbdSolverIterations = 20
             };
+            rp.filename = $"{GenerateFilename(rp)}";
 
             // Add the recording settings to the pendingExperiments list
             pendingExperiments.Add(rp);
         }
+        */
+        for (int i = 0; i < 3; i++)
+        {
+            int subs = 5 + i*10;
+            var rp = new RecordParameters
+            {
+                algorithm = 2, // XPBD
+                scenario = 1, // HangingCloth
+                xpbdStretchingCompliance = 0.001f, 
+                xpbdShearingCompliance = 0.001f, 
+                xpbdSubsteps = 5,
+                pbdShearingStiffness = 0.5f,
+                pbdStretchingStiffness = 0.5f,
+                pbdSolverIterations = 20
+            };
+            rp.xpbdSubsteps = subs;
+            rp.filename = $"{GenerateFilename(rp)}";
+
+            // Add the recording settings to the pendingExperiments list
+            pendingExperiments.Add(rp);
+        }
+        
+        //Debug.Log(GenerateFilename());
     }
 
     void Start()
     {
         // Init Recorder settings
-        RecorderControllerSettings controllerSettings = ScriptableObject.CreateInstance<RecorderControllerSettings>();
+        controllerSettings = ScriptableObject.CreateInstance<RecorderControllerSettings>();
         m_RecorderController = new RecorderController(controllerSettings);
+
+        videoRecorderSettings = ScriptableObject.CreateInstance<MovieRecorderSettings>();
+        videoRecorderSettings.name = "Recorder";
+        videoRecorderSettings.Enabled = true;
+
+        videoRecorderSettings.EncoderSettings = new CoreEncoderSettings
+        {
+            EncodingQuality = CoreEncoderSettings.VideoEncodingQuality.Medium,
+            Codec = CoreEncoderSettings.OutputCodec.MP4
+        };
+
+        videoRecorderSettings.CaptureAudio = false;
+
+        videoRecorderSettings.ImageInputSettings = new GameViewInputSettings
+        {
+            OutputWidth = 1920,
+            OutputHeight = 1080
+        };
+
 
         if (scenario == 0) // Hanging cloth
         {
