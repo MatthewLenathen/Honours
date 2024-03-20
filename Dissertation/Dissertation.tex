@@ -335,7 +335,57 @@ Despite all of these advancements, the field continues to face hurdles in develo
 In conclusion, the literature on cloth simulation reflects a massive field, that is marked by novel and innovate approaches dedicated to improving the realism of cloth simulation. The combination of traditional methods rooted in classical physics, and the interesting techniques in computer science such as neural networks and camera capture highlights the progress of the field to date, but also opens the door to future breakthroughs that will further improve and scale cloth simulations.
 \newpage
 
+\section{Methodology}
+This section will discuss how various methods of constructing a cloth simulation were achieved inside a physics framework. It will go into depth on the design choices such as which framework to use, programming language and experiment setup. It will also cover the different algorithms used and how they compare with one another. Finally, it will discuss the additional features implemented and how they were useful in evaluating the simulation.
 
+\subsection{Environment and Framework}
+- talk about why Unity, c\# vs c++, use of export dll to run sim in c++ and hand variables back to c\#
+- can talk about useful aspects to unity like boxcollider, shaders etc
+- can explain fixedupdate vs update
+- can mention recalculateNormals unity func? and how a more specialised one would be better but more expensive? \\
+
+Before starting, a choice of which framework to implement the cloth simulation in was required. In this project, a simulation framework is just a sandbox containing the basic necessities for calculating, updating and rendering meshes that are composed of vertices and triangles. In the field of computer graphics/games development, there are a vast number of engines and physics frameworks to choose from. Some of these include: Unity, Unreal Engine, Godot, Nvidia PhysX etc. Research was done into various frameworks but eventually Unity was chosen for this project. \\
+
+Unity is typically used for game development but it is also a very useful tool for building interactive simulations. 
+
+\subsection{Mesh creation}
+- can discuss how i created cloth mesh, explain with pbd, each vertex is a particle that interacts with others etc
+- explain particle class, mass, isstatic 
+
+\subsection{Start/initialisation}
+- could be a section discussing what goes on in the Start() function, like switching based off scenarios, setting up variables and calling the dll init
+- also discuss the c++ init, differences between etc
+
+\subsection{Mass-Spring}
+- quick section on the implementation of mass spring system, discuss pros and cons (it explodes at high spring constants)
+- symplectic euler integration
+
+\subsection{PBD}
+- Quite a long section on PBD, go through entire algo and explain each part, any problems that arose, constraints etc
+- constraint generation was a big part, passed in triangle data and created them from that
+- constraint application
+- solver iterations etc
+- stiffness
+- damping
+\subsection{XPBD}
+- another decently big section on PBD to XPBD, substeps, stretching compliance etc
+
+\subsection{Hanging cloth setup}
+- discuss the scenario of the hanging cloth, vertical mesh creation, wind etc
+\subsection{Cloth on Sphere setup}
+- section on the scenario where a horizontal cloth falls on a sphere
+- collision discussion
+- mention self collision, didnt get it done but can put it in further work
+
+\subsection{User Cloth interaction}
+- discuss feature i added where the user can click and drag the cloth around, sets a particle to stationary etc
+- raycast
+
+\subsection{Recorder and Screenshotter}
+- section on how i implemented a recorder using unity recorder plugin, how it is useful for experiments, data gathering and for evidence
+
+\subsection{Experiments}
+- maybe a section on experiment setup, parameters?, mostly saved for results section
 
 \section{Rest of Diss}
 

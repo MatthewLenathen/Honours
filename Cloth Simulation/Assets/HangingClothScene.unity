@@ -319,10 +319,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mesh: {fileID: 0}
   meshFilter: {fileID: 0}
-  stretchingStiffness: 1
-  shearingStiffness: 1
-  stretchingCompliance: 0.000352
-  shearingCompliance: 0.000335
+  stretchingStiffness: 0.478
+  shearingStiffness: 0.478
+  stretchingCompliance: 0.000491
+  shearingCompliance: 0.001
   windStrength: 0.4
 --- !u!4 &860173042
 Transform:
@@ -1306,7 +1306,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1975211343}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 860173041}
+        m_TargetAssemblyTypeName: HangingCloth, Assembly-CSharp
+        m_MethodName: OnButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1975211343
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  25 JAN 2024 09:44
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  20 MAR 2024 20:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -277,28 +277,28 @@ n-Dec.tex) [1
 ] (./Dissertation-DP.tex) [2
 
 ] [3]
-(./Dissertation.toc)
+(./Dissertation.toc [4
+
+])
 \tf@toc=\write3
 \openout3 = `Dissertation.toc'.
 
- [4
-
-] (./Dissertation.lot)
+ [5] (./Dissertation.lot)
 \tf@lot=\write4
 \openout4 = `Dissertation.lot'.
 
- [5
+ [6
 
 ] (./Dissertation.lof)
 \tf@lof=\write5
 \openout5 = `Dissertation.lof'.
 
- [6
 
-]
 [7
 
 ] [8
+
+] [9
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 83--84
@@ -325,7 +325,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 95--96
 
  []
 
-[9
+[10
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 97--98
@@ -347,7 +347,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 108--110
 
  []
 
-[10]
+[11]
 Underfull \hbox (badness 10000) in paragraph at lines 111--113
 
  []
@@ -367,12 +367,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 123--126
 
  []
 
-[11]
+[12]
 Underfull \hbox (badness 10000) in paragraph at lines 131--132
 
  []
 
-[12]
+[13]
 Underfull \hbox (badness 10000) in paragraph at lines 133--135
 
  []
@@ -382,7 +382,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 140--141
 
  []
 
-[13]
+[14]
 Underfull \hbox (badness 10000) in paragraph at lines 143--144
 
  []
@@ -402,7 +402,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 153--154
 
  []
 
-[14]
+[15]
 Underfull \hbox (badness 10000) in paragraph at lines 155--156
 
  []
@@ -417,7 +417,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 159--161
 
  []
 
-[15]
+[16]
 Underfull \hbox (badness 10000) in paragraph at lines 162--163
 
  []
@@ -427,13 +427,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 166--167
 
  []
 
-[16]
+[17]
 Underfull \hbox (badness 10000) in paragraph at lines 178--180
 
  []
 
-[17]
-<figures/DNN.png, id=67, 943.3644pt x 273.1806pt>
+[18]
+<figures/DNN.png, id=71, 943.3644pt x 273.1806pt>
 File: figures/DNN.png Graphic file (type png)
 <use figures/DNN.png>
 Package pdftex.def Info: figures/DNN.png  used on input line 186.
@@ -443,7 +443,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 194--195
 
  []
 
-[18 <./figures/DNN.png>]
+[19 <./figures/DNN.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 196--198
 
  []
@@ -453,7 +453,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 199--200
 
  []
 
-<figures/shapeMatching.jpg, id=74, 379.25761pt x 117.03903pt>
+<figures/shapeMatching.jpg, id=77, 379.25761pt x 117.03903pt>
 File: figures/shapeMatching.jpg Graphic file (type jpg)
 <use figures/shapeMatching.jpg>
 Package pdftex.def Info: figures/shapeMatching.jpg  used on input line 203.
@@ -466,7 +466,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 206--207
 
  []
 
-[19]
+[20]
 Overfull \hbox (2.50703pt too wide) in paragraph at lines 208--210
 []\OT1/cmr/m/n/12 In terms of per-for-mance, they sim-u-lated meshes be-tween 1
 0000 and 100000
@@ -483,7 +483,7 @@ Overfull \hbox (5.31395pt too wide) in paragraph at lines 211--213
 g model []Vassilev,
  []
 
-[20 <./figures/shapeMatching.jpg>]
+[21 <./figures/shapeMatching.jpg>]
 Underfull \hbox (badness 10000) in paragraph at lines 217--218
 
  []
@@ -493,7 +493,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 219--220
 
  []
 
-[21] [22]
+[22] [23]
 Underfull \hbox (badness 10000) in paragraph at lines 251--254
 
  []
@@ -508,7 +508,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 263--266
 
  []
 
-[23]
+[24]
 Underfull \hbox (badness 10000) in paragraph at lines 267--268
 
  []
@@ -528,7 +528,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 279--281
 
  []
 
-[24]
+[25]
 Underfull \hbox (badness 10000) in paragraph at lines 282--284
 
  []
@@ -538,7 +538,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 291--293
 
  []
 
-<figures/PDFlag.png, id=96, 428.35031pt x 300.3722pt>
+<figures/PDFlag.png, id=99, 428.35031pt x 300.3722pt>
 File: figures/PDFlag.png Graphic file (type png)
 <use figures/PDFlag.png>
 Package pdftex.def Info: figures/PDFlag.png  used on input line 297.
@@ -548,12 +548,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 301--305
 
  []
 
-[25]
+[26]
 Underfull \hbox (badness 10000) in paragraph at lines 306--308
 
  []
 
-[26 <./figures/PDflag.png>]
+[27 <./figures/PDflag.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 312--314
 
  []
@@ -573,7 +573,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 323--325
 
  []
 
-[27]
+[28]
 Underfull \hbox (badness 10000) in paragraph at lines 326--328
 
  []
@@ -588,11 +588,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 332--334
 
  []
 
-[28] [29
+[29]
+Underfull \hbox (badness 10000) in paragraph at lines 342--346
 
-{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [30
+ []
 
-] (./Dissertation.bbl [31
+
+Underfull \hbox (badness 10000) in paragraph at lines 347--348
+
+ []
+
+[30
+
+] [31] [32
+
+{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [33
+
+] (./Dissertation.bbl [34
 
 ]
 Underfull \hbox (badness 1859) in paragraph at lines 16--36
@@ -695,7 +707,7 @@ Underfull \hbox (badness 3199) in paragraph at lines 241--260
 4017   \OT1/cmr/m/n/12 doi:
  []
 
-[32
+[35
 
 ]
 Underfull \hbox (badness 3724) in paragraph at lines 448--465
@@ -730,7 +742,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 610--629
  \OT1/cmr/m/n/12 doi:
  []
 
-[33]
+[36]
 Underfull \hbox (badness 5847) in paragraph at lines 675--696
 []\OT1/cmr/m/n/12 Oh, Y. J., Lee, T. M., & Lee, I.-K.  (2018).  Hi-er-ar-chi-
  []
@@ -765,11 +777,11 @@ Underfull \hbox (badness 2326) in paragraph at lines 831--851
 -
  []
 
-[34]) [35] [36] [37
+[37]) [38] [39] [40
 
-] [38
+] [41
 
-] [39
+] [42
 
 ] (./Dissertation.aux)
  ***********
@@ -796,10 +808,10 @@ fb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/te
 xlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/202
 3/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-d
 ist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on Dissertation.pdf (40 pages, 612973 bytes).
+Output written on Dissertation.pdf (43 pages, 617772 bytes).
 PDF statistics:
- 202 PDF objects out of 1000 (max. 8388607)
- 129 compressed objects within 2 object streams
+ 212 PDF objects out of 1000 (max. 8388607)
+ 136 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

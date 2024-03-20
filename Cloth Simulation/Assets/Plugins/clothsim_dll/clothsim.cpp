@@ -461,7 +461,6 @@ void ClothSim::GenerateConstraints(const vector<int>& triangles, int num_triangl
 
 void ClothSim::CollisionWithSphere()
 {
-
 	for (int i = 0; i < _num_particles; i++)
 	{
 		// Calc the vector from particle to sphere centre, if its shorter than sphere radius then a collision has occured
@@ -474,7 +473,6 @@ void ClothSim::CollisionWithSphere()
 			depth += 0.0001f;
 			glm::vec3 delta = glm::normalize(particle_to_centre) * depth;
 			_particles[i].predicted_position += delta;
-
 		}
 	}
 }
