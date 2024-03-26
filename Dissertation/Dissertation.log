@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  25 MAR 2024 22:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  26 MAR 2024 22:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -720,16 +720,50 @@ Underfull \hbox (badness 10000) in paragraph at lines 395--400
 
  []
 
-[32]
-Underfull \hbox (badness 10000) in paragraph at lines 411--417
+
+LaTeX Warning: Reference `PBD' on page 32 undefined on input line 401.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 404--405
 
  []
 
-[33] [34] [35
+[32]
 
-{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [36
+LaTeX Font Warning: Font shape `TS1/cmr/m/n' in size <8.5> not available
+(Font)              size <8> substituted on input line 406.
 
-] (./Dissertation.bbl [37
+
+Underfull \hbox (badness 10000) in paragraph at lines 406--408
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 409--410
+
+ []
+
+[33{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+<figures/clothmesh.png, id=128, 569.12625pt x 529.98pt>
+File: figures/clothmesh.png Graphic file (type png)
+<use figures/clothmesh.png>
+Package pdftex.def Info: figures/clothmesh.png  used on input line 416.
+(pdftex.def)             Requested size: 284.56242pt x 264.98933pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 420--421
+
+ []
+
+[34 <./figures/clothmesh.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 431--437
+
+ []
+
+[35] [36
+
+] [37
+
+] (./Dissertation.bbl [38
 
 ]
 Underfull \hbox (badness 1859) in paragraph at lines 16--36
@@ -832,7 +866,7 @@ Underfull \hbox (badness 3199) in paragraph at lines 241--260
 4017   \OT1/cmr/m/n/12 doi:
  []
 
-[38
+[39
 
 ]
 Underfull \hbox (badness 3724) in paragraph at lines 448--465
@@ -867,7 +901,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 610--629
  \OT1/cmr/m/n/12 doi:
  []
 
-[39]
+[40]
 Underfull \hbox (badness 5847) in paragraph at lines 675--696
 []\OT1/cmr/m/n/12 Oh, Y. J., Lee, T. M., & Lee, I.-K.  (2018).  Hi-er-ar-chi-
  []
@@ -902,11 +936,11 @@ Underfull \hbox (badness 2326) in paragraph at lines 831--851
 -
  []
 
-[40]) [41] [42] [43
-
-] [44
+[41]) [42] [43] [44
 
 ] [45
+
+] [46
 
 ] (./Dissertation.aux)
  ***********
@@ -918,13 +952,16 @@ L3 programming layer <2023-10-10>
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.75pt have occurred.
 
+
+LaTeX Warning: There were undefined references.
+
  ) 
 Here is how much of TeX's memory you used:
- 7027 strings out of 474503
- 111384 string characters out of 5756704
+ 7051 strings out of 474503
+ 111760 string characters out of 5756704
  2039043 words of memory out of 5000000
- 28924 multiletter control sequences out of 15000+600000
- 564737 words of font info for 58 fonts, out of 8000000 for 9000
+ 28947 multiletter control sequences out of 15000+600000
+ 565074 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  69i,11n,79p,1557b,1438s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/tex
@@ -938,11 +975,12 @@ fb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/te
 xlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2023
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2023/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-dist/fonts/
-type1/public/cm-super/sfrm1200.pfb>
-Output written on Dissertation.pdf (46 pages, 643540 bytes).
+type1/public/cm-super/sfrm0800.pfb><c:/texlive/2023/texmf-dist/fonts/type1/publ
+ic/cm-super/sfrm1200.pfb>
+Output written on Dissertation.pdf (47 pages, 721828 bytes).
 PDF statistics:
- 226 PDF objects out of 1000 (max. 8388607)
- 145 compressed objects within 2 object streams
+ 236 PDF objects out of 1000 (max. 8388607)
+ 150 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -22,23 +22,23 @@
 \contentsline {subsubsection}{\numberline {3.1.1}Language Choice}{30}{}%
 \contentsline {subsection}{\numberline {3.2}Initialisation}{32}{}%
 \contentsline {subsubsection}{\numberline {3.2.1}Mesh Creation}{32}{}%
-\contentsline {subsection}{\numberline {3.3}Mass-Spring}{33}{}%
-\contentsline {subsection}{\numberline {3.4}PBD}{33}{}%
-\contentsline {subsection}{\numberline {3.5}XPBD}{33}{}%
-\contentsline {subsection}{\numberline {3.6}Scenarios}{33}{}%
-\contentsline {subsubsection}{\numberline {3.6.1}Hanging cloth setup}{33}{}%
-\contentsline {subsubsection}{\numberline {3.6.2}Cloth on Sphere setup}{33}{}%
-\contentsline {subsection}{\numberline {3.7}User Cloth interaction}{34}{}%
-\contentsline {subsection}{\numberline {3.8}Recorder and Screenshotter}{34}{}%
-\contentsline {subsection}{\numberline {3.9}Experiments}{34}{}%
-\contentsline {section}{\numberline {4}Rest of Diss}{35}{}%
-\contentsline {subsubsection}{\numberline {4.0.1}Overview Of Project Content and Milestones}{35}{}%
-\contentsline {section}{\numberline {5}Chapter 2}{36}{}%
-\contentsline {section}{\numberline {6}Additional Information / Knowledge Required}{37}{}%
-\contentsline {section}{References}{38}{}%
-\contentsline {section}{Appendices}{42}{}%
-\contentsline {section}{\numberline {A}Project Overview}{42}{}%
-\contentsline {subsection}{\numberline {A.A}Example sub appendices}{42}{}%
-\contentsline {section}{\numberline {B}Second Formal Review Output}{43}{}%
-\contentsline {section}{\numberline {C}Diary Sheets (or other project management evidence)}{44}{}%
-\contentsline {section}{\numberline {D}Appendix 4 and following}{45}{}%
+\contentsline {subsubsection}{\numberline {3.2.2}Particle Class}{34}{}%
+\contentsline {subsection}{\numberline {3.3}Mass-Spring}{35}{}%
+\contentsline {subsection}{\numberline {3.4}PBD}{35}{}%
+\contentsline {subsection}{\numberline {3.5}XPBD}{35}{}%
+\contentsline {subsection}{\numberline {3.6}User Cloth interaction}{35}{}%
+\contentsline {section}{\numberline {4}Results}{36}{}%
+\contentsline {subsection}{\numberline {4.1}Scenarios}{36}{}%
+\contentsline {subsubsection}{\numberline {4.1.1}Hanging cloth setup}{36}{}%
+\contentsline {subsubsection}{\numberline {4.1.2}Cloth on Sphere setup}{36}{}%
+\contentsline {subsection}{\numberline {4.2}Recorder and Screenshotter}{36}{}%
+\contentsline {subsubsection}{\numberline {4.2.1}Overview Of Project Content and Milestones}{36}{}%
+\contentsline {section}{\numberline {5}Chapter 2}{37}{}%
+\contentsline {section}{\numberline {6}Additional Information / Knowledge Required}{38}{}%
+\contentsline {section}{References}{39}{}%
+\contentsline {section}{Appendices}{43}{}%
+\contentsline {section}{\numberline {A}Project Overview}{43}{}%
+\contentsline {subsection}{\numberline {A.A}Example sub appendices}{43}{}%
+\contentsline {section}{\numberline {B}Second Formal Review Output}{44}{}%
+\contentsline {section}{\numberline {C}Diary Sheets (or other project management evidence)}{45}{}%
+\contentsline {section}{\numberline {D}Appendix 4 and following}{46}{}%

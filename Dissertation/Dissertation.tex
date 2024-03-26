@@ -401,12 +401,32 @@ For this project, only the simple mass spring system was implemented in C\#, whi
 Initialisation is an important part of the simulation, as it effectively determines the starting state of all objects within it. To start, a cloth mesh is needed. This is typically a flat vertical mesh, meaning it has no depth in the z axis. Initially, a default Unity preset mesh was used for testing. A problem quickly arose where the orientation of the mesh was wrong. This preset mesh was intended to be used as a ground or horizontal surface. When the mesh was rotated horizontally, the y axis became aligned horizontally instead of vertically, which disrupted the physics calculations. Consequently, it was decided to create the mesh from scratch to ensure proper alignment.
 
 \subsubsection{Mesh Creation}
-In Unity, an empty mesh object can be created then filled by the developer to suit their purposes. Meshes require two properties to be set, vertices and triangles. Vertices are just individual points in space, represented by a 3D coordinate. They are used to define the meshes overall structure. Triangles are geometric primitives used to represent the surface of the mesh, and are created by connecting three vertices in a sequence. Another important list is the triangle indices. these indices specify which vertices are used to create a triangle. This is necessary for creating constraints and will be discussed in section XD.
+In Unity, an empty mesh object can be created then filled by the developer to suit their purposes. Meshes require two properties to be set, vertices and triangles. Vertices are just individual points in space, represented by a 3D coordinate. They are used to define the meshes overall structure. Triangles are geometric primitives used to represent the surface of the mesh, and are created by connecting three vertices in a sequence. Another important list is the triangle indices. these indices specify which vertices are used to create a triangle. This is necessary for creating constraints and will be discussed in section XD. \\
 
+For this project, a mesh creation class was created and holds two functions. GenerateVerticalMesh and GenerateHorizontalMesh. Two parameters are passed to these functions, Grid size and spacing. Grid size represents how many vertices in the x and y axis, e.g. a 20x20 mesh, and spacing refers to the distance between each vertex. For most tests, a 20x20 grid is used with a spacing of 0.5. Creating the vertices is simple, a nested for loop is used and each vertex is set within. The only line within the nested loops is:\\ \lstinline[language=C++]!vertices[i] = new Vector3(x * spacing, y * spacing, 0);!
+In the code block, the outer loop iterates over the y-axis coordinates while the inner loop iterates over the x-axis, both from 0 to gridSize. Within the loop this line is executed to generate the coordinate at that index. The x and y coordinates of each vertex are set depending on the current position within the grid, multiplied by spacing to either increase or decrease the space between the vertices.\\
+
+Generating triangles is a bit more tricky. For this project, a gridSize by gridSize mesh will generate 2166 triangle indices, with 722 triangles. The way these triangles are generated is another nested for loop, working on 6 vertices at once and creating two triangles from them. It then moves onto the next 6 vertices. The data stored in the triangles array are the indices of the triangles. \\
+
+Finally, the vertices and triangle arrays are assigned to the mesh object. Additionally, the RecalculateNormals function is called to calculate the normals of this mesh. Normals are necessary for lighting calculations, and they will be recalculated every fixedUpdate. A wireframe of this mesh can be seen in Figure \ref{fig:mesh}.
+\newpage
+\begin{figure}
+	\centering
+	\caption{A wireframe of a vertical cloth mesh}
+	\includegraphics[scale=0.5]{clothmesh.png}
+	\label{fig:mesh}
+\end{figure}
+\subsubsection{Particle Class}
+One detail that is common to all techniques used in this project is the idea of each vertex being a "particle". As mentioned in Section \ref{Physics}, vertices can be represented as particles that have various properties. Here, the particle is represented by a class that has 4 properties: position, velocity, inverse mass and isStatic. Whil the first three are fairly self explanatory, the last "isStatic" property determines whether that particle is fixed in space, and is a boolean. This isStatic variable is very useful for cloth as it lets you pin certain particles, e.g. a hanging curtain or attachment points of a cape to the back of a character model. \\
+
+One important part of initialisation is looping through all the vertices of the mesh and adding them to a particle list. In this loop, particles are assigned the position of the vertex, an initial velocity of 0, an inverse mass of 1.0 and isStatic set to false. Directly after this loop, the static particles are set depending on the configuration. The hanging cloth scenario has two static particles holding the top corners up. All physics calculations loop through the particle list, as it allows the important properties to be set, such as velocity and position.
+\\
+One final property is required when using position based dynamics, and that is predicted position. Since PBD iteratively works on the predicted position during the time-step depending on external forces, an additional property is needed to store this. At the end of the time-step, the position is then updated to match the calculated predicted position.
 \subsection{Mass-Spring}
 - quick section on the implementation of mass spring system, discuss pros and cons (it explodes at high spring constants)\\
 - symplectic euler integration
 
+Now that the mesh is successfully created, the first cloth simulation method that was implemented was the mass-spring system. As discussed in Section \ref{Mass-Spring}, the simplest mass spring system calculates spring forces using Hooke's Law between neighbouring particles to then apply forces to these particles.
 \subsection{PBD}
 - Quite a long section on PBD, go through entire algo and explain each part, any problems that arose, constraints etc\\
 - constraint generation was a big part, passed in triangle data and created them from that\\
@@ -417,6 +437,13 @@ In Unity, an empty mesh object can be created then filled by the developer to su
 \subsection{XPBD}
 - another decently big section on PBD to XPBD, substeps, stretching compliance etc
 
+\subsection{User Cloth interaction}
+- discuss feature i added where the user can click and drag the cloth around, sets a particle to stationary etc\\
+- raycast
+
+
+\section{Results}
+
 \subsection{Scenarios}
 ff
 \subsubsection{Hanging cloth setup}
@@ -426,17 +453,9 @@ ff
 - collision discussion\\
 - mention self collision, didnt get it done but can put it in further work
 
-\subsection{User Cloth interaction}
-- discuss feature i added where the user can click and drag the cloth around, sets a particle to stationary etc\\
-- raycast
-
 \subsection{Recorder and Screenshotter}
 - section on how i implemented a recorder using unity recorder plugin, how it is useful for experiments, data gathering and for evidence
 
-\subsection{Experiments}
-- maybe a section on experiment setup, parameters?, mostly saved for results section
-
-\section{Rest of Diss}
 
 \subsubsection{Overview Of Project Content and Milestones}
 

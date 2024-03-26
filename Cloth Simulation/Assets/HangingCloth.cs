@@ -416,6 +416,11 @@ public class HangingCloth : MonoBehaviour
             staticParticleIndices[0] = gridSize * (gridSize -1);
             staticParticleIndices[1] = gridSize * gridSize -1;
 
+            // for(int i = 0;i<20;i++)
+            // {
+            //     staticParticleIndices[i] = gridSize * (gridSize -1) + i;
+            // }
+
             numStaticParticles = staticParticleIndices.Length;
 
             sphereCentre = new Vector3(999.0f, 999.0f, 999.0f);
