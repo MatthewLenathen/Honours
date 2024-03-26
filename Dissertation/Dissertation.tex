@@ -27,6 +27,9 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \algdef{SE}[LOOP]{Loop}{EndLoop}[1]{\algorithmicloop\ #1}{\algorithmicend\ \algorithmicloop}%
+\usepackage{listings}
+\usepackage{color}
+
 
 
 %header and footer settings
@@ -40,8 +43,25 @@
 \fancyfoot[L]{}
 \fancyfoot[C]{\thepage}
 
+\lstset{
+	escapeinside={/*@}{@*/}, language=C++,
+	basicstyle=\fontsize{8.5}{12}\selectfont,
+	numbers=left,numbersep=2pt,xleftmargin=2pt,frame=tb,
+	columns=fullflexible,showstringspaces=false,tabsize=4,
+	keepspaces=true,showtabs=false,showspaces=false,
+	backgroundcolor=\color{white}, morekeywords={inline,public,
+		class,private,protected,struct},captionpos=t,lineskip=-0.4em,
+	aboveskip=10pt, extendedchars=true, breaklines=true,
+	prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+	keywordstyle=\color[rgb]{0,0,1},
+	commentstyle=\color[rgb]{0.133,0.545,0.133},
+	stringstyle=\color[rgb]{0.627,0.126,0.941}
+}
 %this starts the document
 \begin{document}
+	
+
+	
 
 %you can import other documents into your main one, these layout the Title and Declarations on its own page.
 %you might need to change these to \ if your on Microsoft Windows.
@@ -339,46 +359,75 @@ In conclusion, the literature on cloth simulation reflects a massive field, that
 This section will discuss how various methods of constructing a cloth simulation were achieved inside a physics framework. It will go into depth on the design choices such as which framework to use, programming language and experiment setup. It will also cover the different algorithms used and how they compare with one another. Finally, it will discuss the additional features implemented and how they were useful in evaluating the simulation.
 
 \subsection{Environment and Framework}
-- talk about why Unity, c\# vs c++, use of export dll to run sim in c++ and hand variables back to c\#
-- can talk about useful aspects to unity like boxcollider, shaders etc
-- can explain fixedupdate vs update
-- can mention recalculateNormals unity func? and how a more specialised one would be better but more expensive? \\
+- talk about why Unity, c\# vs c++, use of export dll to run sim in c++ and hand variables back to c\#\\
+- can talk about useful aspects to unity like boxcollider, shaders etc\\
+- can explain fixedupdate vs update\\
+- can mention recalculateNormals unity func and how a more specialised one would be better but more expensive? \\
 
 Before starting, a choice of which framework to implement the cloth simulation in was required. In this project, a simulation framework is just a sandbox containing the basic necessities for calculating, updating and rendering meshes that are composed of vertices and triangles. In the field of computer graphics/games development, there are a vast number of engines and physics frameworks to choose from. Some of these include: Unity, Unreal Engine, Godot, Nvidia PhysX etc. Research was done into various frameworks but eventually Unity was chosen for this project. \\
 
-Unity is typically used for game development but it is also a very useful tool for building interactive simulations. 
+Unity is typically used for game development but it is also a very useful tool for building interactive simulations. It has powerful graphics capabilities for shaders and lighting which will highlight the dynamics in cloth well. It also has a massive ecosystem of resources and community support so that any problems or bugs would already be discussed online. Unity also has features that handle collisions, which was useful for implementing a level of interaction where the user can click and drag the cloth around.
 
-\subsection{Mesh creation}
+\subsubsection{Language Choice}
+Unity's base scripting language is C\#, a high-level object-oriented language. C\# is a managed language, meaning it will only execute while being managed by a common language runtime environment. This provides features such as memory management, garbage collection and security tools. C\# is a common language used in games development but for physics simulations, C++ pulls ahead due to its high performance. C++ compiles straight to machine code which interacts much faster with the hardware it is running on. \\
+
+A base script contains two functions, Start() and Update(). Start is called once at the beginning of the simulation and Update is called every frame. Typically simulations set up all the necessary components such as meshes, colliders and variables in the Start function, and handles the main simulation loop in Update. An important detail about using Unity for physics simulations is the use of a function called FixedUpdate. Compared to the standard Update, FixedUpdate runs at a fixed time interval with a default value of 0.02 seconds, or 50 frames per second. FixedUpdate is necessary for physics simulations due to the amount of complex calculations within them. In this project, Update was only used to handle user interaction with the mouse, and to handle recordings. \\
+
+Typically, Unity scripts will be solely written in C\#, but through the use of dynamic link libraries (DLLs), it is possible to write an external c++ program that is used as a plugin in Unity.
+
+\begin{lstlisting}[caption={Interfacing C++ functions with Unity},label={lst:cppinterface}]
+public class cppFunctions
+{
+	[DllImport("clothsim_dll", EntryPoint = "cpp_init")]
+	public static extern void cpp_init([In] Vector3[] vertices,[In] int[] triangles, int numParticles, int numTriangles, float fixedDeltaTime, int algorithmType, int scenario, int solverIterations, [In] int[] staticParticleIndices, int numStaticParticles, int subSteps, Vector3 sphereCenter, float sphereRadius);
+	
+	[DllImport("clothsim_dll", EntryPoint = "cpp_update")]
+	public static extern void cpp_update([Out] Vector3[] vertices,[In] float windStrength, [In] float stretchingStiffness, [In] float shearingStiffness, [In] int selectedParticleIndex, [In] Vector3 mouseWorldPos, [In] int stopGrabbingIndex);
+}\end{lstlisting}
+Using this class within C\#, allows the user to pass in variables from C\# to C++. This allows for the sections that require excellent performance, the PBD/XPBD simulation loop, to be executed in C++. The simulation loop requires good performance because cloth dynamics require complex calculations on a lot of particles at every frame.\\ 
+
+Variables passed this way can be specified with [In] or [Out] which help specify the direction of data flow. [In] is used for data that doesn't need to be passed back from C++ to C\#, such as the initialisation variables. [Out] is used when data needs to be changed inside C++ and returned to C\#, such as the vertices of the mesh. The vertices need to be passed back to C\#, as Unity needs the new vertices every frame to properly render the cloth while it changes shape.\\ 
+
+The general way this works is that the C++ dll has a cloth simulation object that is created the first time that instance of Unity runs it. It then maintains this object while Unity is open. To get the simulation ready for the next time it is run, all the class variables are reassigned and all the class vectors are cleared. \\
+
+For this project, only the simple mass spring system was implemented in C\#, while all other methods were implemented in the faster C++ code. A boolean flag was used for this, if it was set to C\#, it would execute code in the same script, while if it was set to C++, it would call the cpp\_init function as seen in Listing \ref{lst:cppinterface}.
+\subsection{Initialisation}
 - can discuss how i created cloth mesh, explain with pbd, each vertex is a particle that interacts with others etc
 - explain particle class, mass, isstatic 
-
-\subsection{Start/initialisation}
-- could be a section discussing what goes on in the Start() function, like switching based off scenarios, setting up variables and calling the dll init
+- could be a section discussing what goes on in the Start() function, like switching based off scenarios, setting up variables and calling the dll init\\
 - also discuss the c++ init, differences between etc
+\\
+
+Initialisation is an important part of the simulation, as it effectively determines the starting state of all objects within it. To start, a cloth mesh is needed. This is typically a flat vertical mesh, meaning it has no depth in the z axis. Initially, a default Unity preset mesh was used for testing. A problem quickly arose where the orientation of the mesh was wrong. This preset mesh was intended to be used as a ground or horizontal surface. When the mesh was rotated horizontally, the y axis became aligned horizontally instead of vertically, which disrupted the physics calculations. Consequently, it was decided to create the mesh from scratch to ensure proper alignment.
+
+\subsubsection{Mesh Creation}
+In Unity, an empty mesh object can be created then filled by the developer to suit their purposes. Meshes require two properties to be set, vertices and triangles. Vertices are just individual points in space, represented by a 3D coordinate. They are used to define the meshes overall structure. Triangles are geometric primitives used to represent the surface of the mesh, and are created by connecting three vertices in a sequence. Another important list is the triangle indices. these indices specify which vertices are used to create a triangle. This is necessary for creating constraints and will be discussed in section XD.
 
 \subsection{Mass-Spring}
-- quick section on the implementation of mass spring system, discuss pros and cons (it explodes at high spring constants)
+- quick section on the implementation of mass spring system, discuss pros and cons (it explodes at high spring constants)\\
 - symplectic euler integration
 
 \subsection{PBD}
-- Quite a long section on PBD, go through entire algo and explain each part, any problems that arose, constraints etc
-- constraint generation was a big part, passed in triangle data and created them from that
-- constraint application
-- solver iterations etc
-- stiffness
-- damping
+- Quite a long section on PBD, go through entire algo and explain each part, any problems that arose, constraints etc\\
+- constraint generation was a big part, passed in triangle data and created them from that\\
+- constraint application\\
+- solver iterations etc\\
+- stiffness\\
+- damping\\
 \subsection{XPBD}
 - another decently big section on PBD to XPBD, substeps, stretching compliance etc
 
-\subsection{Hanging cloth setup}
+\subsection{Scenarios}
+ff
+\subsubsection{Hanging cloth setup}
 - discuss the scenario of the hanging cloth, vertical mesh creation, wind etc
-\subsection{Cloth on Sphere setup}
-- section on the scenario where a horizontal cloth falls on a sphere
-- collision discussion
+\subsubsection{Cloth on Sphere setup}
+- section on the scenario where a horizontal cloth falls on a sphere\\
+- collision discussion\\
 - mention self collision, didnt get it done but can put it in further work
 
 \subsection{User Cloth interaction}
-- discuss feature i added where the user can click and drag the cloth around, sets a particle to stationary etc
+- discuss feature i added where the user can click and drag the cloth around, sets a particle to stationary etc\\
 - raycast
 
 \subsection{Recorder and Screenshotter}

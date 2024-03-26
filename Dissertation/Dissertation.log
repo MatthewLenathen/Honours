@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  20 MAR 2024 20:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  25 MAR 2024 22:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -208,46 +208,89 @@ Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
 \ALG@tmplength=\skip79
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
-) (c:/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+) (c:/texlive/2023/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count285
+\lst@gtempboxa=\box56
+\lst@token=\toks28
+\lst@length=\count286
+\lst@currlwidth=\dimen172
+\lst@column=\count287
+\lst@pos=\count288
+\lst@lostspace=\dimen173
+\lst@width=\dimen174
+\lst@newlines=\count289
+\lst@lineno=\count290
+\lst@maxwidth=\dimen175
+
+(c:/texlive/2023/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
+\c@lstnumber=\count291
+\lst@skipnumbers=\count292
+\lst@framebox=\box57
+)
+(c:/texlive/2023/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2023/02/27 1.9 listings configuration
+))
+Package: listings 2023/02/27 1.9 (Carsten Heinz)
+
+(c:/texlive/2023/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2022/01/06 v1.3d Standard LaTeX Color (DPC)
+
+(c:/texlive/2023/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 149.
+
+(c:/texlive/2023/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(c:/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2023/02/27 1.9 listings language file
+)
+(c:/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2023/02/27 1.9 listings language file
+)
+(c:/texlive/2023/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
+)
+(c:/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2023-10-10 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count285
-\l__pdf_internal_box=\box56
+\l__color_backend_stack_int=\count293
+\l__pdf_internal_box=\box58
 )
 (./Dissertation.aux)
 \openout1 = `Dissertation.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 44.
-LaTeX Font Info:    ... okay on input line 44.
-\c@maskedRefs=\count286
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 61.
+LaTeX Font Info:    ... okay on input line 61.
+\c@maskedRefs=\count294
  (c:/texlive/2023/texmf-dist/tex/latex/apacite/english.apc
 File: english.apc 2013/07/21 v6.03 apacite language file
 LaTeX Info: Redefining \BPBI on input line 129.
 LaTeX Info: Redefining \BHBI on input line 130.
 ) (c:/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count287
-\scratchdimen=\dimen172
-\scratchbox=\box57
-\nofMPsegments=\count288
-\nofMParguments=\count289
-\everyMPshowfont=\toks28
-\MPscratchCnt=\count290
-\MPscratchDim=\dimen173
-\MPnumerator=\count291
-\makeMPintoPDFobject=\count292
-\everyMPtoPDFconversion=\toks29
+\scratchcounter=\count295
+\scratchdimen=\dimen176
+\scratchbox=\box59
+\nofMPsegments=\count296
+\nofMParguments=\count297
+\everyMPshowfont=\toks29
+\MPscratchCnt=\count298
+\MPscratchDim=\dimen177
+\MPnumerator=\count299
+\makeMPintoPDFobject=\count300
+\everyMPtoPDFconversion=\toks30
 ) (c:/texlive/2023/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -260,7 +303,9 @@ e
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: float package is loaded.
+Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
+\c@lstlisting=\count301
 
 (./Dissertation-Title.tex
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -301,134 +346,134 @@ n-Dec.tex) [1
 ] [9
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 83--84
+Underfull \hbox (badness 10000) in paragraph at lines 103--104
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 85--86
+Underfull \hbox (badness 10000) in paragraph at lines 105--106
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 87--88
+Underfull \hbox (badness 10000) in paragraph at lines 107--108
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 93--94
+Underfull \hbox (badness 10000) in paragraph at lines 113--114
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 95--96
+Underfull \hbox (badness 10000) in paragraph at lines 115--116
 
  []
 
 [10
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 97--98
+Underfull \hbox (badness 10000) in paragraph at lines 117--118
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 99--100
+Underfull \hbox (badness 10000) in paragraph at lines 119--120
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 105--107
+Underfull \hbox (badness 10000) in paragraph at lines 125--127
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 108--110
+Underfull \hbox (badness 10000) in paragraph at lines 128--130
 
  []
 
 [11]
-Underfull \hbox (badness 10000) in paragraph at lines 111--113
+Underfull \hbox (badness 10000) in paragraph at lines 131--133
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 118--119
+Underfull \hbox (badness 10000) in paragraph at lines 138--139
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 121--122
+Underfull \hbox (badness 10000) in paragraph at lines 141--142
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 123--126
+Underfull \hbox (badness 10000) in paragraph at lines 143--146
 
  []
 
 [12]
-Underfull \hbox (badness 10000) in paragraph at lines 131--132
+Underfull \hbox (badness 10000) in paragraph at lines 151--152
 
  []
 
 [13]
-Underfull \hbox (badness 10000) in paragraph at lines 133--135
+Underfull \hbox (badness 10000) in paragraph at lines 153--155
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 140--141
+Underfull \hbox (badness 10000) in paragraph at lines 160--161
 
  []
 
 [14]
-Underfull \hbox (badness 10000) in paragraph at lines 143--144
+Underfull \hbox (badness 10000) in paragraph at lines 163--164
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 145--146
+Underfull \hbox (badness 10000) in paragraph at lines 165--166
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 147--148
+Underfull \hbox (badness 10000) in paragraph at lines 167--168
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 153--154
+Underfull \hbox (badness 10000) in paragraph at lines 173--174
 
  []
 
 [15]
-Underfull \hbox (badness 10000) in paragraph at lines 155--156
+Underfull \hbox (badness 10000) in paragraph at lines 175--176
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 157--158
+Underfull \hbox (badness 10000) in paragraph at lines 177--178
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 159--161
+Underfull \hbox (badness 10000) in paragraph at lines 179--181
 
  []
 
 [16]
-Underfull \hbox (badness 10000) in paragraph at lines 162--163
+Underfull \hbox (badness 10000) in paragraph at lines 182--183
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 166--167
+Underfull \hbox (badness 10000) in paragraph at lines 186--187
 
  []
 
 [17]
-Underfull \hbox (badness 10000) in paragraph at lines 178--180
+Underfull \hbox (badness 10000) in paragraph at lines 198--200
 
  []
 
@@ -436,55 +481,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 178--180
 <figures/DNN.png, id=71, 943.3644pt x 273.1806pt>
 File: figures/DNN.png Graphic file (type png)
 <use figures/DNN.png>
-Package pdftex.def Info: figures/DNN.png  used on input line 186.
+Package pdftex.def Info: figures/DNN.png  used on input line 206.
 (pdftex.def)             Requested size: 390.0pt x 112.93848pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 194--195
+Underfull \hbox (badness 10000) in paragraph at lines 214--215
 
  []
 
 [19 <./figures/DNN.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 196--198
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 199--200
-
- []
-
-<figures/shapeMatching.jpg, id=77, 379.25761pt x 117.03903pt>
-File: figures/shapeMatching.jpg Graphic file (type jpg)
-<use figures/shapeMatching.jpg>
-Package pdftex.def Info: figures/shapeMatching.jpg  used on input line 203.
-(pdftex.def)             Requested size: 379.25667pt x 117.03873pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 206--207
-
- []
-
-[20]
-Overfull \hbox (2.50703pt too wide) in paragraph at lines 208--210
-[]\OT1/cmr/m/n/12 In terms of per-for-mance, they sim-u-lated meshes be-tween 1
-0000 and 100000
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 208--210
-
- []
-
-
-Overfull \hbox (5.31395pt too wide) in paragraph at lines 211--213
-\OT1/cmr/m/n/12 ing shape match-ing to im-prove upon a tra-di-tional mass-sprin
-g model []Vassilev,
- []
-
-[21 <./figures/shapeMatching.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 217--218
+Underfull \hbox (badness 10000) in paragraph at lines 216--218
 
  []
 
@@ -493,118 +498,238 @@ Underfull \hbox (badness 10000) in paragraph at lines 219--220
 
  []
 
+<figures/shapeMatching.jpg, id=77, 379.25761pt x 117.03903pt>
+File: figures/shapeMatching.jpg Graphic file (type jpg)
+<use figures/shapeMatching.jpg>
+Package pdftex.def Info: figures/shapeMatching.jpg  used on input line 223.
+(pdftex.def)             Requested size: 379.25667pt x 117.03873pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 226--227
+
+ []
+
+[20]
+Overfull \hbox (2.50703pt too wide) in paragraph at lines 228--230
+[]\OT1/cmr/m/n/12 In terms of per-for-mance, they sim-u-lated meshes be-tween 1
+0000 and 100000
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 228--230
+
+ []
+
+
+Overfull \hbox (5.31395pt too wide) in paragraph at lines 231--233
+\OT1/cmr/m/n/12 ing shape match-ing to im-prove upon a tra-di-tional mass-sprin
+g model []Vassilev,
+ []
+
+[21 <./figures/shapeMatching.jpg>]
+Underfull \hbox (badness 10000) in paragraph at lines 237--238
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 239--240
+
+ []
+
 [22] [23]
-Underfull \hbox (badness 10000) in paragraph at lines 251--254
+Underfull \hbox (badness 10000) in paragraph at lines 271--274
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 255--260
+Underfull \hbox (badness 10000) in paragraph at lines 275--280
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 263--266
+Underfull \hbox (badness 10000) in paragraph at lines 283--286
 
  []
 
 [24]
-Underfull \hbox (badness 10000) in paragraph at lines 267--268
+Underfull \hbox (badness 10000) in paragraph at lines 287--288
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 272--275
+Underfull \hbox (badness 10000) in paragraph at lines 292--295
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 276--278
+Underfull \hbox (badness 10000) in paragraph at lines 296--298
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 279--281
+Underfull \hbox (badness 10000) in paragraph at lines 299--301
 
  []
 
 [25]
-Underfull \hbox (badness 10000) in paragraph at lines 282--284
+Underfull \hbox (badness 10000) in paragraph at lines 302--304
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 291--293
+Underfull \hbox (badness 10000) in paragraph at lines 311--313
 
  []
 
 <figures/PDFlag.png, id=99, 428.35031pt x 300.3722pt>
 File: figures/PDFlag.png Graphic file (type png)
 <use figures/PDFlag.png>
-Package pdftex.def Info: figures/PDFlag.png  used on input line 297.
+Package pdftex.def Info: figures/PDFlag.png  used on input line 317.
 (pdftex.def)             Requested size: 214.17462pt x 150.18571pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 301--305
+Underfull \hbox (badness 10000) in paragraph at lines 321--325
 
  []
 
 [26]
-Underfull \hbox (badness 10000) in paragraph at lines 306--308
-
- []
-
-[27 <./figures/PDflag.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 312--314
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 315--317
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 320--322
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 323--325
-
- []
-
-[28]
 Underfull \hbox (badness 10000) in paragraph at lines 326--328
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 329--331
-
- []
-
-
+[27 <./figures/PDflag.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 332--334
 
  []
 
-[29]
-Underfull \hbox (badness 10000) in paragraph at lines 342--346
+
+Underfull \hbox (badness 10000) in paragraph at lines 335--337
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 347--348
+Underfull \hbox (badness 10000) in paragraph at lines 340--342
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 343--345
+
+ []
+
+[28]
+Underfull \hbox (badness 10000) in paragraph at lines 346--348
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 349--351
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 352--354
+
+ []
+
+[29]
+Underfull \hbox (badness 10000) in paragraph at lines 362--366
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 367--368
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 372--373
 
  []
 
 [30
 
-] [31] [32
+]
+Underfull \hbox (badness 10000) in paragraph at lines 374--375
 
-{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [33
+ []
 
-] (./Dissertation.bbl [34
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <8.5> not available
+(Font)              size <8> substituted on input line 378.
+
+LaTeX Font Info: \kern \lst@width \kern \lst@width \kern \lst@width Calculating
+\kern \lst@width math\kern \lst@width sizes\kern \lst@width for\kern \lst@width
+ size\kern \lst@width <8.5> on input line 379.
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <4.25> not available
+(Font)              size <5> substituted on input line 379.
+
+
+LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <8.5> not available
+(Font)              size <8> substituted on input line 379.
+
+
+LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <4.25> not available
+(Font)              size <5> substituted on input line 379.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <8.5> not available
+(Font)              size <8> substituted on input line 379.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <4.25> not available
+(Font)              size <5> substituted on input line 379.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8.5> on input line 379.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5.94997> on input line 379.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <4.25> on input line 379.
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 3
+80.
+(c:/texlive/2023/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8.5> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 380.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <8.5> not available
+(Font)              size <8> substituted on input line 380.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 387--388
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 389--390
+
+ []
+
+[31]
+Underfull \hbox (badness 10000) in paragraph at lines 391--392
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 395--400
+
+ []
+
+[32]
+Underfull \hbox (badness 10000) in paragraph at lines 411--417
+
+ []
+
+[33] [34] [35
+
+{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [36
+
+] (./Dissertation.bbl [37
 
 ]
 Underfull \hbox (badness 1859) in paragraph at lines 16--36
@@ -707,7 +832,7 @@ Underfull \hbox (badness 3199) in paragraph at lines 241--260
 4017   \OT1/cmr/m/n/12 doi:
  []
 
-[35
+[38
 
 ]
 Underfull \hbox (badness 3724) in paragraph at lines 448--465
@@ -742,7 +867,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 610--629
  \OT1/cmr/m/n/12 doi:
  []
 
-[36]
+[39]
 Underfull \hbox (badness 5847) in paragraph at lines 675--696
 []\OT1/cmr/m/n/12 Oh, Y. J., Lee, T. M., & Lee, I.-K.  (2018).  Hi-er-ar-chi-
  []
@@ -777,26 +902,31 @@ Underfull \hbox (badness 2326) in paragraph at lines 831--851
 -
  []
 
-[37]) [38] [39] [40
+[40]) [41] [42] [43
 
-] [41
+] [44
 
-] [42
+] [45
 
 ] (./Dissertation.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-10-10>
  ***********
+
+
+LaTeX Font Warning: Size substitutions with differences
+(Font)              up to 0.75pt have occurred.
+
  ) 
 Here is how much of TeX's memory you used:
- 5099 strings out of 474503
- 84823 string characters out of 5756704
- 1933043 words of memory out of 5000000
- 27022 multiletter control sequences out of 15000+600000
+ 7027 strings out of 474503
+ 111384 string characters out of 5756704
+ 2039043 words of memory out of 5000000
+ 28924 multiletter control sequences out of 15000+600000
  564737 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 69i,11n,79p,1557b,387s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 69i,11n,79p,1557b,1438s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/tex
 live/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2023
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2023/texmf-di
@@ -805,13 +935,14 @@ ype1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmr12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.p
 fb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/te
-xlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/202
-3/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-d
-ist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on Dissertation.pdf (43 pages, 617772 bytes).
+xlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2023
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2023/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-dist/fonts/
+type1/public/cm-super/sfrm1200.pfb>
+Output written on Dissertation.pdf (46 pages, 643540 bytes).
 PDF statistics:
- 212 PDF objects out of 1000 (max. 8388607)
- 136 compressed objects within 2 object streams
+ 226 PDF objects out of 1000 (max. 8388607)
+ 145 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

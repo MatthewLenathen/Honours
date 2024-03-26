@@ -29,4 +29,7 @@ Babis recommended me to look into a recording script that records X amounts of f
 will make it easier to review and analyse, think this is quite high priority.
 - Babis also explained that instead of needing to do _vector.clear() on init, i can have my cloth object be g_ClothSim = {}; and it would overwrite it every time its ran. Would be a tiny bit slower but won't need to add a .clear() to new vectors 
 - He asked if i could sent an unlisted youtube recording of me showing the simulation as teams screenshare isn't good for animation.
-	- sent one and got some feedback
+	- sent one and got some feedback 
+
+MEETING 14/03/2024
+- look at emaila nd write up
