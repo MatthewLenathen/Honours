@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  26 MAR 2024 22:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  27 MAR 2024 20:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -721,9 +721,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 395--400
  []
 
 
-LaTeX Warning: Reference `PBD' on page 32 undefined on input line 401.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 404--405
 
  []
@@ -755,15 +752,41 @@ Underfull \hbox (badness 10000) in paragraph at lines 420--421
  []
 
 [34 <./figures/clothmesh.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 431--437
+Underfull \hbox (badness 10000) in paragraph at lines 429--431
 
  []
 
-[35] [36
 
-] [37
+Underfull \hbox (badness 10000) in paragraph at lines 432--434
 
-] (./Dissertation.bbl [38
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 435--436
+
+ []
+
+[35]
+<figures/springs.png, id=136, 853.1875pt x 318.18875pt>
+File: figures/springs.png Graphic file (type png)
+<use figures/springs.png>
+Package pdftex.def Info: figures/springs.png  used on input line 443.
+(pdftex.def)             Requested size: 426.59271pt x 159.09398pt.
+
+Overfull \hbox (36.59271pt too wide) in paragraph at lines 443--445
+ [][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 450--456
+
+ []
+
+[36 <./figures/springs.png>] [37] [38
+
+] [39
+
+] (./Dissertation.bbl [40
 
 ]
 Underfull \hbox (badness 1859) in paragraph at lines 16--36
@@ -866,7 +889,7 @@ Underfull \hbox (badness 3199) in paragraph at lines 241--260
 4017   \OT1/cmr/m/n/12 doi:
  []
 
-[39
+[41
 
 ]
 Underfull \hbox (badness 3724) in paragraph at lines 448--465
@@ -901,7 +924,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 610--629
  \OT1/cmr/m/n/12 doi:
  []
 
-[40]
+[42]
 Underfull \hbox (badness 5847) in paragraph at lines 675--696
 []\OT1/cmr/m/n/12 Oh, Y. J., Lee, T. M., & Lee, I.-K.  (2018).  Hi-er-ar-chi-
  []
@@ -919,28 +942,28 @@ Underfull \hbox (badness 2326) in paragraph at lines 675--696
  []
 
 
-Underfull \hbox (badness 1990) in paragraph at lines 831--851
+Underfull \hbox (badness 1990) in paragraph at lines 861--881
 []\OT1/cmr/m/n/12 Vassilev, T. I.  (2017).  Mass-spring cloth sim-u-la-tion wit
 h shape
  []
 
 
-Underfull \hbox (badness 5050) in paragraph at lines 831--851
+Underfull \hbox (badness 5050) in paragraph at lines 861--881
 \OT1/cmr/m/n/12 match-ing.  In \OT1/cmr/m/it/12 Pro-ceed-ings of the 18th in-te
 r-na-tional con-fer-
  []
 
 
-Underfull \hbox (badness 2326) in paragraph at lines 831--851
+Underfull \hbox (badness 2326) in paragraph at lines 861--881
 \OT1/cmr/m/n/12 York, NY, USA: As-so-ci-a-tion for Com-put-ing Ma-chin-ery.  Re
 -
  []
 
-[41]) [42] [43] [44
+[43]) [44] [45] [46
 
-] [45
+] [47
 
-] [46
+] [48
 
 ] (./Dissertation.aux)
  ***********
@@ -952,15 +975,12 @@ L3 programming layer <2023-10-10>
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.75pt have occurred.
 
-
-LaTeX Warning: There were undefined references.
-
  ) 
 Here is how much of TeX's memory you used:
- 7051 strings out of 474503
- 111760 string characters out of 5756704
+ 7063 strings out of 474503
+ 112009 string characters out of 5756704
  2039043 words of memory out of 5000000
- 28947 multiletter control sequences out of 15000+600000
+ 28959 multiletter control sequences out of 15000+600000
  565074 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  69i,11n,79p,1557b,1438s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -977,10 +997,10 @@ xlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2023
 st/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-dist/fonts/
 type1/public/cm-super/sfrm0800.pfb><c:/texlive/2023/texmf-dist/fonts/type1/publ
 ic/cm-super/sfrm1200.pfb>
-Output written on Dissertation.pdf (47 pages, 721828 bytes).
+Output written on Dissertation.pdf (49 pages, 836125 bytes).
 PDF statistics:
- 236 PDF objects out of 1000 (max. 8388607)
- 150 compressed objects within 2 object streams
+ 245 PDF objects out of 1000 (max. 8388607)
+ 155 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

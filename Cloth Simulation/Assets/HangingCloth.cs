@@ -113,7 +113,7 @@ public class cppFunctions
 [System.Diagnostics.DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
 public class HangingCloth : MonoBehaviour
 {
-    bool CSHARP_SIM = false;
+    bool CSHARP_SIM = true;
 
     // Start is called before the first frame update
     List<Particle> particles = new List<Particle>();
@@ -128,7 +128,7 @@ public class HangingCloth : MonoBehaviour
     int numParticles; // Changed to vertices.Length instead of hardcoded value
     int numTriangles; // Need for the C++ code
     float spacing = 0.5f; // Only used for mesh generation, not in c++ anymore
-    int algorithmType = 2; // 0 for mass spring, 1 for position based, 2 for XPBD
+    int algorithmType = 0; // 0 for mass spring, 1 for position based, 2 for XPBD
     int scenario = 0; // 0 for hanging cloth, 1 for ..
     int solverIterations = 30; // Number of iterations for the pbd solver
     int subSteps = 10; // Number of substeps for XPBD

@@ -818,6 +818,36 @@ Terzopoulos, D.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+Va%
+, Choi%
+\BCBL {}\ \BBA {} Hong%
+}{%
+Va%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2021}}%
+}]{%
+springs}
+\APACinsertmetastar {%
+springs}%
+\begin{APACrefauthors}%
+Va, H.%
+, Choi, M\BHBI H.%
+\BCBL {}\ \BBA {} Hong, M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2021}{10}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Parallel Cloth Simulation Using OpenGL Shading Language}
+  {Parallel cloth simulation using opengl shading language}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{Computer Systems Science and
+  Engineering}{1}{}{427-443}.
+\newblock
+\begin{APACrefDOI} \doi{10.32604/csse.2022.020685} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Vassilev%
 }{%
 Vassilev%

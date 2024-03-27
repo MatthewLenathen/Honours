@@ -202,7 +202,7 @@ Another example of cloth simulations using neural networks can be found in the w
 
 Their proposed method would split the simulation into two parts. Firstly, a low resolution or coarse model of the cloth is calculated using a normal physically based method. Then, the DNN is used to calculate the finer levels of the cloth, reducing the computation cost. They note that due to only calculating the coarsest level of cloth using a physically-based method, the overall cloth simulation won't be as accurate as a fully physically-based model but it successfully prevents errors stemming from the DNN, and guarantees a reliable simulation. This can be seen in Figure \ref{fig:DNN}.
 \begin{figure}[h]
-	\caption{An overview of how this implementation works}
+	\caption{An overview of a neural network cloth model}
 	\includegraphics[width=\textwidth]{DNN.png}
 	\label{fig:DNN}
 \end{figure}
@@ -422,11 +422,30 @@ One detail that is common to all techniques used in this project is the idea of 
 One important part of initialisation is looping through all the vertices of the mesh and adding them to a particle list. In this loop, particles are assigned the position of the vertex, an initial velocity of 0, an inverse mass of 1.0 and isStatic set to false. Directly after this loop, the static particles are set depending on the configuration. The hanging cloth scenario has two static particles holding the top corners up. All physics calculations loop through the particle list, as it allows the important properties to be set, such as velocity and position.
 \\
 One final property is required when using position based dynamics, and that is predicted position. Since PBD iteratively works on the predicted position during the time-step depending on external forces, an additional property is needed to store this. At the end of the time-step, the position is then updated to match the calculated predicted position.
-\subsection{Mass-Spring}
+\subsection{Mass-Spring System}
 - quick section on the implementation of mass spring system, discuss pros and cons (it explodes at high spring constants)\\
 - symplectic euler integration
 
-Now that the mesh is successfully created, the first cloth simulation method that was implemented was the mass-spring system. As discussed in Section \ref{Mass-Spring}, the simplest mass spring system calculates spring forces using Hooke's Law between neighbouring particles to then apply forces to these particles.
+Now that the mesh is successfully created, the first cloth simulation method that was implemented was the mass-spring system. As discussed in Section \ref{Mass-Spring}, the simplest mass spring system calculates spring forces using Hooke's Law between neighbouring particles to then apply forces to these particles. Before implementing these spring forces, an integration scheme is required to modify the particles positions and velocities at each time step. There were a few options to choose from such as explicit Euler, implicit Euler and symplectic (semi-implicit) Euler. In general, explicit is simple and fast, but unstable and less accurate than others, while implicit is more computationally expensive and accurate. Semi-implicit strikes a nice balance between these two methods, giving more stability than explicit and with less computational cost than implicit. In semi-implicit integration, the particle's new velocity is calculated from external forces first and this new velocity is then used to calculate the new position. With this integration scheme implemented, the particles now fall down due to gravity. A simple directional vector was also added to the external forces to simulate wind. This vector changes direction based on a sine wave and total simulation time.
+\\
+
+Mass-spring cloth simulations can use a variety of springs to simulate different cloth properties. The most typical are the structural springs and these link adjacent particles. Additional ones can include bend and shear springs which can be visualised in Figure \ref{fig:mss}. These additional springs can help the realism of the cloth simulation to more closely simulate the properties of real life cloth. In this project, mass-spring was not the main focus so only structural springs were implemented.
+\\
+
+The code looped through all particles and executed an ApplySpringForce function where each spring is located. This meant using grid size and the loop counter. For structural springs, it can use the index and apply the spring force between particle[index] and particle[index+1] for horizontal springs. For vertical, it can be between particle[index] and particle[index+gridSize]. \\
+
+For applying these forces, Hooke's law is used. This states that force exerted on the springs by the particles is proportional to the displacement of the connected particles to a rest length. In this case, the rest length is equal to the spacing variable which is the cloth mesh at rest. This force between particles due to the springs can be used to calculate a velocity change that is applied to both particles connected by the spring. The magnitude of this force can be modified with a variable known as the spring constant. This is a parameter that is uniquely tuned depending on the simulation. It effectively modifies the stiffness of the spring. High spring constants result in a very stiff cloth, while a lower constant results in a loose one. \\
+As mentioned before, mass-spring systems can typically be unstable with the aforementioned integration schemes. A high spring constant can exacerbate these stability problems and can cause the simulation to "explode", a term used in the field that refers to numerical instability that quickly goes out of control.
+
+\begin{figure}
+	\centering
+	\caption{The types of springs typically used. Figure adapted from \protect\cite{springs}.}
+	\includegraphics[scale=0.5]{springs.png}
+	\label{fig:mss}
+\end{figure}
+
+
+ 
 \subsection{PBD}
 - Quite a long section on PBD, go through entire algo and explain each part, any problems that arose, constraints etc\\
 - constraint generation was a big part, passed in triangle data and created them from that\\
