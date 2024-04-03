@@ -29,6 +29,7 @@
 \algdef{SE}[LOOP]{Loop}{EndLoop}[1]{\algorithmicloop\ #1}{\algorithmicend\ \algorithmicloop}%
 \usepackage{listings}
 \usepackage{color}
+\usepackage{amsmath}
 
 
 
@@ -234,6 +235,7 @@ After implementing it in OpenGL with compute shaders, the implementation was tes
 Overall, he found that the shape matching spring implementation was considerably more stable and was less dependant on time steps than the original mass spring system. He proposed this method could be used in real time simulation for things such as trying on clothes on models.
 
 \subsubsection{Position Based Dynamics}
+\label{lrPBD}
 A great number of techniques discussed above have been force based, and these forces are used to calculate accelerations. Finally these accelerations are integrated to find the velocities and positions of particles. The Position based dynamics (PBD) technique takes a unique approach to physically based animations by omitting the velocity layer and directly working on the positions of particles. \cite{muller2007position} The main advantage is the controllability, the integration instability discussed in section \ref{Mass-Spring} is completely avoided due to the lack of explicit integration. As this is a real time technique, it is greatly suited to games development, as it is very helpful to have direct control over positions of objects within the game.\\
 
 It was noted that even though PBD was the first fully position based approach, there had been other attempts to utilize positions in this way, such as \cite{fisixArticle}. In his approach, Jacobsen manipulated the positions directly using a Verlet integrator. The authors mention that Jacobsen didn't go into depth in terms of constraints, which is crucial in cloth simulation. PBD aims to improve upon it by giving a general approach to constraints.\\
@@ -359,16 +361,12 @@ In conclusion, the literature on cloth simulation reflects a massive field, that
 This section will discuss how various methods of constructing a cloth simulation were achieved inside a physics framework. It will go into depth on the design choices such as which framework to use, programming language and experiment setup. It will also cover the different algorithms used and how they compare with one another. Finally, it will discuss the additional features implemented and how they were useful in evaluating the simulation.
 
 \subsection{Environment and Framework}
-- talk about why Unity, c\# vs c++, use of export dll to run sim in c++ and hand variables back to c\#\\
-- can talk about useful aspects to unity like boxcollider, shaders etc\\
-- can explain fixedupdate vs update\\
-- can mention recalculateNormals unity func and how a more specialised one would be better but more expensive? \\
-
 Before starting, a choice of which framework to implement the cloth simulation in was required. In this project, a simulation framework is just a sandbox containing the basic necessities for calculating, updating and rendering meshes that are composed of vertices and triangles. In the field of computer graphics/games development, there are a vast number of engines and physics frameworks to choose from. Some of these include: Unity, Unreal Engine, Godot, Nvidia PhysX etc. Research was done into various frameworks but eventually Unity was chosen for this project. \\
 
 Unity is typically used for game development but it is also a very useful tool for building interactive simulations. It has powerful graphics capabilities for shaders and lighting which will highlight the dynamics in cloth well. It also has a massive ecosystem of resources and community support so that any problems or bugs would already be discussed online. Unity also has features that handle collisions, which was useful for implementing a level of interaction where the user can click and drag the cloth around.
 
 \subsubsection{Language Choice}
+\label{lang}
 Unity's base scripting language is C\#, a high-level object-oriented language. C\# is a managed language, meaning it will only execute while being managed by a common language runtime environment. This provides features such as memory management, garbage collection and security tools. C\# is a common language used in games development but for physics simulations, C++ pulls ahead due to its high performance. C++ compiles straight to machine code which interacts much faster with the hardware it is running on. \\
 
 A base script contains two functions, Start() and Update(). Start is called once at the beginning of the simulation and Update is called every frame. Typically simulations set up all the necessary components such as meshes, colliders and variables in the Start function, and handles the main simulation loop in Update. An important detail about using Unity for physics simulations is the use of a function called FixedUpdate. Compared to the standard Update, FixedUpdate runs at a fixed time interval with a default value of 0.02 seconds, or 50 frames per second. FixedUpdate is necessary for physics simulations due to the amount of complex calculations within them. In this project, Update was only used to handle user interaction with the mouse, and to handle recordings. \\
@@ -390,26 +388,22 @@ Variables passed this way can be specified with [In] or [Out] which help specify
 
 The general way this works is that the C++ dll has a cloth simulation object that is created the first time that instance of Unity runs it. It then maintains this object while Unity is open. To get the simulation ready for the next time it is run, all the class variables are reassigned and all the class vectors are cleared. \\
 
-For this project, only the simple mass spring system was implemented in C\#, while all other methods were implemented in the faster C++ code. A boolean flag was used for this, if it was set to C\#, it would execute code in the same script, while if it was set to C++, it would call the cpp\_init function as seen in Listing \ref{lst:cppinterface}.
-\subsection{Initialisation}
-- can discuss how i created cloth mesh, explain with pbd, each vertex is a particle that interacts with others etc
-- explain particle class, mass, isstatic 
-- could be a section discussing what goes on in the Start() function, like switching based off scenarios, setting up variables and calling the dll init\\
-- also discuss the c++ init, differences between etc
-\\
+For this project, only the simple mass spring system was implemented in C\#, while all other methods were implemented in the faster C++ code. A boolean flag was used for this, if it was set to C\#, it would execute code in the same script, while if it was set to C++, it would call the cpp\_init function as seen in Listing \ref{lst:cppinterface}. \\
 
+Within the C++ application, the GLM library is also integrated. GLM is a powerful library designed for mathematics in computer graphics. In this project, GLM is used mainly for its vec3 class, to represent 3D vectors such as position, velocity etc. GLM also contains very useful methods for operating on these 3D vectors such as normalize and length, which are crucial for certain calculations in the pbd and xpbd simulation loops. It is a header only library so the glm folder was simply placed in project directory and added to necessary C++ files with \lstinline[language=C++]!#include <glm.hpp>!.
+\subsection{Initialisation}
 Initialisation is an important part of the simulation, as it effectively determines the starting state of all objects within it. To start, a cloth mesh is needed. This is typically a flat vertical mesh, meaning it has no depth in the z axis. Initially, a default Unity preset mesh was used for testing. A problem quickly arose where the orientation of the mesh was wrong. This preset mesh was intended to be used as a ground or horizontal surface. When the mesh was rotated horizontally, the y axis became aligned horizontally instead of vertically, which disrupted the physics calculations. Consequently, it was decided to create the mesh from scratch to ensure proper alignment.
 
 \subsubsection{Mesh Creation}
-In Unity, an empty mesh object can be created then filled by the developer to suit their purposes. Meshes require two properties to be set, vertices and triangles. Vertices are just individual points in space, represented by a 3D coordinate. They are used to define the meshes overall structure. Triangles are geometric primitives used to represent the surface of the mesh, and are created by connecting three vertices in a sequence. Another important list is the triangle indices. these indices specify which vertices are used to create a triangle. This is necessary for creating constraints and will be discussed in section XD. \\
+\label{creation}
+In Unity, an empty mesh object can be created then filled by the developer to suit their purposes. Meshes require two properties to be set, vertices and triangles. Vertices are just individual points in space, represented by a 3D coordinate. They are used to define the meshes overall structure. Triangles are geometric primitives used to represent the surface of the mesh, and are created by connecting three vertices in a sequence. Another important list is the triangle indices. these indices specify which vertices are used to create a triangle. This is necessary for creating constraints and will be discussed in Section \ref{constraints}. \\
 
-For this project, a mesh creation class was created and holds two functions. GenerateVerticalMesh and GenerateHorizontalMesh. Two parameters are passed to these functions, Grid size and spacing. Grid size represents how many vertices in the x and y axis, e.g. a 20x20 mesh, and spacing refers to the distance between each vertex. For most tests, a 20x20 grid is used with a spacing of 0.5. Creating the vertices is simple, a nested for loop is used and each vertex is set within. The only line within the nested loops is:\\ \lstinline[language=C++]!vertices[i] = new Vector3(x * spacing, y * spacing, 0);!
-In the code block, the outer loop iterates over the y-axis coordinates while the inner loop iterates over the x-axis, both from 0 to gridSize. Within the loop this line is executed to generate the coordinate at that index. The x and y coordinates of each vertex are set depending on the current position within the grid, multiplied by spacing to either increase or decrease the space between the vertices.\\
+For this project, a mesh generator class was created and holds two functions. GenerateVerticalMesh and GenerateHorizontalMesh. Two parameters are passed to these functions, Grid size and spacing. Grid size represents how many vertices in the x and y axis, e.g. a 20x20 mesh, and spacing refers to the distance between each vertex. For most tests, a 20x20 grid is used with a spacing of 0.5. Creating the vertices is simple, a nested for loop is used and each vertex is set within. The only line within the nested loops is:\\ \lstinline[language=C++]!vertices[i] = new Vector3(x * spacing, y * spacing, 0);!
+In the code block, the outer loop iterates over the y-axis coordinates while the inner loop iterates over the x-axis, both from 0 to gridSize. Within the loop this line is executed to generate the coordinate at that index. The x and y coordinates of each vertex are set depending on the current position within the grid, multiplied by spacing to either increase or decrease the space between the vertices. The z coordinate is set to 0 as the cloth has no depth.\\
 
 Generating triangles is a bit more tricky. For this project, a gridSize by gridSize mesh will generate 2166 triangle indices, with 722 triangles. The way these triangles are generated is another nested for loop, working on 6 vertices at once and creating two triangles from them. It then moves onto the next 6 vertices. The data stored in the triangles array are the indices of the triangles. \\
 
 Finally, the vertices and triangle arrays are assigned to the mesh object. Additionally, the RecalculateNormals function is called to calculate the normals of this mesh. Normals are necessary for lighting calculations, and they will be recalculated every fixedUpdate. A wireframe of this mesh can be seen in Figure \ref{fig:mesh}.
-\newpage
 \begin{figure}
 	\centering
 	\caption{A wireframe of a vertical cloth mesh}
@@ -417,15 +411,13 @@ Finally, the vertices and triangle arrays are assigned to the mesh object. Addit
 	\label{fig:mesh}
 \end{figure}
 \subsubsection{Particle Class}
-One detail that is common to all techniques used in this project is the idea of each vertex being a "particle". As mentioned in Section \ref{Physics}, vertices can be represented as particles that have various properties. Here, the particle is represented by a class that has 4 properties: position, velocity, inverse mass and isStatic. Whil the first three are fairly self explanatory, the last "isStatic" property determines whether that particle is fixed in space, and is a boolean. This isStatic variable is very useful for cloth as it lets you pin certain particles, e.g. a hanging curtain or attachment points of a cape to the back of a character model. \\
+One detail that is common to all techniques used in this project is the idea of each vertex being a ``particle". As mentioned in Section \ref{Physics}, vertices can be represented as particles that have various properties. Here, the particle is represented by a class that has 4 properties: position, velocity, inverse mass and isStatic. While the first three are fairly self explanatory, the last ``isStatic" property determines whether that particle is fixed in space, and is a boolean. This isStatic variable is very useful for cloth as it lets you pin certain particles, e.g. a hanging curtain or attachment points of a cape to the back of a character model. \\
 
 One important part of initialisation is looping through all the vertices of the mesh and adding them to a particle list. In this loop, particles are assigned the position of the vertex, an initial velocity of 0, an inverse mass of 1.0 and isStatic set to false. Directly after this loop, the static particles are set depending on the configuration. The hanging cloth scenario has two static particles holding the top corners up. All physics calculations loop through the particle list, as it allows the important properties to be set, such as velocity and position.
 \\
+
 One final property is required when using position based dynamics, and that is predicted position. Since PBD iteratively works on the predicted position during the time-step depending on external forces, an additional property is needed to store this. At the end of the time-step, the position is then updated to match the calculated predicted position.
 \subsection{Mass-Spring System}
-- quick section on the implementation of mass spring system, discuss pros and cons (it explodes at high spring constants)\\
-- symplectic euler integration
-
 Now that the mesh is successfully created, the first cloth simulation method that was implemented was the mass-spring system. As discussed in Section \ref{Mass-Spring}, the simplest mass spring system calculates spring forces using Hooke's Law between neighbouring particles to then apply forces to these particles. Before implementing these spring forces, an integration scheme is required to modify the particles positions and velocities at each time step. There were a few options to choose from such as explicit Euler, implicit Euler and symplectic (semi-implicit) Euler. In general, explicit is simple and fast, but unstable and less accurate than others, while implicit is more computationally expensive and accurate. Semi-implicit strikes a nice balance between these two methods, giving more stability than explicit and with less computational cost than implicit. In semi-implicit integration, the particle's new velocity is calculated from external forces first and this new velocity is then used to calculate the new position. With this integration scheme implemented, the particles now fall down due to gravity. A simple directional vector was also added to the external forces to simulate wind. This vector changes direction based on a sine wave and total simulation time.
 \\
 
@@ -435,7 +427,11 @@ Mass-spring cloth simulations can use a variety of springs to simulate different
 The code looped through all particles and executed an ApplySpringForce function where each spring is located. This meant using grid size and the loop counter. For structural springs, it can use the index and apply the spring force between particle[index] and particle[index+1] for horizontal springs. For vertical, it can be between particle[index] and particle[index+gridSize]. \\
 
 For applying these forces, Hooke's law is used. This states that force exerted on the springs by the particles is proportional to the displacement of the connected particles to a rest length. In this case, the rest length is equal to the spacing variable which is the cloth mesh at rest. This force between particles due to the springs can be used to calculate a velocity change that is applied to both particles connected by the spring. The magnitude of this force can be modified with a variable known as the spring constant. This is a parameter that is uniquely tuned depending on the simulation. It effectively modifies the stiffness of the spring. High spring constants result in a very stiff cloth, while a lower constant results in a loose one. \\
-As mentioned before, mass-spring systems can typically be unstable with the aforementioned integration schemes. A high spring constant can exacerbate these stability problems and can cause the simulation to "explode", a term used in the field that refers to numerical instability that quickly goes out of control.
+As mentioned before, mass-spring systems can typically be unstable with the aforementioned integration schemes. A high spring constant can exacerbate these stability problems and can cause the simulation to "explode", a term used in the field that refers to numerical instability that quickly goes out of control. \\
+
+In this project, a spring constant of 1000 was used. In the C\# version, if you go much higher than this it will quickly become unstable. After implementing this, the basic mass-spring system worked as intended. With two anchor points at the top left and right of the cloth, it hangs down and blows in the wind. It is to be noted that this setup with the spring constant of 1000 is still extremely loose and doesn't accurately represent any real life cloth material, which leads to the next section on the position based dynamics implementation. \\
+
+The very same system was also implemented in the C++ version. This was so that the differences in performance between the two languages can be analysed. The results of these experiments will be discussed in Section \ref{cppcomp}.
 
 \begin{figure}
 	\centering
@@ -447,12 +443,65 @@ As mentioned before, mass-spring systems can typically be unstable with the afor
 
  
 \subsection{PBD}
-- Quite a long section on PBD, go through entire algo and explain each part, any problems that arose, constraints etc\\
-- constraint generation was a big part, passed in triangle data and created them from that\\
-- constraint application\\
-- solver iterations etc\\
-- stiffness\\
-- damping\\
+With a valid simulation framework setup with mesh creation, particle vectors and the simulation loop working, the next thing to implement was position based dynamics. From this point, features were only created in the C++ version, as going back and forth between languages to implement the same things was not the best usage of time. As mentioned in Section \ref{lang}, the C++ program allows variables to be passed from C\# to the C++ app. This means a cloth simulation object can be created within C++ that assigns all the variables passed through, into properties of the cloth simulation object. Some of these variables can include vertex positions, triangle indices, solver iterations etc. There are two int variables that are used in switch statements within init and update, called scenario and algorithm. These variables switch into blocks of code to change how the simulation is run, scenario determines if the cloth is a hanging vertical cloth, or if its a horizontal cloth falling on a sphere. Algorithm changes which method is being used, between mass-spring, pbd and xpbd. \\
+
+To create the pbd simulation loop, the idea was to look at the algorithm from the paper which can be seen in Section \ref{lrPBD}, and translate it to C++ code. Firstly, to handle particles the static particles that should be skipped, a simple check can be used on the isStatic property of that particle in the loop, skipping that particle if the property is true. \\
+Line 6 of the algorithm is updating the particles velocity by utilising delta time and the external forces of the system. In this case, gravity and wind. The idea of this ``for all vertices" block appears multiple times within the algorithm and can be translated to code as seen in Listing \ref{lst:cpploop}.
+
+\begin{lstlisting}[caption={Updating particles velocity using external forces},label={lst:cpploop}]
+for (int i = 0; i < _num_particles; i++)
+{
+	if (!_particles[i].is_static) {
+		glm::vec3 external_forces = GRAVITY + (WIND_FORCE * wind_strength * std::sin(_total_time));
+		_particles[i].velocity += _delta_time * _particles[i].inverse_mass * external_forces;
+	}
+}
+\end{lstlisting}
+
+Here, gravity and wind force are constants defined in the header file as \lstinline[language=C++]!const glm::vec3 GRAVITY = glm::vec3(0.0f,-9.81f,0.0f);! and \lstinline[language=C++]!const glm::vec3 WIND_FORCE = glm::vec3(0.0f, 0.0f, 1.0f);! respectively. This step is very similar to the first step of symplectic Euler in the mass spring system, calculating the new velocity. \\
+
+Next, a simple damping of 99\% was applied to the velocity to simulate air friction. In the paper, the authors note that any form of damping can be used here. \\
+
+The next step is to calculate the predicted position of the particle, based on the new velocity. This predicted position will then be iterated on for a specified number of times to get it closer to the goal position. This requires constraints which are key to the whole algorithm.
+\subsubsection{Constraints}
+\label{constraints} 
+At its core, constraints in position based dynamics are similar to springs in a mass spring system, a way of adjusting particles so that they fit a certain constraint. Position based dynamics can be used for a vast range of deformable objects and can use constraints such as volume constraints. For cloth, structural and bend constraints are used.
+\paragraph{Generating Constraints}\mbox{} \\ \\
+Initially, constraints were held in a vector of uvec2, a glm type that holds two unsigned integers, and these integers would be the indices of the particles that are involved in this constraint. The constraints were generated using gridSize in a similar way to the mass spring system within a nested for loop, which can be seen in Listing \ref{lst:consGen}. 
+\begin{lstlisting}[caption={The inner loop for constraint generation},label={lst:consGen}]
+// Horizontal constraint
+if (x < grid_size - 1)
+{
+	_structural_constraints.push_back(glm::uvec2(index, index + 1));
+}
+
+// Vertical constraint
+if (y < grid_size - 1)
+{
+	_structural_constraints.push_back(glm::uvec2(index, index + grid_size));
+}
+\end{lstlisting}
+This worked well for a basic PBD implementation but problems quickly arose when creating constraints on diagonals. In order to discuss the problems, it is necessary to explain constraint projection first. 
+\paragraph{Constraint Projection}\mbox{} \\ \\
+Once all constraints are generated and added to a vector, they can be used within the PBD simulation loop to iteratively move the particles to attempt to satisfy all constraints in the system. A integer variable called solver iterations was added and this controlled the amount of times to loop over the list of constraints and work on them again. This number typically ranged between 10 to 30 in testing, higher numbers resulted in more accurate simulations but also increased computational cost, as it had many more calculations to do each loop.\\
+
+Constraint projection is simply the act of moving particles so that they satisfy the constraint. To satisfy a constraint in a cloth simulation like this, is achieved by having a goal distance. This goal distance was set to the distance between the two particles at the start of the simulation, the rest distance. This is where the first problem with the original design appeared. Originally, constraint projection had a hardcoded rest distance set to the spacing variable discussed back in Section \ref{creation}, this works fine for structural constraints, but when generating constraints in the diagonal, the rest distance of those two particles is equal to $\sqrt{r^2 + r^2}$, where r is the spacing variable. This was resolved by changing the data structure holding constraints to a vector holding a pair of uvec2 and float. This float would hold the rest distance of that constraint. \\
+
+To actually project these constraints involves calculating two ${\Delta}p$, corrections that are applied to each particle to move it towards the goal, this can be seen in Figure \ref{fig:conproj}, these corrections would be weighted on the inverse masses of each particle. This is especially useful for static particles, as the inverse mass of those are set to 0. The formula for calculating these corrections turns out to be a special case of the general constraint method in the paper, and becomes: 
+\[{\Delta}p_1=-\frac{w_1}{w_1+w_2}(\lvert p_1-p_2 \rvert -d)\frac{p_1-p_2}{\lvert p_1-p_2 \rvert}\] 
+\[{\Delta}p_2=+\frac{w_2}{w_1+w_2}(\lvert p_1-p_2 \rvert -d)\frac{p_1-p_2}{\lvert p_1-p_2 \rvert}\] 
+Where $w$ is the inverse mass, $p$ is the predicted position and $d$ is the rest distance.
+Once these corrections are calculated, they are added to the predicted position of the respective particle during the loop. \\
+
+Another aspect of constraints is stiffness. In the PBD implementation, stiffness is obtained by multiplying ${\Delta}p$ by $k\in[0...1]$. This works, but for the effect of this stiffness is non-linear with multiple solver iterations. This can be resolved by 
+\begin{figure}
+	\centering
+	\caption{Projection of a constraint between two particles. Figure adapted from \protect\cite{muller2007position}.}
+	\includegraphics[scale=0.5]{constraint.png}
+	\label{fig:conproj}
+\end{figure}
+	
+	
 \subsection{XPBD}
 - another decently big section on PBD to XPBD, substeps, stretching compliance etc
 
@@ -462,6 +511,8 @@ As mentioned before, mass-spring systems can typically be unstable with the afor
 
 
 \section{Results}
+\subsection{C++ vs C\#}
+\label{cppcomp}
 
 \subsection{Scenarios}
 ff
@@ -476,27 +527,10 @@ ff
 - section on how i implemented a recorder using unity recorder plugin, how it is useful for experiments, data gathering and for evidence
 
 
-\subsubsection{Overview Of Project Content and Milestones}
-
-This is a sub sub section with a list of bullet points.
-\begin{itemize}\itemsep0pt
-	\item A working X, that will be used for this investigation.
-	\item Investigation of current tools and their potential use during an investigation of X .
-	\item Programming of X with related frameworks Y and Z.
-	\item That is all.
-\end{itemize}
-
-
 \section{Chapter 2}
 The following bibliographic information on Writing a literature review is contained in the \emph{bibliography.bib} file 
 The template automatically starts new chapters on a new page.  The associated guidelines tell you what the available styles do and also how to structure a report.
 There is a section break on this page that you should be careful NOT to delete otherwise the references and appendices will be numbered continuously with the rest of the document.
-
-% another example section
-\section{Additional Information / Knowledge Required}
-Experience with Linux and managing Virtual machines, networking.
-So on and so forth...
-
 
 \bibliographystyle{apacite}
 \bibliography{bibliography}

@@ -1,5 +1,6 @@
 \relax 
 \citation{springs}
+\citation{muller2007position}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{9}{}\protected@file@percent }
 \citation{weil_synthesis_1986}
 \citation{terzopoulos1987elastically}
@@ -56,6 +57,7 @@
 \citation{muller2007position}
 \citation{fisixArticle}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.5.6}Position Based Dynamics}{22}{}\protected@file@percent }
+\newlabel{lrPBD}{{2.5.6}{22}{}{}{}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Position Based Dynamics Algorithm}}{23}{}\protected@file@percent }
 \citation{macklin2016xpbd}
 \citation{bender2014survey}
@@ -75,31 +77,45 @@
 \@writefile{toc}{\contentsline {section}{\numberline {3}Methodology}{30}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Environment and Framework}{30}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}Language Choice}{30}{}\protected@file@percent }
+\newlabel{lang}{{3.1.1}{30}{}{}{}}
 \newlabel{lst:cppinterface}{{1}{31}{}{}{}}
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {1}{\ignorespaces Interfacing C++ functions with Unity}}{31}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Initialisation}{32}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Mesh Creation}{32}{}\protected@file@percent }
+\newlabel{creation}{{3.2.1}{32}{}{}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Particle Class}{33}{}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces A wireframe of a vertical cloth mesh}}{34}{}\protected@file@percent }
 \newlabel{fig:mesh}{{4}{34}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Particle Class}{34}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Mass-Spring System}{35}{}\protected@file@percent }
 \citation{springs}
 \citation{springs}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The types of springs typically used. Figure adapted from \cite {springs}.}}{36}{}\protected@file@percent }
 \newlabel{fig:mss}{{5}{36}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}PBD}{36}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}XPBD}{37}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}User Cloth interaction}{37}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{38}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Scenarios}{38}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1}Hanging cloth setup}{38}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.2}Cloth on Sphere setup}{38}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Recorder and Screenshotter}{38}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Overview Of Project Content and Milestones}{38}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Chapter 2}{39}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}PBD}{37}{}\protected@file@percent }
+\newlabel{lst:cpploop}{{2}{37}{}{}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {2}{\ignorespaces Updating particles velocity using external forces}}{37}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1}Constraints}{38}{}\protected@file@percent }
+\newlabel{constraints}{{3.4.1}{38}{}{}{}}
+\@writefile{toc}{\contentsline {paragraph}{Generating Constraints}{38}{}\protected@file@percent }
+\newlabel{lst:consGen}{{3}{38}{}{}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {3}{\ignorespaces The inner loop for constraint generation}}{38}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Constraint Projection}{38}{}\protected@file@percent }
+\citation{muller2007position}
+\citation{muller2007position}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}XPBD}{39}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Projection of a constraint between two particles. Figure adapted from \cite {muller2007position}.}}{40}{}\protected@file@percent }
+\newlabel{fig:conproj}{{6}{40}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}User Cloth interaction}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}C++ vs C\#}{41}{}\protected@file@percent }
+\newlabel{cppcomp}{{4.1}{41}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Scenarios}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Hanging cloth setup}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.2}Cloth on Sphere setup}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Recorder and Screenshotter}{41}{}\protected@file@percent }
 \bibstyle{apacite}
 \bibdata{bibliography}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Additional Information / Knowledge Required}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Chapter 2}{42}{}\protected@file@percent }
 \bibcite{Baraff1998largesteps}{\citeauthoryear {Baraff\ \BBA{} Witkin}{Baraff\ \BBA{} Witkin}{{\APACyear {1998}}}}
 \APACbibcite{Baraff1998largesteps}{\citeauthoryear {Baraff\ \BBA{} Witkin}{Baraff\ \BBA{} Witkin}{{\APACyear {1998}}}}
 \bibcite{bender2014survey}{\citeauthoryear {Bender, M{\"u}ller, Otaduy, Teschner,{}\ \BBA{} Macklin}{Bender\ \BOthers {.}}{{\APACyear {2014}}}}
@@ -120,7 +136,7 @@
 \APACbibcite{robot}{\citeauthoryear {Clegg\ \BOthers {.}}{Clegg\ \BOthers {.}}{{\APACyear {2020}}}}
 \bibcite{10.1145/1073368.1073384}{\citeauthoryear {Cutler\ \BOthers {.}}{Cutler\ \BOthers {.}}{{\APACyear {2005}}}}
 \APACbibcite{10.1145/1073368.1073384}{\citeauthoryear {Cutler\ \BOthers {.}}{Cutler\ \BOthers {.}}{{\APACyear {2005}}}}
-\@writefile{toc}{\contentsline {section}{References}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{References}{43}{}\protected@file@percent }
 \bibcite{etzmuss2003fast}{\citeauthoryear {Etzmu{\ss }, Keckeisen,{}\ \BBA{} Stra{\ss }er}{Etzmu{\ss }\ \BOthers {.}}{{\APACyear {2003}}}}
 \APACbibcite{etzmuss2003fast}{\citeauthoryear {Etzmu{\ss }, Keckeisen,{}\ \BBA{} Stra{\ss }er}{Etzmu{\ss }\ \BOthers {.}}{{\APACyear {2003}}}}
 \bibcite{fisixArticle}{\citeauthoryear {Jakobsen}{Jakobsen}{{\APACyear {2001}}}}
@@ -167,10 +183,10 @@
 \APACbibcite{yu2018doublefusion}{\citeauthoryear {Yu\ \BOthers {.}}{Yu\ \BOthers {.}}{{\APACyear {2018}}}}
 \bibcite{Yu_2019_CVPR}{\citeauthoryear {Yu\ \BOthers {.}}{Yu\ \BOthers {.}}{{\APACyear {2019}}}}
 \APACbibcite{Yu_2019_CVPR}{\citeauthoryear {Yu\ \BOthers {.}}{Yu\ \BOthers {.}}{{\APACyear {2019}}}}
-\@writefile{toc}{\contentsline {section}{Appendices}{45}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {A}Project Overview}{45}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {A.A}Example sub appendices}{45}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {B}Second Formal Review Output}{46}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {C}Diary Sheets (or other project management evidence)}{47}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {D}Appendix 4 and following}{48}{}\protected@file@percent }
-\gdef \@abspage@last{49}
+\@writefile{toc}{\contentsline {section}{Appendices}{47}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A}Project Overview}{47}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.A}Example sub appendices}{47}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {B}Second Formal Review Output}{48}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {C}Diary Sheets (or other project management evidence)}{49}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {D}Appendix 4 and following}{50}{}\protected@file@percent }
+\gdef \@abspage@last{51}

@@ -22,23 +22,25 @@
 \contentsline {subsubsection}{\numberline {3.1.1}Language Choice}{30}{}%
 \contentsline {subsection}{\numberline {3.2}Initialisation}{32}{}%
 \contentsline {subsubsection}{\numberline {3.2.1}Mesh Creation}{32}{}%
-\contentsline {subsubsection}{\numberline {3.2.2}Particle Class}{34}{}%
+\contentsline {subsubsection}{\numberline {3.2.2}Particle Class}{33}{}%
 \contentsline {subsection}{\numberline {3.3}Mass-Spring System}{35}{}%
-\contentsline {subsection}{\numberline {3.4}PBD}{36}{}%
-\contentsline {subsection}{\numberline {3.5}XPBD}{37}{}%
-\contentsline {subsection}{\numberline {3.6}User Cloth interaction}{37}{}%
-\contentsline {section}{\numberline {4}Results}{38}{}%
-\contentsline {subsection}{\numberline {4.1}Scenarios}{38}{}%
-\contentsline {subsubsection}{\numberline {4.1.1}Hanging cloth setup}{38}{}%
-\contentsline {subsubsection}{\numberline {4.1.2}Cloth on Sphere setup}{38}{}%
-\contentsline {subsection}{\numberline {4.2}Recorder and Screenshotter}{38}{}%
-\contentsline {subsubsection}{\numberline {4.2.1}Overview Of Project Content and Milestones}{38}{}%
-\contentsline {section}{\numberline {5}Chapter 2}{39}{}%
-\contentsline {section}{\numberline {6}Additional Information / Knowledge Required}{40}{}%
-\contentsline {section}{References}{41}{}%
-\contentsline {section}{Appendices}{45}{}%
-\contentsline {section}{\numberline {A}Project Overview}{45}{}%
-\contentsline {subsection}{\numberline {A.A}Example sub appendices}{45}{}%
-\contentsline {section}{\numberline {B}Second Formal Review Output}{46}{}%
-\contentsline {section}{\numberline {C}Diary Sheets (or other project management evidence)}{47}{}%
-\contentsline {section}{\numberline {D}Appendix 4 and following}{48}{}%
+\contentsline {subsection}{\numberline {3.4}PBD}{37}{}%
+\contentsline {subsubsection}{\numberline {3.4.1}Constraints}{38}{}%
+\contentsline {paragraph}{Generating Constraints}{38}{}%
+\contentsline {paragraph}{Constraint Projection}{38}{}%
+\contentsline {subsection}{\numberline {3.5}XPBD}{39}{}%
+\contentsline {subsection}{\numberline {3.6}User Cloth interaction}{40}{}%
+\contentsline {section}{\numberline {4}Results}{41}{}%
+\contentsline {subsection}{\numberline {4.1}C++ vs C\#}{41}{}%
+\contentsline {subsection}{\numberline {4.2}Scenarios}{41}{}%
+\contentsline {subsubsection}{\numberline {4.2.1}Hanging cloth setup}{41}{}%
+\contentsline {subsubsection}{\numberline {4.2.2}Cloth on Sphere setup}{41}{}%
+\contentsline {subsection}{\numberline {4.3}Recorder and Screenshotter}{41}{}%
+\contentsline {section}{\numberline {5}Chapter 2}{42}{}%
+\contentsline {section}{References}{43}{}%
+\contentsline {section}{Appendices}{47}{}%
+\contentsline {section}{\numberline {A}Project Overview}{47}{}%
+\contentsline {subsection}{\numberline {A.A}Example sub appendices}{47}{}%
+\contentsline {section}{\numberline {B}Second Formal Review Output}{48}{}%
+\contentsline {section}{\numberline {C}Diary Sheets (or other project management evidence)}{49}{}%
+\contentsline {section}{\numberline {D}Appendix 4 and following}{50}{}%
