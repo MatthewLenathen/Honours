@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  3 APR 2024 09:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  3 APR 2024 12:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -941,9 +941,37 @@ File: figures/constraint.png Graphic file (type png)
 <use figures/constraint.png>
 Package pdftex.def Info: figures/constraint.png  used on input line 500.
 (pdftex.def)             Requested size: 157.71382pt x 67.37654pt.
-[39] [40 <./figures/constraint.png>] [41
 
-] (./Dissertation.bbl [42
+Underfull \hbox (badness 10000) in paragraph at lines 503--505
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 503--505
+
+ []
+
+[39]
+Underfull \hbox (badness 10000) in paragraph at lines 506--507
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 508--509
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 512--513
+
+ []
+
+[40 <./figures/constraint.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 519--520
+
+ []
+
+[41] [42] (./Dissertation.bbl [43
 
 ]
 Underfull \hbox (badness 1859) in paragraph at lines 16--36
@@ -1046,7 +1074,7 @@ Underfull \hbox (badness 3199) in paragraph at lines 241--260
 4017   \OT1/cmr/m/n/12 doi:
  []
 
-[43
+[44
 
 ]
 Underfull \hbox (badness 3724) in paragraph at lines 448--465
@@ -1081,7 +1109,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 610--629
  \OT1/cmr/m/n/12 doi:
  []
 
-[44]
+[45]
 Underfull \hbox (badness 5847) in paragraph at lines 675--696
 []\OT1/cmr/m/n/12 Oh, Y. J., Lee, T. M., & Lee, I.-K.  (2018).  Hi-er-ar-chi-
  []
@@ -1116,11 +1144,11 @@ Underfull \hbox (badness 2326) in paragraph at lines 861--881
 -
  []
 
-[45]) [46] [47] [48
-
-] [49
+[46]) [47] [48] [49
 
 ] [50
+
+] [51
 
 ] (./Dissertation.aux)
  ***********
@@ -1147,16 +1175,17 @@ live/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2023
 st/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2023/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.p
-fb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/te
-xlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2023
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2023/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-dist/fonts/
-type1/public/cm-super/sfrm0800.pfb>
-Output written on Dissertation.pdf (51 pages, 846806 bytes).
+/cm/cmr12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.p
+fb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texl
+ive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2023/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2023/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/publi
+c/cm-super/sfrm0800.pfb>
+Output written on Dissertation.pdf (52 pages, 860688 bytes).
 PDF statistics:
- 248 PDF objects out of 1000 (max. 8388607)
- 156 compressed objects within 2 object streams
+ 256 PDF objects out of 1000 (max. 8388607)
+ 161 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

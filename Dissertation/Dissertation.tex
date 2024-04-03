@@ -493,21 +493,41 @@ To actually project these constraints involves calculating two ${\Delta}p$, corr
 Where $w$ is the inverse mass, $p$ is the predicted position and $d$ is the rest distance.
 Once these corrections are calculated, they are added to the predicted position of the respective particle during the loop. \\
 
-Another aspect of constraints is stiffness. In the PBD implementation, stiffness is obtained by multiplying ${\Delta}p$ by $k\in[0...1]$. This works, but for the effect of this stiffness is non-linear with multiple solver iterations. This can be resolved by 
+Another aspect of constraints is stiffness. In the PBD implementation, stiffness is obtained by multiplying ${\Delta}p$ by $k\in[0...1]$. This works, but the effect of this stiffness is non-linear with multiple solver iterations. This can be resolved by calculating $k'=1-(1-k)^{1/n_s}$, where $n_s$ is the number of solver iterations. This is then used to multiply ${\Delta}p$.
 \begin{figure}
 	\centering
 	\caption{Projection of a constraint between two particles. Figure adapted from \protect\cite{muller2007position}.}
 	\includegraphics[scale=0.5]{constraint.png}
 	\label{fig:conproj}
 \end{figure}
-	
+\paragraph{Improved Constraint Generation}\mbox{} \\ \\	
+A problem with the earlier constraint generation was that it relied on the grid size variable. This means it would only work for a X by X square mesh, this is obviously not ideal, so the constraint generation needed to be reworked. One way to do this is by using the triangle data. Relying on the fact that the triangle data passed in is sorted by adjacency, we can use the indices of these to generate the constraints. \\
+
+This is achieved by looping through the number of triangles, incrementing by two each time, and working on two triangles at once. The first triangle's indices can be retrieved with the index, while the second triangle's indices can be retrieved with index + 1. With all 6 vertices of these two triangles, it is easy to create both structural and bend constraints in this manner. \\
+
+Sets of pairs of ints were created to hold temporary constraints. There were two main reasons for this approach. In C++, elements of a set have to be unique, this is to avoid creating duplicate constraints, e.g. $C(p_1,p_2)$ and $C(p_2,p_1)$. Using a function called minmax, the pair of ints can be sorted so that the lowest value is first. This is used in tandem with the property of sets to make sure each constraint is only created once. A full example is: a constraint between particle index 1 and index 20 is created as $(1,20)$ and inserted into the set. When the loop goes to create a constraint between index 20 and index 1, minmax will turn it into $(1,20)$ and it won't be added to the set as it already exists in there. \\
+
+Once the temporary sets are created, they can be looped through and inserted into the constraints vector along with the rest length between the two particles. With this new constraint generation, any mesh can be used so long as the triangle data is sorted by adjacent triangles.
+\subsubsection{Updating Position and Velocity}
+Once the constraints have been projected for a given number of times, it is necessary to set the particles new velocity and position. The velocity can be calculated as: $v_1=\frac{p_1-x_1}{dt}$, where $p_1$ is the predicted position, $x_1$ is the current position and $dt$ is delta time. After this, the particles position is simply updated to match the calculated predicted position. It is also necessary to update the positions vector that is passed back to Unity, as this will update the meshes vertex positions. \\
+
+With this entire loop, the PBD implementation correctly works to simulate cloth with great performance and good accuracy. 
 	
 \subsection{XPBD}
-- another decently big section on PBD to XPBD, substeps, stretching compliance etc
+Now that PBD is successfully implemented, the XPBD extension can also be implemented. This was added as another algorithm type, so that it is easy to switch between them. The first major improvement that XPBD offers is the usage of substeps.
+\subsubsection{Substeps}
+In the XPBD paper, the authors found that spending the fixed time budget of one frame is much more effective by using substeps instead of solver iterations. In essence, XPBD encapsulates the whole PBD simulation in a loop of substeps, instead of wrapping the constraint projection inside solver iterations. This means that constraints are processed only once per substep. However, multiple substeps are executed within a single simulation loop, allowing for iterative processing of constraints across the entire simulation. \\
+
+After understanding XPBD's approach to simulating, it is clear that the way delta time is handled needs to be tweaked. Instead of using delta time within the loop, a new measurement of delta time substeps is calculated as ${\Delta}t_s=\frac{{\Delta}t}{n}$, where $n$ is the number of substeps. This new variable represents the duration of each substep. \\
+
+This new approach of using substeps solves the original problem with PBD, the constraint stiffness depending on time step. 
+\subsubsection{Stiffness}
+With XPBD, there is also an extension to how constraint stiffness is altered. PBD handles stiffness with the stiffness between 0 and 1 as discussed in Section \ref{constraints}. With XPBD, a compliance factor is used. 
 
 \subsection{User Cloth interaction}
 - discuss feature i added where the user can click and drag the cloth around, sets a particle to stationary etc\\
 - raycast
+\subsection{Collision}
 
 
 \section{Results}

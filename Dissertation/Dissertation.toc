@@ -28,19 +28,23 @@
 \contentsline {subsubsection}{\numberline {3.4.1}Constraints}{38}{}%
 \contentsline {paragraph}{Generating Constraints}{38}{}%
 \contentsline {paragraph}{Constraint Projection}{38}{}%
-\contentsline {subsection}{\numberline {3.5}XPBD}{39}{}%
-\contentsline {subsection}{\numberline {3.6}User Cloth interaction}{40}{}%
-\contentsline {section}{\numberline {4}Results}{41}{}%
-\contentsline {subsection}{\numberline {4.1}C++ vs C\#}{41}{}%
-\contentsline {subsection}{\numberline {4.2}Scenarios}{41}{}%
-\contentsline {subsubsection}{\numberline {4.2.1}Hanging cloth setup}{41}{}%
-\contentsline {subsubsection}{\numberline {4.2.2}Cloth on Sphere setup}{41}{}%
-\contentsline {subsection}{\numberline {4.3}Recorder and Screenshotter}{41}{}%
-\contentsline {section}{\numberline {5}Chapter 2}{42}{}%
-\contentsline {section}{References}{43}{}%
-\contentsline {section}{Appendices}{47}{}%
-\contentsline {section}{\numberline {A}Project Overview}{47}{}%
-\contentsline {subsection}{\numberline {A.A}Example sub appendices}{47}{}%
-\contentsline {section}{\numberline {B}Second Formal Review Output}{48}{}%
-\contentsline {section}{\numberline {C}Diary Sheets (or other project management evidence)}{49}{}%
-\contentsline {section}{\numberline {D}Appendix 4 and following}{50}{}%
+\contentsline {paragraph}{Improved Constraint Generation}{39}{}%
+\contentsline {subsubsection}{\numberline {3.4.2}Updating Position and Velocity}{41}{}%
+\contentsline {subsection}{\numberline {3.5}XPBD}{41}{}%
+\contentsline {subsubsection}{\numberline {3.5.1}Substeps}{41}{}%
+\contentsline {subsection}{\numberline {3.6}User Cloth interaction}{41}{}%
+\contentsline {subsection}{\numberline {3.7}Collision}{42}{}%
+\contentsline {section}{\numberline {4}Results}{42}{}%
+\contentsline {subsection}{\numberline {4.1}C++ vs C\#}{42}{}%
+\contentsline {subsection}{\numberline {4.2}Scenarios}{42}{}%
+\contentsline {subsubsection}{\numberline {4.2.1}Hanging cloth setup}{42}{}%
+\contentsline {subsubsection}{\numberline {4.2.2}Cloth on Sphere setup}{42}{}%
+\contentsline {subsection}{\numberline {4.3}Recorder and Screenshotter}{42}{}%
+\contentsline {section}{\numberline {5}Chapter 2}{43}{}%
+\contentsline {section}{References}{44}{}%
+\contentsline {section}{Appendices}{48}{}%
+\contentsline {section}{\numberline {A}Project Overview}{48}{}%
+\contentsline {subsection}{\numberline {A.A}Example sub appendices}{48}{}%
+\contentsline {section}{\numberline {B}Second Formal Review Output}{49}{}%
+\contentsline {section}{\numberline {C}Diary Sheets (or other project management evidence)}{50}{}%
+\contentsline {section}{\numberline {D}Appendix 4 and following}{51}{}%
