@@ -113,7 +113,7 @@ public class cppFunctions
 [System.Diagnostics.DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + "(),nq}")]
 public class HangingCloth : MonoBehaviour
 {
-    bool CSHARP_SIM = true;
+    bool CSHARP_SIM = false;
 
     // Start is called before the first frame update
     List<Particle> particles = new List<Particle>();
@@ -124,10 +124,10 @@ public class HangingCloth : MonoBehaviour
 
     BoxCollider boxCollider;
 
-    int gridSize = 20;
+    int gridSize = 100;
     int numParticles; // Changed to vertices.Length instead of hardcoded value
     int numTriangles; // Need for the C++ code
-    float spacing = 0.5f; // Only used for mesh generation, not in c++ anymore
+    float spacing = 0.125f; // Only used for mesh generation, not in c++ anymore
     int algorithmType = 0; // 0 for mass spring, 1 for position based, 2 for XPBD
     int scenario = 0; // 0 for hanging cloth, 1 for ..
     int solverIterations = 30; // Number of iterations for the pbd solver
@@ -146,6 +146,9 @@ public class HangingCloth : MonoBehaviour
     Vector3 mouseWorldPos;
     int stopGrabbingIndex = -1;
     float distanceToCloth = 0.0f;
+
+    private float elapsedTime = 0.0f;
+    private int frameCount = 0;
 
     Vector3 sphereCentre;
     float sphereRadius;
@@ -411,15 +414,15 @@ public class HangingCloth : MonoBehaviour
             numTriangles = triangles.Length / 3;
 
             // Assign static particles to be able to pass them to the C++ code
-            staticParticleIndices = new int[2]; // Change this number for more/less static particles
+            staticParticleIndices = new int[100]; // Change this number for more/less static particles
 
-            staticParticleIndices[0] = gridSize * (gridSize -1);
-            staticParticleIndices[1] = gridSize * gridSize -1;
+            //staticParticleIndices[0] = gridSize * (gridSize -1);
+            //staticParticleIndices[1] = gridSize * gridSize -1;
 
-            // for(int i = 0;i<20;i++)
-            // {
-            //     staticParticleIndices[i] = gridSize * (gridSize -1) + i;
-            // }
+             for(int i = 0;i<100;i++)
+             {
+                staticParticleIndices[i] = gridSize * (gridSize -1) + i;
+             }
 
             numStaticParticles = staticParticleIndices.Length;
 
@@ -608,11 +611,7 @@ public class HangingCloth : MonoBehaviour
                 //Debug.Log("Hit position: " + hit.point);
                 selectedParticleIndex = FindClosestParticleToMouse(hit.point);
                 isDragging = true;
-                //Debug.Log("Selected particle: " + selectedParticleIndex);
-                Vector3 worldPos = transform.TransformPoint(vertices[selectedParticleIndex]);
-                //distanceToCloth = Vector3.Distance(Camera.main.transform.position, worldPos);
                 distanceToCloth = Camera.main.WorldToScreenPoint(hit.point).z;
-                
             }
         }
         if(isDragging){
@@ -642,7 +641,22 @@ public class HangingCloth : MonoBehaviour
             isRecording = false;
             fixedUpdateCounter = 0;
         }
-       
+        // Fps averaged 10 seconds
+       // Only count frames and time for the first 10 seconds
+        if (elapsedTime < 10.0f)
+        {
+            elapsedTime += Time.deltaTime;
+            frameCount++;
+        }
+        else if (frameCount > 0)
+        {
+            // Calculate and log the average FPS
+            float avgFps = frameCount / elapsedTime;
+            Debug.Log("Average FPS for the first 10 seconds: " + avgFps);
+
+            // Reset frame count to prevent logging FPS again
+            frameCount = 0;
+        }
         
     }
 

@@ -86,12 +86,13 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Particle Class}{33}{}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces A wireframe of a vertical cloth mesh}}{34}{}\protected@file@percent }
 \newlabel{fig:mesh}{{4}{34}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Mass-Spring System}{35}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Mass-Spring System}{34}{}\protected@file@percent }
+\newlabel{mss-metho}{{3.3}{34}{}{}{}}
 \citation{springs}
 \citation{springs}
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The types of springs typically used. Figure adapted from \cite {springs}.}}{36}{}\protected@file@percent }
 \newlabel{fig:mss}{{5}{36}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}PBD}{37}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}PBD}{36}{}\protected@file@percent }
 \newlabel{lst:cpploop}{{2}{37}{}{}{}}
 \@writefile{lol}{\contentsline {lstlisting}{\numberline {2}{\ignorespaces Updating particles velocity using external forces}}{37}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1}Constraints}{38}{}\protected@file@percent }
@@ -102,24 +103,36 @@
 \@writefile{toc}{\contentsline {paragraph}{Constraint Projection}{38}{}\protected@file@percent }
 \citation{muller2007position}
 \citation{muller2007position}
-\@writefile{toc}{\contentsline {paragraph}{Improved Constraint Generation}{39}{}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Projection of a constraint between two particles. Figure adapted from \cite {muller2007position}.}}{40}{}\protected@file@percent }
-\newlabel{fig:conproj}{{6}{40}{}{}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2}Updating Position and Velocity}{41}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Projection of a constraint between two particles. Figure adapted from \cite {muller2007position}.}}{39}{}\protected@file@percent }
+\newlabel{fig:conproj}{{6}{39}{}{}{}}
+\@writefile{toc}{\contentsline {paragraph}{Improved Constraint Generation}{40}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2}Updating Position and Velocity}{40}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.5}XPBD}{41}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.1}Substeps}{41}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}User Cloth interaction}{41}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Collision}{42}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{42}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}C++ vs C\#}{42}{}\protected@file@percent }
-\newlabel{cppcomp}{{4.1}{42}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Scenarios}{42}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Hanging cloth setup}{42}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.2}Cloth on Sphere setup}{42}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Recorder and Screenshotter}{42}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.1}Substeps vs Solver Iterations}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2}Stiffness through a Compliance Factor}{41}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}User Cloth interaction}{42}{}\protected@file@percent }
+\newlabel{lst:user}{{4}{42}{}{}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4}{\ignorespaces Modifying particles from user interaction}}{42}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Hanging cloth mesh being dragged by a corner particle}}{43}{}\protected@file@percent }
+\newlabel{fig:drag}{{7}{43}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Collision}{43}{}\protected@file@percent }
+\newlabel{lst:col}{{5}{44}{}{}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {5}{\ignorespaces Sphere collision function}}{44}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{45}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}C++ vs C\#}{45}{}\protected@file@percent }
+\newlabel{cppcomp}{{4.1}{45}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces FPS comparison between C\# and C++ for a mass spring system of 20x20 particles}}{45}{}\protected@file@percent }
+\newlabel{tab:lang}{{1}{45}{}{}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces FPS comparison between C\# and C++ for a mass spring system of 100x100 particles}}{46}{}\protected@file@percent }
+\newlabel{tab:lang2}{{2}{46}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Scenarios}{46}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Hanging cloth setup}{46}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.2}Cloth on Sphere setup}{46}{}\protected@file@percent }
+\newlabel{spherescene}{{4.2.2}{46}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Recorder and Screenshotter}{46}{}\protected@file@percent }
 \bibstyle{apacite}
 \bibdata{bibliography}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Chapter 2}{43}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Chapter 2}{47}{}\protected@file@percent }
 \bibcite{Baraff1998largesteps}{\citeauthoryear {Baraff\ \BBA{} Witkin}{Baraff\ \BBA{} Witkin}{{\APACyear {1998}}}}
 \APACbibcite{Baraff1998largesteps}{\citeauthoryear {Baraff\ \BBA{} Witkin}{Baraff\ \BBA{} Witkin}{{\APACyear {1998}}}}
 \bibcite{bender2014survey}{\citeauthoryear {Bender, M{\"u}ller, Otaduy, Teschner,{}\ \BBA{} Macklin}{Bender\ \BOthers {.}}{{\APACyear {2014}}}}
@@ -140,7 +153,7 @@
 \APACbibcite{robot}{\citeauthoryear {Clegg\ \BOthers {.}}{Clegg\ \BOthers {.}}{{\APACyear {2020}}}}
 \bibcite{10.1145/1073368.1073384}{\citeauthoryear {Cutler\ \BOthers {.}}{Cutler\ \BOthers {.}}{{\APACyear {2005}}}}
 \APACbibcite{10.1145/1073368.1073384}{\citeauthoryear {Cutler\ \BOthers {.}}{Cutler\ \BOthers {.}}{{\APACyear {2005}}}}
-\@writefile{toc}{\contentsline {section}{References}{44}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{References}{48}{}\protected@file@percent }
 \bibcite{etzmuss2003fast}{\citeauthoryear {Etzmu{\ss }, Keckeisen,{}\ \BBA{} Stra{\ss }er}{Etzmu{\ss }\ \BOthers {.}}{{\APACyear {2003}}}}
 \APACbibcite{etzmuss2003fast}{\citeauthoryear {Etzmu{\ss }, Keckeisen,{}\ \BBA{} Stra{\ss }er}{Etzmu{\ss }\ \BOthers {.}}{{\APACyear {2003}}}}
 \bibcite{fisixArticle}{\citeauthoryear {Jakobsen}{Jakobsen}{{\APACyear {2001}}}}
@@ -187,10 +200,10 @@
 \APACbibcite{yu2018doublefusion}{\citeauthoryear {Yu\ \BOthers {.}}{Yu\ \BOthers {.}}{{\APACyear {2018}}}}
 \bibcite{Yu_2019_CVPR}{\citeauthoryear {Yu\ \BOthers {.}}{Yu\ \BOthers {.}}{{\APACyear {2019}}}}
 \APACbibcite{Yu_2019_CVPR}{\citeauthoryear {Yu\ \BOthers {.}}{Yu\ \BOthers {.}}{{\APACyear {2019}}}}
-\@writefile{toc}{\contentsline {section}{Appendices}{48}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {A}Project Overview}{48}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {A.A}Example sub appendices}{48}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {B}Second Formal Review Output}{49}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {C}Diary Sheets (or other project management evidence)}{50}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {D}Appendix 4 and following}{51}{}\protected@file@percent }
-\gdef \@abspage@last{52}
+\@writefile{toc}{\contentsline {section}{Appendices}{52}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A}Project Overview}{52}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.A}Example sub appendices}{52}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {B}Second Formal Review Output}{53}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {C}Diary Sheets (or other project management evidence)}{54}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {D}Appendix 4 and following}{55}{}\protected@file@percent }
+\gdef \@abspage@last{56}

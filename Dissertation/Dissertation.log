@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  3 APR 2024 12:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  6 APR 2024 01:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -856,122 +856,149 @@ Underfull \hbox (badness 10000) in paragraph at lines 414--415
 
  []
 
-[33{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+
 Underfull \hbox (badness 10000) in paragraph at lines 416--418
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 421--423
+[33{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+Underfull \hbox (badness 10000) in paragraph at lines 422--424
 
  []
 
 [34 <./figures/clothmesh.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 424--426
+Underfull \hbox (badness 10000) in paragraph at lines 425--427
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 427--428
+Underfull \hbox (badness 10000) in paragraph at lines 428--429
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 429--431
+Underfull \hbox (badness 10000) in paragraph at lines 430--432
 
  []
 
 [35]
-Underfull \hbox (badness 10000) in paragraph at lines 432--433
+Underfull \hbox (badness 10000) in paragraph at lines 433--434
 
  []
 
 <figures/springs.png, id=136, 853.1875pt x 318.18875pt>
 File: figures/springs.png Graphic file (type png)
 <use figures/springs.png>
-Package pdftex.def Info: figures/springs.png  used on input line 439.
+Package pdftex.def Info: figures/springs.png  used on input line 440.
 (pdftex.def)             Requested size: 426.59271pt x 159.09398pt.
 
-Overfull \hbox (36.59271pt too wide) in paragraph at lines 439--441
+Overfull \hbox (36.59271pt too wide) in paragraph at lines 440--442
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 446--447
+Underfull \hbox (badness 10000) in paragraph at lines 447--448
 
  []
 
 [36 <./figures/springs.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 461--462
+Underfull \hbox (badness 10000) in paragraph at lines 462--463
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 463--464
+Underfull \hbox (badness 10000) in paragraph at lines 464--465
 
  []
 
 [37]
-Underfull \hbox (badness 10000) in paragraph at lines 469--471
+Underfull \hbox (badness 10000) in paragraph at lines 470--472
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 485--487
+Underfull \hbox (badness 10000) in paragraph at lines 486--488
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 485--487
+Underfull \hbox (badness 10000) in paragraph at lines 486--488
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 489--490
 
  []
 
 [38]
-Underfull \hbox (badness 10000) in paragraph at lines 488--489
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 492--495
+Underfull \hbox (badness 10000) in paragraph at lines 493--496
 
  []
 
 <figures/constraint.png, id=148, 315.42844pt x 134.75343pt>
 File: figures/constraint.png Graphic file (type png)
 <use figures/constraint.png>
-Package pdftex.def Info: figures/constraint.png  used on input line 500.
+Package pdftex.def Info: figures/constraint.png  used on input line 501.
 (pdftex.def)             Requested size: 157.71382pt x 67.37654pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 503--505
+Underfull \hbox (badness 10000) in paragraph at lines 504--506
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 503--505
+Underfull \hbox (badness 10000) in paragraph at lines 504--506
 
  []
 
-[39]
-Underfull \hbox (badness 10000) in paragraph at lines 506--507
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 508--509
+[39 <./figures/constraint.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 507--508
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 512--513
+Underfull \hbox (badness 10000) in paragraph at lines 509--510
 
  []
 
-[40 <./figures/constraint.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 519--520
+
+Underfull \hbox (badness 10000) in paragraph at lines 513--514
 
  []
 
-[41] [42] (./Dissertation.bbl [43
+[40]
+Underfull \hbox (badness 10000) in paragraph at lines 520--521
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 522--523
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 530--531
+
+ []
+
+[41]
+Underfull \hbox (badness 10000) in paragraph at lines 532--533
+
+ []
+
+<figures/drag.png, id=160, 647.41875pt x 536.0025pt>
+File: figures/drag.png Graphic file (type png)
+<use figures/drag.png>
+Package pdftex.def Info: figures/drag.png  used on input line 551.
+(pdftex.def)             Requested size: 323.70857pt x 268.0006pt.
+[42]
+Underfull \hbox (badness 10000) in paragraph at lines 555--556
+
+ []
+
+[43 <./figures/drag.png>] [44] [45
+
+] [46] (./Dissertation.bbl [47
 
 ]
 Underfull \hbox (badness 1859) in paragraph at lines 16--36
@@ -1074,7 +1101,7 @@ Underfull \hbox (badness 3199) in paragraph at lines 241--260
 4017   \OT1/cmr/m/n/12 doi:
  []
 
-[44
+[48
 
 ]
 Underfull \hbox (badness 3724) in paragraph at lines 448--465
@@ -1109,7 +1136,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 610--629
  \OT1/cmr/m/n/12 doi:
  []
 
-[45]
+[49]
 Underfull \hbox (badness 5847) in paragraph at lines 675--696
 []\OT1/cmr/m/n/12 Oh, Y. J., Lee, T. M., & Lee, I.-K.  (2018).  Hi-er-ar-chi-
  []
@@ -1144,11 +1171,11 @@ Underfull \hbox (badness 2326) in paragraph at lines 861--881
 -
  []
 
-[46]) [47] [48] [49
+[50]) [51] [52] [53
 
-] [50
+] [54
 
-] [51
+] [55
 
 ] (./Dissertation.aux)
  ***********
@@ -1162,10 +1189,10 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 8421 strings out of 474503
- 132880 string characters out of 5756704
+ 8469 strings out of 474503
+ 133744 string characters out of 5756704
  2039043 words of memory out of 5000000
- 30265 multiletter control sequences out of 15000+600000
+ 30313 multiletter control sequences out of 15000+600000
  565865 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  69i,12n,79p,1557b,1436s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1182,10 +1209,10 @@ texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2023/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2023/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/publi
 c/cm-super/sfrm0800.pfb>
-Output written on Dissertation.pdf (52 pages, 860688 bytes).
+Output written on Dissertation.pdf (56 pages, 1051819 bytes).
 PDF statistics:
- 256 PDF objects out of 1000 (max. 8388607)
- 161 compressed objects within 2 object streams
+ 271 PDF objects out of 1000 (max. 8388607)
+ 170 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
 
