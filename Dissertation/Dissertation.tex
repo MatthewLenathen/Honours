@@ -30,7 +30,7 @@
 \usepackage{listings}
 \usepackage{color}
 \usepackage{amsmath}
-
+\usepackage{pdfpages}
 
 
 %header and footer settings
@@ -443,7 +443,7 @@ The very same system was also implemented in the C++ version. This was so that t
 
 
  
-\subsection{PBD}
+\subsection{Position Based Dynamics}
 With a valid simulation framework setup with mesh creation, particle vectors and the simulation loop working, the next thing to implement was position based dynamics. From this point, features were only created in the C++ version, as going back and forth between languages to implement the same things was not the best usage of time. As mentioned in Section \ref{lang}, the C++ program allows variables to be passed from C\# to the C++ app. This means a cloth simulation object can be created within C++ that assigns all the variables passed through, into properties of the cloth simulation object. Some of these variables can include vertex positions, triangle indices, solver iterations etc. There are two int variables that are used in switch statements within init and update, called scenario and algorithm. These variables switch into blocks of code to change how the simulation is run, scenario determines if the cloth is a hanging vertical cloth, or if its a horizontal cloth falling on a sphere. Algorithm changes which method is being used, between mass-spring, pbd and xpbd. \\
 
 To create the pbd simulation loop, the idea was to look at the algorithm from the paper which can be seen in Section \ref{lrPBD}, and translate it to C++ code. Firstly, to handle particles the static particles that should be skipped, a simple check can be used on the isStatic property of that particle in the loop, skipping that particle if the property is true. \\
@@ -466,7 +466,7 @@ Next, a simple damping of 99\% was applied to the velocity to simulate air frict
 The next step is to calculate the predicted position of the particle, based on the new velocity. This predicted position will then be iterated on for a specified number of times to get it closer to the goal position. This requires constraints which are key to the whole algorithm.
 \subsubsection{Constraints}
 \label{constraints} 
-At its core, constraints in position based dynamics are similar to springs in a mass spring system, a way of adjusting particles so that they fit a certain constraint. Position based dynamics can be used for a vast range of deformable objects and can use constraints such as volume constraints. For cloth, structural and bend constraints are used.
+At its core, constraints in position based dynamics are similar to springs in a mass spring system, a way of adjusting particles so that they fit a certain constraint. Position based dynamics can be used for a vast range of deformable objects and can use constraints such as volume constraints. For cloth, structural and shear constraints are used.
 \paragraph{Generating Constraints}\mbox{} \\ \\
 Initially, constraints were held in a vector of uvec2, a glm type that holds two unsigned integers, and these integers would be the indices of the particles that are involved in this constraint. The constraints were generated using gridSize in a similar way to the mass spring system within a nested for loop, which can be seen in Listing \ref{lst:consGen}. 
 \begin{lstlisting}[caption={The inner loop for constraint generation},label={lst:consGen}]
@@ -504,7 +504,7 @@ Another aspect of constraints is stiffness. In the PBD implementation, stiffness
 \paragraph{Improved Constraint Generation}\mbox{} \\ \\	
 A problem with the earlier constraint generation was that it relied on the grid size variable. This means it would only work for a X by X square mesh, this is obviously not ideal, so the constraint generation needed to be reworked. One way to do this is by using the triangle data. Relying on the fact that the triangle data passed in is sorted by adjacency, we can use the indices of these to generate the constraints. \\
 
-This is achieved by looping through the number of triangles, incrementing by two each time, and working on two triangles at once. The first triangle's indices can be retrieved with the index, while the second triangle's indices can be retrieved with index + 1. With all 6 vertices of these two triangles, it is easy to create both structural and bend constraints in this manner. \\
+This is achieved by looping through the number of triangles, incrementing by two each time, and working on two triangles at once. The first triangle's indices can be retrieved with the index, while the second triangle's indices can be retrieved with index + 1. With all 6 vertices of these two triangles, it is easy to create both structural and shear constraints in this manner. \\
 
 Sets of pairs of ints were created to hold temporary constraints. There were two main reasons for this approach. In C++, elements of a set have to be unique, this is to avoid creating duplicate constraints, e.g. $C(p_1,p_2)$ and $C(p_2,p_1)$. Using a function called minmax, the pair of ints can be sorted so that the lowest value is first. This is used in tandem with the property of sets to make sure each constraint is only created once. A full example is: a constraint between particle index 1 and index 20 is created as $(1,20)$ and inserted into the set. When the loop goes to create a constraint between index 20 and index 1, minmax will turn it into $(1,20)$ and it won't be added to the set as it already exists in there. \\
 
@@ -514,7 +514,7 @@ Once the constraints have been projected for a given number of times, it is nece
 
 With this entire loop, the PBD implementation correctly works to simulate cloth with great performance and good accuracy. 
 	
-\subsection{XPBD}
+\subsection{Extended Position Based Dynamics}
 Now that PBD is successfully implemented, the XPBD extension can also be implemented. This was added as another algorithm type, so that it is easy to switch between them. The first major improvement that XPBD offers is the usage of substeps.
 \subsubsection{Substeps vs Solver Iterations}
 In the XPBD paper, the authors found that spending the fixed time budget of one frame is much more effective by using substeps instead of solver iterations. In essence, XPBD encapsulates the whole PBD simulation in a loop of substeps, instead of wrapping the constraint projection inside solver iterations. This means that constraints are processed only once per substep. However, multiple substeps are executed within a single simulation loop, allowing for iterative processing of constraints across the entire simulation. \\
@@ -551,7 +551,7 @@ It is necessary to set the mass as well as the static property, to allow the con
 	\includegraphics[scale=0.5]{drag.png}
 	\label{fig:drag}
 \end{figure}
-\subsection{Collision}
+\subsection{Cloth and Sphere Collision}
 Collision was the next feature to be implemented for use in the scenario of a horizontal cloth falling on top of a static sphere. First, a simple sphere object was created within Unity using the sphere primitive. This will have two relevant properties: Sphere centre and sphere radius. There are many ways to do collision in physics simulations and the implementation depends on the scenario and usage of it. It is mentioned by the authors in the original PBD paper that position based approaches have an advantage compared to normal methods because of how easy it is to implement collision and response. They do this by creating collision constraints. With collision between cloth and a small rigid body, two way collision is required, due to the fact that the small object could potentially fall through the cloth. In this situation, only collision between the cloth and the sphere is needed, due to the sphere being large. \\
 
 The way this collision and response is handled is by checking each particle's predicted position during the PBD/XPBD loop. A vector between the position of the sphere's centre and the predicted position can be calculated. If the length of this vector is smaller than the radius of the sphere then the particle has collied with the sphere. The depth of this collision is then calculated and multiplied with the normalised vector calculated earlier. This delta can then be added to the predicted position, to move the particle outside the sphere in the direction of this vector. This can be coded very easily as seen in Listing \ref{lst:col}. 
@@ -576,11 +576,11 @@ void ClothSim::CollisionWithSphere()
 
 \end{lstlisting}
 The $0.0001f$ that is added to the depth is a buffer to make sure the particles aren't just moved directly onto the sphere. This helps to avoid the cloth getting stuck, as it might still be colliding on the very next frame. It also helps with z-fighting issues, this will be discussed in Section \ref{spherescene}.
-\section{Results}
+\section{Results and Discussion}
 Now that the entire implementation is finished, it is necessary to test and experiment with variables to fully gauge the simulations effectiveness. This will mean comparing the C++ and C\# implementations, discussing the two scenarios, discussing the recorder feature that was implemented and analysing the visuals of the simulation.
 \subsection{C++ vs C\#}
 \label{cppcomp}
-As discussed in Section \ref{mss-metho}, the mass spring system was implemented in both C++ and C\#. This will allow for testing of both versions with the same setup, to check performance. Inside Unity's Update function, a quick if/else was created to sum up and average the frames over the first 10 seconds of simulation. This will be used over 5 runs of both C++ and C\# to check the true average fps for both implementations. Before testing, it is expected that the C++ version will outperform C\#, due to the efficiency of C++ and not having to deal with garbage collection in C\#. This experiment will be conducted on 20x20 mesh of spacing 0.5, and a 100x100 mesh of spacing 0.125. The results of the first experiment can be seen in Table \ref{tab:lang}. \\
+As discussed in Section \ref{mss-metho}, the mass spring system was implemented in both C++ and C\#. This will allow for testing of both versions with the same setup, to check performance. Inside Unity's Update function, a quick if/else was created to sum up and average the frames over the first 10 seconds of simulation. This will be used over 5 runs of both C++ and C\# to check the true average fps for both implementations. Before testing, it is expected that the C++ version will outperform C\#, due to the efficiency of C++ and not having to deal with garbage collection in C\#. This experiment will be conducted on 20x20 mesh of spacing 0.5, a 100x100 mesh of spacing 0.125 and finally, a 150x150 mesh of spacing 0.125. The results of the first experiment can be seen in Table \ref{tab:lang}. \\
 \begin{table}[htbp]
 	\centering
 	\begin{tabular}{|c|c|c|} % Specifies three columns with centered content, and vertical lines between columns
@@ -620,26 +620,96 @@ It can be seen here that on average, there is a 60fps increase when running a ma
 	\label{tab:lang2}
 \end{table}
 
-With this second experiment, the fps on both versions are lower as expected, and the C++ version still outperforms the C\#, this time by 65 fps on average.
+With this second experiment, the fps on both versions are lower as expected, and the C++ version still outperforms the C\#, this time by 65 fps on average. It has to be noted that at higher particle size, this mass spring system implementation is extremely elastic and doesn't truly represent any real world cloth material, and with the problem of instability at higher spring constants, it is unable to simulate accurate cloth. This could potentially be due to only structural springs being implemented, and there not being enough forces to keep the particle mesh in its original shape. \\
+
+A final test using a mesh of 150x150 particles and a spacing of 0.125 was performed to test the extremes of both implementations. The results of testing both implementations with this mesh can be seen in Table \ref{tab:lang3}.\\
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|c|c|c|} % Specifies three columns with centered content, and vertical lines between columns
+		\hline % Horizontal line at the top of the table
+		Run \# & C\# FPS & C++ FPS \\ % Table header row
+		\hline % Horizontal line below the header row
+		1 & 69.96 & 187.19 \\ 
+		2 & 70.29 & 188.69 \\ 
+		3 & 74.30 & 187.78 \\ 
+		4 & 76.29 & 192.00  \\ 
+		5 & 73.39 & 190.79  \\ 
+		\hline
+		Average & 72.85 & 189.29 \\ 
+		\hline % Horizontal line at the bottom of the table
+	\end{tabular}
+	\caption{FPS comparison between C\# and C++ for a mass spring system of 150x150 particles} % Table caption
+	\label{tab:lang3}
+\end{table}
+
+With this final experiment, there was a noticeable drop off in fps compared to the previous two experiments, yet C++ remained well ahead vs C\#. On average, C++ outperformed by 116 fps, leading to the conclusion that fps saved was proportional to the mesh size. This makes sense, as when the amount of calculations and vector manipulation increases, C++ will be saving more time compared to C\#. For the mass spring system, any higher resolution meshes and the fps begins to suffer heavily as a result of the increased computations required.\\
+
+As C++ is clearly superior than C\# at physics simulations, it was clear that the rest of the project was to be implemented only in C++ and to not waste development time repeating it in C\#. The rest of the results will be solely resulting from the C++ code, except from features like recording videos from within Unity.
+\subsection{Recorder}
+To properly evaluate the simulations, it is necessary to record different algorithms and scenarios to be able to compare them. Unity recorder is a plugin within Unity that allows for video's and screenshots to be taken of projects. Usually it is manually used through a plugin window but it also provides an API to allow for scripts to manage recording. \\
+
+With this, a mass-recording system was successfully implemented within the C\# script. It uses a new class called recordParameters that sets variables to be tested, such as the number of PBD solver iterations, its stiffness and scenario etc. A generate filename function was also implemented that takes in a recordParameters object and generates a unique filename from its properties. The way this recording feature was designed allowed for lots of different experiments to be queued up and recorded in succession. In Unity's update, it checks if it is currently recording, if it isn't it takes the next pending experiment and starts it. The recording folder within the project can now hold all the experiments that are clearly identified with the filename as seen in Figure \ref{fig:recs}.
+
+\begin{figure}
+	\centering
+	\caption{The folder of experiment recordings.}
+	\includegraphics[scale=0.8]{recs.png}
+	\label{fig:recs}
+\end{figure}
+
 
 \subsection{Scenarios}
-ff
-\subsubsection{Hanging cloth setup}
-- discuss the scenario of the hanging cloth, vertical mesh creation, wind etc
-\subsubsection{Cloth on Sphere setup}
+In this project, two distinct scenarios were implemented to test aspects of cloth simulation that are common use cases for it, such as a hanging cloth acting as things such as curtains or flags. The second scenario being a horizontal cloth falling onto a rigid sphere. This was to test how the constraints function when including collision. 
+\subsubsection{Hanging Cloth}
+The first scenario is the basic hanging cloth scenario. This mesh was created vertically, so 0.0f was value for the z-axis in every coordinate when initialising. There were two main ways the cloth was pinned in testing. The first being the top two corner particles being static, this would emulate a cloth such as clothes being pinned with two pegs, or a cape. The second way was the entire top row of particles being pinned, emulating a flag. Overall, the first method was used much more in testing as it allows the constraints to be shown better, and displays interesting properties regarding the top row of particles. \\
+
+Wind was also used in this scenario to apply an additional force than just gravity. Allowing the display of a system with multiple forces interacting with multiple particles. This wind was a simple vector with magnitude 1.0 in the z direction, blowing the cloth away and towards the camera. The magnitude changed between 1.0 and -1.0 using a sine function with total simulation time as the factor. \\
+
+A useful property of Unity is the range property of public variables. If a range is applied above a public variable as so:
+\begin{lstlisting}[caption={Unity's range feature},label={lst:rng}]
+[Range(0f, 100f)]
+public float windStrength = 1.0f;
+\end{lstlisting}
+It will allow the user to manipulate this variable in real time with a slider. This feature is crucial in analysing different setups to display how properties such as stiffness or wind affect the simulation.
+
+\paragraph{Mass-Spring System} \mbox{} \\
+In the mass spring system version of the hanging cloth, a variable to test the impact of is spring constant. As explain in Section \ref{mss-metho}, the spring constant multiplies the force applied by the springs. A higher spring constant results in a stiffer system, while a lower results in a loose one. In Figure \ref{fig:msscomp}, three versions of the simulation can be seen with spring constants of 500, 1000 and 1500 from left to right. The lower spring constant cloth sagging under the force of gravity while the higher spring constants hold up more. Changing this variable can help the developer tune the cloth to have different properties depending on the use case.
+
+\begin{figure}
+	\centering
+	\caption{Three versions of the mass spring system, with spring constant = 500,1000 and 1500}
+	\includegraphics[scale=0.35]{msscomp.png}
+	\label{fig:msscomp}
+\end{figure}
+
+\paragraph{Position Based Dynamics} \mbox{} \\
+The position based dynamics implementation within this project has a few more parameters that can be tuned and experimented with. These can include: delta time, structural stiffness, shearing stiffness and solver iterations. In the original paper, one problem was that constraint stiffness was heavily impacted by the time step and solver iterations. More specifically, the system would get more stiff as the solver iterations increased, or time step decreased. Within Unity, the fixed time step is easily modifiable in the project settings, and was normally set at 0.02s or 50 frames per second. This can be then tested to verify. In Figure \ref{fig:pbdts}, the only variable changing is fixed time step, the others are: 
+\begin{itemize}
+	\item Solver Iterations = 20
+	\item Stretching Stiffness = 0.5
+	\item Shearing Stiffness = 0.5
+	\item No wind
+\end{itemize}
+The three time steps tested were 0.04, 0.02 and 0.01, or 25, 50 and 100fps respectively.
+
+
+\subsubsection{Cloth on Sphere}
 \label{spherescene}
 - section on the scenario where a horizontal cloth falls on a sphere\\
 - collision discussion\\
 - mention self collision, didnt get it done but can put it in further work
 
-\subsection{Recorder and Screenshotter}
-- section on how i implemented a recorder using unity recorder plugin, how it is useful for experiments, data gathering and for evidence
+\section{Future Work}
+ff
 
+\section{Conclusion}
+f
+\section{Reflection}
+4.1 Is there clear reflection on the project process, showing achievements in overcoming difficulties?\\
+4.2 Are the outcomes and deliverables evaluated with respect to the project aims and to the work of others?\\
+4.3 Is it clear what the student would do differently with hindsight?\\
+4.4 Is it clear what future work could be done to the project? \\
 
-\section{Chapter 2}
-The following bibliographic information on Writing a literature review is contained in the \emph{bibliography.bib} file 
-The template automatically starts new chapters on a new page.  The associated guidelines tell you what the available styles do and also how to structure a report.
-There is a section break on this page that you should be careful NOT to delete otherwise the references and appendices will be numbered continuously with the rest of the document.
 
 \bibliographystyle{apacite}
 \bibliography{bibliography}
@@ -647,10 +717,12 @@ There is a section break on this page that you should be careful NOT to delete o
 %you can crate this on a extra tex document just like the title or any other part of the document.
 \newpage
 \begin{appendices}
-\section{Project Overview}
-%insert IPO
-
+\begin{minipage}{\textwidth}
+	\includepdf[offset=0 -2cm,scale=0.65,pages=1,pagecommand={\section{Project Overview}}]{appendices/IPO.pdf}
+\end{minipage}
+\includepdf[scale=0.65,pages=2,pagecommand={}]{appendices/IPO.pdf}
 \begin{subappendices}
+
 \subsection{Example sub appendices}
 ...
 \end{subappendices}

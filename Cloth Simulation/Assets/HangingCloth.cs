@@ -124,13 +124,13 @@ public class HangingCloth : MonoBehaviour
 
     BoxCollider boxCollider;
 
-    int gridSize = 100;
+    int gridSize = 20;
     int numParticles; // Changed to vertices.Length instead of hardcoded value
     int numTriangles; // Need for the C++ code
-    float spacing = 0.125f; // Only used for mesh generation, not in c++ anymore
-    int algorithmType = 0; // 0 for mass spring, 1 for position based, 2 for XPBD
+    float spacing = 0.5f; // Only used for mesh generation, not in c++ anymore
+    int algorithmType = 1; // 0 for mass spring, 1 for position based, 2 for XPBD
     int scenario = 0; // 0 for hanging cloth, 1 for ..
-    int solverIterations = 30; // Number of iterations for the pbd solver
+    int solverIterations = 20; // Number of iterations for the pbd solver
     int subSteps = 10; // Number of substeps for XPBD
 
     int[] triangles;
@@ -138,7 +138,7 @@ public class HangingCloth : MonoBehaviour
     int numStaticParticles;
 
     Vector3 gravity = new Vector3(0.0f, -9.8f, 0.0f);
-    int springConstant = 1000;
+    int springConstant = 1500;
     Vector3 windForce = new Vector3(0.0f, 0.0f, 1.0f);
 
     bool isDragging = false;
@@ -414,15 +414,15 @@ public class HangingCloth : MonoBehaviour
             numTriangles = triangles.Length / 3;
 
             // Assign static particles to be able to pass them to the C++ code
-            staticParticleIndices = new int[100]; // Change this number for more/less static particles
+            staticParticleIndices = new int[2]; // Change this number for more/less static particles
 
-            //staticParticleIndices[0] = gridSize * (gridSize -1);
-            //staticParticleIndices[1] = gridSize * gridSize -1;
+            staticParticleIndices[0] = gridSize * (gridSize -1);
+            staticParticleIndices[1] = gridSize * gridSize -1;
 
-             for(int i = 0;i<100;i++)
-             {
-                staticParticleIndices[i] = gridSize * (gridSize -1) + i;
-             }
+            //  for(int i = 0;i<20;i++)
+            //  {
+            //     staticParticleIndices[i] = gridSize * (gridSize -1) + i;
+            //  }
 
             numStaticParticles = staticParticleIndices.Length;
 
@@ -550,7 +550,7 @@ public class HangingCloth : MonoBehaviour
     {
         if (CSHARP_SIM)
         {
-            windStrength = Mathf.Sin(Time.time) * 3.0f;
+            //windStrength = Mathf.Sin(Time.time) * 3.0f;
             //windStrength = Random.Range(-10.0f, 10.0f);
             // Simple Euler integration as a test
             for (int i = 0; i < particles.Count; i++)

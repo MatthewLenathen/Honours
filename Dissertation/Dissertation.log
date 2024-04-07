@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  6 APR 2024 01:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  7 APR 2024 04:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -310,6 +310,43 @@ LaTeX Info: Redefining \Relbar on input line 971.
 LaTeX Info: Redefining \[ on input line 2953.
 LaTeX Info: Redefining \] on input line 2954.
 )
+(c:/texlive/2023/texmf-dist/tex/latex/pdfpages/pdfpages.sty
+Package: pdfpages 2022/12/19 v0.5x Insert pages of external PDF documents (AM)
+
+(c:/texlive/2023/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count305
+\calc@Bcount=\count306
+\calc@Adimen=\dimen185
+\calc@Bdimen=\dimen186
+\calc@Askip=\skip83
+\calc@Bskip=\skip84
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count307
+\calc@Cskip=\skip85
+)
+(c:/texlive/2023/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+Package: eso-pic 2023/05/03 v3.0c eso-pic (RN)
+\ESO@tempdima=\dimen187
+\ESO@tempdimb=\dimen188
+)
+\AM@pagewidth=\dimen189
+\AM@pageheight=\dimen190
+\AM@fboxrule=\dimen191
+
+(c:/texlive/2023/texmf-dist/tex/latex/pdfpages/pppdftex.def
+File: pppdftex.def 2022/12/19 v0.5x Pdfpages driver for pdfTeX (AM)
+)
+\pdfpages@includegraphics@status=\count308
+\AM@pagebox=\box60
+\AM@global@opts=\toks34
+\AM@pagecnt=\count309
+\AM@toc@title=\toks35
+\AM@lof@heading=\toks36
+\c@AM@survey=\count310
+\AM@templatesizebox=\box61
+)
 (c:/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
@@ -321,8 +358,8 @@ File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
 )
 (c:/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2023-10-10 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count305
-\l__pdf_internal_box=\box60
+\l__color_backend_stack_int=\count311
+\l__pdf_internal_box=\box62
 )
 (./Dissertation.aux)
 \openout1 = `Dissertation.aux'.
@@ -341,62 +378,28 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 62.
 LaTeX Font Info:    ... okay on input line 62.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 62.
 LaTeX Font Info:    ... okay on input line 62.
-\c@maskedRefs=\count306
+\c@maskedRefs=\count312
  (c:/texlive/2023/texmf-dist/tex/latex/apacite/english.apc
 File: english.apc 2013/07/21 v6.03 apacite language file
 LaTeX Info: Redefining \BPBI on input line 129.
 LaTeX Info: Redefining \BHBI on input line 130.
 ) (c:/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count307
-\scratchdimen=\dimen185
-\scratchbox=\box61
-\nofMPsegments=\count308
-\nofMParguments=\count309
-\everyMPshowfont=\toks34
-\MPscratchCnt=\count310
-\MPscratchDim=\dimen186
-\MPnumerator=\count311
-\makeMPintoPDFobject=\count312
-\everyMPtoPDFconversion=\toks35
+\scratchcounter=\count313
+\scratchdimen=\dimen192
+\scratchbox=\box63
+\nofMPsegments=\count314
+\nofMParguments=\count315
+\everyMPshowfont=\toks37
+\MPscratchCnt=\count316
+\MPscratchDim=\dimen193
+\MPnumerator=\count317
+\makeMPintoPDFobject=\count318
+\everyMPtoPDFconversion=\toks38
 ) (c:/texlive/2023/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
-
-(c:/texlive/2023/texmf-dist/tex/generic/infwarerr/infwarerr.sty
-Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
-)
-(c:/texlive/2023/texmf-dist/tex/latex/grfext/grfext.sty
-Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
-
-(c:/texlive/2023/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
-Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
-))
-(c:/texlive/2023/texmf-dist/tex/latex/kvoptions/kvoptions.sty
-Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
-
-(c:/texlive/2023/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
-Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
-)
-(c:/texlive/2023/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
-Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
-))
-(c:/texlive/2023/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
-Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
-)
-
-(c:/texlive/2023/texmf-dist/tex/generic/iftex/iftex.sty
-Package: iftex 2022/02/03 v1.0f TeX engine tests
-)
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode found.
-)
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
-Package grfext Info: Graphics extension search list:
-(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
-G,.JBIG2,.JB2,.eps]
-(grfext)             \AppendGraphicsExtensions on input line 504.
 
 (c:/texlive/2023/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
@@ -407,8 +410,23 @@ Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: float package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count313
+\c@lstlisting=\count319
 
+(c:/texlive/2023/texmf-dist/tex/latex/pdflscape/pdflscape.sty
+Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
+
+(c:/texlive/2023/texmf-dist/tex/latex/pdflscape/pdflscape-nometadata.sty
+Package: pdflscape-nometadata 2022-10-28 v0.13 Display of landscape pages in PD
+F (HO)
+
+(c:/texlive/2023/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+)
+(c:/texlive/2023/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
+))
 (./Dissertation-Title.tex [1
 
 {c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]) (./Dissertatio
@@ -998,7 +1016,56 @@ Underfull \hbox (badness 10000) in paragraph at lines 555--556
 
 [43 <./figures/drag.png>] [44] [45
 
-] [46] (./Dissertation.bbl [47
+]
+Underfull \hbox (badness 10000) in paragraph at lines 623--624
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 645--646
+
+ []
+
+[46]
+Underfull \hbox (badness 10000) in paragraph at lines 649--650
+
+ []
+
+<figures/recs.png, id=178, 438.13687pt x 128.73094pt>
+File: figures/recs.png Graphic file (type png)
+<use figures/recs.png>
+Package pdftex.def Info: figures/recs.png  used on input line 656.
+(pdftex.def)             Requested size: 350.50996pt x 102.98486pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 664--665
+
+ []
+
+[47]
+Underfull \hbox (badness 10000) in paragraph at lines 666--667
+
+ []
+
+[48 <./figures/recs.png>]
+<figures/msscomp.png, id=187, 1068.24094pt x 441.90094pt>
+File: figures/msscomp.png Graphic file (type png)
+<use figures/msscomp.png>
+Package pdftex.def Info: figures/msscomp.png  used on input line 681.
+(pdftex.def)             Requested size: 373.88992pt x 154.66763pt.
+
+
+LaTeX Warning: Reference `fig:pbdts' on page 49 undefined on input line 686.
+
+[49 <./figures/msscomp.png>] [50] [51
+
+] [52
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 707--711
+
+ []
+
+(./Dissertation.bbl [53
 
 ]
 Underfull \hbox (badness 1859) in paragraph at lines 16--36
@@ -1101,7 +1168,7 @@ Underfull \hbox (badness 3199) in paragraph at lines 241--260
 4017   \OT1/cmr/m/n/12 doi:
  []
 
-[48
+[54
 
 ]
 Underfull \hbox (badness 3724) in paragraph at lines 448--465
@@ -1136,7 +1203,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 610--629
  \OT1/cmr/m/n/12 doi:
  []
 
-[49]
+[55]
 Underfull \hbox (badness 5847) in paragraph at lines 675--696
 []\OT1/cmr/m/n/12 Oh, Y. J., Lee, T. M., & Lee, I.-K.  (2018).  Hi-er-ar-chi-
  []
@@ -1171,13 +1238,109 @@ Underfull \hbox (badness 2326) in paragraph at lines 861--881
 -
  []
 
-[50]) [51] [52] [53
+[56]) [57]
 
-] [54
+pdfTeX warning: pdflatex.exe (file ./appendices/IPO.pdf): PDF inclusion: found 
+PDF version <1.7>, but at most version <1.5> allowed
+<appendices/IPO.pdf, id=219, 597.55246pt x 845.07718pt>
+File: appendices/IPO.pdf Graphic file (type pdf)
+<use appendices/IPO.pdf>
+Package pdftex.def Info: appendices/IPO.pdf  used on input line 720.
+(pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 
-] [55
 
-] (./Dissertation.aux)
+pdfTeX warning: pdflatex.exe (file ./appendices/IPO.pdf): PDF inclusion: found 
+PDF version <1.7>, but at most version <1.5> allowed
+File: appendices/IPO.pdf Graphic file (type pdf)
+<use appendices/IPO.pdf>
+Package pdftex.def Info: appendices/IPO.pdf  used on input line 720.
+(pdftex.def)             Requested size: 597.551pt x 845.07512pt.
+
+
+pdfTeX warning: pdflatex.exe (file ./appendices/IPO.pdf): PDF inclusion: found 
+PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex.exe (file ./appendices/IPO.pdf): PDF inclusion: found 
+PDF version <1.7>, but at most version <1.5> allowed
+<appendices/IPO.pdf, id=222, page=1, 597.55246pt x 845.07718pt>
+File: appendices/IPO.pdf Graphic file (type pdf)
+<use appendices/IPO.pdf, page 1>
+Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 720.
+(pdftex.def)             Requested size: 597.551pt x 845.07512pt.
+File: appendices/IPO.pdf Graphic file (type pdf)
+<use appendices/IPO.pdf, page 1>
+Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 720.
+(pdftex.def)             Requested size: 388.4045pt x 549.29366pt.
+File: appendices/IPO.pdf Graphic file (type pdf)
+<use appendices/IPO.pdf, page 1>
+Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 720.
+(pdftex.def)             Requested size: 388.4045pt x 549.29366pt.
+File: appendices/IPO.pdf Graphic file (type pdf)
+<use appendices/IPO.pdf, page 1>
+Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 720.
+(pdftex.def)             Requested size: 388.4045pt x 549.29366pt.
+File: appendices/IPO.pdf Graphic file (type pdf)
+<use appendices/IPO.pdf>
+Package pdftex.def Info: appendices/IPO.pdf  used on input line 722.
+(pdftex.def)             Requested size: 597.551pt x 845.07512pt.
+
+
+pdfTeX warning: pdflatex.exe (file ./appendices/IPO.pdf): PDF inclusion: found 
+PDF version <1.7>, but at most version <1.5> allowed
+File: appendices/IPO.pdf Graphic file (type pdf)
+<use appendices/IPO.pdf>
+Package pdftex.def Info: appendices/IPO.pdf  used on input line 722.
+(pdftex.def)             Requested size: 597.551pt x 845.07512pt.
+
+
+pdfTeX warning: pdflatex.exe (file ./appendices/IPO.pdf): PDF inclusion: found 
+PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex.exe (file ./appendices/IPO.pdf): PDF inclusion: found 
+PDF version <1.7>, but at most version <1.5> allowed
+<appendices/IPO.pdf, id=225, page=2, 597.55246pt x 845.07718pt>
+File: appendices/IPO.pdf Graphic file (type pdf)
+<use appendices/IPO.pdf, page 2>
+Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 722.
+(pdftex.def)             Requested size: 597.551pt x 845.07512pt.
+File: appendices/IPO.pdf Graphic file (type pdf)
+<use appendices/IPO.pdf, page 2>
+Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 722.
+(pdftex.def)             Requested size: 388.4045pt x 549.29366pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 719--722
+
+ []
+
+File: appendices/IPO.pdf Graphic file (type pdf)
+<use appendices/IPO.pdf, page 1>
+Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 722.
+(pdftex.def)             Requested size: 388.4045pt x 549.29366pt.
+[58
+
+ <./appendices/IPO.pdf>]
+File: appendices/IPO.pdf Graphic file (type pdf)
+<use appendices/IPO.pdf, page 2>
+Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 722.
+(pdftex.def)             Requested size: 388.4045pt x 549.29366pt.
+File: appendices/IPO.pdf Graphic file (type pdf)
+<use appendices/IPO.pdf, page 2>
+Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 722.
+(pdftex.def)             Requested size: 388.4045pt x 549.29366pt.
+File: appendices/IPO.pdf Graphic file (type pdf)
+<use appendices/IPO.pdf, page 2>
+Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 722.
+(pdftex.def)             Requested size: 388.4045pt x 549.29366pt.
+ [59 <./appendices/IPO.pdf>] [60] [61
+
+] [62
+
+] [63
+
+]
+(./Dissertation.aux)
  ***********
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-10-10>
@@ -1187,15 +1350,18 @@ L3 programming layer <2023-10-10>
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.75pt have occurred.
 
+
+LaTeX Warning: There were undefined references.
+
  ) 
 Here is how much of TeX's memory you used:
- 8469 strings out of 474503
- 133744 string characters out of 5756704
+ 8817 strings out of 474503
+ 139157 string characters out of 5756704
  2039043 words of memory out of 5000000
- 30313 multiletter control sequences out of 15000+600000
- 565865 words of font info for 63 fonts, out of 8000000 for 9000
+ 30664 multiletter control sequences out of 15000+600000
+ 566202 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 69i,12n,79p,1557b,1436s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 69i,18n,79p,1557b,1438s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/tex
 live/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2023
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2023/texmf-di
@@ -1208,11 +1374,12 @@ ive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2023/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/2023/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/publi
-c/cm-super/sfrm0800.pfb>
-Output written on Dissertation.pdf (56 pages, 1051819 bytes).
+c/cm-super/sfrm0800.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super
+/sfrm1200.pfb>
+Output written on Dissertation.pdf (64 pages, 1223262 bytes).
 PDF statistics:
- 271 PDF objects out of 1000 (max. 8388607)
- 170 compressed objects within 2 object streams
+ 334 PDF objects out of 1000 (max. 8388607)
+ 210 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
- 36 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 81 words of extra memory for PDF output out of 10000 (max. 10000000)
 

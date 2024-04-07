@@ -322,8 +322,8 @@ MonoBehaviour:
   stretchingStiffness: 0.478
   shearingStiffness: 0.478
   stretchingCompliance: 0.000491
-  shearingCompliance: 0.001
-  windStrength: 0.4
+  shearingCompliance: 0
+  windStrength: 0
 --- !u!4 &860173042
 Transform:
   m_ObjectHideFlags: 0
