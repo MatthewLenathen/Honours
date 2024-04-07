@@ -6,4 +6,6 @@
 \contentsline {figure}{\numberline {6}{\ignorespaces Projection of a constraint between two particles. Figure adapted from \cite {muller2007position}.}}{39}{}%
 \contentsline {figure}{\numberline {7}{\ignorespaces Hanging cloth mesh being dragged by a corner particle}}{43}{}%
 \contentsline {figure}{\numberline {8}{\ignorespaces The folder of experiment recordings.}}{48}{}%
-\contentsline {figure}{\numberline {9}{\ignorespaces Three versions of the mass spring system, with spring constant = 500,1000 and 1500}}{49}{}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Three versions of the mass spring system, with spring constants of 500,1000 and 1500 left to right}}{49}{}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Testing the time step stiffness issue with original PBD, with time steps of 0.04, 0.02 and 0.01 left to right}}{50}{}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Cloth with different stiffness values}}{51}{}%

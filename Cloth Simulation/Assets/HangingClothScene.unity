@@ -319,10 +319,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mesh: {fileID: 0}
   meshFilter: {fileID: 0}
-  stretchingStiffness: 0.478
-  shearingStiffness: 0.478
+  stretchingStiffness: 0.5
+  shearingStiffness: 0.5
   stretchingCompliance: 0.000491
-  shearingCompliance: 0
+  shearingCompliance: 0.000489
   windStrength: 0
 --- !u!4 &860173042
 Transform:

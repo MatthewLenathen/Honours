@@ -494,7 +494,7 @@ To actually project these constraints involves calculating two ${\Delta}p$, corr
 Where $w$ is the inverse mass, $p$ is the predicted position and $d$ is the rest distance.
 Once these corrections are calculated, they are added to the predicted position of the respective particle during the loop. \\
 
-Another aspect of constraints is stiffness. In the PBD implementation, stiffness is obtained by multiplying ${\Delta}p$ by $k\in[0...1]$. This works, but the effect of this stiffness is non-linear with multiple solver iterations. This can be resolved by calculating $k'=1-(1-k)^{1/n_s}$, where $n_s$ is the number of solver iterations. This is then used to multiply ${\Delta}p$.
+Another aspect of constraints is stiffness. In the PBD implementation, stiffness is obtained by multiplying ${\Delta}p$ by $k\in[0...1]$. This works, but the effect of this stiffness is non-linear with multiple solver iterations. This can be fixed by calculating $k'=1-(1-k)^{1/n_s}$, where $n_s$ is the number of solver iterations. This is then used to multiply ${\Delta}p$.
 \begin{figure}
 	\centering
 	\caption{Projection of a constraint between two particles. Figure adapted from \protect\cite{muller2007position}.}
@@ -677,21 +677,36 @@ In the mass spring system version of the hanging cloth, a variable to test the i
 
 \begin{figure}
 	\centering
-	\caption{Three versions of the mass spring system, with spring constant = 500,1000 and 1500}
+	\caption{Three versions of the mass spring system, with spring constants of 500,1000 and 1500 left to right}
 	\includegraphics[scale=0.35]{msscomp.png}
 	\label{fig:msscomp}
 \end{figure}
 
 \paragraph{Position Based Dynamics} \mbox{} \\
-The position based dynamics implementation within this project has a few more parameters that can be tuned and experimented with. These can include: delta time, structural stiffness, shearing stiffness and solver iterations. In the original paper, one problem was that constraint stiffness was heavily impacted by the time step and solver iterations. More specifically, the system would get more stiff as the solver iterations increased, or time step decreased. Within Unity, the fixed time step is easily modifiable in the project settings, and was normally set at 0.02s or 50 frames per second. This can be then tested to verify. In Figure \ref{fig:pbdts}, the only variable changing is fixed time step, the others are: 
+The position based dynamics implementation within this project has a few more parameters that can be tuned and experimented with. These can include: delta time, structural stiffness, shearing stiffness and solver iterations. In the original paper, one problem was that constraint stiffness was heavily impacted by the time step and solver iterations. More specifically, the system would get more stiff as the solver iterations increased, or time step decreased. Within Unity, the fixed time step is easily modifiable in the project settings, and was normally set at 0.02s or 50 fixed updates per second. This can be then tested to verify. The only variable changing is fixed time step, the others are: 
 \begin{itemize}
-	\item Solver Iterations = 20
-	\item Stretching Stiffness = 0.5
-	\item Shearing Stiffness = 0.5
-	\item No wind
+	\item Solver iterations = 20
+	\item Stretching stiffness = 0.5
+	\item Shearing stiffness = 0.5
 \end{itemize}
-The three time steps tested were 0.04, 0.02 and 0.01, or 25, 50 and 100fps respectively.
 
+The three time steps tested were 0.04, 0.02 and 0.01, or 25, 50 and 100 updates per second respectively. In Figure \ref{fig:pbdts} it is quite apparent the severe impact that fixed time step has on the original PBD implementation. This is problematic as it requires the developer to retune all stiffness properties for different time steps, requiring much more work. This was one of the improvements that XPBD had over the original, stiffness independent of time step. \\
+
+For the problem of iteration count, PBD attempts to mitigate this with the stiffness term that involves iteration count as explained in Section \ref{constraints} but in the XPBD paper, the authors note that this doesn't converge to a well defined solution in the presence of multiple constraints. For this project, it successfully decouples stiffness from iteration count but for a more advanced simulation it would pose issues. \\
+\begin{figure}
+	\centering
+	\caption{Testing the time step stiffness issue with original PBD, with time steps of 0.04, 0.02 and 0.01 left to right}
+	\includegraphics[scale=0.5]{pbdtscomp.png}
+	\label{fig:pbdts}
+\end{figure}
+
+Having both structural and shear stiffness being variable allows for lots of variation in the end cloth, for example in Figure \ref{fig:pbdcomp}, the cloth on the left has a structural stiffness of 1, and a shear stiffness of 0, while the cloth on the right has both structural and shear stiffness of 1. The cloth with both stiffness set to 1 acts extremely stiff and would be suitable to represent objects such as paper or card, while the other acts more naturally like clothes or flags.
+\begin{figure}
+	\centering
+	\caption{Cloth with different stiffness values}
+	\includegraphics[scale=0.5]{pbdcomp.png}
+	\label{fig:pbdcomp}
+\end{figure}
 
 \subsubsection{Cloth on Sphere}
 \label{spherescene}

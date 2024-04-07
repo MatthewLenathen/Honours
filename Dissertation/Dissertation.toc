@@ -42,14 +42,14 @@
 \contentsline {subsubsection}{\numberline {4.3.1}Hanging Cloth}{48}{}%
 \contentsline {paragraph}{Mass-Spring System}{48}{}%
 \contentsline {paragraph}{Position Based Dynamics}{49}{}%
-\contentsline {subsubsection}{\numberline {4.3.2}Cloth on Sphere}{50}{}%
-\contentsline {section}{\numberline {5}Future Work}{51}{}%
-\contentsline {section}{\numberline {6}Conclusion}{52}{}%
-\contentsline {section}{\numberline {7}Reflection}{53}{}%
-\contentsline {section}{References}{54}{}%
-\contentsline {section}{Appendices}{58}{}%
-\contentsline {section}{\numberline {A}Project Overview}{58}{}%
-\contentsline {subsection}{\numberline {A.A}Example sub appendices}{60}{}%
-\contentsline {section}{\numberline {B}Second Formal Review Output}{61}{}%
-\contentsline {section}{\numberline {C}Diary Sheets (or other project management evidence)}{62}{}%
-\contentsline {section}{\numberline {D}Appendix 4 and following}{63}{}%
+\contentsline {subsubsection}{\numberline {4.3.2}Cloth on Sphere}{51}{}%
+\contentsline {section}{\numberline {5}Future Work}{52}{}%
+\contentsline {section}{\numberline {6}Conclusion}{53}{}%
+\contentsline {section}{\numberline {7}Reflection}{54}{}%
+\contentsline {section}{References}{55}{}%
+\contentsline {section}{Appendices}{59}{}%
+\contentsline {section}{\numberline {A}Project Overview}{59}{}%
+\contentsline {subsection}{\numberline {A.A}Example sub appendices}{61}{}%
+\contentsline {section}{\numberline {B}Second Formal Review Output}{62}{}%
+\contentsline {section}{\numberline {C}Diary Sheets (or other project management evidence)}{63}{}%
+\contentsline {section}{\numberline {D}Appendix 4 and following}{64}{}%
