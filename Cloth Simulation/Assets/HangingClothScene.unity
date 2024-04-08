@@ -321,8 +321,8 @@ MonoBehaviour:
   meshFilter: {fileID: 0}
   stretchingStiffness: 0.5
   shearingStiffness: 0.5
-  stretchingCompliance: 0.000491
-  shearingCompliance: 0.000489
+  stretchingCompliance: 0.0005
+  shearingCompliance: 0.0005
   windStrength: 0
 --- !u!4 &860173042
 Transform:
@@ -534,7 +534,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &1414205518
 MeshRenderer:
   m_ObjectHideFlags: 0

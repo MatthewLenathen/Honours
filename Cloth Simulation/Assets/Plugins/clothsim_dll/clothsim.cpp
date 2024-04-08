@@ -151,6 +151,11 @@ void ClothSim::Init(glm::vec3* positions, int* triangles, int num_positions, int
 			//logConstraints(_shear_constraints, "shear_constraints_log.txt");
 			break;
 		}
+		case 1:
+		{
+			GenerateConstraints(_triangles, _num_triangles, _particles, _structural_constraints, _shear_constraints);
+			break;
+		}
 		default:
 			break;
 		}
@@ -249,6 +254,7 @@ void ClothSim::Update(glm::vec3* positions, float wind_strength, float stretchin
 
 		// Collision constraints to be generated here, doing it later as i want to get main pbd working first
 		// forall vertices i do generateCollisionConstraints(xi -> pi)
+		CollisionWithSphere();
 
 		// Now, for a set number of solver iterations, work on the constraints to slightly move particles to fit them
 		for (int i = 0; i < _solver_iterations; i++)

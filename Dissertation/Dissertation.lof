@@ -9,3 +9,6 @@
 \contentsline {figure}{\numberline {9}{\ignorespaces Three versions of the mass spring system, with spring constants of 500,1000 and 1500 left to right}}{49}{}%
 \contentsline {figure}{\numberline {10}{\ignorespaces Testing the time step stiffness issue with original PBD, with time steps of 0.04, 0.02 and 0.01 left to right}}{50}{}%
 \contentsline {figure}{\numberline {11}{\ignorespaces Cloth with different stiffness values}}{51}{}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Time step stiffness problem resolved in XPBD}}{53}{}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Z-fighting issue when rendering two colliding objects}}{54}{}%
+\contentsline {figure}{\numberline {14}{\ignorespaces The glass sphere approach to solve z-fighting}}{54}{}%

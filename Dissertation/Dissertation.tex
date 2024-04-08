@@ -33,6 +33,7 @@
 \usepackage{pdfpages}
 
 
+
 %header and footer settings
 \pagestyle{fancyplain}
 \fancyhf{}
@@ -552,6 +553,7 @@ It is necessary to set the mass as well as the static property, to allow the con
 	\label{fig:drag}
 \end{figure}
 \subsection{Cloth and Sphere Collision}
+\label{collision}
 Collision was the next feature to be implemented for use in the scenario of a horizontal cloth falling on top of a static sphere. First, a simple sphere object was created within Unity using the sphere primitive. This will have two relevant properties: Sphere centre and sphere radius. There are many ways to do collision in physics simulations and the implementation depends on the scenario and usage of it. It is mentioned by the authors in the original PBD paper that position based approaches have an advantage compared to normal methods because of how easy it is to implement collision and response. They do this by creating collision constraints. With collision between cloth and a small rigid body, two way collision is required, due to the fact that the small object could potentially fall through the cloth. In this situation, only collision between the cloth and the sphere is needed, due to the sphere being large. \\
 
 The way this collision and response is handled is by checking each particle's predicted position during the PBD/XPBD loop. A vector between the position of the sphere's centre and the predicted position can be calculated. If the length of this vector is smaller than the radius of the sphere then the particle has collied with the sphere. The depth of this collision is then calculated and multiplied with the normalised vector calculated earlier. This delta can then be added to the predicted position, to move the particle outside the sphere in the direction of this vector. This can be coded very easily as seen in Listing \ref{lst:col}. 
@@ -707,13 +709,88 @@ Having both structural and shear stiffness being variable allows for lots of var
 	\includegraphics[scale=0.5]{pbdcomp.png}
 	\label{fig:pbdcomp}
 \end{figure}
+\paragraph{Extended Position Based Dynamics} \mbox{} \\
+Now, it is vital to test the hanging cloth using the extended position based dynamics method. On the whole, the overall simulation loop is extremely similar with a few improvements, substeps and stiffness compliance. Substeps were the first to be tested, the other parameters were as follows:  
+\begin{itemize}
+	\item Stretching compliance = 0.0005
+	\item Shearing compliance = 0.0005
+	\item Wind strength = 0.7
+\end{itemize}
+The substeps would be tested at 1, 20 and 40. This means that for every fixed update, the simulation loop would repeat for the number of substeps. It can be expected that as substeps increase, overall simulation accuracy will increase. This will come with a computational cost so the expected fps will also be lower as substeps increase. Wind is utilised in this experiment to have an additional force on the cloth to inspect how substeps affect the constraint projection. \\
 
-\subsubsection{Cloth on Sphere}
+The recorder feature was utilised here to run these three tests, as it was easy to change substeps in the recorder class. In Listing \ref{lst:exp}, is an example of how multiple experiments were run, keeping most of the properties the same but changing substeps. \\ \\ \\
+\begin{lstlisting}[caption={Utilising the recorder feature},label={lst:exp}]
+for (int i = 0; i < 3; i++)
+{
+	int[] subs = new int[]{1,20,40};
+	var rp = new RecordParameters
+	{
+		algorithm = 2, // XPBD
+		scenario = 0, // HangingCloth
+		xpbdStretchingCompliance = 0.0005f, 
+		xpbdShearingCompliance = 0.0005f, 
+	};
+	rp.xpbdSubsteps = subs[i];
+	rp.filename = $"{GenerateFilename(rp)}";
+	
+	// Add the recording settings to the pendingExperiments list
+	pendingExperiments.Add(rp);
+}
+\end{lstlisting}
+When analysing these three, there are two main aspects to look at, visuals and FPS. In Table \ref{tab:sub}, the FPS of each test is averaged over 10 seconds. It can be seen that increasing the number of substeps has a drastic effect on performance, with the 40 substeps experiment dipping to 20 FPS.\\
+\begin{table}[htbp]
+	\centering
+	\caption{Substeps and FPS Data}
+	\label{tab:sub}
+	\begin{tabular}{cc}
+		\toprule
+		Substeps & FPS \\
+		\midrule
+		1 & 599.04 \\
+		20 & 306.58 \\
+		40 & 20.67 \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+The visuals of the simulation are also affected. The 1 substep experiment overall looks too smooth and when moved with the mouse interaction, it has a delay before it moves. This makes sense, as the constraints are only projected once in each fixed update, so the time taken to satisfy all constraints will be considerably longer. This also means the cloth takes longer to come to rest. \\
+
+This is fixed in the 20 substep version, as the constraints can be projected multiple times in one fixed update, leading to the cloth overall looking more physically realistic. It also fixes the issue of the delay before moving and it comes to rest quicker. \\
+
+The 40 substeps version has taken quite the performance hit, leading to overall less appealing visuals through the lower fps, so the ideal substeps for this project is around 20. \\
+
+Next, the time step issue from the original PBD can be tested to see if the XPBD version has fixed it. The same time step experiments used in the PBD paragraph will be used here, 0.04,0.02 and 0.01. Before experimenting, it is expected that changing the time step will have no effect on the stiffness of the simulation, due to the new compliance factor in XPBD. The results of these experiments can be seen in Figure \ref{fig:xpbdcomp}.
+\begin{figure}
+	\centering
+	\caption{Time step stiffness problem resolved in XPBD}
+	\includegraphics[scale=0.35]{xpbdtscomp.png}
+	\label{fig:xpbdcomp}
+\end{figure}
+With XPBD, the stiffness of the system now doesn't depend on the time step of the project which is a very useful improvement. Now, the developers can tune the XPBD simulation's stiffness parameters to suit a wide range of time steps without having to change the parameters for different time steps.
+\subsubsection{Cloth falling on Sphere}
 \label{spherescene}
-- section on the scenario where a horizontal cloth falls on a sphere\\
-- collision discussion\\
-- mention self collision, didnt get it done but can put it in further work
+The second scenario in this project is a horizontal cloth falling onto a static, rigid sphere. This scenario is made to test how the constraints function in a simulation where collision is also a factor. The horizontal cloth was generated in a similar way to the vertical cloth. When creating the vertex coordinates, the y coordinate was set to 0 instead of the z like so: \\ \lstinline{vertices[i] = new Vector3(x * spacing, 0, y * spacing);}\\
 
+The sphere is created in Unity, with a radius of 2.5f. The sphere centre can be obtained in C\# by acquiring the transform position of the sphere game object, these two variables are then passed to C++ to be used in the collision code discussed in Section \ref{collision}. \\
+
+Initially, there was an issue where the sphere object could be seen through the cloth when they were colliding. This is a known issue in computer graphics called stitching or z-fighting. It occurs when two objects within a scene have very similar distances to the camera, which causes issues when deciding what object to render first. This problem can be visualised in Figure \ref{fig:zfight}. \\
+\begin{figure}
+	\centering
+	\caption{Z-fighting issue when rendering two colliding objects}
+	\includegraphics[scale=0.5]{zfight.png}
+	\label{fig:zfight}
+\end{figure}
+
+To address this issue, a novel approach was implemented in this project. In the cloth shader, an additional rendering pass was used alongside the command ``ZTest Always". This command specifies the depth test function for determining if a pixel should be drawn on not. By assigning ``Always" to it ensured that the cloth will always be rendered on top of other objects, regardless of position. \\
+
+However, this alone wouldn't be enough to solve the issue, as the cloth would continue to be rendered on top of the sphere, even when it falls behind it. To overcome this challenge, the shader used for the sphere was modified to a transparent one. This alteration effectively transformed the appearance of the sphere into glass-like, allowing the cloth to be rendered behind it without appearing out of place. The result of this approach can be seen in Figure \ref{fig:spherefixed}.
+\begin{figure}[h]
+	\centering
+	\caption{The glass sphere approach to solve z-fighting}
+	\includegraphics[scale=0.5]{spherefixed.png}
+	\label{fig:spherefixed}
+\end{figure}
+With this implementation, the sphere successfully collides with the sphere and reacts in a physically plausible way, sliding off the sphere. With friction, the cloth would most likely stay on top of the sphere, but it was not implemented in this project. The 
 \section{Future Work}
 ff
 

@@ -128,9 +128,9 @@ public class HangingCloth : MonoBehaviour
     int numParticles; // Changed to vertices.Length instead of hardcoded value
     int numTriangles; // Need for the C++ code
     float spacing = 0.5f; // Only used for mesh generation, not in c++ anymore
-    int algorithmType = 1; // 0 for mass spring, 1 for position based, 2 for XPBD
-    int scenario = 0; // 0 for hanging cloth, 1 for ..
-    int solverIterations = 20; // Number of iterations for the pbd solver
+    int algorithmType = 2; // 0 for mass spring, 1 for position based, 2 for XPBD
+    int scenario = 1; // 0 for hanging cloth, 1 for ..
+    int solverIterations = 30; // Number of iterations for the pbd solver
     int subSteps = 10; // Number of substeps for XPBD
 
     int[] triangles;
@@ -348,28 +348,24 @@ public class HangingCloth : MonoBehaviour
             pendingExperiments.Add(rp);
         }
         */
+        
         for (int i = 0; i < 3; i++)
         {
-            int subs = 5 + i*10;
+            int[] subs = new int[]{1,20,40};
             var rp = new RecordParameters
             {
                 algorithm = 2, // XPBD
-                scenario = 1, // HangingCloth
-                xpbdStretchingCompliance = 0.001f, 
-                xpbdShearingCompliance = 0.001f, 
-                xpbdSubsteps = 5,
-                pbdShearingStiffness = 0.5f,
-                pbdStretchingStiffness = 0.5f,
-                pbdSolverIterations = 20
+                scenario = 0, // HangingCloth
+                xpbdStretchingCompliance = 0.0005f,
+                xpbdShearingCompliance = 0.0005f,
+                xpbdSubsteps = subs[i]
             };
-            rp.xpbdSubsteps = subs;
             rp.filename = $"{GenerateFilename(rp)}";
 
             // Add the recording settings to the pendingExperiments list
             pendingExperiments.Add(rp);
         }
         
-        //Debug.Log(GenerateFilename());
     }
 
     void Start()
