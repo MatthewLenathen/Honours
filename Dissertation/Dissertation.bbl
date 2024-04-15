@@ -357,6 +357,55 @@ Etzmu{\ss}, O.%
 \PrintBackRefs{\CurrentBib}
 
 \bibitem [\protect \citeauthoryear {%
+{G-Truc Creation}%
+}{%
+{G-Truc Creation}%
+}{%
+{\protect \APACyear {2024}}%
+}]{%
+glm}
+\APACinsertmetastar {%
+glm}%
+\begin{APACrefauthors}%
+{G-Truc Creation}.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2024}{}{}.
+\newblock
+\APACrefbtitle {{GLM} - OpenGL Mathematics.} {{GLM} - opengl mathematics.}
+\newblock
+\APAChowpublished {\url{https://github.com/g-truc/glm}}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Gould%
+, Tobochnik%
+\BCBL {}\ \BBA {} Christian%
+}{%
+Gould%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2007}}%
+}]{%
+gould2007introduction}
+\APACinsertmetastar {%
+gould2007introduction}%
+\begin{APACrefauthors}%
+Gould, H.%
+, Tobochnik, J.%
+\BCBL {}\ \BBA {} Christian, W.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYear{2007}.
+\newblock
+\APACrefbtitle {An Introduction to Computer Simulation Methods} {An
+  introduction to computer simulation methods}\ (\PrintOrdinal{3rd}\ \BEd).
+\newblock
+\APACaddressPublisher{}{Addison-Wesley}.
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Jakobsen%
 }{%
 Jakobsen%

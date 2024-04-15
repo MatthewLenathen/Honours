@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  8 APR 2024 18:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  15 APR 2024 09:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -599,7 +599,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 200--202
 <figures/DNN.png, id=71, 943.3644pt x 273.1806pt>
 File: figures/DNN.png Graphic file (type png)
 <use figures/DNN.png>
-Package pdftex.def Info: figures/DNN.png  used on input line 208.
+Package pdftex.def Info: figures/DNN.png  used on input line 207.
 (pdftex.def)             Requested size: 390.0pt x 112.93848pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 216--217
@@ -619,7 +619,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 221--222
 <figures/shapeMatching.jpg, id=77, 379.25761pt x 117.03903pt>
 File: figures/shapeMatching.jpg Graphic file (type jpg)
 <use figures/shapeMatching.jpg>
-Package pdftex.def Info: figures/shapeMatching.jpg  used on input line 225.
+Package pdftex.def Info: figures/shapeMatching.jpg  used on input line 224.
 (pdftex.def)             Requested size: 379.25667pt x 117.03873pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -704,7 +704,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 314--316
 <figures/PDFlag.png, id=99, 428.35031pt x 300.3722pt>
 File: figures/PDFlag.png Graphic file (type png)
 <use figures/PDFlag.png>
-Package pdftex.def Info: figures/PDFlag.png  used on input line 320.
+Package pdftex.def Info: figures/PDFlag.png  used on input line 319.
 (pdftex.def)             Requested size: 214.17462pt x 150.18571pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 324--328
@@ -867,7 +867,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 405--406
 <figures/clothmesh.png, id=124, 569.12625pt x 529.98pt>
 File: figures/clothmesh.png Graphic file (type png)
 <use figures/clothmesh.png>
-Package pdftex.def Info: figures/clothmesh.png  used on input line 411.
+Package pdftex.def Info: figures/clothmesh.png  used on input line 410.
 (pdftex.def)             Requested size: 284.56242pt x 264.98933pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 415--416
@@ -907,13 +907,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 434--435
 <figures/springs.png, id=136, 853.1875pt x 318.18875pt>
 File: figures/springs.png Graphic file (type png)
 <use figures/springs.png>
-Package pdftex.def Info: figures/springs.png  used on input line 441.
-(pdftex.def)             Requested size: 426.59271pt x 159.09398pt.
-
-Overfull \hbox (36.59271pt too wide) in paragraph at lines 441--443
- [][] 
- []
-
+Package pdftex.def Info: figures/springs.png  used on input line 440.
+(pdftex.def)             Requested size: 341.26895pt x 127.27324pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 448--449
 
@@ -957,7 +952,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 494--497
 <figures/constraint.png, id=148, 315.42844pt x 134.75343pt>
 File: figures/constraint.png Graphic file (type png)
 <use figures/constraint.png>
-Package pdftex.def Info: figures/constraint.png  used on input line 502.
+Package pdftex.def Info: figures/constraint.png  used on input line 501.
 (pdftex.def)             Requested size: 157.71382pt x 67.37654pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 505--507
@@ -1004,45 +999,50 @@ Underfull \hbox (badness 10000) in paragraph at lines 533--534
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 535--536
+
+ []
+
 <figures/drag.png, id=160, 647.41875pt x 536.0025pt>
 File: figures/drag.png Graphic file (type png)
 <use figures/drag.png>
-Package pdftex.def Info: figures/drag.png  used on input line 552.
+Package pdftex.def Info: figures/drag.png  used on input line 553.
 (pdftex.def)             Requested size: 323.70857pt x 268.0006pt.
 [42]
-Underfull \hbox (badness 10000) in paragraph at lines 557--558
+Underfull \hbox (badness 10000) in paragraph at lines 559--560
 
  []
 
 [43 <./figures/drag.png>] [44] [45
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 625--626
+Underfull \hbox (badness 10000) in paragraph at lines 627--628
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 647--648
+Underfull \hbox (badness 10000) in paragraph at lines 649--650
 
  []
 
 [46]
-Underfull \hbox (badness 10000) in paragraph at lines 651--652
+Underfull \hbox (badness 10000) in paragraph at lines 653--654
 
  []
 
 <figures/recs.png, id=178, 438.13687pt x 128.73094pt>
 File: figures/recs.png Graphic file (type png)
 <use figures/recs.png>
-Package pdftex.def Info: figures/recs.png  used on input line 658.
+Package pdftex.def Info: figures/recs.png  used on input line 659.
 (pdftex.def)             Requested size: 350.50996pt x 102.98486pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 666--667
+Underfull \hbox (badness 10000) in paragraph at lines 668--669
 
  []
 
 [47]
-Underfull \hbox (badness 10000) in paragraph at lines 668--669
+Underfull \hbox (badness 10000) in paragraph at lines 670--671
 
  []
 
@@ -1050,10 +1050,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 668--669
 <figures/msscomp.png, id=187, 1068.24094pt x 441.90094pt>
 File: figures/msscomp.png Graphic file (type png)
 <use figures/msscomp.png>
-Package pdftex.def Info: figures/msscomp.png  used on input line 683.
+Package pdftex.def Info: figures/msscomp.png  used on input line 684.
 (pdftex.def)             Requested size: 373.88992pt x 154.66763pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 695--696
+Underfull \hbox (badness 10000) in paragraph at lines 697--698
 
  []
 
@@ -1061,39 +1061,34 @@ Underfull \hbox (badness 10000) in paragraph at lines 695--696
 <figures/pbdtscomp.png, id=193, 746.79pt x 386.94562pt>
 File: figures/pbdtscomp.png Graphic file (type png)
 <use figures/pbdtscomp.png>
-Package pdftex.def Info: figures/pbdtscomp.png  used on input line 701.
+Package pdftex.def Info: figures/pbdtscomp.png  used on input line 702.
 (pdftex.def)             Requested size: 373.39407pt x 193.47234pt.
 <figures/pbdcomp.png, id=194, 654.19406pt x 342.5297pt>
 File: figures/pbdcomp.png Graphic file (type png)
 <use figures/pbdcomp.png>
-Package pdftex.def Info: figures/pbdcomp.png  used on input line 709.
+Package pdftex.def Info: figures/pbdcomp.png  used on input line 710.
 (pdftex.def)             Requested size: 327.09622pt x 171.26442pt.
  [50 <./figures/pbdtscomp.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 719--720
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 721--722
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 721--722
+Underfull \hbox (badness 10000) in paragraph at lines 723--724
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 721--722
+Underfull \hbox (badness 10000) in paragraph at lines 723--724
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 723--724
 
  []
 
 [51 <./figures/pbdcomp.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 756--757
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 758--759
 
  []
@@ -1103,46 +1098,49 @@ Underfull \hbox (badness 10000) in paragraph at lines 760--761
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 762--763
+
+ []
+
 <figures/xpbdtscomp.png, id=201, 1063.72406pt x 360.59718pt>
 File: figures/xpbdtscomp.png Graphic file (type png)
 <use figures/xpbdtscomp.png>
-Package pdftex.def Info: figures/xpbdtscomp.png  used on input line 766.
+Package pdftex.def Info: figures/xpbdtscomp.png  used on input line 767.
 (pdftex.def)             Requested size: 372.30899pt x 126.21089pt.
 [52]
-Underfull \hbox (badness 10000) in paragraph at lines 772--773
+Underfull \hbox (badness 10000) in paragraph at lines 774--775
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 774--775
+Underfull \hbox (badness 10000) in paragraph at lines 776--777
 
  []
 
 <figures/zfight.png, id=205, 194.22563pt x 191.21437pt>
 File: figures/zfight.png Graphic file (type png)
 <use figures/zfight.png>
-Package pdftex.def Info: figures/zfight.png  used on input line 780.
+Package pdftex.def Info: figures/zfight.png  used on input line 781.
 (pdftex.def)             Requested size: 97.11256pt x 95.60695pt.
 [53 <./figures/xpbdtscomp.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 784--785
+Underfull \hbox (badness 10000) in paragraph at lines 786--787
 
  []
 
 <figures/spherefixed.png, id=210, 207.02344pt x 155.83218pt>
 File: figures/spherefixed.png Graphic file (type png)
 <use figures/spherefixed.png>
-Package pdftex.def Info: figures/spherefixed.png  used on input line 790.
+Package pdftex.def Info: figures/spherefixed.png  used on input line 791.
 (pdftex.def)             Requested size: 103.51146pt x 77.9159pt.
-[54 <./figures/zfight.png> <./figures/spherefixed.png>] [55
-
-] [56
-
-]
-Underfull \hbox (badness 10000) in paragraph at lines 799--803
+[54 <./figures/zfight.png> <./figures/spherefixed.png>] [55]
+Underfull \hbox (badness 10000) in paragraph at lines 800--804
 
  []
 
-(./Dissertation.bbl [57
+[56
+
+] (./Dissertation.bbl [57
 
 ]
 Underfull \hbox (badness 1859) in paragraph at lines 16--36
@@ -1248,69 +1246,75 @@ Underfull \hbox (badness 3199) in paragraph at lines 241--260
 [58
 
 ]
-Underfull \hbox (badness 3724) in paragraph at lines 448--465
+Underfull \hbox (badness 10000) in paragraph at lines 370--380
+[]\OT1/cmr/m/n/12 G-Truc Cre-ation.  (2024).  \OT1/cmr/m/it/12 GLM - opengl mat
+h-e-mat-ics.
+ []
+
+
+Underfull \hbox (badness 3724) in paragraph at lines 497--514
 \OT1/cmr/m/it/12 Com-puter Graph-ics Fo-rum\OT1/cmr/m/n/12 , \OT1/cmr/m/it/12 3
 9\OT1/cmr/m/n/12 (8), 171-179.  Re-trieved from
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 448--465
+Underfull \hbox (badness 10000) in paragraph at lines 497--514
 \OT1/cmtt/m/n/12 https://onlinelibrary.wiley.com/doi/abs/10.1111/cgf.14111
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 610--629
+Underfull \hbox (badness 10000) in paragraph at lines 659--678
 []\OT1/cmr/m/n/12 M^^?uller, M., Hei-del-berger, B., Teschner, M., & Gross, M.
  []
 
 
-Underfull \hbox (badness 4084) in paragraph at lines 610--629
+Underfull \hbox (badness 4084) in paragraph at lines 659--678
 \OT1/cmr/m/n/12 (2005, jul).  Mesh-less de-for-ma-tions based on shape match-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 610--629
+Underfull \hbox (badness 10000) in paragraph at lines 659--678
 \OT1/cmr/m/n/12 ing.  \OT1/cmr/m/it/12 ACM Trans. Graph.\OT1/cmr/m/n/12 , \OT1/
 cmr/m/it/12 24\OT1/cmr/m/n/12 (3), 471{478.  Re-trieved
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 610--629
+Underfull \hbox (badness 10000) in paragraph at lines 659--678
 \OT1/cmr/m/n/12 from \OT1/cmtt/m/n/12 https://doi.org/10.1145/1073204.1073216  
  \OT1/cmr/m/n/12 doi:
  []
 
 [59]
-Underfull \hbox (badness 5847) in paragraph at lines 675--696
+Underfull \hbox (badness 5847) in paragraph at lines 724--745
 []\OT1/cmr/m/n/12 Oh, Y. J., Lee, T. M., & Lee, I.-K.  (2018).  Hi-er-ar-chi-
  []
 
 
-Underfull \hbox (badness 1755) in paragraph at lines 675--696
+Underfull \hbox (badness 1755) in paragraph at lines 724--745
 \OT1/cmr/m/n/12 cal cloth sim-u-la-tion us-ing deep neu-ral net-works.  In \OT1
 /cmr/m/it/12 Pro-ceed-
  []
 
 
-Underfull \hbox (badness 2326) in paragraph at lines 675--696
+Underfull \hbox (badness 2326) in paragraph at lines 724--745
 \OT1/cmr/m/n/12 York, NY, USA: As-so-ci-a-tion for Com-put-ing Ma-chin-ery.  Re
 -
  []
 
 
-Underfull \hbox (badness 1990) in paragraph at lines 861--881
+Underfull \hbox (badness 1990) in paragraph at lines 910--930
 []\OT1/cmr/m/n/12 Vassilev, T. I.  (2017).  Mass-spring cloth sim-u-la-tion wit
 h shape
  []
 
 
-Underfull \hbox (badness 5050) in paragraph at lines 861--881
+Underfull \hbox (badness 5050) in paragraph at lines 910--930
 \OT1/cmr/m/n/12 match-ing.  In \OT1/cmr/m/it/12 Pro-ceed-ings of the 18th in-te
 r-na-tional con-fer-
  []
 
 
-Underfull \hbox (badness 2326) in paragraph at lines 861--881
+Underfull \hbox (badness 2326) in paragraph at lines 910--930
 \OT1/cmr/m/n/12 York, NY, USA: As-so-ci-a-tion for Com-put-ing Ma-chin-ery.  Re
 -
  []
@@ -1322,7 +1326,7 @@ PDF version <1.7>, but at most version <1.5> allowed
 <appendices/IPO.pdf, id=240, 597.55246pt x 845.07718pt>
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf>
-Package pdftex.def Info: appendices/IPO.pdf  used on input line 812.
+Package pdftex.def Info: appendices/IPO.pdf  used on input line 816.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 
 
@@ -1330,7 +1334,7 @@ pdfTeX warning: pdflatex.exe (file ./appendices/IPO.pdf): PDF inclusion: found
 PDF version <1.7>, but at most version <1.5> allowed
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf>
-Package pdftex.def Info: appendices/IPO.pdf  used on input line 812.
+Package pdftex.def Info: appendices/IPO.pdf  used on input line 816.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 
 
@@ -1343,23 +1347,23 @@ PDF version <1.7>, but at most version <1.5> allowed
 <appendices/IPO.pdf, id=243, page=1, 597.55246pt x 845.07718pt>
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf, page 1>
-Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 812.
+Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 816.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf, page 1>
-Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 812.
+Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 816.
 (pdftex.def)             Requested size: 388.4045pt x 549.29366pt.
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf, page 1>
-Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 812.
+Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 816.
 (pdftex.def)             Requested size: 388.4045pt x 549.29366pt.
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf, page 1>
-Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 812.
+Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 816.
 (pdftex.def)             Requested size: 388.4045pt x 549.29366pt.
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf>
-Package pdftex.def Info: appendices/IPO.pdf  used on input line 814.
+Package pdftex.def Info: appendices/IPO.pdf  used on input line 818.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 
 
@@ -1367,7 +1371,7 @@ pdfTeX warning: pdflatex.exe (file ./appendices/IPO.pdf): PDF inclusion: found
 PDF version <1.7>, but at most version <1.5> allowed
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf>
-Package pdftex.def Info: appendices/IPO.pdf  used on input line 814.
+Package pdftex.def Info: appendices/IPO.pdf  used on input line 818.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 
 
@@ -1380,35 +1384,35 @@ PDF version <1.7>, but at most version <1.5> allowed
 <appendices/IPO.pdf, id=246, page=2, 597.55246pt x 845.07718pt>
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf, page 2>
-Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 814.
+Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 818.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf, page 2>
-Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 814.
+Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 818.
 (pdftex.def)             Requested size: 388.4045pt x 549.29366pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 811--814
+Underfull \hbox (badness 10000) in paragraph at lines 815--818
 
  []
 
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf, page 1>
-Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 814.
+Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 818.
 (pdftex.def)             Requested size: 388.4045pt x 549.29366pt.
 [62
 
  <./appendices/IPO.pdf>]
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf, page 2>
-Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 814.
+Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 818.
 (pdftex.def)             Requested size: 388.4045pt x 549.29366pt.
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf, page 2>
-Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 814.
+Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 818.
 (pdftex.def)             Requested size: 388.4045pt x 549.29366pt.
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf, page 2>
-Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 814.
+Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 818.
 (pdftex.def)             Requested size: 388.4045pt x 549.29366pt.
  [63 <./appendices/IPO.pdf>] [64] [65
 
@@ -1429,10 +1433,10 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 8893 strings out of 474503
- 140753 string characters out of 5756704
+ 8899 strings out of 474503
+ 140843 string characters out of 5756704
  2039043 words of memory out of 5000000
- 30740 multiletter control sequences out of 15000+600000
+ 30746 multiletter control sequences out of 15000+600000
  566202 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  69i,18n,79p,1557b,1438s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1450,7 +1454,7 @@ texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2023/texmf-dist
 pe1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/publi
 c/cm-super/sfrm0800.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super
 /sfrm1200.pfb>
-Output written on Dissertation.pdf (68 pages, 1533936 bytes).
+Output written on Dissertation.pdf (68 pages, 1549965 bytes).
 PDF statistics:
  355 PDF objects out of 1000 (max. 8388607)
  219 compressed objects within 3 object streams

@@ -32,7 +32,7 @@
 \usepackage{amsmath}
 \usepackage{pdfpages}
 
-
+\usepackage[font=small,labelfont=bf]{caption}
 
 %header and footer settings
 \pagestyle{fancyplain}
@@ -104,7 +104,7 @@ Insert acknowledgements here
 \subsection{Introduction to Cloth Simulation}
 Cloth is a major aspect of realistic simulations. Present in many different industries such as: film, games development and virtual reality, cloth simulation is a challenge that combines maths, physics and programming. \\
 
-Cloth simulation is a subsection of Physics-based animation. PBA uses physics and code to create a plausible looking display of realistic effects, e.g. fluid simulations, soft-body dynamics etc. Cloth is defined as a flexible plane of some material or fabric that can move in unique ways, such as bending or stretching. This makes it a tricky and unique problem to simulate accurately. \\
+Cloth simulation is a subsection of Physics-based animation. PBA uses physics and code to create a plausible looking display of realistic effects, e.g. fluid simulations, soft-body dynamics etc. Cloth is defined as a flexible plane of some material or fabric that can move in unique ways, such as bending or stretching. This makes it a challenging and unique problem to simulate accurately. \\
 
 The end goal of a cloth simulation can vary depending on the intended use. In computer graphics, physical accuracy is not the highest priority, the end product is mostly focused on how it looks. This is in contrast to cloth simulations for real-world engineering problems, their focus being primarily on physical accuracy, in order to help them predict real-world scenarios. Real time usage of cloth is also very important in the games industry, and will be discussed later. \\
 
@@ -204,8 +204,8 @@ Another example of cloth simulations using neural networks can be found in the w
 
 Their proposed method would split the simulation into two parts. Firstly, a low resolution or coarse model of the cloth is calculated using a normal physically based method. Then, the DNN is used to calculate the finer levels of the cloth, reducing the computation cost. They note that due to only calculating the coarsest level of cloth using a physically-based method, the overall cloth simulation won't be as accurate as a fully physically-based model but it successfully prevents errors stemming from the DNN, and guarantees a reliable simulation. This can be seen in Figure \ref{fig:DNN}.
 \begin{figure}[h]
-	\caption{An overview of a neural network cloth model}
 	\includegraphics[width=\textwidth]{DNN.png}
+	\caption{An overview of a neural network cloth model}
 	\label{fig:DNN}
 \end{figure}
 
@@ -221,8 +221,8 @@ Overall, this shape matching approach to simulation provides an unconditionally 
 This research inspired a paper on cloth simulation using shape matching in 2013 \cite{BENDER2013945}. As mentioned before, using shape matching for simulations proved unconditionally stable, so a model specifically designed for cloth simulation was created. They note that normal shape matching approaches that use regions, cannot differentiate between shearing, bending and stretching, which are crucial to represent cloth accurately. To combat that, they introduce a novel approach to use a multi-resolution model instead of region based. This can be seen in Figure \ref{fig:shape}, where a is a nested model that shares vertices between levels, and b is a non-nested model that do not share vertices. The results in this paper use a nested configuration. This multi-resolution model will allow for the simulation of fabrics that have different stretching/shearing stiffness. It is also noted that this method is fast due to it scaling linearly with the size of the cloth. \\
 
 \begin{figure}[h]
-	\caption{Two levels in a multi-resolution configuration, where a is a nested model and b is a non-nested model.}
 	\includegraphics{shapeMatching.jpg}
+	\caption{Two levels in a multi-resolution configuration, where a is a nested model and b is a non-nested model.}
 	\label{fig:shape}
 \end{figure} 
 A shape matching approach that used regions was attempted before \cite{regionshapecloth}. But in this model, it introduces forces that influence the bending stiffness and depend on the size of the model, and this is undesirable in cloth simulation. Another problem is that due to small regions within a large model, high stretching and shearing stiffness cannot be obtained. This lead to the development of the multi-resolution approach.\\
@@ -299,7 +299,7 @@ In 2012, Kim et al., tackled a problem that all cloth has to deal with: inextens
 This works by creating a constraint on a fixed point, e.g. the part of cape attached to a characters shoulders. It then computes the distance from this particle to other attached particles. If a particle goes beyond a certain radius it is projected back towards the surface of a sphere with the centre of that sphere being the attachment point.
 \\
 
-The time taken to handle these LRA constraints scales linearly with the number of attachment points. This can be used to optimise the simulation by pruning certain attachment points. For example, in their cape test, they only choose the closest attachment point to each particle and it shows good results. It gets tricky when working on other shapes and for each configuration, it is recommended to find certain groups of pinned points, e.g. a waistline for a skirt.
+The time taken to handle these LRA constraints scales linearly with the number of attachment points. This can be used to optimise the simulation by pruning certain attachment points. For example, in their cape test, they only choose the closest attachment point to each particle and it shows good results. It gets difficult when working on other shapes and for each configuration, it is recommended to find certain groups of pinned points, e.g. a waistline for a skirt.
 \\
 
 In their results, they found that the implementation provided a efficient and simple way to solve the stretching problem of cloth in games. They note that this method is only applicable to cloth applied to characters such as dresses, skirts and capes and that any environmental cloth such as a tissue or paper would see no benefit.
@@ -316,8 +316,8 @@ When analysing the results, they test a cloth setup as a flag on a pole, which c
 
 \begin{figure}
 	\centering
-	\caption{The simulation remaining stable in high wind speeds}
 	\includegraphics[scale=0.5]{PDFlag.png}
+	\caption{The simulation remaining stable in high wind speeds}
 	\label{fig:pd}
 \end{figure}
 
@@ -326,7 +326,7 @@ In 2022, Li et al., proposed a new differentiable cloth simulation based on proj
 One of these examples showcases the usefulness of dry frictional contact, a piece of cloth falling onto a sphere. This is a very standard test in cloth simulation. This example contains both self collision from the cloth and also external contact with the sphere. After colliding the motion was mostly from the frictional component.
 \\
 
-Another example is a real-to-sim implementation of a flag. They used real motion of a flag blowing in the wind and tried to create a digital simulation copy. This was particularly tricky as it involved estimating what material was used and also modelling the wind condition at the time. They found it to be a good recreation of it but noted that due to the final loss function being non-zero, it was still imperfect. This is most likely due to the simplistic wind model they employed and could be improved with a more sophisticated model, such as one from a neural network.
+Another example is a real-to-sim implementation of a flag. They used real motion of a flag blowing in the wind and tried to create a digital simulation copy. This was particularly challenging as it involved estimating what material was used and also modelling the wind condition at the time. They found it to be a good recreation of it but noted that due to the final loss function being non-zero, it was still imperfect. This is most likely due to the simplistic wind model they employed and could be improved with a more sophisticated model, such as one from a neural network.
 \\
 
 When evaluating the implementation, they found that it successfully accommodated rich and detailed self contact, differentiability and dry frictional contact. Since it was differentiable, they were able to utilise backpropagation and observe a significant speedup when compared to other direct solvers. There are a few limitations with this model, one being that since it is based on projective dynamics, it limits the choice of material. Another significant drawback is that the solver doesn't guarantee convergence, even though it is rare for this to happen, it still results in a costly switch to a direct solver. They note that they hope to resolve this in the future.
@@ -391,7 +391,7 @@ The general way this works is that the C++ dll has a cloth simulation object tha
 
 For this project, only the simple mass spring system was implemented in C\#, while all other methods were implemented in the faster C++ code. A boolean flag was used for this, if it was set to C\#, it would execute code in the same script, while if it was set to C++, it would call the cpp\_init function as seen in Listing \ref{lst:cppinterface}. \\
 
-Within the C++ application, the GLM library is also integrated. GLM is a powerful library designed for mathematics in computer graphics. In this project, GLM is used mainly for its vec3 class, to represent 3D vectors such as position, velocity etc. GLM also contains very useful methods for operating on these 3D vectors such as normalize and length, which are crucial for certain calculations in the pbd and xpbd simulation loops. It is a header only library so the glm folder was simply placed in project directory and added to necessary C++ files with \lstinline[language=C++]!#include <glm.hpp>!.
+Within the C++ application, the GLM library is also integrated. GLM is a powerful library designed for mathematics in computer graphics \cite{glm}. In this project, GLM is used mainly for its vec3 class, to represent 3D vectors such as position, velocity etc. GLM also contains very useful methods for operating on these 3D vectors such as normalize and length, which are crucial for certain calculations in the pbd and xpbd simulation loops. It is a header only library so the glm folder was simply placed in project directory and added to necessary C++ files with \lstinline[language=C++]!#include <glm.hpp>!.
 \subsection{Initialisation}
 Initialisation is an important part of the simulation, as it effectively determines the starting state of all objects within it. To start, a cloth mesh is needed. This is typically a flat vertical mesh, meaning it has no depth in the z axis. Initially, a default Unity preset mesh was used for testing. A problem quickly arose where the orientation of the mesh was wrong. This preset mesh was intended to be used as a ground or horizontal surface. When the mesh was rotated horizontally, the y axis became aligned horizontally instead of vertically, which disrupted the physics calculations. Consequently, it was decided to create the mesh from scratch to ensure proper alignment.
 
@@ -402,25 +402,25 @@ In Unity, an empty mesh object can be created then filled by the developer to su
 For this project, a mesh generator class was created and holds two functions. GenerateVerticalMesh and GenerateHorizontalMesh. Two parameters are passed to these functions, Grid size and spacing. Grid size represents how many vertices in the x and y axis, e.g. a 20x20 mesh, and spacing refers to the distance between each vertex. For most tests, a 20x20 grid is used with a spacing of 0.5. Creating the vertices is simple, a nested for loop is used and each vertex is set within. The only line within the nested loops is:\\ \lstinline[language=C++]!vertices[i] = new Vector3(x * spacing, y * spacing, 0);!
 In the code block, the outer loop iterates over the y-axis coordinates while the inner loop iterates over the x-axis, both from 0 to gridSize. Within the loop this line is executed to generate the coordinate at that index. The x and y coordinates of each vertex are set depending on the current position within the grid, multiplied by spacing to either increase or decrease the space between the vertices. The z coordinate is set to 0 as the cloth has no depth.\\
 
-Generating triangles is a bit more tricky. For this project, a 20 by 20 mesh will generate 2166 triangle indices, with 722 triangles. The way these triangles are generated is another nested for loop, working on 6 vertices at once and creating two triangles from them. It then moves onto the next 6 vertices. The data stored in the triangles array are the indices of the triangles. \\
+Generating triangles is a slightly more difficult. For this project, a 20 by 20 mesh will generate 2166 triangle indices, with 722 triangles. The way these triangles are generated is another nested for loop, working on 6 vertices at once and creating two triangles from them. It then moves onto the next 6 vertices. The data stored in the triangles array are the indices of the triangles. \\
 
 Finally, the vertices and triangle arrays are assigned to the mesh object. Additionally, the RecalculateNormals function is called to calculate the normals of this mesh. Normals are necessary for lighting calculations, and they will be recalculated every fixedUpdate. A wireframe of this mesh can be seen in Figure \ref{fig:mesh}.
 \begin{figure}
 	\centering
-	\caption{A wireframe of a vertical cloth mesh}
 	\includegraphics[scale=0.5]{clothmesh.png}
+	\caption{A wireframe of a vertical cloth mesh}
 	\label{fig:mesh}
 \end{figure}
 \subsubsection{Particle Class}
-One detail that is common to all techniques used in this project is the idea of each vertex being a ``particle". As mentioned in Section \ref{Physics}, vertices can be represented as particles that have various properties. Here, the particle is represented by a class that has 4 properties: position, velocity, inverse mass and isStatic. While the first three are fairly self explanatory, the last ``isStatic" property determines whether that particle is fixed in space, and is a boolean. This isStatic variable is very useful for cloth as it lets you pin certain particles, e.g. a hanging curtain or attachment points of a cape to the back of a character model. \\
+One detail that is common to all techniques used in this project is the idea of each vertex being a ``particle". As mentioned in Section \ref{Physics}, vertices can be represented as particles that have various properties. Here, the particle is represented by a class that has 4 properties: $position$, $velocity$, $inverse\ mass$ and $isStatic$. While the first three are fairly self explanatory, the last $isStatic$ property determines whether that particle is fixed in space, and is a boolean. This $isStatic$ variable is very useful for cloth as it allows for certain particles to be pinned, e.g. a hanging curtain or attachment points of a cape to the back of a character model. \\
 
-One important part of initialisation is looping through all the vertices of the mesh and adding them to a particle list. In this loop, particles are assigned the position of the vertex, an initial velocity of 0, an inverse mass of 1.0 and isStatic set to false. Directly after this loop, the static particles are set depending on the configuration. The hanging cloth scenario has two static particles holding the top corners up. All physics calculations loop through the particle list, as it allows the important properties to be set, such as velocity and position.
+One important part of initialisation is looping through all the vertices of the mesh and adding them to a particle list. In this loop, particles are assigned the position of the vertex, an initial velocity of 0, an inverse mass of 1.0 and $isStatic$ set to false. Directly after this loop, the static particles are set depending on the configuration. The hanging cloth scenario has two static particles holding the top corners up. All physics calculations loop through the particle list, as it allows the important properties to be set, such as velocity and position.
 \\
 
-One final property is required when using position based dynamics, and that is predicted position. Since PBD iteratively works on the predicted position during the time-step depending on external forces, an additional property is needed to store this. At the end of the time-step, the position is then updated to match the calculated predicted position.
+One final property is required when using position based dynamics, and that is $predicted\ position$. Since PBD iteratively works on the predicted position during the time-step depending on external forces, an additional property is needed to store this. At the end of the time-step, the position is then updated to match the calculated predicted position.
 \subsection{Mass-Spring System}
 \label{mss-metho}
-Now that the mesh is successfully created, the first cloth simulation method that was implemented was the mass-spring system. As discussed in Section \ref{Mass-Spring}, the simplest mass spring system calculates spring forces using Hooke's Law between neighbouring particles to then apply forces to these particles. Before implementing these spring forces, an integration scheme is required to modify the particles positions and velocities at each time step. There were a few options to choose from such as explicit Euler, implicit Euler and symplectic (semi-implicit) Euler. In general, explicit is simple and fast, but unstable and less accurate than others, while implicit is more computationally expensive and accurate. Semi-implicit strikes a nice balance between these two methods, giving more stability than explicit and with less computational cost than implicit. In semi-implicit integration, the particle's new velocity is calculated from external forces first and this new velocity is then used to calculate the new position. With this integration scheme implemented, the particles now fall down due to gravity. A simple directional vector was also added to the external forces to simulate wind. This vector changes direction based on a sine wave and total simulation time.
+Now that the mesh is successfully created, the first cloth simulation method that was implemented was the mass-spring system. As discussed in Section \ref{Mass-Spring}, the simplest mass spring system calculates spring forces using Hooke's Law between neighbouring particles to then apply forces to these particles. Before implementing these spring forces, an integration scheme is required to modify the particles positions and velocities at each time step. There were a few options to choose from such as explicit Euler, implicit Euler and symplectic (semi-implicit) Euler, which are discussed in ``An Introduction to Computer Simulation Methods" by Gould et al. \cite{gould2007introduction}. In general, explicit is simple and fast, but unstable and less accurate than others, while implicit is more computationally expensive and accurate. Semi-implicit strikes a nice balance between these two methods, giving more stability than explicit and with less computational cost than implicit. In semi-implicit integration, the particle's new velocity is calculated from external forces first and this new velocity is then used to calculate the new position. With this integration scheme implemented, the particles now fall down due to gravity. A simple directional vector was also added to the external forces to simulate wind. This vector changes direction based on a sine wave and total simulation time.
 \\
 
 Mass-spring cloth simulations can use a variety of springs to simulate different cloth properties. The most typical are the structural springs and these link adjacent particles. Additional ones can include bend and shear springs which can be visualised in Figure \ref{fig:mss}. These additional springs can help the realism of the cloth simulation to more closely simulate the properties of real life cloth. In this project, mass-spring was not the main focus so only structural springs were implemented.
@@ -431,14 +431,14 @@ The code looped through all particles and executed an ApplySpringForce function 
 For applying these forces, Hooke's law is used. This states that force exerted on the springs by the particles is proportional to the displacement of the connected particles to a rest length. In this case, the rest length is equal to the spacing variable which is the cloth mesh at rest. This force between particles due to the springs can be used to calculate a velocity change that is applied to both particles connected by the spring. The magnitude of this force can be modified with a variable known as the spring constant. This is a parameter that is uniquely tuned depending on the simulation. It effectively modifies the stiffness of the spring. High spring constants result in a very stiff cloth, while a lower constant results in a loose one. \\
 As mentioned before, mass-spring systems can typically be unstable with the aforementioned integration schemes. A high spring constant can exacerbate these stability problems and can cause the simulation to "explode", a term used in the field that refers to numerical instability that quickly goes out of control. \\
 
-In this project, a spring constant of 1000 was used. In the C\# version, if you go much higher than this it will quickly become unstable. After implementing this, the basic mass-spring system worked as intended. With two anchor points at the top left and right of the cloth, it hangs down and blows in the wind. It is to be noted that this setup with the spring constant of 1000 is still extremely loose and doesn't accurately represent any real life cloth material, which leads to the next section on the position based dynamics implementation. \\
+In this project, a spring constant of 1000 was used. In the C\# version, increasing it higher than this it will cause rapid instability. After implementing this, the basic mass-spring system worked as intended. With two anchor points at the top left and right of the cloth, it hangs down and blows in the wind. It is to be noted that this setup with the spring constant of 1000 is still extremely loose and doesn't accurately represent any real life cloth material, which leads to the next section on the position based dynamics implementation. \\
 
 The very same system was also implemented in the C++ version. This was so that the differences in performance between the two languages can be analysed. The results of these experiments will be discussed in Section \ref{cppcomp}.
 
 \begin{figure}
 	\centering
+	\includegraphics[scale=0.4]{springs.png}
 	\caption{The types of springs typically used. Figure adapted from \protect\cite{springs}.}
-	\includegraphics[scale=0.5]{springs.png}
 	\label{fig:mss}
 \end{figure}
 
@@ -447,8 +447,8 @@ The very same system was also implemented in the C++ version. This was so that t
 \subsection{Position Based Dynamics}
 With a valid simulation framework setup with mesh creation, particle vectors and the simulation loop working, the next thing to implement was position based dynamics. From this point, features were only created in the C++ version, as going back and forth between languages to implement the same things was not the best usage of time. As mentioned in Section \ref{lang}, the C++ program allows variables to be passed from C\# to the C++ app. This means a cloth simulation object can be created within C++ that assigns all the variables passed through, into properties of the cloth simulation object. Some of these variables can include vertex positions, triangle indices, solver iterations etc. There are two int variables that are used in switch statements within init and update, called scenario and algorithm. These variables switch into blocks of code to change how the simulation is run, scenario determines if the cloth is a hanging vertical cloth, or if its a horizontal cloth falling on a sphere. Algorithm changes which method is being used, between mass-spring, pbd and xpbd. \\
 
-To create the pbd simulation loop, the idea was to look at the algorithm from the paper which can be seen in Section \ref{lrPBD}, and translate it to C++ code. Firstly, to handle particles the static particles that should be skipped, a simple check can be used on the isStatic property of that particle in the loop, skipping that particle if the property is true. \\
-Line 6 of the algorithm is updating the particles velocity by utilising delta time and the external forces of the system. In this case, gravity and wind. The idea of this ``for all vertices" block appears multiple times within the algorithm and can be translated to code as seen in Listing \ref{lst:cpploop}.
+The PBD simulation loop is implemented in C++ based on the description of \cite{muller2007position}, as seen in Section \ref{lrPBD}.  Firstly, to handle particles the static particles that should be skipped, a simple check can be used on the $isStatic$ property of that particle in the loop, skipping that particle if the property is true. \\
+The first step of the algorithm is updating the particles velocity by utilising delta time and the external forces of the system. In this case, gravity and wind. The idea of this ``for all vertices" block appears multiple times within the algorithm and can be translated to code as seen in Listing \ref{lst:cpploop}.
 
 \begin{lstlisting}[caption={Updating particles velocity using external forces},label={lst:cpploop}]
 for (int i = 0; i < _num_particles; i++)
@@ -462,7 +462,7 @@ for (int i = 0; i < _num_particles; i++)
 
 Here, gravity and wind force are constants defined in the header file as \lstinline[language=C++]!const glm::vec3 GRAVITY = glm::vec3(0.0f,-9.81f,0.0f);! and \lstinline[language=C++]!const glm::vec3 WIND_FORCE = glm::vec3(0.0f, 0.0f, 1.0f);! respectively. This step is very similar to the first step of symplectic Euler in the mass spring system, calculating the new velocity. \\
 
-Next, a simple damping of 99\% was applied to the velocity to simulate air friction. In the paper, the authors note that any form of damping can be used here. \\
+Next, the velocity was damped to 99\% of its original value to simulate air friction. In the paper, the authors note that any form of damping can be used here. \\
 
 The next step is to calculate the predicted position of the particle, based on the new velocity. This predicted position will then be iterated on for a specified number of times to get it closer to the goal position. This requires constraints which are key to the whole algorithm.
 \subsubsection{Constraints}
@@ -498,8 +498,8 @@ Once these corrections are calculated, they are added to the predicted position 
 Another aspect of constraints is stiffness. In the PBD implementation, stiffness is obtained by multiplying ${\Delta}p$ by $k\in[0...1]$. This works, but the effect of this stiffness is non-linear with multiple solver iterations. This can be fixed by calculating $k'=1-(1-k)^{1/n_s}$, where $n_s$ is the number of solver iterations. This is then used to multiply ${\Delta}p$.
 \begin{figure}
 	\centering
-	\caption{Projection of a constraint between two particles. Figure adapted from \protect\cite{muller2007position}.}
 	\includegraphics[scale=0.5]{constraint.png}
+	\caption{Projection of a constraint between two particles. Figure adapted from \protect\cite{muller2007position}.}
 	\label{fig:conproj}
 \end{figure}
 \paragraph{Improved Constraint Generation}\mbox{} \\ \\	
@@ -530,7 +530,9 @@ With this extra factor, this way of applying stiffness to a constraint is much p
 \subsection{User Cloth interaction}
 An additional feature created was user interaction through the mouse. This feature would allow the user to click, hold and drag a particle around in space. When the mouse button is held, the chosen particle acts as a static particle with infinite mass, allowing the constraints to function as if this particle was pinned. \\
 
-The way this is achieved is by using Unity's Update method. Update is necessary here, as user interaction such as mouse clicks can happen every frame, and thus need the additional responsiveness from Update compared to FixedUpdate. If the mouse is clicked, a ray is cast from the camera in the direction of the mouse cursor. If this ray hits the collider of the cloth mesh, the exact position of this collision is calculated. Another helper function was created to find the nearest particle to this position. This is a minimisation function that loops through all particles to calculate which particle is closest to the collision point, the particle's index is then returned. Finally, this mouse position is converted from screen space to world space, with the z coordinate being the distance from camera to the cloth. The particle's index and mouse position are then passed to C++ where it is utilised in the simulation loop. \\
+The way this is achieved is through Unity's raycasting support. If the mouse is clicked, a ray is cast from the camera in the direction of the mouse cursor. If this ray hits the collider of the cloth mesh, the exact position of this collision is calculated. Another helper function was created to find the nearest particle to this position. This is a minimisation function that loops through all particles to calculate which particle is closest to the collision point, the particle's index is then returned. Finally, this mouse position is converted from screen space to world space, with the z coordinate being the distance from camera to the cloth. The particle's index and mouse position are then passed to C++ where it is utilised in the simulation loop. \\
+
+The code for user interaction is implemented within the regular Update method. This is because user interactions such as mouse clicks can happen every frame, and thus need the additional responsiveness from Update compared to FixedUpdate. If this was implemented in FixedUpdate, there could be situations where a mouse click occurs between two consecutive FixedUpdate calls, resulting in a missed input. \\
 
 One additional integer is also passed through, stopGrabbingIndex. This is needed to revert the particle's properties back to normal when the mouse click is released. Two if statements that facilitate the grabbing feature can be seen in Listing \ref{lst:user}.
 \begin{lstlisting}[caption={Modifying particles from user interaction},label={lst:user}]
@@ -548,8 +550,8 @@ if (selected_particle_index != -1)
 It is necessary to set the mass as well as the static property, to allow the constraints between this held particle and other particles to function properly, as the constraints are weighted based on both particles mass. Inside the PBD/XPBD loop, when calculating the predicted position, if the current particle is held, then the predicted position is just set to the mouse world position, instead of calculating it based on velocity. With this feature implemented, the user is able to click and drag any particle in the mesh, allowing the cloth to be tested for situations like folding and stretching. This can be seen in Figure \ref{fig:drag}.
 \begin{figure}
 	\centering
-	\caption{Hanging cloth mesh being dragged by a corner particle}
 	\includegraphics[scale=0.5]{drag.png}
+	\caption{Hanging cloth mesh being dragged by a corner particle}
 	\label{fig:drag}
 \end{figure}
 \subsection{Cloth and Sphere Collision}
@@ -577,32 +579,32 @@ void ClothSim::CollisionWithSphere()
 }
 
 \end{lstlisting}
-The $0.0001f$ that is added to the depth is a buffer to make sure the particles aren't just moved directly onto the sphere. This helps to avoid the cloth getting stuck, as it might still be colliding on the very next frame. It also helps with z-fighting issues, this will be discussed in Section \ref{spherescene}.
+The $0.0001f$ that is added to the depth is known as depth bias. It is used to make sure the particles aren't just moved directly onto the sphere. This helps to avoid the cloth getting stuck, as it might still be colliding on the very next frame. It also helps with z-fighting issues, this will be discussed in Section \ref{spherescene}.
 \section{Results and Discussion}
 Now that the entire implementation is finished, it is necessary to test and experiment with variables to fully gauge the simulations effectiveness. This will mean comparing the C++ and C\# implementations, discussing the two scenarios, discussing the recorder feature that was implemented and analysing the visuals of the simulation.
 \subsection{C++ vs C\#}
 \label{cppcomp}
-As discussed in Section \ref{mss-metho}, the mass spring system was implemented in both C++ and C\#. This will allow for testing of both versions with the same setup, to check performance. Inside Unity's Update function, a quick if/else was created to sum up and average the frames over the first 10 seconds of simulation. This will be used over 5 runs of both C++ and C\# to check the true average fps for both implementations. Before testing, it is expected that the C++ version will outperform C\#, due to the efficiency of C++ and not having to deal with garbage collection in C\#. This experiment will be conducted on 20x20 mesh of spacing 0.5, a 100x100 mesh of spacing 0.125 and finally, a 150x150 mesh of spacing 0.125. The results of the first experiment can be seen in Table \ref{tab:lang}. \\
+As discussed in Section \ref{mss-metho}, the mass spring system was implemented in both C++ and C\#. This will allow for testing of both versions with the same setup, to check performance. Inside Unity's Update function, a quick if/else was created to sum up and average the frames over the first 10 seconds of simulation. This will be used over 5 runs of both C++ and C\# to check the true average frame time for both implementations. Frame time is a common metric in real time graphics and it represents the time taken to render a frame.  Before testing, it is expected that the C++ version will outperform C\#, due to the efficiency of C++ and not having to deal with garbage collection in C\#. This experiment will be conducted on 20x20 mesh of spacing 0.5, a 100x100 mesh of spacing 0.125 and finally, a 150x150 mesh of spacing 0.125. The results of the first experiment can be seen in Table \ref{tab:lang}. \\
 \begin{table}[htbp]
 	\centering
 	\begin{tabular}{|c|c|c|} % Specifies three columns with centered content, and vertical lines between columns
 		\hline % Horizontal line at the top of the table
-		Run \# & C\# FPS & C++ FPS \\ % Table header row
+		Run \# & C\# frame time (ms) & C++ frame time (ms)\\ % Table header row
 		\hline % Horizontal line below the header row
-		1 & 589.99 & 637.22 \\ 
-		2 & 580.48 & 642.10 \\ 
-		3 & 577.45 & 657.66 \\ 
-		4 & 584.32 & 638.00  \\ 
-		5 & 598.71 & 654.54  \\ 
+		1 & 1.695 & 1.569 \\ 
+		2 & 1.723 & 1.557 \\ 
+		3 & 1.732 & 1.521 \\ 
+		4 & 1.711 & 1.567  \\ 
+		5 & 1.670 & 1.528  \\ 
 		\hline
-		Average & 586.19 & 645.90 \\ 
+		Average & 1.706 & 1.548 \\ 
 		\hline % Horizontal line at the bottom of the table
 	\end{tabular}
-	\caption{FPS comparison between C\# and C++ for a mass spring system of 20x20 particles} % Table caption
+	\caption{Frame time comparison between C\# and C++ for a mass spring system of 20x20 particles} % Table caption
 	\label{tab:lang}
 \end{table}
 
-It can be seen here that on average, there is a 60fps increase when running a mass spring system of this size in C++ compared to C\#. Overall the fps of both are very high due to the small amount of particles and springs to test, so both versions achieve this quite easily. To analyse with a bigger mesh, a 100x100 is also tested with a spacing of 0.125. This second mesh will have 10,000 vertices and 19,602 triangles, compared to 400 vertices and 722 triangles of the first experiment. The result of this second experiment can be seen in Table \ref{tab:lang2}. \\
+It can be seen here that on average, the C++ frame time is 0.158ms faster, which is a sizeable improvement. To analyse with a bigger mesh, a 100x100 is also tested with a spacing of 0.125. This second mesh will have 10,000 vertices and 19,602 triangles, compared to 400 vertices and 722 triangles of the first experiment. The result of this second experiment can be seen in Table \ref{tab:lang2}. \\
 \begin{table}[htbp]
 	\centering
 	\begin{tabular}{|c|c|c|} % Specifies three columns with centered content, and vertical lines between columns
@@ -647,15 +649,15 @@ A final test using a mesh of 150x150 particles and a spacing of 0.125 was perfor
 With this final experiment, there was a noticeable drop off in fps compared to the previous two experiments, yet C++ remained well ahead vs C\#. On average, C++ outperformed by 116 fps, leading to the conclusion that fps saved was proportional to the mesh size. This makes sense, as when the amount of calculations and vector manipulation increases, C++ will be saving more time compared to C\#. For the mass spring system, any higher resolution meshes and the fps begins to suffer heavily as a result of the increased computations required.\\
 
 As C++ is clearly superior than C\# at physics simulations, it was clear that the rest of the project was to be implemented only in C++ and to not waste development time repeating it in C\#. The rest of the results will be solely resulting from the C++ code, except from features like recording videos from within Unity.
-\subsection{Recorder}
+\subsection{Recording Feature}
 To properly evaluate the simulations, it is necessary to record different algorithms and scenarios to be able to compare them. Unity recorder is a plugin within Unity that allows for video's and screenshots to be taken of projects. Usually it is manually used through a plugin window but it also provides an API to allow for scripts to manage recording. \\
 
 With this, a mass-recording system was successfully implemented within the C\# script. It uses a new class called recordParameters that sets variables to be tested, such as the number of PBD solver iterations, its stiffness and scenario etc. A generate filename function was also implemented that takes in a recordParameters object and generates a unique filename from its properties. The way this recording feature was designed allowed for lots of different experiments to be queued up and recorded in succession. In Unity's update, it checks if it is currently recording, if it isn't it takes the next pending experiment and starts it. The recording folder within the project can now hold all the experiments that are clearly identified with the filename as seen in Figure \ref{fig:recs}.
 
 \begin{figure}
 	\centering
-	\caption{The folder of experiment recordings.}
 	\includegraphics[scale=0.8]{recs.png}
+	\caption{The folder of experiment recordings.}
 	\label{fig:recs}
 \end{figure}
 
@@ -679,8 +681,8 @@ In the mass spring system version of the hanging cloth, a variable to test the i
 
 \begin{figure}
 	\centering
-	\caption{Three versions of the mass spring system, with spring constants of 500,1000 and 1500 left to right}
 	\includegraphics[scale=0.35]{msscomp.png}
+	\caption{Three versions of the mass spring system, with spring constants of 500,1000 and 1500 left to right}
 	\label{fig:msscomp}
 \end{figure}
 
@@ -697,16 +699,16 @@ The three time steps tested were 0.04, 0.02 and 0.01, or 25, 50 and 100 updates 
 For the problem of iteration count, PBD attempts to mitigate this with the stiffness term that involves iteration count as explained in Section \ref{constraints} but in the XPBD paper, the authors note that this doesn't converge to a well defined solution in the presence of multiple constraints. For this project, it successfully decouples stiffness from iteration count but for a more advanced simulation it would pose issues. \\
 \begin{figure}
 	\centering
-	\caption{Testing the time step stiffness issue with original PBD, with time steps of 0.04, 0.02 and 0.01 left to right}
 	\includegraphics[scale=0.5]{pbdtscomp.png}
+	\caption{Testing the time step stiffness issue with original PBD, with time steps of 0.04, 0.02 and 0.01 left to right}
 	\label{fig:pbdts}
 \end{figure}
 
 Having both structural and shear stiffness being variable allows for lots of variation in the end cloth, for example in Figure \ref{fig:pbdcomp}, the cloth on the left has a structural stiffness of 1, and a shear stiffness of 0, while the cloth on the right has both structural and shear stiffness of 1. The cloth with both stiffness set to 1 acts extremely stiff and would be suitable to represent objects such as paper or card, while the other acts more naturally like clothes or flags.
 \begin{figure}
 	\centering
-	\caption{Cloth with different stiffness values}
 	\includegraphics[scale=0.5]{pbdcomp.png}
+	\caption{Cloth with different stiffness values}
 	\label{fig:pbdcomp}
 \end{figure}
 \paragraph{Extended Position Based Dynamics} \mbox{} \\
@@ -762,8 +764,8 @@ The 40 substeps version has taken quite the performance hit, leading to overall 
 Next, the time step issue from the original PBD can be tested to see if the XPBD version has fixed it. The same time step experiments used in the PBD paragraph will be used here, 0.04,0.02 and 0.01. Before experimenting, it is expected that changing the time step will have no effect on the stiffness of the simulation, due to the new compliance factor in XPBD. The results of these experiments can be seen in Figure \ref{fig:xpbdcomp}.
 \begin{figure}
 	\centering
-	\caption{Time step stiffness problem resolved in XPBD}
 	\includegraphics[scale=0.35]{xpbdtscomp.png}
+	\caption{Time step stiffness problem resolved in XPBD}
 	\label{fig:xpbdcomp}
 \end{figure}
 With XPBD, the stiffness of the system now doesn't depend on the time step of the project which is a very useful improvement. Now, the developers can tune the XPBD simulation's stiffness parameters to suit a wide range of time steps without having to change the parameters for different time steps.
@@ -776,33 +778,34 @@ The sphere is created in Unity, with a radius of 2.5f. The sphere centre can be 
 Initially, there was an issue where the sphere object could be seen through the cloth when they were colliding. This is a known issue in computer graphics called stitching or z-fighting. It occurs when two objects within a scene have very similar distances to the camera, which causes issues when deciding what object to render first. This problem can be visualised in Figure \ref{fig:zfight}. \\
 \begin{figure}
 	\centering
-	\caption{Z-fighting issue when rendering two colliding objects}
 	\includegraphics[scale=0.5]{zfight.png}
+	\caption{Z-fighting issue when rendering two colliding objects}
 	\label{fig:zfight}
 \end{figure}
 
 To address this issue, a novel approach was implemented in this project. In the cloth shader, an additional rendering pass was used alongside the command ``ZTest Always". This command specifies the depth test function for determining if a pixel should be drawn on not. By assigning ``Always" to it ensured that the cloth will always be rendered on top of other objects, regardless of position. \\
 
-However, this alone wouldn't be enough to solve the issue, as the cloth would continue to be rendered on top of the sphere, even when it falls behind it. To overcome this challenge, the shader used for the sphere was modified to a transparent one. This alteration effectively transformed the appearance of the sphere into glass-like, allowing the cloth to be rendered behind it without appearing out of place. The result of this approach can be seen in Figure \ref{fig:spherefixed}.
+However, this alone wouldn't be enough to solve the issue, as the cloth would continue to be rendered on top of the sphere, even when it falls behind it. To overcome this challenge, the shader used for the sphere was modified to a transparent one. This alteration effectively transformed the appearance of the sphere into glass-like, allowing the cloth to be rendered behind it without appearing out of place. The result of this approach can be seen in Figure \ref{fig:spherefixed}. \\
 \begin{figure}[h]
 	\centering
-	\caption{The glass sphere approach to solve z-fighting}
 	\includegraphics[scale=0.5]{spherefixed.png}
+	\caption{The glass sphere approach to solve z-fighting}
 	\label{fig:spherefixed}
 \end{figure}
-With this implementation, the sphere successfully collides with the sphere and reacts in a physically plausible way, sliding off the sphere. With friction, the cloth would most likely stay on top of the sphere, but it was not implemented in this project. The 
-\section{Future Work}
-ff
+With this implementation, the sphere successfully collides with the sphere and reacts in a physically plausible way, sliding off the sphere. With friction, the cloth would most likely stay on top of the sphere, but it was not implemented in this project. The way the sphere interacts with the cloth using such simple collision code, showcases the effectiveness of XPBD's constraints in simulating realistic cloth dynamics.
+\subsection{Discussion}
+With these experiments conducted, the overall effectiveness of PBD and XPBD can be discussed. 
 
-\section{Conclusion}
-f
 \section{Reflection}
 4.1 Is there clear reflection on the project process, showing achievements in overcoming difficulties?\\
 4.2 Are the outcomes and deliverables evaluated with respect to the project aims and to the work of others?\\
 4.3 Is it clear what the student would do differently with hindsight?\\
 4.4 Is it clear what future work could be done to the project? \\
 
+Although PBD and XPBD were explored to a high degree in this project, there is much room for improvements and additional features to be implemented. 
 
+\section{Conclusion}
+f
 \bibliographystyle{apacite}
 \bibliography{bibliography}
 

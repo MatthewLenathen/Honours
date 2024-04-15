@@ -129,9 +129,9 @@ public class HangingCloth : MonoBehaviour
     int numTriangles; // Need for the C++ code
     float spacing = 0.5f; // Only used for mesh generation, not in c++ anymore
     int algorithmType = 2; // 0 for mass spring, 1 for position based, 2 for XPBD
-    int scenario = 1; // 0 for hanging cloth, 1 for ..
+    int scenario = 0; // 0 for hanging cloth, 1 for ..
     int solverIterations = 30; // Number of iterations for the pbd solver
-    int subSteps = 10; // Number of substeps for XPBD
+    int subSteps = 20; // Number of substeps for XPBD
 
     int[] triangles;
     int[] staticParticleIndices;
