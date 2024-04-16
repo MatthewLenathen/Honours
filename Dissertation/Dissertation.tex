@@ -855,7 +855,12 @@ Overall, I think this project was on the whole, a success. The project aims were
 \section{Conclusion}
 In conclusion, this project successfully implemented XPBD and other cloth simulation methods within a physics framework. Through experimentation, it was found that XPBD is a very effective method in accurately simulating complex cloth dynamics, while also keeping computational cost low. The mass-spring system also allowed the two programming langauges C\# and C++ to be compared in the context of a physics simulation. In this case, C++ came out ahead in every test. This is due to all the extra overhead that C\# has, slowing down the many number of calculations required each time step, while also requiring a common language runtime environment. This is in contrast to C++ which compiles straight to machine code that will interact with the hardware much faster. \\
 
+When comparing mass-spring to the position based methods, it was clear that mass-spring performed worse on a number of aspects. The instability of using symplectic Euler integration combined with mass-spring often caused the simulation to explode at high stiffness, and thus never really was able to simulate a realistic cloth. PBD and XPBD remain unconditionally stable, and this was proven by utilising both the wind force and the user interaction to test the constraints when extreme forces were applied. The stiffness was easily controllable too, through the use of Unity public ranges, they were modifiable in real time. XPBD sucessfully improved upon PBD by fixing the stiffness issue and the overall simulation performed better through the use of substeps. \\
 
+The originals aims of the initial project overview were met, which was to implement XPBD within a framework and analyse its effectiveness through testing. Extra features such as collision, user interaction and recording were also implemented to help the evaluation. The project would've benefited from an additional scenario showcasing how the method performs on clothing, but this wasn't implemented due to time constraints.
+\\
+
+Overall, this project was a success, as it showcased the way this cloth simulation method was implemented in a framework, and allowed for various experiments to be conducted to analyse the efficiency of XPBD in simulating cloth dynamics.
 \bibliographystyle{apacite}
 \bibliography{bibliography}
 
