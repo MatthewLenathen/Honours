@@ -51,6 +51,6 @@
 \contentsline {section}{Appendices}{65}{}%
 \contentsline {section}{\numberline {A}Project Overview}{65}{}%
 \contentsline {subsection}{\numberline {A.A}Example sub appendices}{67}{}%
-\contentsline {section}{\numberline {B}Second Formal Review Output}{68}{}%
-\contentsline {section}{\numberline {C}Diary Sheets (or other project management evidence)}{69}{}%
-\contentsline {section}{\numberline {D}Appendix 4 and following}{70}{}%
+\contentsline {section}{\numberline {B}Second Formal Review Output}{67}{}%
+\contentsline {section}{\numberline {C}Diary Sheets}{69}{}%
+\contentsline {section}{\numberline {D}Poster}{76}{}%

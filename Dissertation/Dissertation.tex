@@ -828,11 +828,6 @@ Overall, all 3 methods proved useful in comparing how cloth simulations are desi
 
 \section{Reflection}
 \label{reffy}
-4.1 Is there clear reflection on the project process, showing achievements in overcoming difficulties?\\
-4.2 Are the outcomes and deliverables evaluated with respect to the project aims and to the work of others?\\
-4.3 Is it clear what the student would do differently with hindsight?\\
-4.4 Is it clear what future work could be done to the project? \\
-
 This project was challenging and interesting to work on throughout the semester. It allowed me to explore more advanced parts of real time physics simulations and even some computer graphics techniques through shaders. Initially, I struggled to decide which part of cloth simulation to explore in the honours project, but through research done in the first semester while writing the literature review, I decided to focus on the implementation of various methods within a physics framework, as I much prefer writing code and seeing the visual difference than just working on the maths and physics. \\
 Initially, there was a learning curve to using Unity and C\#, as I hadn't used them much in the past, but through tutorials and guides online, I quickly grasped the main functions needed to implement this project. In hindsight, I should have done this over the break between semesters, as it would've allowed me to dive straight into implementing the methods in the first weeks, instead of getting everything set up. \\
 The hardest part of this project was effectively translating the algorithm within the papers into code, as it is sometimes not clear how to link the two. The main author of PBD/XPBD, Matthias Müller, has talks and videos online discussing the methods and they proved very useful in how to think about how these methods actually work in a more hands on way, instead of just discussions within a paper. \\
@@ -841,7 +836,11 @@ Referring to the initial project overview, Appendix \ref{ipo}, the original aim 
 
 When comparing this implementation to other works, I felt my version was to a reasonable standard. The more advanced versions online that include things like self collision and additional constraints surpassed my version, but with likely more work devoted to it. A potential use case for this project could be in education. It is typical in academic papers to dive into the theories and methodologies behind many algorithms, but commonly lack detail about the ways to implement these algorithms in code. With tweaks, this project could be used to showcase how these methods are utilised in a physics framework. \\
 
-Although PBD and XPBD were explored to a high degree in this project, there is much room for improvements and additional features to be implemented. If this project was to be revisited, 
+Although PBD and XPBD were explored to a high degree in this project, there is much room for improvements and additional features to be implemented. If this project was to be revisited, the first thing to be implemented would be the character cloth combination as discussed earlier, or a similar scenario like a cape on the back of a moving character. \\
+One idea that was briefly considered during the project was self collision. This would allow the cloth to interact with itself, providing more realistic visuals. It was going to be the next thing I implemented but I ran out of time, perhaps with better planning I would've been able to.\\
+Another potential avenue for future work would be exploring a GPU implementation of this project. Cloth simulation is a very commonly parallelised problem and it would be interesting to see how I could use my knowledge from the concurrent and parallel systems module to attempt this. The biggest benefit from GPU programming is the massive increase in computational power. \\
+
+Overall, I think this project was on the whole, a success. The project aims were achieved, and while there could've been an additional scenario with better planning, I think the base PBD/XPBD was implemented to a good standard. I learned a lot about real time simulations which can be applied to many other types of simulations and other physics based animations.
 
 \section{Conclusion}
 f
@@ -861,14 +860,24 @@ f
 ...
 \end{subappendices}
 
-\section{Second Formal Review Output}
-Insert a copy of the project review form you were given at the end of the review by the second marker
+\begin{minipage}{\textwidth}
+	\includepdf[offset=0 -2cm,scale=0.65,pages=1,pagecommand={\section{Second Formal Review Output}\label{interim}}]{appendices/interim.pdf}
+\end{minipage}
+\includepdf[scale=0.65,pages=2,pagecommand={}]{appendices/interim.pdf}
 
-\section{Diary Sheets (or other project management evidence)}
-Insert diary sheets here together with any project management plan you have
+\begin{minipage}{\textwidth}
+	\includepdf[offset=0 -2cm,scale=0.65,pages=1,pagecommand={\section{Diary Sheets}\label{meeting}}]{appendices/meeting.pdf}
+\end{minipage}
+\includepdf[scale=0.65,pages=2,pagecommand={}]{appendices/meeting.pdf}
+\includepdf[scale=0.65,pages=3,pagecommand={}]{appendices/meeting.pdf}
+\includepdf[scale=0.65,pages=4,pagecommand={}]{appendices/meeting.pdf}
+\includepdf[scale=0.65,pages=5,pagecommand={}]{appendices/meeting.pdf}
+\includepdf[scale=0.65,pages=6,pagecommand={}]{appendices/meeting.pdf}
+\includepdf[scale=0.65,pages=7,pagecommand={}]{appendices/meeting.pdf}
 
-\section{Appendix 4 and following}
-insert content here and for each of the other appendices, the title may be just on a page by itself, the pages of the appendices are not numbered, unless an included document such as a user manual or design document is itself pager numbered.
+\begin{minipage}{\textwidth}
+	\includepdf[offset=0 -1cm,scale=0.7,pages=1,pagecommand={\section{Poster}\label{poster}}]{appendices/poster.pdf}
+\end{minipage}
 \end{appendices}
 
 \end{document}
