@@ -1,15 +1,15 @@
-\contentsline {figure}{\numberline {1}{\ignorespaces An overview of a neural network cloth model}}{19}{}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Two levels in a multi-resolution configuration, where a is a nested model and b is a non-nested model.}}{21}{}%
-\contentsline {figure}{\numberline {3}{\ignorespaces The simulation remaining stable in high wind speeds}}{27}{}%
-\contentsline {figure}{\numberline {4}{\ignorespaces A wireframe of a vertical cloth mesh}}{34}{}%
-\contentsline {figure}{\numberline {5}{\ignorespaces The types of springs typically used. Figure adapted from \cite {springs}.}}{36}{}%
-\contentsline {figure}{\numberline {6}{\ignorespaces Projection of a constraint between two particles. Figure adapted from \cite {muller2007position}.}}{39}{}%
-\contentsline {figure}{\numberline {7}{\ignorespaces Hanging cloth mesh being dragged by a corner particle}}{43}{}%
-\contentsline {figure}{\numberline {8}{\ignorespaces Average Frame Time for C\# and C++ in a Mass Spring System}}{47}{}%
-\contentsline {figure}{\numberline {9}{\ignorespaces The folder of experiment recordings.}}{48}{}%
-\contentsline {figure}{\numberline {10}{\ignorespaces Three versions of the mass spring system, with spring constants of 500,1000 and 1500 left to right}}{50}{}%
-\contentsline {figure}{\numberline {11}{\ignorespaces Testing the time step stiffness issue with original PBD, with time steps of 0.04, 0.02 and 0.01 left to right}}{51}{}%
-\contentsline {figure}{\numberline {12}{\ignorespaces Cloth with different stiffness values}}{52}{}%
-\contentsline {figure}{\numberline {13}{\ignorespaces Time step stiffness problem resolved in XPBD}}{54}{}%
-\contentsline {figure}{\numberline {14}{\ignorespaces Z-fighting issue when rendering two colliding objects}}{55}{}%
-\contentsline {figure}{\numberline {15}{\ignorespaces The glass sphere approach to solve z-fighting}}{55}{}%
+\contentsline {figure}{\numberline {1}{\ignorespaces An overview of a neural network cloth model}}{20}{}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Two levels in a multi-resolution configuration, where a is a nested model and b is a non-nested model.}}{22}{}%
+\contentsline {figure}{\numberline {3}{\ignorespaces The simulation remaining stable in high wind speeds}}{28}{}%
+\contentsline {figure}{\numberline {4}{\ignorespaces A wireframe of a vertical cloth mesh}}{35}{}%
+\contentsline {figure}{\numberline {5}{\ignorespaces The types of springs typically used. Figure adapted from \cite {springs}.}}{37}{}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Projection of a constraint between two particles. Figure adapted from \cite {muller2007position}.}}{40}{}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Hanging cloth mesh being dragged by a corner particle}}{44}{}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Average Frame Time for C\# and C++ in a Mass Spring System}}{48}{}%
+\contentsline {figure}{\numberline {9}{\ignorespaces The folder of experiment recordings.}}{49}{}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Three versions of the mass spring system, with spring constants of 500,1000 and 1500 left to right}}{51}{}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Testing the time step stiffness issue with original PBD, with time steps of 0.04, 0.02 and 0.01 left to right}}{52}{}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Cloth with different stiffness values}}{53}{}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Time step stiffness problem resolved in XPBD}}{55}{}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Z-fighting issue when rendering two colliding objects}}{56}{}%
+\contentsline {figure}{\numberline {15}{\ignorespaces The glass sphere approach to solve z-fighting}}{56}{}%

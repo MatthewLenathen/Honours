@@ -75,7 +75,7 @@
 
 %LaTeX let you define the abstract separately so it wont get sucked into the main document.
 \begin{abstract}
-Abstract here
+Real-time cloth simulation, a subset of physics-based simulations, aims to generate realistic simulations of cloth-like objects using mathematics, physics, and programming. It is a complex problem to solve and many specialised methods have been developed to further the realism, while aiming to lower the computational cost. This project details the implementation of a popular cloth simulation method, extended position based dynamics, in the Unity physics framework. The Unity framework was useful in allowing features such as user interaction and experiment recording, which in turn allowed for greater testing of the methods. The implementation is compared to two other cloth simulation methods, the mass-spring system and the original position based dynamics. These three methods will be tested in various scenarios and experiments to analyse the effectiveness of these methods in simulating realistic cloth dynamics. The two key scenarios are a vertical cloth object pinned by two points, and a horizontal cloth falling on top of a rigid sphere. These were chosen as they effectively demonstrate how the cloth would move in potential projects such as games or animation. It was found that extended position based dynamics is a powerful and relatively inexpensive method to use, and improved upon position based dynamics in a few ways. One such way was decoupling the stiffness of the cloth, from the number of substeps within the simulation, a flaw that the original position based dynamics had.
 % fill the abstract in here
 \end{abstract}
 \pagebreak
@@ -100,6 +100,16 @@ I'd also like to thank my family and friends for encouraging me.
 \newpage
 
 \section{Introduction}
+This project aims to cover the implementation of a realistic cloth simulation within the Unity physics framework. Cloth simulation, a subset of physics-based simulations, aims to combine the principles of mathematics, physics and programming to realistically simulate cloth-like objects and how they interact with external forces. It is used in many industries such as games development, film and animation, and virtual reality based applications. For decades, researchers have been designing new methods of accurately simulating cloth, while aiming to keep computational cost to a minimum. One such method is known as position based dynamics (PBD), with a further extension called extended position based dynamics (XPBD). This project is focussed on the overall implementation and testing of XPBD within Unity, a popular games development tool that also functions as a physics simulation framework. Unity was chosen as the framework of choice, as it is very popular and has a vast amount of documenation online which was helpful when implementing my own features within it. Unity typically uses C\# for its scripts but this simulation was written as a C++ dll, as C++ is much more memory efficient and optimised for programs that have lots of computation. This will be discussed more in Section \ref{lang}.  \\
+
+Cloth simulation is a challenging topic of physics based simulations, as it often requires many parameters and tweaking of these parameters to accurately simulate real life cloth dynamics such as bending, stretching and shearing. Three methods will be implemented: Mass-spring system, PBD and XPBD. Mass-spring systems work by considering the connections that make up the cloth, as springs. This is a simple method to implement but falls short in modern cloth simulations as it can often become unstable and inaccurate. Position based dynamics considers the cloth as a mesh of particles that have constraints between them. These constraints aim to keep the neighbouring particles a set distance away from each other, and will help move these particles to satisfy the constraints. PBD is a very efficient method, and while not completely physically accurate, it gets close enough for most applications. PBD falls short when dealing with cloth stiffness, the way the algorithm is designed means that the stiffness of the cloth is linked to the number of solver iterations. Solver iterations represents the number of times the constraints are worked on during one time step. Meaning that if the time step decreases, the constraints get arbitrarily stiff. This is a problem as it requires the developer to manually tune the simulation for different time steps, requiring much more work. This is one of the reasons XPBD was created, to decouple the constraint stiffness from the time step. \\
+XPBD works by splitting each time step into substeps, and solving the constraints once per substep. The authors of PBD and XPBD found that spending the fixed time budget using substeps was more computationally efficient that using solver iterations in PBD. XPBD also improves the stiffness by changing the 0 to 1 range in PBD, to a compliance factor that allows constraints to be infinitely stiff at compliance = 0, while allowing a smooth range of compliance values that will suit a wide range of scenarios.
+\\
+
+The goal of this project is to successfully implement these methods and test them against each other, while varying parameters such as time step, substeps and stiffness. It does this through the use of two scenarios: a vertical cloth pinned by two points and a horizontal cloth falling on a sphere. The cloth meshes used for these scenarios were generated in the C\# script, this allowed for easy tweaking of overall mesh size, which is useful for experiments. One of the main ways of measuring the performance of a cloth simulation is through frame time. Frame time is a commonly used metric in real time rendering, and it represents the time to render one frame. It is much preferred over FPS as the overall FPS of a simulation can be misleading, e.g. a simulation can have stable fps, but if the frame time differs heavily, it will result in stuttering that is unwanted in real time applications.
+\\
+
+The first chapter of this dissertation will dive into the literature surrounding cloth simulation. It will discuss the history of cloth simulation, the underlying physics before going on to cover many methods for use in both offline and real-time cloth simulations, and how they work. The next chapter discusses the methodology behind this project, the design choices and how the methods were implemented in code, along with other features such as user interaction and the experiment recorder. It will then cover the results obtained from many experiments done on these three methods. It will go into depth on scenario setups and experiment parameters, to effectively analyse how each method performs. Finally, a reflection of the overall project, discussing both the achievements and shortcomings of the overall simulation.
 \newpage
 \section{Literature Review}
 \subsection{Introduction to Cloth Simulation}
@@ -843,7 +853,9 @@ Another potential avenue for future work would be exploring a GPU implementation
 Overall, I think this project was on the whole, a success. The project aims were achieved, and while there could've been an additional scenario with better planning, I think the base PBD/XPBD was implemented to a good standard. I learned a lot about real time simulations which can be applied to many other types of simulations and other physics based animations.
 
 \section{Conclusion}
-f
+In conclusion, this project successfully implemented XPBD and other cloth simulation methods within a physics framework. Through experimentation, it was found that XPBD is a very effective method in accurately simulating complex cloth dynamics, while also keeping computational cost low. The mass-spring system also allowed the two programming langauges C\# and C++ to be compared in the context of a physics simulation. In this case, C++ came out ahead in every test. This is due to all the extra overhead that C\# has, slowing down the many number of calculations required each time step, while also requiring a common language runtime environment. This is in contrast to C++ which compiles straight to machine code that will interact with the hardware much faster. \\
+
+
 \bibliographystyle{apacite}
 \bibliography{bibliography}
 
@@ -854,11 +866,6 @@ f
 	\includepdf[offset=0 -2cm,scale=0.65,pages=1,pagecommand={\section{Project Overview}\label{ipo}}]{appendices/IPO.pdf}
 \end{minipage}
 \includepdf[scale=0.65,pages=2,pagecommand={}]{appendices/IPO.pdf}
-\begin{subappendices}
-
-\subsection{Example sub appendices}
-...
-\end{subappendices}
 
 \begin{minipage}{\textwidth}
 	\includepdf[offset=0 -2cm,scale=0.65,pages=1,pagecommand={\section{Second Formal Review Output}\label{interim}}]{appendices/interim.pdf}

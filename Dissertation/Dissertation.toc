@@ -1,56 +1,55 @@
 \contentsline {section}{\numberline {1}Introduction}{9}{}%
-\contentsline {section}{\numberline {2}Literature Review}{10}{}%
-\contentsline {subsection}{\numberline {2.1}Introduction to Cloth Simulation}{10}{}%
-\contentsline {subsection}{\numberline {2.2}Brief History of Cloth Simulation}{10}{}%
-\contentsline {subsection}{\numberline {2.3}Underlying Physics}{11}{}%
-\contentsline {subsection}{\numberline {2.4}Offline Cloth Simulation}{12}{}%
-\contentsline {subsubsection}{\numberline {2.4.1}Fine Cloth Interactions}{12}{}%
-\contentsline {subsubsection}{\numberline {2.4.2}Precomputing Cloth Effects}{13}{}%
-\contentsline {subsection}{\numberline {2.5}Real Time Cloth Simulation}{14}{}%
-\contentsline {subsubsection}{\numberline {2.5.1}Mass-Spring Systems}{15}{}%
-\contentsline {subsubsection}{\numberline {2.5.2}The Continuum Model}{16}{}%
-\contentsline {subsubsection}{\numberline {2.5.3}Cloth Simulation with Camera Capture}{17}{}%
-\contentsline {subsubsection}{\numberline {2.5.4}Cloth Simulation with Neural Networks}{18}{}%
-\contentsline {subsubsection}{\numberline {2.5.5}Shape Matching}{20}{}%
-\contentsline {subsubsection}{\numberline {2.5.6}Position Based Dynamics}{22}{}%
-\contentsline {paragraph}{Extended Position Based Dynamics}{24}{}%
-\contentsline {paragraph}{Other PBD methods}{25}{}%
-\contentsline {subsection}{\numberline {2.6}Future Trends}{28}{}%
-\contentsline {subsection}{\numberline {2.7}Conclusion}{28}{}%
-\contentsline {section}{\numberline {3}Methodology}{30}{}%
-\contentsline {subsection}{\numberline {3.1}Environment and Framework}{30}{}%
-\contentsline {subsubsection}{\numberline {3.1.1}Language Choice}{30}{}%
-\contentsline {subsection}{\numberline {3.2}Initialisation}{32}{}%
-\contentsline {subsubsection}{\numberline {3.2.1}Mesh Creation}{32}{}%
-\contentsline {subsubsection}{\numberline {3.2.2}Particle Class}{33}{}%
-\contentsline {subsection}{\numberline {3.3}Mass-Spring System}{34}{}%
-\contentsline {subsection}{\numberline {3.4}Position Based Dynamics}{36}{}%
-\contentsline {subsubsection}{\numberline {3.4.1}Constraints}{38}{}%
-\contentsline {paragraph}{Generating Constraints}{38}{}%
-\contentsline {paragraph}{Constraint Projection}{38}{}%
-\contentsline {paragraph}{Improved Constraint Generation}{40}{}%
-\contentsline {subsubsection}{\numberline {3.4.2}Updating Position and Velocity}{40}{}%
-\contentsline {subsection}{\numberline {3.5}Extended Position Based Dynamics}{41}{}%
-\contentsline {subsubsection}{\numberline {3.5.1}Substeps vs Solver Iterations}{41}{}%
-\contentsline {subsubsection}{\numberline {3.5.2}Stiffness through a Compliance Factor}{41}{}%
-\contentsline {subsection}{\numberline {3.6}User Cloth interaction}{42}{}%
-\contentsline {subsection}{\numberline {3.7}Cloth and Sphere Collision}{43}{}%
-\contentsline {section}{\numberline {4}Results and Discussion}{45}{}%
-\contentsline {subsection}{\numberline {4.1}C++ vs C\#}{45}{}%
-\contentsline {subsection}{\numberline {4.2}Recording Feature}{48}{}%
-\contentsline {subsection}{\numberline {4.3}Scenarios}{48}{}%
-\contentsline {subsubsection}{\numberline {4.3.1}Hanging Cloth}{49}{}%
-\contentsline {paragraph}{Mass-Spring System}{49}{}%
-\contentsline {paragraph}{Position Based Dynamics}{50}{}%
-\contentsline {paragraph}{Extended Position Based Dynamics}{51}{}%
-\contentsline {subsubsection}{\numberline {4.3.2}Cloth falling on Sphere}{54}{}%
-\contentsline {subsection}{\numberline {4.4}Discussion}{55}{}%
-\contentsline {section}{\numberline {5}Reflection}{58}{}%
-\contentsline {section}{\numberline {6}Conclusion}{60}{}%
-\contentsline {section}{References}{61}{}%
-\contentsline {section}{Appendices}{65}{}%
-\contentsline {section}{\numberline {A}Project Overview}{65}{}%
-\contentsline {subsection}{\numberline {A.A}Example sub appendices}{67}{}%
-\contentsline {section}{\numberline {B}Second Formal Review Output}{67}{}%
-\contentsline {section}{\numberline {C}Diary Sheets}{69}{}%
-\contentsline {section}{\numberline {D}Poster}{76}{}%
+\contentsline {section}{\numberline {2}Literature Review}{11}{}%
+\contentsline {subsection}{\numberline {2.1}Introduction to Cloth Simulation}{11}{}%
+\contentsline {subsection}{\numberline {2.2}Brief History of Cloth Simulation}{11}{}%
+\contentsline {subsection}{\numberline {2.3}Underlying Physics}{12}{}%
+\contentsline {subsection}{\numberline {2.4}Offline Cloth Simulation}{13}{}%
+\contentsline {subsubsection}{\numberline {2.4.1}Fine Cloth Interactions}{13}{}%
+\contentsline {subsubsection}{\numberline {2.4.2}Precomputing Cloth Effects}{14}{}%
+\contentsline {subsection}{\numberline {2.5}Real Time Cloth Simulation}{15}{}%
+\contentsline {subsubsection}{\numberline {2.5.1}Mass-Spring Systems}{16}{}%
+\contentsline {subsubsection}{\numberline {2.5.2}The Continuum Model}{17}{}%
+\contentsline {subsubsection}{\numberline {2.5.3}Cloth Simulation with Camera Capture}{18}{}%
+\contentsline {subsubsection}{\numberline {2.5.4}Cloth Simulation with Neural Networks}{19}{}%
+\contentsline {subsubsection}{\numberline {2.5.5}Shape Matching}{21}{}%
+\contentsline {subsubsection}{\numberline {2.5.6}Position Based Dynamics}{23}{}%
+\contentsline {paragraph}{Extended Position Based Dynamics}{25}{}%
+\contentsline {paragraph}{Other PBD methods}{26}{}%
+\contentsline {subsection}{\numberline {2.6}Future Trends}{29}{}%
+\contentsline {subsection}{\numberline {2.7}Conclusion}{29}{}%
+\contentsline {section}{\numberline {3}Methodology}{31}{}%
+\contentsline {subsection}{\numberline {3.1}Environment and Framework}{31}{}%
+\contentsline {subsubsection}{\numberline {3.1.1}Language Choice}{31}{}%
+\contentsline {subsection}{\numberline {3.2}Initialisation}{33}{}%
+\contentsline {subsubsection}{\numberline {3.2.1}Mesh Creation}{33}{}%
+\contentsline {subsubsection}{\numberline {3.2.2}Particle Class}{34}{}%
+\contentsline {subsection}{\numberline {3.3}Mass-Spring System}{35}{}%
+\contentsline {subsection}{\numberline {3.4}Position Based Dynamics}{37}{}%
+\contentsline {subsubsection}{\numberline {3.4.1}Constraints}{39}{}%
+\contentsline {paragraph}{Generating Constraints}{39}{}%
+\contentsline {paragraph}{Constraint Projection}{39}{}%
+\contentsline {paragraph}{Improved Constraint Generation}{41}{}%
+\contentsline {subsubsection}{\numberline {3.4.2}Updating Position and Velocity}{41}{}%
+\contentsline {subsection}{\numberline {3.5}Extended Position Based Dynamics}{42}{}%
+\contentsline {subsubsection}{\numberline {3.5.1}Substeps vs Solver Iterations}{42}{}%
+\contentsline {subsubsection}{\numberline {3.5.2}Stiffness through a Compliance Factor}{42}{}%
+\contentsline {subsection}{\numberline {3.6}User Cloth interaction}{43}{}%
+\contentsline {subsection}{\numberline {3.7}Cloth and Sphere Collision}{44}{}%
+\contentsline {section}{\numberline {4}Results and Discussion}{46}{}%
+\contentsline {subsection}{\numberline {4.1}C++ vs C\#}{46}{}%
+\contentsline {subsection}{\numberline {4.2}Recording Feature}{49}{}%
+\contentsline {subsection}{\numberline {4.3}Scenarios}{49}{}%
+\contentsline {subsubsection}{\numberline {4.3.1}Hanging Cloth}{50}{}%
+\contentsline {paragraph}{Mass-Spring System}{50}{}%
+\contentsline {paragraph}{Position Based Dynamics}{51}{}%
+\contentsline {paragraph}{Extended Position Based Dynamics}{52}{}%
+\contentsline {subsubsection}{\numberline {4.3.2}Cloth falling on Sphere}{55}{}%
+\contentsline {subsection}{\numberline {4.4}Discussion}{56}{}%
+\contentsline {section}{\numberline {5}Reflection}{59}{}%
+\contentsline {section}{\numberline {6}Conclusion}{61}{}%
+\contentsline {section}{References}{62}{}%
+\contentsline {section}{Appendices}{66}{}%
+\contentsline {section}{\numberline {A}Project Overview}{66}{}%
+\contentsline {section}{\numberline {B}Second Formal Review Output}{68}{}%
+\contentsline {section}{\numberline {C}Diary Sheets}{70}{}%
+\contentsline {section}{\numberline {D}Poster}{77}{}%
