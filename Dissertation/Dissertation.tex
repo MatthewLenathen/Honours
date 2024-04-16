@@ -609,44 +609,54 @@ It can be seen here that on average, the C++ frame time is 0.158ms faster, which
 	\centering
 	\begin{tabular}{|c|c|c|} % Specifies three columns with centered content, and vertical lines between columns
 		\hline % Horizontal line at the top of the table
-		Run \# & C\# FPS & C++ FPS \\ % Table header row
+		Run \# & C\# frame time (ms) &  C++ frame time (ms) \\ % Table header row
 		\hline % Horizontal line below the header row
-		1 & 435.59 & 494.08 \\ 
-		2 & 437.19 & 499.90 \\ 
-		3 & 441.57 & 499.25 \\ 
-		4 & 427.20 & 498.88  \\ 
-		5 & 425.99 & 499.53  \\ 
+		1 & 2.296 & 2.024 \\ 
+		2 & 2.287 & 2.000 \\ 
+		3 & 2.265 & 2.003 \\ 
+		4 & 2.341 & 2.004  \\ 
+		5 & 2.347 & 2.002  \\ 
 		\hline
-		Average & 433.51 & 498.13 \\ 
+		Average & 2.307 & 2.007 \\ 
 		\hline % Horizontal line at the bottom of the table
 	\end{tabular}
-	\caption{FPS comparison between C\# and C++ for a mass spring system of 100x100 particles} % Table caption
+	\caption{Frame time comparison between C\# and C++ for a mass spring system of 100x100 particles} % Table caption
 	\label{tab:lang2}
 \end{table}
 
-With this second experiment, the fps on both versions are lower as expected, and the C++ version still outperforms the C\#, this time by 65 fps on average. It has to be noted that at higher particle size, this mass spring system implementation is extremely elastic and doesn't truly represent any real world cloth material, and with the problem of instability at higher spring constants, it is unable to simulate accurate cloth. This could potentially be due to only structural springs being implemented, and there not being enough forces to keep the particle mesh in its original shape. \\
+With this second experiment, the time to render a frame on both versions are higher as expected, and the C++ version still outperforms the C\#, this time by 0.3ms on average. It has to be noted that at higher particle size, this mass spring system implementation is extremely elastic and doesn't truly represent any real world cloth material, and with the problem of instability at higher spring constants, it is unable to simulate accurate cloth. This could potentially be due to only structural springs being implemented, and there not being enough forces to keep the particle mesh in its original shape. \\
 
 A final test using a mesh of 150x150 particles and a spacing of 0.125 was performed to test the extremes of both implementations. The results of testing both implementations with this mesh can be seen in Table \ref{tab:lang3}.\\
 \begin{table}[htbp]
 	\centering
 	\begin{tabular}{|c|c|c|} % Specifies three columns with centered content, and vertical lines between columns
 		\hline % Horizontal line at the top of the table
-		Run \# & C\# FPS & C++ FPS \\ % Table header row
+		Run \# & C\# frame time (ms) &  C++ frame time (ms) \\ % Table header row
 		\hline % Horizontal line below the header row
-		1 & 69.96 & 187.19 \\ 
-		2 & 70.29 & 188.69 \\ 
-		3 & 74.30 & 187.78 \\ 
-		4 & 76.29 & 192.00  \\ 
-		5 & 73.39 & 190.79  \\ 
+		1 & 14.294 & 5.342 \\ 
+		2 & 14.227 & 5.300 \\ 
+		3 & 13.459 & 5.325 \\ 
+		4 & 13.108 & 5.208  \\ 
+		5 & 13.626 & 5.241  \\ 
 		\hline
-		Average & 72.85 & 189.29 \\ 
+		Average & 13.743 & 5.283 \\ 
 		\hline % Horizontal line at the bottom of the table
 	\end{tabular}
-	\caption{FPS comparison between C\# and C++ for a mass spring system of 150x150 particles} % Table caption
+	\caption{Frame time comparison between C\# and C++ for a mass spring system of 150x150 particles} % Table caption
 	\label{tab:lang3}
 \end{table}
 
-With this final experiment, there was a noticeable drop off in fps compared to the previous two experiments, yet C++ remained well ahead vs C\#. On average, C++ outperformed by 116 fps, leading to the conclusion that fps saved was proportional to the mesh size. This makes sense, as when the amount of calculations and vector manipulation increases, C++ will be saving more time compared to C\#. For the mass spring system, any higher resolution meshes and the fps begins to suffer heavily as a result of the increased computations required.\\
+With this final experiment, there was a noticeable increase in average frame time compared to the previous two experiments, yet C++ remained well ahead vs C\#. On average, C++ outperformed by 8.459ms, leading to the conclusion that fps saved was proportional to the mesh size. This makes sense, as when the amount of calculations and vector manipulation increases, C++ will be saving more time compared to C\#. For the mass spring system, any higher resolution meshes and the frame time begins to increase drastically as a result of the increased computations required.\\
+
+These three experiments can be combined on a line graph to see how the number of particles affect the runtime cost in this mass spring implementation, this graph can be seen in Figure \ref{line}.
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.7]{line.png}
+	\caption{Average Frame Time for C\# and C++ in a Mass Spring System}
+	\label{line}
+\end{figure}
+
+It can be seen that past a certain number of particles, the computational cost goes very high, most likely due to the significantly increased number of spring calculations to perform. The C\# implementation's frame time increases drastically, while the C++ increases by a relatively small amount.\\
 
 As C++ is clearly superior than C\# at physics simulations, it was clear that the rest of the project was to be implemented only in C++ and to not waste development time repeating it in C\#. The rest of the results will be solely resulting from the C++ code, except from features like recording videos from within Unity.
 \subsection{Recording Feature}
@@ -718,13 +728,13 @@ Now, it is vital to test the hanging cloth using the extended position based dyn
 	\item Shearing compliance = 0.0005
 	\item Wind strength = 0.7
 \end{itemize}
-The substeps would be tested at 1, 20 and 40. This means that for every fixed update, the simulation loop would repeat for the number of substeps. It can be expected that as substeps increase, overall simulation accuracy will increase. This will come with a computational cost so the expected fps will also be lower as substeps increase. Wind is utilised in this experiment to have an additional force on the cloth to inspect how substeps affect the constraint projection. \\
+The substeps would be tested at 1, 10, 20, 30 and 40. This means that for every fixed update, the simulation loop would repeat for the number of substeps. It can be expected that as substeps increase, overall simulation accuracy will increase. This will come with a computational cost so the expected frame time will also be higher as substeps increase. Wind is utilised in this experiment to have an additional force on the cloth to inspect how substeps affect the constraint projection. \\
 
-The recorder feature was utilised here to run these three tests, as it was easy to change substeps in the recorder class. In Listing \ref{lst:exp}, is an example of how multiple experiments were run, keeping most of the properties the same but changing substeps. \\ \\ \\
+The recorder feature was utilised here to run these three tests, as it was easy to change substeps in the recorder class. In Listing \ref{lst:exp}, is an example of how multiple experiments were run, keeping most of the properties the same but changing substeps. \\ \\
 \begin{lstlisting}[caption={Utilising the recorder feature},label={lst:exp}]
-for (int i = 0; i < 3; i++)
+for (int i = 0; i < 5; i++)
 {
-	int[] subs = new int[]{1,20,40};
+	int[] subs = new int[]{1,10,20,30,40};
 	var rp = new RecordParameters
 	{
 		algorithm = 2, // XPBD
@@ -734,23 +744,24 @@ for (int i = 0; i < 3; i++)
 	};
 	rp.xpbdSubsteps = subs[i];
 	rp.filename = $"{GenerateFilename(rp)}";
-	
 	// Add the recording settings to the pendingExperiments list
 	pendingExperiments.Add(rp);
 }
 \end{lstlisting}
-When analysing these three, there are two main aspects to look at, visuals and FPS. In Table \ref{tab:sub}, the FPS of each test is averaged over 10 seconds. It can be seen that increasing the number of substeps has a drastic effect on performance, with the 40 substeps experiment dipping to 20 FPS.\\
+When analysing these three, there are two main aspects to look at, visuals and average frame time. In Table \ref{tab:sub}, the frame time of each test is averaged over 10 seconds. It can be seen that increasing the number of substeps has a drastic effect on performance, with the 40 substeps experiment having a significantly higher frame time at 48.379ms.\\
 \begin{table}[htbp]
 	\centering
-	\caption{Substeps and FPS Data}
+	\caption{Substeps and Frame Time Data}
 	\label{tab:sub}
 	\begin{tabular}{cc}
 		\toprule
-		Substeps & FPS \\
+		Substeps & Frame Time (ms) \\
 		\midrule
-		1 & 599.04 \\
-		20 & 306.58 \\
-		40 & 20.67 \\
+		1 & 1.669 \\
+		10 & 2.150 \\
+		20 & 3.262 \\
+		30 & 6.050 \\
+		40 & 48.379 \\
 		\bottomrule
 	\end{tabular}
 \end{table}
@@ -759,7 +770,7 @@ The visuals of the simulation are also affected. The 1 substep experiment overal
 
 This is fixed in the 20 substep version, as the constraints can be projected multiple times in one fixed update, leading to the cloth overall looking more physically realistic. It also fixes the issue of the delay before moving and it comes to rest quicker. \\
 
-The 40 substeps version has taken quite the performance hit, leading to overall less appealing visuals through the lower fps, so the ideal substeps for this project is around 20. \\
+The 40 substeps version has taken quite the performance hit, leading to overall less appealing visuals through the higher frame time/lower fps, so the ideal substeps for this project is around 20. \\
 
 Next, the time step issue from the original PBD can be tested to see if the XPBD version has fixed it. The same time step experiments used in the PBD paragraph will be used here, 0.04,0.02 and 0.01. Before experimenting, it is expected that changing the time step will have no effect on the stiffness of the simulation, due to the new compliance factor in XPBD. The results of these experiments can be seen in Figure \ref{fig:xpbdcomp}.
 \begin{figure}
@@ -794,7 +805,15 @@ However, this alone wouldn't be enough to solve the issue, as the cloth would co
 \end{figure}
 With this implementation, the sphere successfully collides with the sphere and reacts in a physically plausible way, sliding off the sphere. With friction, the cloth would most likely stay on top of the sphere, but it was not implemented in this project. The way the sphere interacts with the cloth using such simple collision code, showcases the effectiveness of XPBD's constraints in simulating realistic cloth dynamics.
 \subsection{Discussion}
-With these experiments conducted, the overall effectiveness of PBD and XPBD can be discussed. 
+With these experiments conducted, the overall effectiveness of the various cloth simulation approaches can be discussed. The first and most simple approach, the mass spring system using symplectic Euler integration was simple to implement and yielded decent results for a small grid size. It unfortunately has the instability from this type of integration and thus cannot handle rapid change in the system or it is prone to exploding. As the only springs implemented were structural springs, it is overall very elastic and not representative of real life cloth material. One positive about the mass spring system is the ease of implementation, as it is very intuitive to treat the connections between particles as springs, which allows the use of Hooke's law to calculate resultant forces. \\
+
+As this was the easiest method to implement, it was perfect to use as the comparison between C\# and C++, as it was simple enough to implement in both languages. Using this test, it was found that C++ performed better than C\# in every test. This is due to C++'s greater control over memory management and overall less overhead compared to C\#. As discussed in Section \ref{lang}, C\# requires a common language runtime to execute, and also performs garbage collection. Both of these will introduce significant overheads when running code, thus performing much worse than C++ in projects such as cloth simulation, where there are a great number of calculations required.
+\\
+
+One improvement to the mass spring system that could be introduced would be a more advanced integration method, such as Runge-Kutta or Verlet. Runge-Kutta is a higher order method that is multi-stage, meaning it performs many more calculations in order to obtain more accurate results with lower error. This results in a more accurate simulation but with a higher computational cost. The most commonly used Runge-Kutta method, RK4, involves 4 stages of calculation. Verlet integration is a commonly used second order integration method that provides good numerical stability over explicit Euler at little additional computational cost \cite{gould2007introduction}. 
+\\
+
+Another improvement of this mass spring system would be to implement all the additional springs seen in Figure \ref{fig:mss}. This would help with the over-elastic issue by applying more spring forces to the particles, helping the mesh to stay in a more rigid shape.
 
 \section{Reflection}
 4.1 Is there clear reflection on the project process, showing achievements in overcoming difficulties?\\

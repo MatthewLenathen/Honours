@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  15 APR 2024 09:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.21)  16 APR 2024 07:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1027,120 +1027,142 @@ Underfull \hbox (badness 10000) in paragraph at lines 649--650
  []
 
 [46]
-Underfull \hbox (badness 10000) in paragraph at lines 653--654
+<figures/line.png, id=178, 462.528pt x 346.896pt>
+File: figures/line.png Graphic file (type png)
+<use figures/line.png>
+Package pdftex.def Info: figures/line.png  used on input line 654.
+(pdftex.def)             Requested size: 323.76738pt x 242.82553pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 659--660
 
  []
 
-<figures/recs.png, id=178, 438.13687pt x 128.73094pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 663--664
+
+ []
+
+[47 <./figures/line.png>]
+<figures/recs.png, id=183, 438.13687pt x 128.73094pt>
 File: figures/recs.png Graphic file (type png)
 <use figures/recs.png>
-Package pdftex.def Info: figures/recs.png  used on input line 659.
+Package pdftex.def Info: figures/recs.png  used on input line 669.
 (pdftex.def)             Requested size: 350.50996pt x 102.98486pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 668--669
-
- []
-
-[47]
-Underfull \hbox (badness 10000) in paragraph at lines 670--671
+Underfull \hbox (badness 10000) in paragraph at lines 678--679
 
  []
 
 [48 <./figures/recs.png>]
-<figures/msscomp.png, id=187, 1068.24094pt x 441.90094pt>
+Underfull \hbox (badness 10000) in paragraph at lines 680--681
+
+ []
+
+<figures/msscomp.png, id=189, 1068.24094pt x 441.90094pt>
 File: figures/msscomp.png Graphic file (type png)
 <use figures/msscomp.png>
-Package pdftex.def Info: figures/msscomp.png  used on input line 684.
+Package pdftex.def Info: figures/msscomp.png  used on input line 694.
 (pdftex.def)             Requested size: 373.88992pt x 154.66763pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 697--698
+[49]
+Underfull \hbox (badness 10000) in paragraph at lines 707--708
 
  []
 
-[49 <./figures/msscomp.png>]
-<figures/pbdtscomp.png, id=193, 746.79pt x 386.94562pt>
+<figures/pbdtscomp.png, id=194, 746.79pt x 386.94562pt>
 File: figures/pbdtscomp.png Graphic file (type png)
 <use figures/pbdtscomp.png>
-Package pdftex.def Info: figures/pbdtscomp.png  used on input line 702.
+Package pdftex.def Info: figures/pbdtscomp.png  used on input line 712.
 (pdftex.def)             Requested size: 373.39407pt x 193.47234pt.
-<figures/pbdcomp.png, id=194, 654.19406pt x 342.5297pt>
+[50 <./figures/msscomp.png>]
+<figures/pbdcomp.png, id=199, 654.19406pt x 342.5297pt>
 File: figures/pbdcomp.png Graphic file (type png)
 <use figures/pbdcomp.png>
-Package pdftex.def Info: figures/pbdcomp.png  used on input line 710.
+Package pdftex.def Info: figures/pbdcomp.png  used on input line 720.
 (pdftex.def)             Requested size: 327.09622pt x 171.26442pt.
- [50 <./figures/pbdtscomp.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 721--722
+
+Underfull \hbox (badness 10000) in paragraph at lines 731--732
+
+ []
+
+[51 <./figures/pbdtscomp.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 733--734
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 723--724
+Underfull \hbox (badness 10000) in paragraph at lines 733--734
+
+ []
+
+[52 <./figures/pbdcomp.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 769--770
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 723--724
+Underfull \hbox (badness 10000) in paragraph at lines 771--772
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 723--724
+Underfull \hbox (badness 10000) in paragraph at lines 773--774
 
  []
 
-[51 <./figures/pbdcomp.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 758--759
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 760--761
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 762--763
-
- []
-
-<figures/xpbdtscomp.png, id=201, 1063.72406pt x 360.59718pt>
+<figures/xpbdtscomp.png, id=206, 1063.72406pt x 360.59718pt>
 File: figures/xpbdtscomp.png Graphic file (type png)
 <use figures/xpbdtscomp.png>
-Package pdftex.def Info: figures/xpbdtscomp.png  used on input line 767.
+Package pdftex.def Info: figures/xpbdtscomp.png  used on input line 778.
 (pdftex.def)             Requested size: 372.30899pt x 126.21089pt.
-[52]
-Underfull \hbox (badness 10000) in paragraph at lines 774--775
+[53]
+Underfull \hbox (badness 10000) in paragraph at lines 785--786
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 776--777
+Underfull \hbox (badness 10000) in paragraph at lines 787--788
 
  []
 
-<figures/zfight.png, id=205, 194.22563pt x 191.21437pt>
+<figures/zfight.png, id=210, 194.22563pt x 191.21437pt>
 File: figures/zfight.png Graphic file (type png)
 <use figures/zfight.png>
-Package pdftex.def Info: figures/zfight.png  used on input line 781.
+Package pdftex.def Info: figures/zfight.png  used on input line 792.
 (pdftex.def)             Requested size: 97.11256pt x 95.60695pt.
-[53 <./figures/xpbdtscomp.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 786--787
+
+Underfull \hbox (badness 10000) in paragraph at lines 797--798
 
  []
 
-<figures/spherefixed.png, id=210, 207.02344pt x 155.83218pt>
+[54 <./figures/xpbdtscomp.png>]
+<figures/spherefixed.png, id=216, 207.02344pt x 155.83218pt>
 File: figures/spherefixed.png Graphic file (type png)
 <use figures/spherefixed.png>
-Package pdftex.def Info: figures/spherefixed.png  used on input line 791.
+Package pdftex.def Info: figures/spherefixed.png  used on input line 802.
 (pdftex.def)             Requested size: 103.51146pt x 77.9159pt.
-[54 <./figures/zfight.png> <./figures/spherefixed.png>] [55]
-Underfull \hbox (badness 10000) in paragraph at lines 800--804
+
+Underfull \hbox (badness 10000) in paragraph at lines 808--809
 
  []
 
-[56
+[55 <./figures/zfight.png> <./figures/spherefixed.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 810--812
 
-] (./Dissertation.bbl [57
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 813--815
+
+ []
+
+[56]
+Underfull \hbox (badness 10000) in paragraph at lines 819--823
+
+ []
+
+[57
+
+] (./Dissertation.bbl [58
 
 ]
 Underfull \hbox (badness 1859) in paragraph at lines 16--36
@@ -1243,7 +1265,7 @@ Underfull \hbox (badness 3199) in paragraph at lines 241--260
 4017   \OT1/cmr/m/n/12 doi:
  []
 
-[58
+[59
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 370--380
@@ -1284,7 +1306,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 659--678
  \OT1/cmr/m/n/12 doi:
  []
 
-[59]
+[60]
 Underfull \hbox (badness 5847) in paragraph at lines 724--745
 []\OT1/cmr/m/n/12 Oh, Y. J., Lee, T. M., & Lee, I.-K.  (2018).  Hi-er-ar-chi-
  []
@@ -1319,14 +1341,14 @@ Underfull \hbox (badness 2326) in paragraph at lines 910--930
 -
  []
 
-[60]) [61]
+[61]) [62]
 
 pdfTeX warning: pdflatex.exe (file ./appendices/IPO.pdf): PDF inclusion: found 
 PDF version <1.7>, but at most version <1.5> allowed
-<appendices/IPO.pdf, id=240, 597.55246pt x 845.07718pt>
+<appendices/IPO.pdf, id=245, 597.55246pt x 845.07718pt>
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf>
-Package pdftex.def Info: appendices/IPO.pdf  used on input line 816.
+Package pdftex.def Info: appendices/IPO.pdf  used on input line 835.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 
 
@@ -1334,7 +1356,7 @@ pdfTeX warning: pdflatex.exe (file ./appendices/IPO.pdf): PDF inclusion: found
 PDF version <1.7>, but at most version <1.5> allowed
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf>
-Package pdftex.def Info: appendices/IPO.pdf  used on input line 816.
+Package pdftex.def Info: appendices/IPO.pdf  used on input line 835.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 
 
@@ -1344,26 +1366,26 @@ PDF version <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./appendices/IPO.pdf): PDF inclusion: found 
 PDF version <1.7>, but at most version <1.5> allowed
-<appendices/IPO.pdf, id=243, page=1, 597.55246pt x 845.07718pt>
+<appendices/IPO.pdf, id=248, page=1, 597.55246pt x 845.07718pt>
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf, page 1>
-Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 816.
+Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 835.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf, page 1>
-Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 816.
+Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 835.
 (pdftex.def)             Requested size: 388.4045pt x 549.29366pt.
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf, page 1>
-Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 816.
+Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 835.
 (pdftex.def)             Requested size: 388.4045pt x 549.29366pt.
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf, page 1>
-Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 816.
+Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 835.
 (pdftex.def)             Requested size: 388.4045pt x 549.29366pt.
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf>
-Package pdftex.def Info: appendices/IPO.pdf  used on input line 818.
+Package pdftex.def Info: appendices/IPO.pdf  used on input line 837.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 
 
@@ -1371,7 +1393,7 @@ pdfTeX warning: pdflatex.exe (file ./appendices/IPO.pdf): PDF inclusion: found
 PDF version <1.7>, but at most version <1.5> allowed
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf>
-Package pdftex.def Info: appendices/IPO.pdf  used on input line 818.
+Package pdftex.def Info: appendices/IPO.pdf  used on input line 837.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 
 
@@ -1381,44 +1403,44 @@ PDF version <1.7>, but at most version <1.5> allowed
 
 pdfTeX warning: pdflatex.exe (file ./appendices/IPO.pdf): PDF inclusion: found 
 PDF version <1.7>, but at most version <1.5> allowed
-<appendices/IPO.pdf, id=246, page=2, 597.55246pt x 845.07718pt>
+<appendices/IPO.pdf, id=251, page=2, 597.55246pt x 845.07718pt>
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf, page 2>
-Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 818.
+Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 837.
 (pdftex.def)             Requested size: 597.551pt x 845.07512pt.
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf, page 2>
-Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 818.
+Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 837.
 (pdftex.def)             Requested size: 388.4045pt x 549.29366pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 815--818
+Underfull \hbox (badness 10000) in paragraph at lines 834--837
 
  []
 
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf, page 1>
-Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 818.
+Package pdftex.def Info: appendices/IPO.pdf , page1 used on input line 837.
 (pdftex.def)             Requested size: 388.4045pt x 549.29366pt.
-[62
+[63
 
  <./appendices/IPO.pdf>]
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf, page 2>
-Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 818.
+Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 837.
 (pdftex.def)             Requested size: 388.4045pt x 549.29366pt.
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf, page 2>
-Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 818.
+Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 837.
 (pdftex.def)             Requested size: 388.4045pt x 549.29366pt.
 File: appendices/IPO.pdf Graphic file (type pdf)
 <use appendices/IPO.pdf, page 2>
-Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 818.
+Package pdftex.def Info: appendices/IPO.pdf , page2 used on input line 837.
 (pdftex.def)             Requested size: 388.4045pt x 549.29366pt.
- [63 <./appendices/IPO.pdf>] [64] [65
-
-] [66
+ [64 <./appendices/IPO.pdf>] [65] [66
 
 ] [67
+
+] [68
 
 ]
 (./Dissertation.aux)
@@ -1433,10 +1455,10 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 8899 strings out of 474503
- 140843 string characters out of 5756704
+ 8909 strings out of 474503
+ 141037 string characters out of 5756704
  2039043 words of memory out of 5000000
- 30746 multiletter control sequences out of 15000+600000
+ 30756 multiletter control sequences out of 15000+600000
  566202 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  69i,18n,79p,1557b,1438s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1454,10 +1476,10 @@ texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2023/texmf-dist
 pe1/public/amsfonts/cm/cmtt12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/publi
 c/cm-super/sfrm0800.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super
 /sfrm1200.pfb>
-Output written on Dissertation.pdf (68 pages, 1549965 bytes).
+Output written on Dissertation.pdf (69 pages, 1573183 bytes).
 PDF statistics:
- 355 PDF objects out of 1000 (max. 8388607)
- 219 compressed objects within 3 object streams
+ 360 PDF objects out of 1000 (max. 8388607)
+ 221 compressed objects within 3 object streams
  0 named destinations out of 1000 (max. 500000)
- 106 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 111 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -131,7 +131,7 @@ public class HangingCloth : MonoBehaviour
     int algorithmType = 2; // 0 for mass spring, 1 for position based, 2 for XPBD
     int scenario = 0; // 0 for hanging cloth, 1 for ..
     int solverIterations = 30; // Number of iterations for the pbd solver
-    int subSteps = 20; // Number of substeps for XPBD
+    int subSteps = 40; // Number of substeps for XPBD
 
     int[] triangles;
     int[] staticParticleIndices;
@@ -637,8 +637,8 @@ public class HangingCloth : MonoBehaviour
             isRecording = false;
             fixedUpdateCounter = 0;
         }
-        // Fps averaged 10 seconds
-       // Only count frames and time for the first 10 seconds
+        // Only count frames and time for the first 10 seconds
+        // Frame times averaged over 10 seconds
         if (elapsedTime < 10.0f)
         {
             elapsedTime += Time.deltaTime;
@@ -646,11 +646,11 @@ public class HangingCloth : MonoBehaviour
         }
         else if (frameCount > 0)
         {
-            // Calculate and log the average FPS
-            float avgFps = frameCount / elapsedTime;
-            Debug.Log("Average FPS for the first 10 seconds: " + avgFps);
-
-            // Reset frame count to prevent logging FPS again
+            // Calculate and log the average frame time in milliseconds
+            float avgFrameTime = (elapsedTime / frameCount) * 1000;
+            Debug.Log("Average frame time for the first 10 seconds: " + avgFrameTime + " ms");
+        
+            // Reset frame count to prevent logging frame time again
             frameCount = 0;
         }
         
