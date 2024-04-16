@@ -93,9 +93,10 @@ Abstract here
 \newpage
 
 \section*{Acknowledgements}
-Insert acknowledgements here
-\subsection*{}
-	I would like to thank my cat, dog and family.
+I'd first like to thank my supervisor Dr Babis Koniaris for all his help during this project and throughout my time at Napier.\\
+
+I'd also like to thank my family and friends for encouraging me.
+
 \newpage
 
 \section{Introduction}
@@ -814,14 +815,33 @@ One improvement to the mass spring system that could be introduced would be a mo
 \\
 
 Another improvement of this mass spring system would be to implement all the additional springs seen in Figure \ref{fig:mss}. This would help with the over-elastic issue by applying more spring forces to the particles, helping the mesh to stay in a more rigid shape.
+\\
+
+Once the original position based dynamics method was implemented it was immediately a clear improvement upon the mass spring system. Since position based methods are unconditionally stable, the simulation no longer had the chance to explode, and allowed for the testing of extreme wind forces to see how the constraints would react to massive forces, the cloth always returned to a normal shape after such forces, showcasing the robustness of the method. Implementing stiffness into PBD was simple as well, and it allowed for the cloth's visuals to be changed in real time through the Unity editor. \\
+The issue of stiffness coupled with time step was evident during testing, as even a small change in fixed time step resulted in a massive change in stiffness. Which was one of the motivations that the authors of PBD had for creating XPBD. \\
+
+The XPBD implementation was mostly derived from the PBD code, so it did not need to be recreated from scratch. The stiffness needed to be reworked to compliance which was relatively simple, also a new variable was created that denoted delta time substeps and was used in replacement for delta time. Overall, XPBD performs similarly to PBD but with the added benefits of greater control over stiffness, since the compliance factor just needs to be more than 0, instead of a fixed 0 to 1 range in PBD. It successfully fixed the time step stiffness interaction and was confirmed through testing multiple time steps. The number of substeps can be varied depending on the use case of that cloth, e.g. a prominent object within a game could benefit from the increased accuracy of more substeps, and a small background object could use smaller substeps to reduce computational cost. \\
+
+The sphere scenario was also useful to see how simple collision code could create a realistic interaction between two objects through the use of XPBD, demonstrating the power of constraints. This collision code would have to be improved upon if it was to be used in a different setting, as the depth test solution wouldn't be suitable for all objects. \\
+
+Overall, all 3 methods proved useful in comparing how cloth simulations are designed and created, and the experiments provided useful data on the computational cost of different parameters such as amount of particles, substeps, time step etc.
 
 \section{Reflection}
+\label{reffy}
 4.1 Is there clear reflection on the project process, showing achievements in overcoming difficulties?\\
 4.2 Are the outcomes and deliverables evaluated with respect to the project aims and to the work of others?\\
 4.3 Is it clear what the student would do differently with hindsight?\\
 4.4 Is it clear what future work could be done to the project? \\
 
-Although PBD and XPBD were explored to a high degree in this project, there is much room for improvements and additional features to be implemented. 
+This project was challenging and interesting to work on throughout the semester. It allowed me to explore more advanced parts of real time physics simulations and even some computer graphics techniques through shaders. Initially, I struggled to decide which part of cloth simulation to explore in the honours project, but through research done in the first semester while writing the literature review, I decided to focus on the implementation of various methods within a physics framework, as I much prefer writing code and seeing the visual difference than just working on the maths and physics. \\
+Initially, there was a learning curve to using Unity and C\#, as I hadn't used them much in the past, but through tutorials and guides online, I quickly grasped the main functions needed to implement this project. In hindsight, I should have done this over the break between semesters, as it would've allowed me to dive straight into implementing the methods in the first weeks, instead of getting everything set up. \\
+The hardest part of this project was effectively translating the algorithm within the papers into code, as it is sometimes not clear how to link the two. The main author of PBD/XPBD, Matthias Müller, has talks and videos online discussing the methods and they proved very useful in how to think about how these methods actually work in a more hands on way, instead of just discussions within a paper. \\
+
+Referring to the initial project overview, Appendix \ref{ipo}, the original aim of the project was to implement extended position based dynamics within a physics framework and effectively analyse the simulation through experiments. Overall, I feel this was achieved to a good standard. It successfully utilised the method to implement two scenarios of cloth simulation that worked well. Implementing a C++ dll and linking it to Unity was a great idea and proved very useful in testing to showcase why C++ is the preferred language for physics simulations. The downside to this implementation is that it is more of a stand-alone project, and that it wasn't utilised in an actual game or animation. During meetings it was suggested that I explore a way of using my implementation on a game characters outfit to see how it handles that scenario, but this wasn't achieved due to time limitations. \\
+
+When comparing this implementation to other works, I felt my version was to a reasonable standard. The more advanced versions online that include things like self collision and additional constraints surpassed my version, but with likely more work devoted to it. A potential use case for this project could be in education. It is typical in academic papers to dive into the theories and methodologies behind many algorithms, but commonly lack detail about the ways to implement these algorithms in code. With tweaks, this project could be used to showcase how these methods are utilised in a physics framework. \\
+
+Although PBD and XPBD were explored to a high degree in this project, there is much room for improvements and additional features to be implemented. If this project was to be revisited, 
 
 \section{Conclusion}
 f
@@ -832,7 +852,7 @@ f
 \newpage
 \begin{appendices}
 \begin{minipage}{\textwidth}
-	\includepdf[offset=0 -2cm,scale=0.65,pages=1,pagecommand={\section{Project Overview}}]{appendices/IPO.pdf}
+	\includepdf[offset=0 -2cm,scale=0.65,pages=1,pagecommand={\section{Project Overview}\label{ipo}}]{appendices/IPO.pdf}
 \end{minipage}
 \includepdf[scale=0.65,pages=2,pagecommand={}]{appendices/IPO.pdf}
 \begin{subappendices}
