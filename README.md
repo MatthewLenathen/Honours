@@ -23,7 +23,7 @@ The project includes two main scenarios for testing:
    -   Demonstrates collision and draping behavior.
 
 ## Screenshots
-<img src="Dissertation/figures/drag.png" alt="User Interaction with the Cloth"  width="300"> <img src="Dissertation/figures/spherefixed.png" alt="Cloth Simulation in Action" width="300"> 
+<img src="Dissertation/figures/drag.png" alt="User Interaction with the Cloth"  width="250"> <img src="Dissertation/figures/spherefixed.png" alt="Cloth Simulation in Action" width="250"> 
 <img src="Dissertation/figures/poster1.png" alt="Hanging Cloth" width="250">
 ## Results
 
