@@ -1,12 +1,13 @@
+# Real-Time Cloth Simulation Using XPBD in Unity
 ## Overview
 
-This project aims to implement a powerful method of simulating deformable bodies within Unity, known as Extended Position Based Dynamics (XPBD). The focus of this simulation is on cloth objects, showcasing how they interact with external forces and maintaining computational efficiency.
+This project aims to implement a powerful method of simulating deformable bodies within Unity, known as Extended Position Based Dynamics (XPBD). The focus of this simulation is on cloth objects, showcasing how they interact with external forces and maintaining computational efficiency. The main simulation loop is implemented in C++ for performance, integrated with Unity as a DLL plugin.
 
 ## Features
 
 - **XPBD Implementation**: A robust method to simulate cloth dynamics.
 - **Comparison with Other Methods**: Includes Mass-Spring System and Original Position Based Dynamics (PBD) for performance comparison.
-- **Integration with Unity**: Utilizes C# for Unity scripts (mesh creation, user interaction, recording) and C++ for the main simulation loop. Integrates with unity by treating the C++ code as a DLL plugin.
+- **Integration with Unity**: Utilizes C# for Unity scripts (mesh creation, user interaction, recording) and C++ for the main simulation loop.
 - **User Interaction**: Real-time manipulation and interaction with the cloth using the mouse.
 - **Experiment Recording**: Record and playback different simulation scenarios, with the ability to queue up any number of experiments.
 
