@@ -24,7 +24,7 @@ The project includes two main scenarios for testing:
 
 ## Screenshots
 <img src="Dissertation/figures/drag.png" alt="User Interaction with the Cloth"  width="300"> <img src="Dissertation/figures/spherefixed.png" alt="Cloth Simulation in Action" width="300"> 
-<img src="assets/71607754/3d910865-01db-4117-b560-4fd1359829f9" alt="Hanging Cloth" width="250">
+<img src="Dissertation/figures/poster1.png" alt="Hanging Cloth" width="250">
 ## Results
 
 - XPBD demonstrated superior stability and performance compared to the mass-spring system.
